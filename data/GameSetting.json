@@ -1,0 +1,78 @@
+[
+  {
+    "GameSettingID": "HpRecoverySec",
+    "GameSettingValue": 12
+  },
+  {
+    "GameSettingID": "MpRecoverySec",
+    "GameSettingValue": 20
+  },
+  {
+    "GameSettingID": "HumanBasalHpRecovery",
+    "GameSettingValue": 10
+  },
+  {
+    "GameSettingID": "ElfBasalHpRecovery",
+    "GameSettingValue": 8
+  },
+  {
+    "GameSettingID": "DruidBasalHpRecovery",
+    "GameSettingValue": 12
+  },
+  {
+    "GameSettingID": "HumanBasalMpRecovery",
+    "GameSettingValue": 4.2
+  },
+  {
+    "GameSettingID": "ElfBasalMpRecovery",
+    "GameSettingValue": 7.5
+  },
+  {
+    "GameSettingID": "DruidBasalＭpRecovery",
+    "GameSettingValue": 3
+  },
+  {
+    "GameSettingID": "AttackSpeedHighFast",
+    "GameSettingValue": 0.9
+  },
+  {
+    "GameSettingID": "AttackSpeedFast",
+    "GameSettingValue": 0.8
+  },
+  {
+    "GameSettingID": "AttackSpeedMedium",
+    "GameSettingValue": 0.7
+  },
+  {
+    "GameSettingID": "AttackSpeedSlow",
+    "GameSettingValue": 0.6
+  },
+  {
+    "GameSettingID": "AttackSppedHighSlow",
+    "GameSettingValue": 0.5
+  },
+  {
+    "GameSettingID": "MeleeAttackRange",
+    "GameSettingValue": 8
+  },
+  {
+    "GameSettingID": "MonsterActivityIntervalMin",
+    "GameSettingValue": 3
+  },
+  {
+    "GameSettingID": "MonsterActivityIntervalMax",
+    "GameSettingValue": 8
+  },
+  {
+    "GameSettingID": "FirstPhaseBootysLockTime",
+    "GameSettingValue": 15
+  },
+  {
+    "GameSettingID": "SecondPhaseBootysLockTime",
+    "GameSettingValue": 30
+  },
+  {
+    "GameSettingID": "ExpDeathPenalty",
+    "GameSettingValue": 0.1
+  }
+]

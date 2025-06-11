@@ -1,0 +1,722 @@
+[
+  {
+    "TextID": "TM_Heavy_Head_01_Name",
+    "TextContent": "訓練用金屬頭盔"
+  },
+  {
+    "TextID": "TM_Heavy_Head_01_Intro",
+    "TextContent": "供新兵訓練用的防具"
+  },
+  {
+    "TextID": "TM_Heavy_Body_01_Name",
+    "TextContent": "訓練用金屬護甲"
+  },
+  {
+    "TextID": "TM_Heavy_Body_01_Intro",
+    "TextContent": "供新兵訓練用的防具"
+  },
+  {
+    "TextID": "TM_Heavy_Leg_01_Name",
+    "TextContent": "訓練用金屬護腿"
+  },
+  {
+    "TextID": "TM_Heavy_Leg_01_Intro",
+    "TextContent": "供新兵訓練用的防具"
+  },
+  {
+    "TextID": "TM_Heavy_Arm_01_Name",
+    "TextContent": "訓練用金屬護手"
+  },
+  {
+    "TextID": "TM_Heavy_Arm_01_Intro",
+    "TextContent": "供新兵訓練用的防具"
+  },
+  {
+    "TextID": "TM_Heavy_Foot_01_Name",
+    "TextContent": "訓練用金屬長靴"
+  },
+  {
+    "TextID": "TM_Heavy_Foot_01_Intro",
+    "TextContent": "供新兵訓練用的防具"
+  },
+  {
+    "TextID": "TM_Light_Head_01_Name",
+    "TextContent": "訓練用輕便頭盔"
+  },
+  {
+    "TextID": "TM_Light_Head_01_Intro",
+    "TextContent": "供新兵訓練用的防具"
+  },
+  {
+    "TextID": "TM_Light_Body_01_Name",
+    "TextContent": "訓練用輕便護甲"
+  },
+  {
+    "TextID": "TM_Light_Body_01_Intro",
+    "TextContent": "供新兵訓練用的防具"
+  },
+  {
+    "TextID": "TM_Light_Leg_01_Name",
+    "TextContent": "訓練用輕便護腿"
+  },
+  {
+    "TextID": "TM_Light_Leg_01_Intro",
+    "TextContent": "供新兵訓練用的防具"
+  },
+  {
+    "TextID": "TM_Light_Arm_01_Name",
+    "TextContent": "訓練用輕便護手"
+  },
+  {
+    "TextID": "TM_Light_Arm_01_Intro",
+    "TextContent": "供新兵訓練用的防具"
+  },
+  {
+    "TextID": "TM_Light_Foot_01_Name",
+    "TextContent": "訓練用輕便短靴"
+  },
+  {
+    "TextID": "TM_Light_Foot_01_Intro",
+    "TextContent": "供新兵訓練用的防具"
+  },
+  {
+    "TextID": "TM_Cloth_Head_01_Name",
+    "TextContent": "訓練用布料頭箍"
+  },
+  {
+    "TextID": "TM_Cloth_Head_01_Intro",
+    "TextContent": "供新兵訓練用的防具"
+  },
+  {
+    "TextID": "TM_Cloth_Body_01_Name",
+    "TextContent": "訓練用布料護甲"
+  },
+  {
+    "TextID": "TM_Cloth_Body_01_Intro",
+    "TextContent": "供新兵訓練用的防具"
+  },
+  {
+    "TextID": "TM_Cloth_Leg_01_Name",
+    "TextContent": "訓練用布料護腿"
+  },
+  {
+    "TextID": "TM_Cloth_Leg_01_Intro",
+    "TextContent": "供新兵訓練用的防具"
+  },
+  {
+    "TextID": "TM_Cloth_Arm_01_Name",
+    "TextContent": "訓練用布料護手"
+  },
+  {
+    "TextID": "TM_Cloth_Arm_01_Intro",
+    "TextContent": "供新兵訓練用的防具"
+  },
+  {
+    "TextID": "TM_Cloth_Foot_01_Name",
+    "TextContent": "訓練用布料靴"
+  },
+  {
+    "TextID": "TM_Cloth_Foot_01_Intro",
+    "TextContent": "供新兵訓練用的防具"
+  },
+  {
+    "TextID": "TM_Heavy_Head_02_Name",
+    "TextContent": "重金屬頭盔"
+  },
+  {
+    "TextID": "TM_Heavy_Head_02_Intro",
+    "TextContent": "金屬打造的防具，較為耐用，防禦性也比較高，但穿著起來較為笨重"
+  },
+  {
+    "TextID": "TM_Heavy_Body_02_Name",
+    "TextContent": "重金屬護甲"
+  },
+  {
+    "TextID": "TM_Heavy_Body_02_Intro",
+    "TextContent": "金屬打造的防具，較為耐用，防禦性也比較高，但穿著起來較為笨重"
+  },
+  {
+    "TextID": "TM_Heavy_Leg_02_Name",
+    "TextContent": "重金屬護腿"
+  },
+  {
+    "TextID": "TM_Heavy_Leg_02_Intro",
+    "TextContent": "金屬打造的防具，較為耐用，防禦性也比較高，但穿著起來較為笨重"
+  },
+  {
+    "TextID": "TM_Heavy_Arm_02_Name",
+    "TextContent": "重金屬護手"
+  },
+  {
+    "TextID": "TM_Heavy_Arm_02_Intro",
+    "TextContent": "金屬打造的防具，較為耐用，防禦性也比較高，但穿著起來較為笨重"
+  },
+  {
+    "TextID": "TM_Heavy_Foot_02_Name",
+    "TextContent": "重金屬長靴"
+  },
+  {
+    "TextID": "TM_Heavy_Foot_02_Intro",
+    "TextContent": "金屬打造的防具，較為耐用，防禦性也比較高，但穿著起來較為笨重"
+  },
+  {
+    "TextID": "TM_Light_Head_02_Name",
+    "TextContent": "野獸皮頭盔"
+  },
+  {
+    "TextID": "TM_Light_Head_02_Intro",
+    "TextContent": "野獸的皮製成的防具，雖然防禦性沒有那麼高，但機動性較為敏捷"
+  },
+  {
+    "TextID": "TM_Light_Body_02_Name",
+    "TextContent": "野獸皮護甲"
+  },
+  {
+    "TextID": "TM_Light_Body_02_Intro",
+    "TextContent": "野獸的皮製成的防具，雖然防禦性沒有那麼高，但機動性較為敏捷"
+  },
+  {
+    "TextID": "TM_Light_Leg_02_Name",
+    "TextContent": "野獸皮護腿"
+  },
+  {
+    "TextID": "TM_Light_Leg_02_Intro",
+    "TextContent": "野獸的皮製成的防具，雖然防禦性沒有那麼高，但機動性較為敏捷"
+  },
+  {
+    "TextID": "TM_Light_Arm_02_Name",
+    "TextContent": "野獸皮護手"
+  },
+  {
+    "TextID": "TM_Light_Arm_02_Intro",
+    "TextContent": "野獸的皮製成的防具，雖然防禦性沒有那麼高，但機動性較為敏捷"
+  },
+  {
+    "TextID": "TM_Light_Foot_02_Name",
+    "TextContent": "野獸皮短靴"
+  },
+  {
+    "TextID": "TM_Light_Foot_02_Intro",
+    "TextContent": "野獸的皮製成的防具，雖然防禦性沒有那麼高，但機動性較為敏捷"
+  },
+  {
+    "TextID": "TM_Cloth_Head_02_Name",
+    "TextContent": "高質布頭盔"
+  },
+  {
+    "TextID": "TM_Cloth_Head_02_Intro",
+    "TextContent": "布料製成的防具，較為輕薄，外觀上也較為神聖嚴肅"
+  },
+  {
+    "TextID": "TM_Cloth_Body_02_Name",
+    "TextContent": "高質布外衣"
+  },
+  {
+    "TextID": "TM_Cloth_Body_02_Intro",
+    "TextContent": "布料製成的防具，較為輕薄，外觀上也較為神聖嚴肅"
+  },
+  {
+    "TextID": "TM_Cloth_Leg_02_Name",
+    "TextContent": "高質布護腿"
+  },
+  {
+    "TextID": "TM_Cloth_Leg_02_Intro",
+    "TextContent": "布料製成的防具，較為輕薄，外觀上也較為神聖嚴肅"
+  },
+  {
+    "TextID": "TM_Cloth_Arm_02_Name",
+    "TextContent": "高質布護手"
+  },
+  {
+    "TextID": "TM_Cloth_Arm_02_Intro",
+    "TextContent": "布料製成的防具，較為輕薄，外觀上也較為神聖嚴肅"
+  },
+  {
+    "TextID": "TM_Cloth_Foot_02_Name",
+    "TextContent": "高質布靴"
+  },
+  {
+    "TextID": "TM_Cloth_Foot_02_Intro",
+    "TextContent": "布料製成的防具，較為輕薄，外觀上也較為神聖嚴肅"
+  },
+  {
+    "TextID": "TM_Heavy_Head_03_Name",
+    "TextContent": "青銅頭盔"
+  },
+  {
+    "TextID": "TM_Heavy_Head_03_Intro",
+    "TextContent": "金屬打造的防具，防禦性也比較高，穿著起來較為笨重，也更加適合了脫離新人階段的冒險家"
+  },
+  {
+    "TextID": "TM_Heavy_Body_03_Name",
+    "TextContent": "青銅護甲"
+  },
+  {
+    "TextID": "TM_Heavy_Body_03_Intro",
+    "TextContent": "金屬打造的防具，防禦性也比較高，穿著起來較為笨重，也更加適合了脫離新人階段的冒險家"
+  },
+  {
+    "TextID": "TM_Heavy_Leg_03_Name",
+    "TextContent": "青銅護腿"
+  },
+  {
+    "TextID": "TM_Heavy_Leg_03_Intro",
+    "TextContent": "金屬打造的防具，防禦性也比較高，穿著起來較為笨重，也更加適合了脫離新人階段的冒險家"
+  },
+  {
+    "TextID": "TM_Heavy_Arm_03_Name",
+    "TextContent": "青銅護手"
+  },
+  {
+    "TextID": "TM_Heavy_Arm_03_Intro",
+    "TextContent": "金屬打造的防具，防禦性也比較高，穿著起來較為笨重，也更加適合了脫離新人階段的冒險家"
+  },
+  {
+    "TextID": "TM_Heavy_Foot_03_Name",
+    "TextContent": "青銅長靴"
+  },
+  {
+    "TextID": "TM_Heavy_Foot_03_Intro",
+    "TextContent": "金屬打造的防具，防禦性也比較高，穿著起來較為笨重，也更加適合了脫離新人階段的冒險家"
+  },
+  {
+    "TextID": "TM_Light_Head_03_Name",
+    "TextContent": "精皮革頭盔"
+  },
+  {
+    "TextID": "TM_Light_Head_03_Intro",
+    "TextContent": "精緻的皮革製成的防具，雖然防禦性沒有那麼高，但機動性較為敏捷，也更加適合脫離新人階段的冒險家穿戴"
+  },
+  {
+    "TextID": "TM_Light_Body_03_Name",
+    "TextContent": "精皮革護甲"
+  },
+  {
+    "TextID": "TM_Light_Body_03_Intro",
+    "TextContent": "精緻的皮革製成的防具，雖然防禦性沒有那麼高，但機動性較為敏捷，也更加適合脫離新人階段的冒險家穿戴"
+  },
+  {
+    "TextID": "TM_Light_Leg_03_Name",
+    "TextContent": "精皮革護腿"
+  },
+  {
+    "TextID": "TM_Light_Leg_03_Intro",
+    "TextContent": "精緻的皮革製成的防具，雖然防禦性沒有那麼高，但機動性較為敏捷，也更加適合脫離新人階段的冒險家穿戴"
+  },
+  {
+    "TextID": "TM_Light_Arm_03_Name",
+    "TextContent": "精皮革護手"
+  },
+  {
+    "TextID": "TM_Light_Arm_03_Intro",
+    "TextContent": "精緻的皮革製成的防具，雖然防禦性沒有那麼高，但機動性較為敏捷，也更加適合脫離新人階段的冒險家穿戴"
+  },
+  {
+    "TextID": "TM_Light_Foot_03_Name",
+    "TextContent": "精皮革短靴"
+  },
+  {
+    "TextID": "TM_Light_Foot_03_Intro",
+    "TextContent": "精緻的皮革製成的防具，雖然防禦性沒有那麼高，但機動性較為敏捷，也更加適合脫離新人階段的冒險家穿戴"
+  },
+  {
+    "TextID": "TM_Cloth_Head_03_Name",
+    "TextContent": "蠶絲布頭箍"
+  },
+  {
+    "TextID": "TM_Cloth_Head_03_Intro",
+    "TextContent": "蠶絲製成的防具，較為輕薄，外觀神聖莊嚴，更加適合脫離新人階段的冒險家"
+  },
+  {
+    "TextID": "TM_Cloth_Body_03_Name",
+    "TextContent": "蠶絲布護甲"
+  },
+  {
+    "TextID": "TM_Cloth_Body_03_Intro",
+    "TextContent": "蠶絲製成的防具，較為輕薄，外觀神聖莊嚴，更加適合脫離新人階段的冒險家"
+  },
+  {
+    "TextID": "TM_Cloth_Leg_03_Name",
+    "TextContent": "蠶絲布護腿"
+  },
+  {
+    "TextID": "TM_Cloth_Leg_03_Intro",
+    "TextContent": "蠶絲製成的防具，較為輕薄，外觀神聖莊嚴，更加適合脫離新人階段的冒險家"
+  },
+  {
+    "TextID": "TM_Cloth_Arm_03_Name",
+    "TextContent": "蠶絲布護手"
+  },
+  {
+    "TextID": "TM_Cloth_Arm_03_Intro",
+    "TextContent": "蠶絲製成的防具，較為輕薄，外觀神聖莊嚴，更加適合脫離新人階段的冒險家"
+  },
+  {
+    "TextID": "TM_Cloth_Foot_03_Name",
+    "TextContent": "蠶絲布靴"
+  },
+  {
+    "TextID": "TM_Cloth_Foot_03_Intro",
+    "TextContent": "蠶絲製成的防具，較為輕薄，外觀神聖莊嚴，更加適合脫離新人階段的冒險家"
+  },
+  {
+    "TextID": "TM_Heavy_Head_04_Name",
+    "TextContent": "伊卡洛黃金頭盔"
+  },
+  {
+    "TextID": "TM_Heavy_Head_04_Intro",
+    "TextContent": "伊卡洛對黃金的執念，導致他在正義的天秤失衡，貪欲勝過他的理智線。這是擊敗他後，使用他囤積的黃金製成的防具"
+  },
+  {
+    "TextID": "TM_Heavy_Body_04_Name",
+    "TextContent": "伊卡洛黃金鎧甲"
+  },
+  {
+    "TextID": "TM_Heavy_Body_04_Intro",
+    "TextContent": "伊卡洛對黃金的執念，導致他在正義的天秤失衡，貪欲勝過他的理智線。這是擊敗他後，使用他囤積的黃金製成的防具"
+  },
+  {
+    "TextID": "TM_Heavy_Leg_04_Name",
+    "TextContent": "伊卡洛黃金護腿"
+  },
+  {
+    "TextID": "TM_Heavy_Leg_04_Intro",
+    "TextContent": "伊卡洛對黃金的執念，導致他在正義的天秤失衡，貪欲勝過他的理智線。這是擊敗他後，使用他囤積的黃金製成的防具"
+  },
+  {
+    "TextID": "TM_Heavy_Arm_04_Name",
+    "TextContent": "伊卡洛黃金護手"
+  },
+  {
+    "TextID": "TM_Heavy_Arm_04_Intro",
+    "TextContent": "伊卡洛對黃金的執念，導致他在正義的天秤失衡，貪欲勝過他的理智線。這是擊敗他後，使用他囤積的黃金製成的防具"
+  },
+  {
+    "TextID": "TM_Heavy_Foot_04_Name",
+    "TextContent": "伊卡洛黃金長靴"
+  },
+  {
+    "TextID": "TM_Heavy_Foot_04_Intro",
+    "TextContent": "伊卡洛對黃金的執念，導致他在正義的天秤失衡，貪欲勝過他的理智線。這是擊敗他後，使用他囤積的黃金製成的防具"
+  },
+  {
+    "TextID": "TM_Heavy_Head_05_Name",
+    "TextContent": "崔西斯合金頭盔"
+  },
+  {
+    "TextID": "TM_Heavy_Head_05_Intro",
+    "TextContent": "哥布林族霸佔了對人類利益十分重要的礦坑，大隊長崔西斯在帶領眾多低階哥布林挖掘礦坑時，私藏了一部分合金石。這是擊敗他後，使用獲得的合金石製成的裝備"
+  },
+  {
+    "TextID": "TM_Heavy_Body_05_Name",
+    "TextContent": "崔西斯合金鎧甲"
+  },
+  {
+    "TextID": "TM_Heavy_Body_05_Intro",
+    "TextContent": "哥布林族霸佔了對人類利益十分重要的礦坑，大隊長崔西斯在帶領眾多低階哥布林挖掘礦坑時，私藏了一部分合金石。這是擊敗他後，使用獲得的合金石製成的裝備"
+  },
+  {
+    "TextID": "TM_Heavy_Leg_05_Name",
+    "TextContent": "崔西斯合金護腿"
+  },
+  {
+    "TextID": "TM_Heavy_Leg_05_Intro",
+    "TextContent": "哥布林族霸佔了對人類利益十分重要的礦坑，大隊長崔西斯在帶領眾多低階哥布林挖掘礦坑時，私藏了一部分合金石。這是擊敗他後，使用獲得的合金石製成的裝備"
+  },
+  {
+    "TextID": "TM_Heavy_Arm_05_Name",
+    "TextContent": "崔西斯合金護手"
+  },
+  {
+    "TextID": "TM_Heavy_Arm_05_Intro",
+    "TextContent": "哥布林族霸佔了對人類利益十分重要的礦坑，大隊長崔西斯在帶領眾多低階哥布林挖掘礦坑時，私藏了一部分合金石。這是擊敗他後，使用獲得的合金石製成的裝備"
+  },
+  {
+    "TextID": "TM_Heavy_Foot_05_Name",
+    "TextContent": "崔西斯合金長靴"
+  },
+  {
+    "TextID": "TM_Heavy_Foot_05_Intro",
+    "TextContent": "哥布林族霸佔了對人類利益十分重要的礦坑，大隊長崔西斯在帶領眾多低階哥布林挖掘礦坑時，私藏了一部分合金石。這是擊敗他後，使用獲得的合金石製成的裝備"
+  },
+  {
+    "TextID": "TM_Heavy_Head_06_Name",
+    "TextContent": "卡倫迪歐琥珀頭盔"
+  },
+  {
+    "TextID": "TM_Heavy_Head_06_Intro",
+    "TextContent": "琥珀是卡倫迪歐眼中的寶物，他一輩子掠奪得來的財產全都變賣成了琥珀玉。這是擊敗他後，從他藏身地搜刮來的琥珀打造成的裝備"
+  },
+  {
+    "TextID": "TM_Heavy_Body_06_Name",
+    "TextContent": "卡倫迪歐琥珀鎧甲"
+  },
+  {
+    "TextID": "TM_Heavy_Body_06_Intro",
+    "TextContent": "琥珀是卡倫迪歐眼中的寶物，他一輩子掠奪得來的財產全都變賣成了琥珀玉。這是擊敗他後，從他藏身地搜刮來的琥珀打造成的裝備"
+  },
+  {
+    "TextID": "TM_Heavy_Leg_06_Name",
+    "TextContent": "卡倫迪歐琥珀護腿"
+  },
+  {
+    "TextID": "TM_Heavy_Leg_06_Intro",
+    "TextContent": "琥珀是卡倫迪歐眼中的寶物，他一輩子掠奪得來的財產全都變賣成了琥珀玉。這是擊敗他後，從他藏身地搜刮來的琥珀打造成的裝備"
+  },
+  {
+    "TextID": "TM_Heavy_Arm_06_Name",
+    "TextContent": "卡倫迪歐琥珀護手"
+  },
+  {
+    "TextID": "TM_Heavy_Arm_06_Intro",
+    "TextContent": "琥珀是卡倫迪歐眼中的寶物，他一輩子掠奪得來的財產全都變賣成了琥珀玉。這是擊敗他後，從他藏身地搜刮來的琥珀打造成的裝備"
+  },
+  {
+    "TextID": "TM_Heavy_Foot_06_Name",
+    "TextContent": "卡倫迪歐琥珀長靴"
+  },
+  {
+    "TextID": "TM_Heavy_Foot_06_Intro",
+    "TextContent": "琥珀是卡倫迪歐眼中的寶物，他一輩子掠奪得來的財產全都變賣成了琥珀玉。這是擊敗他後，從他藏身地搜刮來的琥珀打造成的裝備"
+  },
+  {
+    "TextID": "TM_Light_Head_04_Name",
+    "TextContent": "西拉爾疾風頭盔"
+  },
+  {
+    "TextID": "TM_Light_Head_04_Intro",
+    "TextContent": "被稱為疾風的西拉爾，叛變所屬的騎士團後，一直隱居在密林之中。這是擊敗他後，獲得的裝備。"
+  },
+  {
+    "TextID": "TM_Light_Body_04_Name",
+    "TextContent": "西拉爾疾風護甲"
+  },
+  {
+    "TextID": "TM_Light_Body_04_Intro",
+    "TextContent": "被稱為疾風的西拉爾，叛變所屬的騎士團後，一直隱居在密林之中。這是擊敗他後，獲得的裝備。"
+  },
+  {
+    "TextID": "TM_Light_Leg_04_Name",
+    "TextContent": "西拉爾疾風脛甲"
+  },
+  {
+    "TextID": "TM_Light_Leg_04_Intro",
+    "TextContent": "被稱為疾風的西拉爾，叛變所屬的騎士團後，一直隱居在密林之中。這是擊敗他後，獲得的裝備。"
+  },
+  {
+    "TextID": "TM_Light_Arm_04_Name",
+    "TextContent": "西拉爾疾風護手"
+  },
+  {
+    "TextID": "TM_Light_Arm_04_Intro",
+    "TextContent": "被稱為疾風的西拉爾，叛變所屬的騎士團後，一直隱居在密林之中。這是擊敗他後，獲得的裝備。"
+  },
+  {
+    "TextID": "TM_Light_Foot_04_Name",
+    "TextContent": "西拉爾疾風跑鞋"
+  },
+  {
+    "TextID": "TM_Light_Foot_04_Intro",
+    "TextContent": "被稱為疾風的西拉爾，叛變所屬的騎士團後，一直隱居在密林之中。這是擊敗他後，獲得的裝備。"
+  },
+  {
+    "TextID": "TM_Light_Head_05_Name",
+    "TextContent": "崔西斯苦痛頭盔"
+  },
+  {
+    "TextID": "TM_Light_Head_05_Intro",
+    "TextContent": "崔西斯利用他的魔力導致一片樹林全都受他汙染，在擊敗他後使得原本的魔力積成苦痛結晶。這是擊敗他後，苦痛結晶凝聚成的裝備。"
+  },
+  {
+    "TextID": "TM_Light_Body_05_Name",
+    "TextContent": "崔西斯苦痛護甲"
+  },
+  {
+    "TextID": "TM_Light_Body_05_Intro",
+    "TextContent": "崔西斯利用他的魔力導致一片樹林全都受他汙染，在擊敗他後使得原本的魔力積成苦痛結晶。這是擊敗他後，苦痛結晶凝聚成的裝備。"
+  },
+  {
+    "TextID": "TM_Light_Leg_05_Name",
+    "TextContent": "崔西斯苦痛脛甲"
+  },
+  {
+    "TextID": "TM_Light_Leg_05_Intro",
+    "TextContent": "崔西斯利用他的魔力導致一片樹林全都受他汙染，在擊敗他後使得原本的魔力積成苦痛結晶。這是擊敗他後，苦痛結晶凝聚成的裝備。"
+  },
+  {
+    "TextID": "TM_Light_Arm_05_Name",
+    "TextContent": "崔西斯苦痛護手"
+  },
+  {
+    "TextID": "TM_Light_Arm_05_Intro",
+    "TextContent": "崔西斯利用他的魔力導致一片樹林全都受他汙染，在擊敗他後使得原本的魔力積成苦痛結晶。這是擊敗他後，苦痛結晶凝聚成的裝備。"
+  },
+  {
+    "TextID": "TM_Light_Foot_05_Name",
+    "TextContent": "崔西斯苦痛短靴"
+  },
+  {
+    "TextID": "TM_Light_Foot_05_Intro",
+    "TextContent": "崔西斯利用他的魔力導致一片樹林全都受他汙染，在擊敗他後使得原本的魔力積成苦痛結晶。這是擊敗他後，苦痛結晶凝聚成的裝備。"
+  },
+  {
+    "TextID": "TM_Light_Head_06_Name",
+    "TextContent": "洛哥尼野性頭盔"
+  },
+  {
+    "TextID": "TM_Light_Head_06_Intro",
+    "TextContent": "在挑戰者山峰的衛冕者洛哥尼，從沒有人成攻搶奪他的衛冕寶座。這是擊敗他後，從他手中獲取的裝備。"
+  },
+  {
+    "TextID": "TM_Light_Body_06_Name",
+    "TextContent": "洛哥尼野性脛甲"
+  },
+  {
+    "TextID": "TM_Light_Body_06_Intro",
+    "TextContent": "在挑戰者山峰的衛冕者洛哥尼，從沒有人成攻搶奪他的衛冕寶座。這是擊敗他後，從他手中獲取的裝備。"
+  },
+  {
+    "TextID": "TM_Light_Leg_06_Name",
+    "TextContent": "洛哥尼野性護腿"
+  },
+  {
+    "TextID": "TM_Light_Leg_06_Intro",
+    "TextContent": "在挑戰者山峰的衛冕者洛哥尼，從沒有人成攻搶奪他的衛冕寶座。這是擊敗他後，從他手中獲取的裝備。"
+  },
+  {
+    "TextID": "TM_Light_Arm_06_Name",
+    "TextContent": "洛哥尼野性護手"
+  },
+  {
+    "TextID": "TM_Light_Arm_06_Intro",
+    "TextContent": "在挑戰者山峰的衛冕者洛哥尼，從沒有人成攻搶奪他的衛冕寶座。這是擊敗他後，從他手中獲取的裝備。"
+  },
+  {
+    "TextID": "TM_Light_Foot_06_Name",
+    "TextContent": "洛哥尼野性短靴"
+  },
+  {
+    "TextID": "TM_Light_Foot_06_Intro",
+    "TextContent": "在挑戰者山峰的衛冕者洛哥尼，從沒有人成攻搶奪他的衛冕寶座。這是擊敗他後，從他手中獲取的裝備。"
+  },
+  {
+    "TextID": "TM_Cloth_Head_04_Name",
+    "TextContent": "莉娜魯多奉獻頭箍"
+  },
+  {
+    "TextID": "TM_Cloth_Head_04_Intro",
+    "TextContent": "第一次戰爭後，聖女莉娜魯多遺留下的聖物，刻下了，只有對於帝國以及教會有崇高的奉獻精神的人，才能穿戴。"
+  },
+  {
+    "TextID": "TM_Cloth_Body_04_Name",
+    "TextContent": "莉娜魯多奉獻外衣"
+  },
+  {
+    "TextID": "TM_Cloth_Body_04_Intro",
+    "TextContent": "第一次戰爭後，聖女莉娜魯多遺留下的聖物，某些部位刻下了聖女傳承的經文，只有對於帝國以及教會有崇高的奉獻精神的人，才能穿戴。"
+  },
+  {
+    "TextID": "TM_Cloth_Leg_04_Name",
+    "TextContent": "莉娜魯多奉獻護腿"
+  },
+  {
+    "TextID": "TM_Cloth_Leg_04_Intro",
+    "TextContent": "第一次戰爭後，聖女莉娜魯多遺留下的聖物，某些部位刻下了聖女傳承的經文，只有對於帝國以及教會有崇高的奉獻精神的人，才能穿戴。"
+  },
+  {
+    "TextID": "TM_Cloth_Arm_04_Name",
+    "TextContent": "莉娜魯多奉獻護手"
+  },
+  {
+    "TextID": "TM_Cloth_Arm_04_Intro",
+    "TextContent": "第一次戰爭後，聖女莉娜魯多遺留下的聖物，某些部位刻下了聖女傳承的經文，只有對於帝國以及教會有崇高的奉獻精神的人，才能穿戴。"
+  },
+  {
+    "TextID": "TM_Cloth_Foot_04_Name",
+    "TextContent": "莉娜魯多奉獻長靴"
+  },
+  {
+    "TextID": "TM_Cloth_Foot_04_Intro",
+    "TextContent": "第一次戰爭後，聖女莉娜魯多遺留下的聖物，某些部位刻下了聖女傳承的經文，只有對於帝國以及教會有崇高的奉獻精神的人，才能穿戴。"
+  },
+  {
+    "TextID": "TM_Cloth_Head_05_Name",
+    "TextContent": "崔西斯惡語頭箍"
+  },
+  {
+    "TextID": "TM_Cloth_Head_05_Intro",
+    "TextContent": "崔西斯對人類降下的詛咒，因聖女的祈求而失敗，剩下的能量匯聚成惡語晶石。這是擊敗他後，惡語晶石凝聚成的裝備。"
+  },
+  {
+    "TextID": "TM_Cloth_Body_05_Name",
+    "TextContent": "崔西斯惡語外衣"
+  },
+  {
+    "TextID": "TM_Cloth_Body_05_Intro",
+    "TextContent": "崔西斯對人類降下的詛咒，因聖女的祈求而失敗，剩下的能量匯聚成惡語晶石。這是擊敗他後，惡語晶石凝聚成的裝備。"
+  },
+  {
+    "TextID": "TM_Cloth_Leg_05_Name",
+    "TextContent": "崔西斯惡語護腿"
+  },
+  {
+    "TextID": "TM_Cloth_Leg_05_Intro",
+    "TextContent": "崔西斯對人類降下的詛咒，因聖女的祈求而失敗，剩下的能量匯聚成惡語晶石。這是擊敗他後，惡語晶石凝聚成的裝備。"
+  },
+  {
+    "TextID": "TM_Cloth_Arm_05_Name",
+    "TextContent": "崔西斯惡語手套"
+  },
+  {
+    "TextID": "TM_Cloth_Arm_05_Intro",
+    "TextContent": "崔西斯對人類降下的詛咒，因聖女的祈求而失敗，剩下的能量匯聚成惡語晶石。這是擊敗他後，惡語晶石凝聚成的裝備。"
+  },
+  {
+    "TextID": "TM_Cloth_Foot_05_Name",
+    "TextContent": "崔西斯惡語長靴"
+  },
+  {
+    "TextID": "TM_Cloth_Foot_05_Intro",
+    "TextContent": "崔西斯對人類降下的詛咒，因聖女的祈求而失敗，剩下的能量匯聚成惡語晶石。這是擊敗他後，惡語晶石凝聚成的裝備。"
+  },
+  {
+    "TextID": "TM_Cloth_Head_06_Name",
+    "TextContent": "卡歐斯混亂頭箍"
+  },
+  {
+    "TextID": "TM_Cloth_Head_06_Intro",
+    "TextContent": "卡歐斯是第一代德魯伊的巫師，卻因為追求禁忌的法術，被禁忌能量給洗腦，不分敵我。這是擊敗他後，禁忌能量凝聚成的裝備。"
+  },
+  {
+    "TextID": "TM_Cloth_Body_06_Name",
+    "TextContent": "卡歐斯混亂長袍"
+  },
+  {
+    "TextID": "TM_Cloth_Body_06_Intro",
+    "TextContent": "卡歐斯是第一代德魯伊的巫師，卻因為追求禁忌的法術，被禁忌能量給洗腦，不分敵我。這是擊敗他後，禁忌能量凝聚成的裝備。"
+  },
+  {
+    "TextID": "TM_Cloth_Leg_06_Name",
+    "TextContent": "卡歐斯混亂長襪"
+  },
+  {
+    "TextID": "TM_Cloth_Leg_06_Intro",
+    "TextContent": "卡歐斯是第一代德魯伊的巫師，卻因為追求禁忌的法術，被禁忌能量給洗腦，不分敵我。這是擊敗他後，禁忌能量凝聚成的裝備。"
+  },
+  {
+    "TextID": "TM_Cloth_Arm_06_Name",
+    "TextContent": "卡歐斯混亂手套"
+  },
+  {
+    "TextID": "TM_Cloth_Arm_06_Intro",
+    "TextContent": "卡歐斯是第一代德魯伊的巫師，卻因為追求禁忌的法術，被禁忌能量給洗腦，不分敵我。這是擊敗他後，禁忌能量凝聚成的裝備。"
+  },
+  {
+    "TextID": "TM_Cloth_Foot_06_Name",
+    "TextContent": "卡歐斯混亂長靴"
+  },
+  {
+    "TextID": "TM_Cloth_Foot_06_Intro",
+    "TextContent": "卡歐斯是第一代德魯伊的巫師，卻因為追求禁忌的法術，被禁忌能量給洗腦，不分敵我。這是擊敗他後，禁忌能量凝聚成的裝備。"
+  }
+]

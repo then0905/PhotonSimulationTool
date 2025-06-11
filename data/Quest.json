@@ -1,0 +1,66 @@
+[
+  {
+    "QuestID": "QuestID_01",
+    "QuestName": "TM_Quest01_Name",
+    "NeedLv": 1,
+    "QuestChatContent": [
+      "TM_Quest01_ChatContent1",
+      "TM_Quest01_ChatContent2",
+      "TM_Quest01_ChatContent3",
+      "TM_Quest01_ChatContent4"
+    ],
+    "StartNpcID": "Npc01",
+    "EndNpcID": "Npc01",
+    "QuestType": "Main",
+    "Exp": 100,
+    "Coin": 100,
+    "QuestFinishList": [
+      {
+        "QuestID": "QuestID_01",
+        "QuestChatContent": [
+          "TM_Quest01_FinishContent1",
+          "TM_Quest01_FinishContent2"
+        ]
+      }
+    ],
+    "QuestConditionList": [
+      {
+        "QuestID": "QuestID_01",
+        "ConditionType": "Hunting",
+        "ConditionID": "Monster_Test_0",
+        "ConditionCount": 3
+      }
+    ]
+  },
+  {
+    "QuestID": "QuestID_02",
+    "QuestName": "TM_Quest02_Name",
+    "NeedLv": 1,
+    "QuestChatContent": [
+      "TM_Quest02_ChatContent1",
+      "TM_Quest02_ChatContent2"
+    ],
+    "StartNpcID": "Npc02",
+    "EndNpcID": "Npc01",
+    "QuestType": "Side",
+    "Exp": 25,
+    "Coin": 0,
+    "QuestFinishList": [
+      {
+        "QuestID": "QuestID_02",
+        "QuestChatContent": [
+          "TM_Quest02_FinishContent1",
+          "TM_Quest02_FinishContent2"
+        ]
+      }
+    ],
+    "QuestConditionList": [
+      {
+        "QuestID": "QuestID_02",
+        "ConditionType": "Relay",
+        "ConditionID": "Npc01",
+        "ConditionCount": 1
+      }
+    ]
+  }
+]

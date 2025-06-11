@@ -1,0 +1,242 @@
+[
+  {
+    "TextID": "TM_Potion_Hp_01_Name",
+    "TextContent": "小型生命藥劑"
+  },
+  {
+    "TextID": "TM_Potion_Hp_01_Intro",
+    "TextContent": "玻璃罐罐裝起來的藥劑罐，食用後回復少許的生命值"
+  },
+  {
+    "TextID": "TM_Potion_Mp_01_Name",
+    "TextContent": "小型魔力藥劑"
+  },
+  {
+    "TextID": "TM_Potion_Mp_01_Intro",
+    "TextContent": "玻璃罐罐裝起來的藥劑罐，食用後回復少許的魔力值"
+  },
+  {
+    "TextID": "TM_Potion_Hp_02_Name",
+    "TextContent": "中型生命藥劑"
+  },
+  {
+    "TextID": "TM_Potion_Hp_02_Intro",
+    "TextContent": "玻璃罐罐裝起來的藥劑罐，食用後回復一些的生命值"
+  },
+  {
+    "TextID": "TM_Potion_Mp_02_Name",
+    "TextContent": "中型魔力藥劑"
+  },
+  {
+    "TextID": "TM_Potion_Mp_02_Intro",
+    "TextContent": "玻璃罐罐裝起來的藥劑罐，食用後回復一些的魔力值"
+  },
+  {
+    "TextID": "TM_Potion_Hp_03_Name",
+    "TextContent": "大型生命藥劑"
+  },
+  {
+    "TextID": "TM_Potion_Hp_03_Intro",
+    "TextContent": "玻璃罐罐裝起來的藥劑罐，食用後回復大量的生命值"
+  },
+  {
+    "TextID": "TM_Potion_Mp_03_Name",
+    "TextContent": "大型魔力藥劑"
+  },
+  {
+    "TextID": "TM_Potion_Mp_03_Intro",
+    "TextContent": "玻璃罐罐裝起來的藥劑罐，食用後回復大量的魔力值"
+  },
+  {
+    "TextID": "TM_Potion_Hp_04_Name",
+    "TextContent": "巨型生命藥劑"
+  },
+  {
+    "TextID": "TM_Potion_Hp_04_Intro",
+    "TextContent": "玻璃罐罐裝起來的藥劑罐，食用後回復超大量的生命值"
+  },
+  {
+    "TextID": "TM_Potion_Mp_04_Name",
+    "TextContent": "巨型魔力藥劑"
+  },
+  {
+    "TextID": "TM_Potion_Mp_04_Intro",
+    "TextContent": "玻璃罐罐裝起來的藥劑罐，食用後回復超大量的魔力值"
+  },
+  {
+    "TextID": "TM_Potion_Detoxification_01_Name",
+    "TextContent": "解毒劑"
+  },
+  {
+    "TextID": "TM_Potion_Detoxification_01_Intro",
+    "TextContent": "玻璃罐罐裝起來的藥劑罐，食用後可以解除中毒的狀態"
+  },
+  {
+    "TextID": "TM_DEF_Reel_01_Name",
+    "TextContent": "防禦魔法卷軸"
+  },
+  {
+    "TextID": "TM_DEF_Reel_01_Intro",
+    "TextContent": "將法術封存於羊皮製的卷軸內，使用後在一定時間內獲得增加防禦力的祝福魔法"
+  },
+  {
+    "TextID": "TM_ATK_Reel_01_Name",
+    "TextContent": "攻擊魔法卷軸"
+  },
+  {
+    "TextID": "TM_ATK_Reel_01_Intro",
+    "TextContent": "將法術封存於羊皮製的卷軸內，使用後在一定時間內獲得增加攻擊力的祝福魔法"
+  },
+  {
+    "TextID": "TM_Potion_AS_01_Name",
+    "TextContent": "攻速藥水"
+  },
+  {
+    "TextID": "TM_Potion_AS_01_Intro",
+    "TextContent": "玻璃罐罐裝起來的藥劑罐，食用後在一定時間內攻擊速度上升"
+  },
+  {
+    "TextID": "TM_Record_Reel_01_Name",
+    "TextContent": "回城卷軸"
+  },
+  {
+    "TextID": "TM_Record_Reel_01_Intro",
+    "TextContent": "將法術封存於羊皮製的卷軸內，使用後回到最近的城鎮內"
+  },
+  {
+    "TextID": "TM_Enhance_01_Name",
+    "TextContent": "強化石"
+  },
+  {
+    "TextID": "TM_Enhance_01_Intro",
+    "TextContent": "內含神秘力量的石頭，雜質量過高，可以用來強化裝備與武器"
+  },
+  {
+    "TextID": "TM_Enhance_02_Name",
+    "TextContent": "高純度的強化石"
+  },
+  {
+    "TextID": "TM_Enhance_02_Intro",
+    "TextContent": "內含神秘力量的石頭，雜質量較低，用來強化裝備與武器時成功率較高"
+  },
+  {
+    "TextID": "TM_Enhance_03_Name",
+    "TextContent": "高純度的祝福石"
+  },
+  {
+    "TextID": "TM_Enhance_03_Intro",
+    "TextContent": "內含祝福力量的石頭，雜質量較高，可以用來強化裝備與武器，失敗時不會使裝備被破壞"
+  },
+  {
+    "TextID": "TM_Enhance_04_Name",
+    "TextContent": "高純度的詛咒石"
+  },
+  {
+    "TextID": "TM_Enhance_04_Intro",
+    "TextContent": "內含詛咒力量的石頭，雜質量較高，使用後將裝備或武器的強化等級下降"
+  },
+  {
+    "TextID": "TM_Booty_001_Name",
+    "TextContent": "獸皮"
+  },
+  {
+    "TextID": "TM_Booty_001_Intro",
+    "TextContent": "從野獸身上獲得的戰利品，可以販賣給商人換取金幣"
+  },
+  {
+    "TextID": "TM_Booty_002_Name",
+    "TextContent": "獸骨"
+  },
+  {
+    "TextID": "TM_Booty_002_Intro",
+    "TextContent": "從野獸身上獲得的戰利品，可以販賣給商人換取金幣"
+  },
+  {
+    "TextID": "TM_Booty_003_Name",
+    "TextContent": "不明黏液"
+  },
+  {
+    "TextID": "TM_Booty_003_Intro",
+    "TextContent": "從魔法生物身上獲得的戰利品，可以販賣給商人換取金幣"
+  },
+  {
+    "TextID": "TM_Booty_004_Name",
+    "TextContent": "魔法碎塊"
+  },
+  {
+    "TextID": "TM_Booty_004_Intro",
+    "TextContent": "從魔法生物身上獲得的戰利品，可以販賣給商人換取金幣"
+  },
+  {
+    "TextID": "TM_Booty_005_Name",
+    "TextContent": "哥布林項鍊"
+  },
+  {
+    "TextID": "TM_Booty_005_Intro",
+    "TextContent": "從哥布林身上獲得的戰利品，可以販賣給商人換取金幣"
+  },
+  {
+    "TextID": "TM_Booty_006_Name",
+    "TextContent": "哥布林指甲"
+  },
+  {
+    "TextID": "TM_Booty_006_Intro",
+    "TextContent": "從哥布林身上獲得的戰利品，可以販賣給商人換取金幣"
+  },
+  {
+    "TextID": "TM_Booty_007_Name",
+    "TextContent": "皮革"
+  },
+  {
+    "TextID": "TM_Booty_007_Intro",
+    "TextContent": "從人形生物身上獲得的戰利品，可以販賣給商人換取金幣"
+  },
+  {
+    "TextID": "TM_Booty_008_Name",
+    "TextContent": "不明布料"
+  },
+  {
+    "TextID": "TM_Booty_008_Intro",
+    "TextContent": "從人形生物身上獲得的戰利品，可以販賣給商人換取金幣"
+  },
+  {
+    "TextID": "TM_Booty_009_Name",
+    "TextContent": "木塊"
+  },
+  {
+    "TextID": "TM_Booty_009_Intro",
+    "TextContent": "從植物類生物獲得的戰利品，可以販賣給商人換取金幣"
+  },
+  {
+    "TextID": "TM_Booty_010_Name",
+    "TextContent": "完整木頭"
+  },
+  {
+    "TextID": "TM_Booty_010_Intro",
+    "TextContent": "從植物類生物獲得的戰利品，可以販賣給商人換取金幣"
+  },
+  {
+    "TextID": "TM_Booty_011_Name",
+    "TextContent": "破碎的肢體"
+  },
+  {
+    "TextID": "TM_Booty_011_Intro",
+    "TextContent": "從爬蟲類生物獲得的戰利品，可以販賣給商人換取金幣"
+  },
+  {
+    "TextID": "TM_Booty_012_Name",
+    "TextContent": "破碎的翅膀"
+  },
+  {
+    "TextID": "TM_Booty_012_Intro",
+    "TextContent": "從爬蟲類生物獲得的戰利品，可以販賣給商人換取金幣"
+  },
+  {
+    "TextID": "TM_Potion_EXP_01_Name",
+    "TextContent": "經驗加倍藥水"
+  },
+  {
+    "TextID": "TM_Potion_EXP_01_Intro",
+    "TextContent": "玻璃罐裝起來的藥劑罐，食用後在一定時間內獲得經驗量提升"
+  }
+]

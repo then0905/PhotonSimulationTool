@@ -1,0 +1,322 @@
+[
+  {
+    "TextID": "TM_Rate",
+    "TextContent": "提升{0}倍。"
+  },
+  {
+    "TextID": "TM_Value",
+    "TextContent": "加上{0}。"
+  },
+  {
+    "TextID": "TM_Lv",
+    "TextContent": "等級"
+  },
+  {
+    "TextID": "TM_Race",
+    "TextContent": "種族"
+  },
+  {
+    "TextID": "TM_Job",
+    "TextContent": "職業"
+  },
+  {
+    "TextID": "TM_Exp",
+    "TextContent": "經驗值"
+  },
+  {
+    "TextID": "TM_MaxExp",
+    "TextContent": "最大經驗值"
+  },
+  {
+    "TextID": "TM_PlayerCoin",
+    "TextContent": "玩家金幣量"
+  },
+  {
+    "TextID": "TM_Weapon",
+    "TextContent": "武器"
+  },
+  {
+    "TextID": "TM_Item",
+    "TextContent": "道具"
+  },
+  {
+    "TextID": "TM_Armor",
+    "TextContent": "防具"
+  },
+  {
+    "TextID": "TM_RightHand",
+    "TextContent": "主手"
+  },
+  {
+    "TextID": "TM_LeftHand",
+    "TextContent": "副手"
+  },
+  {
+    "TextID": "TM_BothHand",
+    "TextContent": "雙手"
+  },
+  {
+    "TextID": "TM_SingleHand",
+    "TextContent": "單手"
+  },
+  {
+    "TextID": "TM_OneHandedSword",
+    "TextContent": "單手劍"
+  },
+  {
+    "TextID": "TM_TwoHandedSword",
+    "TextContent": "雙手劍"
+  },
+  {
+    "TextID": "TM_LongStuff",
+    "TextContent": "長杖"
+  },
+  {
+    "TextID": "TM_LongBow",
+    "TextContent": "弓"
+  },
+  {
+    "TextID": "TM_Dagger",
+    "TextContent": "匕首"
+  },
+  {
+    "TextID": "TM_Axe",
+    "TextContent": "雙手斧"
+  },
+  {
+    "TextID": "TM_Crossbow",
+    "TextContent": "弩"
+  },
+  {
+    "TextID": "TM_Stick",
+    "TextContent": "短杖"
+  },
+  {
+    "TextID": "TM_Hammer",
+    "TextContent": "單手槌"
+  },
+  {
+    "TextID": "TM_GiantMallet",
+    "TextContent": "雙手槌"
+  },
+  {
+    "TextID": "TM_Book",
+    "TextContent": "法書"
+  },
+  {
+    "TextID": "TM_Shield",
+    "TextContent": "盾牌"
+  },
+  {
+    "TextID": "TM_Potion",
+    "TextContent": "藥劑"
+  },
+  {
+    "TextID": "TM_Reel",
+    "TextContent": "卷軸"
+  },
+  {
+    "TextID": "TM_EnhanceItem",
+    "TextContent": "強化道具"
+  },
+  {
+    "TextID": "TM_Booty",
+    "TextContent": "戰利品"
+  },
+  {
+    "TextID": "TM_Head",
+    "TextContent": "頭部"
+  },
+  {
+    "TextID": "TM_Body",
+    "TextContent": "身體"
+  },
+  {
+    "TextID": "TM_Leg",
+    "TextContent": "腿部"
+  },
+  {
+    "TextID": "TM_Arm",
+    "TextContent": "手腕"
+  },
+  {
+    "TextID": "TM_Foot",
+    "TextContent": "腳踝"
+  },
+  {
+    "TextID": "TM_HeavyArmor",
+    "TextContent": "重甲"
+  },
+  {
+    "TextID": "TM_LightArmor",
+    "TextContent": "輕甲"
+  },
+  {
+    "TextID": "TM_ClothArmor",
+    "TextContent": "布甲"
+  },
+  {
+    "TextID": "TM_Medium",
+    "TextContent": "中型"
+  },
+  {
+    "TextID": "TM_Normal",
+    "TextContent": "一般"
+  },
+  {
+    "TextID": "TM_Elite",
+    "TextContent": "菁英"
+  },
+  {
+    "TextID": "TM_Boss",
+    "TextContent": "王"
+  },
+  {
+    "TextID": "TM_MonsterType_Human",
+    "TextContent": "人型"
+  },
+  {
+    "TextID": "TM_MonsterType_Beast",
+    "TextContent": "野獸"
+  },
+  {
+    "TextID": "TM_MonsterType_MagicalCreature",
+    "TextContent": "魔法生物"
+  },
+  {
+    "TextID": "TM_MonsterType_Goblin",
+    "TextContent": "哥布林"
+  },
+  {
+    "TextID": "TM_Buff",
+    "TextContent": "增益效果"
+  },
+  {
+    "TextID": "TM_DeBuff",
+    "TextContent": "減益效果"
+  },
+  {
+    "TextID": "TM_CrowdControl",
+    "TextContent": "控制效果"
+  },
+  {
+    "TextID": "TM_Passive",
+    "TextContent": "被動效果"
+  },
+  {
+    "TextID": "TM_PlayerLv",
+    "TextContent": "玩家等級"
+  },
+  {
+    "TextID": "TM_Human",
+    "TextContent": "人類"
+  },
+  {
+    "TextID": "TM_Elf",
+    "TextContent": "精靈"
+  },
+  {
+    "TextID": "TM_Druid",
+    "TextContent": "德魯伊"
+  },
+  {
+    "TextID": "TM_Coin",
+    "TextContent": "金幣"
+  },
+  {
+    "TextID": "TM_Hunting",
+    "TextContent": "狩獵"
+  },
+  {
+    "TextID": "TM_Collect",
+    "TextContent": "收集"
+  },
+  {
+    "TextID": "TM_Deliver",
+    "TextContent": "交付"
+  },
+  {
+    "TextID": "TM_SendMessageTo",
+    "TextContent": "傳話給"
+  },
+  {
+    "TextID": "TM_ItemName",
+    "TextContent": "道具名稱"
+  },
+  {
+    "TextID": "TM_Classification",
+    "TextContent": "材質類型"
+  },
+  {
+    "TextID": "TM_WearPart",
+    "TextContent": "裝備部位"
+  },
+  {
+    "TextID": "TM_ItemType",
+    "TextContent": "道具分類"
+  },
+  {
+    "TextID": "TM_NeedLv",
+    "TextContent": "所需等級"
+  },
+  {
+    "TextID": "TM_Volume",
+    "TextContent": "作用值"
+  },
+  {
+    "TextID": "TM_CD",
+    "TextContent": "冷卻時間"
+  },
+  {
+    "TextID": "TM_Duration",
+    "TextContent": "持續時間"
+  },
+  {
+    "TextID": "TM_PlayerName",
+    "TextContent": "玩家名稱"
+  },
+  {
+    "TextID": "TM_Forge",
+    "TextContent": "裝備強化"
+  },
+  {
+    "TextID": "TM_Cancel",
+    "TextContent": "取消"
+  },
+  {
+    "TextID": "TM_ForgeAppend",
+    "TextContent": "  (追加: <color=#1FFF00>{0}</color>)"
+  },
+  {
+    "TextID": "TM_AttackSpeedSlow",
+    "TextContent": "偏慢"
+  },
+  {
+    "TextID": "TM_AttackSpeedMedium",
+    "TextContent": "中等"
+  },
+  {
+    "TextID": "TM_AttackSpeedFast",
+    "TextContent": "快"
+  },
+  {
+    "TextID": "TM_AttackSppedHighSlow",
+    "TextContent": "慢"
+  },
+  {
+    "TextID": "TM_None",
+    "TextContent": "無"
+  },
+  {
+    "TextID": "TM_Resurrection",
+    "TextContent": "復活"
+  },
+  {
+    "TextID": "TM_Comfirm",
+    "TextContent": "確認"
+  },
+  {
+    "TextID": "TM_Discarded",
+    "TextContent": "丟棄"
+  }
+]

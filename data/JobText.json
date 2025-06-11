@@ -1,0 +1,162 @@
+[
+  {
+    "TextID": "TM_Sword",
+    "TextContent": "劍士"
+  },
+  {
+    "TextID": "TM_Warrior",
+    "TextContent": "戰士"
+  },
+  {
+    "TextID": "TM_Knight",
+    "TextContent": "騎士"
+  },
+  {
+    "TextID": "TM_Berserker",
+    "TextContent": "狂戰士"
+  },
+  {
+    "TextID": "TM_Paladin",
+    "TextContent": "聖騎士"
+  },
+  {
+    "TextID": "TM_Praetorian",
+    "TextContent": "禁衛軍"
+  },
+  {
+    "TextID": "TM_Mage",
+    "TextContent": "法師"
+  },
+  {
+    "TextID": "TM_Monk",
+    "TextContent": "僧侶"
+  },
+  {
+    "TextID": "TM_Wizard",
+    "TextContent": "巫師"
+  },
+  {
+    "TextID": "TM_Priest",
+    "TextContent": "祭司"
+  },
+  {
+    "TextID": "TM_Magister",
+    "TextContent": "魔導"
+  },
+  {
+    "TextID": "TM_Prophet",
+    "TextContent": "先知"
+  },
+  {
+    "TextID": "TM_Archer",
+    "TextContent": "弓箭手"
+  },
+  {
+    "TextID": "TM_Shooter",
+    "TextContent": "射手"
+  },
+  {
+    "TextID": "TM_Hunter",
+    "TextContent": "獵人"
+  },
+  {
+    "TextID": "TM_Marksman",
+    "TextContent": "神射手"
+  },
+  {
+    "TextID": "TM_Chaser",
+    "TextContent": "狩獵者"
+  },
+  {
+    "TextID": "TM_Rogue",
+    "TextContent": "俠盜"
+  },
+  {
+    "TextID": "TM_Ranger",
+    "TextContent": "遊俠"
+  },
+  {
+    "TextID": "TM_Thieves",
+    "TextContent": "盜賊"
+  },
+  {
+    "TextID": "TM_Swashbuckler",
+    "TextContent": "俠客"
+  },
+  {
+    "TextID": "TM_Assassin",
+    "TextContent": "刺客"
+  },
+  {
+    "TextID": "TM_Battlemage",
+    "TextContent": "戰法"
+  },
+  {
+    "TextID": "TM_Dragonknight",
+    "TextContent": "龍騎士"
+  },
+  {
+    "TextID": "TM_Archangel",
+    "TextContent": "大天使長"
+  },
+  {
+    "TextID": "TM_Scythemaster",
+    "TextContent": "死神"
+  },
+  {
+    "TextID": "TM_Magicsword",
+    "TextContent": "魔劍士"
+  },
+  {
+    "TextID": "TM_RighteousMonk",
+    "TextContent": "破戒僧"
+  },
+  {
+    "TextID": "TM_Librarian",
+    "TextContent": "圖書館管理員"
+  },
+  {
+    "TextID": "TM_SmokeScout",
+    "TextContent": "菸鬼"
+  },
+  {
+    "TextID": "TM_MineArtisan",
+    "TextContent": "策反"
+  },
+  {
+    "TextID": "TM_Echo",
+    "TextContent": "回音"
+  },
+  {
+    "TextID": "TM_Hero",
+    "TextContent": "英雄"
+  },
+  {
+    "TextID": "TM_Dirt",
+    "TextContent": "汙穢"
+  },
+  {
+    "TextID": "TM_Warlord",
+    "TextContent": "戰魂"
+  },
+  {
+    "TextID": "TM_LoneExile",
+    "TextContent": "孤狼"
+  },
+  {
+    "TextID": "TM_BeastTamer",
+    "TextContent": "馴獸師"
+  },
+  {
+    "TextID": "TM_SwordSoul",
+    "TextContent": "劍靈"
+  },
+  {
+    "TextID": "TM_Specialist",
+    "TextContent": "專家"
+  },
+  {
+    "TextID": "TM_Voodoo",
+    "TextContent": "巫毒"
+  }
+]

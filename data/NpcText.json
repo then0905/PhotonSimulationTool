@@ -1,0 +1,42 @@
+[
+  {
+    "TextID": "TM_Npc01_Name",
+    "TextContent": "村長\n奧利柏"
+  },
+  {
+    "TextID": "TM_Npc01_ChatContent_1",
+    "TextContent": "歡迎來到初始之村，我是這裡的村長你好!"
+  },
+  {
+    "TextID": "TM_Npc02_Name",
+    "TextContent": "達蘭妲"
+  },
+  {
+    "TextID": "TM_Npc02_ChatContent_1",
+    "TextContent": "今天天氣很好，對吧?"
+  },
+  {
+    "TextID": "TM_Npc03_Name",
+    "TextContent": "道具商人\n克雷德"
+  },
+  {
+    "TextID": "TM_Npc03_ChatContent_1",
+    "TextContent": "歡迎光臨我的小舖，來參考看看呀!"
+  },
+  {
+    "TextID": "TM_Npc04_Name",
+    "TextContent": "測試NPC1"
+  },
+  {
+    "TextID": "TM_Npc04_ChatContent_1",
+    "TextContent": "第二張測試地圖 我是NPC1"
+  },
+  {
+    "TextID": "TM_Npc05_Name",
+    "TextContent": "測試NPC2"
+  },
+  {
+    "TextID": "TM_Npc05_ChatContent_1",
+    "TextContent": "第二張測試地圖 我是NPC2"
+  }
+]

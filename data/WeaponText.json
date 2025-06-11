@@ -1,0 +1,258 @@
+[
+  {
+    "TextID": "TM_Sword_Right_001_Name",
+    "TextContent": "訓練用單手劍"
+  },
+  {
+    "TextID": "TM_Sword_Right_001_Intro",
+    "TextContent": "供新兵訓練用的武器"
+  },
+  {
+    "TextID": "TM_Sword_Both_001_Name",
+    "TextContent": "訓練用雙手劍"
+  },
+  {
+    "TextID": "TM_Sword_Both_001_Intro",
+    "TextContent": "供新兵訓練用的武器"
+  },
+  {
+    "TextID": "TM_Mage_Both_001_Name",
+    "TextContent": "訓練用長杖"
+  },
+  {
+    "TextID": "TM_Mage_Both_001_Intro",
+    "TextContent": "供新兵訓練用的武器"
+  },
+  {
+    "TextID": "TM_Bow_Both_001_Name",
+    "TextContent": "訓練用長弓"
+  },
+  {
+    "TextID": "TM_Bow_Both_001_Intro",
+    "TextContent": "供新兵訓練用的武器"
+  },
+  {
+    "TextID": "TM_Dagger_Single_001_Name",
+    "TextContent": "訓練用匕首"
+  },
+  {
+    "TextID": "TM_Dagger_Single_001_Intro",
+    "TextContent": "供新兵訓練用的武器"
+  },
+  {
+    "TextID": "TM_Sword_Right_002_Name",
+    "TextContent": "初心者單手劍"
+  },
+  {
+    "TextID": "TM_Sword_Right_002_Intro",
+    "TextContent": "在新兵熟練訓練用的武器後，才可配戴的進階武器"
+  },
+  {
+    "TextID": "TM_Sword_Both_002_Name",
+    "TextContent": "初心者雙手劍"
+  },
+  {
+    "TextID": "TM_Sword_Both_002_Intro",
+    "TextContent": "在新兵熟練訓練用的武器後，才可配戴的進階武器"
+  },
+  {
+    "TextID": "TM_Mage_Both_002_Name",
+    "TextContent": "初心者長法杖"
+  },
+  {
+    "TextID": "TM_Mage_Both_002_Intro",
+    "TextContent": "在新兵熟練訓練用的武器後，才可配戴的進階武器"
+  },
+  {
+    "TextID": "TM_Bow_Both_002_Name",
+    "TextContent": "初心者長弓"
+  },
+  {
+    "TextID": "TM_Bow_Both_002_Intro",
+    "TextContent": "在新兵熟練訓練用的武器後，才可配戴的進階武器"
+  },
+  {
+    "TextID": "TM_Dagger_Single_002_Name",
+    "TextContent": "初心者匕首"
+  },
+  {
+    "TextID": "TM_Dagger_Single_002_Intro",
+    "TextContent": "在新兵熟練訓練用的武器後，才可配戴的進階武器"
+  },
+  {
+    "TextID": "TM_Sword_Right_003_Name",
+    "TextContent": "原始單手劍"
+  },
+  {
+    "TextID": "TM_Sword_Right_003_Intro",
+    "TextContent": "在新兵訓練最後階段時，給予的武器，能感受前一個使用者的靈魂"
+  },
+  {
+    "TextID": "TM_Sword_Both_003_Name",
+    "TextContent": "原始雙手劍"
+  },
+  {
+    "TextID": "TM_Sword_Both_003_Intro",
+    "TextContent": "在新兵訓練最後階段時，給予的武器，能感受前一個使用者的靈魂"
+  },
+  {
+    "TextID": "TM_Mage_Both_003_Name",
+    "TextContent": "原始長法杖"
+  },
+  {
+    "TextID": "TM_Mage_Both_003_Intro",
+    "TextContent": "在新兵訓練最後階段時，給予的武器，能感受前一個使用者的靈魂"
+  },
+  {
+    "TextID": "TM_Bow_Both_003_Name",
+    "TextContent": "原始長弓"
+  },
+  {
+    "TextID": "TM_Bow_Both_003_Intro",
+    "TextContent": "在新兵訓練最後階段時，給予的武器，能感受前一個使用者的靈魂"
+  },
+  {
+    "TextID": "TM_Dagger_Single_003_Name",
+    "TextContent": "原始匕首"
+  },
+  {
+    "TextID": "TM_Dagger_Single_003_Intro",
+    "TextContent": "在新兵訓練最後階段時，給予的武器，能感受前一個使用者的靈魂"
+  },
+  {
+    "TextID": "TM_Sword_Right_004_Name",
+    "TextContent": "精製單手劍"
+  },
+  {
+    "TextID": "TM_Sword_Right_004_Intro",
+    "TextContent": "離開新兵訓練時，武器匠贈與的畢業武器"
+  },
+  {
+    "TextID": "TM_Sword_Both_004_Name",
+    "TextContent": "精製雙手劍"
+  },
+  {
+    "TextID": "TM_Sword_Both_004_Intro",
+    "TextContent": "離開新兵訓練時，武器匠贈與的畢業武器"
+  },
+  {
+    "TextID": "TM_Mage_Both_004_Name",
+    "TextContent": "精製長法杖"
+  },
+  {
+    "TextID": "TM_Mage_Both_004_Intro",
+    "TextContent": "離開新兵訓練時，武器匠贈與的畢業武器"
+  },
+  {
+    "TextID": "TM_Bow_Both_004_Name",
+    "TextContent": "精製長弓"
+  },
+  {
+    "TextID": "TM_Bow_Both_004_Intro",
+    "TextContent": "離開新兵訓練時，武器匠贈與的畢業武器"
+  },
+  {
+    "TextID": "TM_Dagger_Single_004_Name",
+    "TextContent": "精製匕首"
+  },
+  {
+    "TextID": "TM_Dagger_Single_004_Intro",
+    "TextContent": "離開新兵訓練時，武器匠贈與的畢業武器"
+  },
+  {
+    "TextID": "TM_Sword_Right_005_Name",
+    "TextContent": "哥布林細劍"
+  },
+  {
+    "TextID": "TM_Sword_Right_005_Intro",
+    "TextContent": "在擊敗哥布林之後，獲得的武器"
+  },
+  {
+    "TextID": "TM_Sword_Both_005_Name",
+    "TextContent": "哥布林大劍"
+  },
+  {
+    "TextID": "TM_Sword_Both_005_Intro",
+    "TextContent": "在擊敗哥布林之後，獲得的武器"
+  },
+  {
+    "TextID": "TM_Mage_Both_005_Name",
+    "TextContent": "哥布林長木杖"
+  },
+  {
+    "TextID": "TM_Mage_Both_005_Intro",
+    "TextContent": "在擊敗哥布林之後，獲得的武器"
+  },
+  {
+    "TextID": "TM_Bow_Both_005_Name",
+    "TextContent": "哥布林木弓"
+  },
+  {
+    "TextID": "TM_Bow_Both_005_Intro",
+    "TextContent": "在擊敗哥布林之後，獲得的武器"
+  },
+  {
+    "TextID": "TM_Dagger_Single_005_Name",
+    "TextContent": "哥布林小刀"
+  },
+  {
+    "TextID": "TM_Dagger_Single_005_Intro",
+    "TextContent": "在擊敗哥布林之後，獲得的武器"
+  },
+  {
+    "TextID": "TM_Axe_Both_005_Name",
+    "TextContent": "哥布林大斧"
+  },
+  {
+    "TextID": "TM_Axe_Both_005_Intro",
+    "TextContent": "在擊敗哥布林之後，獲得的武器"
+  },
+  {
+    "TextID": "TM_Crossbow_Both_005_Name",
+    "TextContent": "哥布林弩弓"
+  },
+  {
+    "TextID": "TM_Crossbow_Both_005_Intro",
+    "TextContent": "在擊敗哥布林之後，獲得的武器"
+  },
+  {
+    "TextID": "TM_Stick_Right_005_Name",
+    "TextContent": "哥布林小木杖"
+  },
+  {
+    "TextID": "TM_Stick_Right_005_Intro",
+    "TextContent": "在擊敗哥布林之後，獲得的武器"
+  },
+  {
+    "TextID": "TM_Hammer_Right_005_Name",
+    "TextContent": "哥布林木槌"
+  },
+  {
+    "TextID": "TM_Hammer_Right_005_Intro",
+    "TextContent": "在擊敗哥布林之後，獲得的武器"
+  },
+  {
+    "TextID": "TM_GiantMallet_Both_005_Name",
+    "TextContent": "哥布林巨槌"
+  },
+  {
+    "TextID": "TM_GiantMallet_Both_005_Intro",
+    "TextContent": "在擊敗哥布林之後，獲得的武器"
+  },
+  {
+    "TextID": "TM_Book_Left_005_Name",
+    "TextContent": "哥布林魔書"
+  },
+  {
+    "TextID": "TM_Book_Left_005_Intro",
+    "TextContent": "在擊敗哥布林之後，獲得的武器"
+  },
+  {
+    "TextID": "TM_Shield_Left_005_Name",
+    "TextContent": "哥布林木盾"
+  },
+  {
+    "TextID": "TM_Shield_Left_005_Intro",
+    "TextContent": "在擊敗哥布林之後，獲得的盾牌"
+  }
+]

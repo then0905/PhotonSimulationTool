@@ -1,0 +1,234 @@
+[
+  {
+    "TextID": "TM_Stun_Name",
+    "TextContent": "暈眩"
+  },
+  {
+    "TextID": "TM_Stun_Intro",
+    "TextContent": "在持續時間內使目標進入暈眩狀態、不能使用技能、不能移動、不能使用道具，角色進入暈眩動畫生成暈眩特效"
+  },
+  {
+    "TextID": "TM_Imprison_Name",
+    "TextContent": "禁錮"
+  },
+  {
+    "TextID": "TM_Imprison_Intro",
+    "TextContent": "在持續時間內使目標進入禁錮狀態，不能使用位移效果的技能、不能移動。可以使用道具，可以使用非位移技能"
+  },
+  {
+    "TextID": "TM_Suppress_Name",
+    "TextContent": "壓制"
+  },
+  {
+    "TextID": "TM_Suppress_Intro",
+    "TextContent": "在持續時間內使目標進入壓制狀態、不能使用技能、不能移動、不能使用道具，無法獲得來自友方的新增益效果、不能接受來自友方的位移"
+  },
+  {
+    "TextID": "TM_Taunt_Name",
+    "TextContent": "嘲諷"
+  },
+  {
+    "TextID": "TM_Taunt_Intro",
+    "TextContent": "在持續時間內使目標不受控制的攻擊施法者，不能使用技能，只能使用普通攻擊，不能使用道具"
+  },
+  {
+    "TextID": "TM_Repel_Name",
+    "TextContent": "擊退"
+  },
+  {
+    "TextID": "TM_Repel_Intro",
+    "TextContent": "退後一定距離"
+  },
+  {
+    "TextID": "TM_Knockup _Name",
+    "TextContent": "擊飛"
+  },
+  {
+    "TextID": "TM_Knockup _Intro",
+    "TextContent": "使目標飛起，落地前不能使用道具、技能、不能移動、不能攻擊"
+  },
+  {
+    "TextID": "TM_Drag_Name",
+    "TextContent": "拖拽"
+  },
+  {
+    "TextID": "TM_Drag_Intro",
+    "TextContent": "將目標拖曳至中心點"
+  },
+  {
+    "TextID": "TM_Freeze_Name",
+    "TextContent": "凍結"
+  },
+  {
+    "TextID": "TM_Freeze_Intro",
+    "TextContent": "持續時間內，目標不能移動、使用技能、使用道具。"
+  },
+  {
+    "TextID": "TM_Silence _Name",
+    "TextContent": "沈默"
+  },
+  {
+    "TextID": "TM_Silence_Intro",
+    "TextContent": "持續時間內，目標無法使用任何技能"
+  },
+  {
+    "TextID": "TM_Duel_Name",
+    "TextContent": "單挑"
+  },
+  {
+    "TextID": "TM_Duel_Intro",
+    "TextContent": "持續時間內為目標與施法者製造一個獨立空間，期間雙方不會受到外界的傷害，外界的單位也無法進入該空間"
+  },
+  {
+    "TextID": "TM_ArmorBreak_Name",
+    "TextContent": "破甲"
+  },
+  {
+    "TextID": "TM_ArmorBreak_Intro",
+    "TextContent": "在持續時間內扣除百分比防禦"
+  },
+  {
+    "TextID": "TM_MagicShred_Name",
+    "TextContent": "耗弱"
+  },
+  {
+    "TextID": "TM_MagicShred_Intro",
+    "TextContent": "在持續時間內扣除百分比魔法防禦"
+  },
+  {
+    "TextID": "TM_Weaken_Name",
+    "TextContent": "弱化"
+  },
+  {
+    "TextID": "TM_Weaken_Intro",
+    "TextContent": "持續時間內降低目標百分比值的魔法攻擊力、近距離物理攻擊力、遠距離物理攻擊力"
+  },
+  {
+    "TextID": "TM_Bleeding_Name",
+    "TextContent": "出血"
+  },
+  {
+    "TextID": "TM_Bleeding_Intro",
+    "TextContent": "在持續時間內，每秒使目標受到指定值的物理傷害，並減少一半的基本血量恢復、藥水回復量"
+  },
+  {
+    "TextID": "TM_Poisoned_Name",
+    "TextContent": "中毒"
+  },
+  {
+    "TextID": "TM_Poisoned_Intro",
+    "TextContent": "在持續時間內，每秒使目標受到指定值的魔法傷害，並減少一半的基本血量恢復、藥水回復量"
+  },
+  {
+    "TextID": "TM_Scorched_Name",
+    "TextContent": "灼傷"
+  },
+  {
+    "TextID": "TM_Scorched_Intro",
+    "TextContent": "持續時間內，每秒使目標受到指定值的火屬性魔法傷害"
+  },
+  {
+    "TextID": "TM_Thorns _Name",
+    "TextContent": "謙遜"
+  },
+  {
+    "TextID": "TM_Thorns _Intro",
+    "TextContent": "持續時間內對施法者造成的傷害減少百分比"
+  },
+  {
+    "TextID": "TM_SpeedSlow_Name",
+    "TextContent": "緩速"
+  },
+  {
+    "TextID": "TM_SpeedSlow_Intro",
+    "TextContent": "持續時間內使目標的移動速度減少百分比值"
+  },
+  {
+    "TextID": "TM_Blind_Name",
+    "TextContent": "致盲"
+  },
+  {
+    "TextID": "TM_Blind_Intro",
+    "TextContent": "持續時間，內使目標的各命中值降低百分比值"
+  },
+  {
+    "TextID": "TM_Lichform_Name",
+    "TextContent": "不死同化"
+  },
+  {
+    "TextID": "TM_Lichform_Intro",
+    "TextContent": "持續時間內，使目標被視為死亡生物，目標提高受到的聖屬性傷害降低受到的闇屬性傷害，並無法受到任何回復血量效果，目標頭上生成骷髏頭特效"
+  },
+  {
+    "TextID": "TM_Harvest_Name",
+    "TextContent": "收割"
+  },
+  {
+    "TextID": "TM_Harvest_Intro",
+    "TextContent": "目標當前血量低於最大血量的百分比直接死亡"
+  },
+  {
+    "TextID": "TM_Darkness_Name",
+    "TextContent": "失明"
+  },
+  {
+    "TextID": "TM_Darkness_Intro",
+    "TextContent": "持續時間內限制目標的有效視野範圍"
+  },
+  {
+    "TextID": "TM_Marked_Name",
+    "TextContent": "印記"
+  },
+  {
+    "TextID": "TM_Marked_Intro",
+    "TextContent": "持續時間內累積目標受到來自施法者的傷害的百分比值，持續時間過後收到累積傷害"
+  },
+  {
+    "TextID": "TM_Branded_Name",
+    "TextContent": "烙印"
+  },
+  {
+    "TextID": "TM_Branded_Intro",
+    "TextContent": "持續時間內，目標百分比增加受到的魔法攻擊"
+  },
+  {
+    "TextID": "TM_Wound_Name",
+    "TextContent": "創傷"
+  },
+  {
+    "TextID": "TM_Wound_Intro",
+    "TextContent": "持續時間內，目標的任何治癒回復效果減少一半"
+  },
+  {
+    "TextID": "TM_Lifesteal_Name",
+    "TextContent": "吸血"
+  },
+  {
+    "TextID": "TM_Lifesteal_Intro",
+    "TextContent": "持續時間內，施法者在戰鬥中造成的任何物理傷害的百分比轉換為血量回復"
+  },
+  {
+    "TextID": "TM_InCombat_Name",
+    "TextContent": "戰鬥狀態中"
+  },
+  {
+    "TextID": "TM_InCombat_Intro",
+    "TextContent": "在進入戰鬥後的5秒，若中間持續戰鬥則刷新秒數"
+  },
+  {
+    "TextID": "TM_CriticalHit_Name",
+    "TextContent": "重傷"
+  },
+  {
+    "TextID": "TM_CriticalHit_Intro",
+    "TextContent": "單筆傷害量大於目標最大血量的50%"
+  },
+  {
+    "TextID": "TM_Dot_Name",
+    "TextContent": "純持續傷害"
+  },
+  {
+    "TextID": "TM_Dot_Intro",
+    "TextContent": "在指定時間內，每秒受到固定的魔法傷害"
+  }
+]

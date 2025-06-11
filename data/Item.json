@@ -1,0 +1,740 @@
+[
+  {
+    "CodeID": "Potion_Hp_01",
+    "Lv": 1,
+    "Name": "TM_Potion_Hp_01_Name",
+    "Path": "UI/Item",
+    "FileName": "Potion_Hp_01",
+    "TakeHand": "TM_None",
+    "TakeHandID": "None",
+    "Classification": "TM_Item",
+    "ClassificationID": "Potion",
+    "Type": "TM_Potion",
+    "TypeID": "Potion",
+    "Intro": "TM_Potion_Hp_01_Intro",
+    "Stackability": true,
+    "CD": 1.5,
+    "Price": 10,
+    "Redeem": 1,
+    "ItemEffectDataList": [
+      {
+        "CodeID": "Potion_Hp_01",
+        "ItemComponentID": "Restoration",
+        "EffectValue": 100,
+        "InfluenceStatus": "HP",
+        "AddType": "Value",
+        "ConditionOR": [
+          "NeedLv"
+        ],
+        "EffectRecive": 0,
+        "TargetCount": 0
+      }
+    ]
+  },
+  {
+    "CodeID": "Potion_Mp_01",
+    "Lv": 1,
+    "Name": "TM_Potion_Mp_01_Name",
+    "Path": "UI/Item",
+    "FileName": "Potion_Mp_01",
+    "TakeHand": "TM_None",
+    "TakeHandID": "None",
+    "Classification": "TM_Item",
+    "ClassificationID": "Potion",
+    "Type": "TM_Potion",
+    "TypeID": "Potion",
+    "Intro": "TM_Potion_Mp_01_Intro",
+    "Stackability": true,
+    "CD": 3,
+    "Price": 10,
+    "Redeem": 1,
+    "ItemEffectDataList": [
+      {
+        "CodeID": "Potion_Mp_01",
+        "ItemComponentID": "Restoration",
+        "EffectValue": 55,
+        "InfluenceStatus": "MP",
+        "AddType": "Value",
+        "ConditionOR": [
+          "NeedLv"
+        ],
+        "EffectRecive": 0,
+        "TargetCount": 0
+      }
+    ]
+  },
+  {
+    "CodeID": "Potion_Hp_02",
+    "Lv": 10,
+    "Name": "TM_Potion_Hp_02_Name",
+    "Path": "UI/Item",
+    "FileName": "Potion_Hp_02",
+    "TakeHand": "TM_None",
+    "TakeHandID": "None",
+    "Classification": "TM_Item",
+    "ClassificationID": "Potion",
+    "Type": "TM_Potion",
+    "TypeID": "Potion",
+    "Intro": "TM_Potion_Hp_02_Intro",
+    "Stackability": true,
+    "CD": 2.5,
+    "Price": 100,
+    "Redeem": 1,
+    "ItemEffectDataList": [
+      {
+        "CodeID": "Potion_Hp_02",
+        "ItemComponentID": "Restoration",
+        "EffectValue": 300,
+        "InfluenceStatus": "HP",
+        "AddType": "Value",
+        "ConditionOR": [
+          "NeedLv"
+        ],
+        "EffectRecive": 0,
+        "TargetCount": 0
+      }
+    ]
+  },
+  {
+    "CodeID": "Potion_Mp_02",
+    "Lv": 10,
+    "Name": "TM_Potion_Mp_02_Name",
+    "Path": "UI/Item",
+    "FileName": "Potion_Mp_02",
+    "TakeHand": "TM_None",
+    "TakeHandID": "None",
+    "Classification": "TM_Item",
+    "ClassificationID": "Potion",
+    "Type": "TM_Potion",
+    "TypeID": "Potion",
+    "Intro": "TM_Potion_Mp_02_Intro",
+    "Stackability": true,
+    "CD": 5,
+    "Price": 100,
+    "Redeem": 1,
+    "ItemEffectDataList": [
+      {
+        "CodeID": "Potion_Mp_02",
+        "ItemComponentID": "Restoration",
+        "EffectValue": 150,
+        "InfluenceStatus": "MP",
+        "AddType": "Value",
+        "ConditionOR": [
+          "NeedLv"
+        ],
+        "EffectRecive": 0,
+        "TargetCount": 0
+      }
+    ]
+  },
+  {
+    "CodeID": "Potion_Hp_03",
+    "Lv": 25,
+    "Name": "TM_Potion_Hp_03_Name",
+    "Path": "UI/Item",
+    "FileName": "Potion_Hp_03",
+    "TakeHand": "TM_None",
+    "TakeHandID": "None",
+    "Classification": "TM_Item",
+    "ClassificationID": "Potion",
+    "Type": "TM_Potion",
+    "TypeID": "Potion",
+    "Intro": "TM_Potion_Hp_03_Intro",
+    "Stackability": true,
+    "CD": 3.5,
+    "Price": 1000,
+    "Redeem": 1,
+    "ItemEffectDataList": [
+      {
+        "CodeID": "Potion_Hp_03",
+        "ItemComponentID": "Restoration",
+        "EffectValue": 1000,
+        "InfluenceStatus": "HP",
+        "AddType": "Value",
+        "ConditionOR": [
+          "NeedLv"
+        ],
+        "EffectRecive": 0,
+        "TargetCount": 0
+      }
+    ]
+  },
+  {
+    "CodeID": "Potion_Mp_03",
+    "Lv": 25,
+    "Name": "TM_Potion_Mp_03_Name",
+    "Path": "UI/Item",
+    "FileName": "Potion_Mp_03",
+    "TakeHand": "TM_None",
+    "TakeHandID": "None",
+    "Classification": "TM_Item",
+    "ClassificationID": "Potion",
+    "Type": "TM_Potion",
+    "TypeID": "Potion",
+    "Intro": "TM_Potion_Mp_03_Intro",
+    "Stackability": true,
+    "CD": 7,
+    "Price": 1000,
+    "Redeem": 1,
+    "ItemEffectDataList": [
+      {
+        "CodeID": "Potion_Mp_03",
+        "ItemComponentID": "Restoration",
+        "EffectValue": 400,
+        "InfluenceStatus": "MP",
+        "AddType": "Value",
+        "ConditionOR": [
+          "NeedLv"
+        ],
+        "EffectRecive": 0,
+        "TargetCount": 0
+      }
+    ]
+  },
+  {
+    "CodeID": "Potion_Hp_04",
+    "Lv": 40,
+    "Name": "TM_Potion_Hp_04_Name",
+    "Path": "UI/Item",
+    "FileName": "Potion_Hp_04",
+    "TakeHand": "TM_None",
+    "TakeHandID": "None",
+    "Classification": "TM_Item",
+    "ClassificationID": "Potion",
+    "Type": "TM_Potion",
+    "TypeID": "Potion",
+    "Intro": "TM_Potion_Hp_04_Intro",
+    "Stackability": true,
+    "CD": 4.5,
+    "Price": 10000,
+    "Redeem": 1,
+    "ItemEffectDataList": [
+      {
+        "CodeID": "Potion_Hp_04",
+        "ItemComponentID": "Restoration",
+        "EffectValue": 3000,
+        "InfluenceStatus": "HP",
+        "AddType": "Value",
+        "ConditionOR": [
+          "NeedLv"
+        ],
+        "EffectRecive": 0,
+        "TargetCount": 0
+      }
+    ]
+  },
+  {
+    "CodeID": "Potion_Mp_04",
+    "Lv": 40,
+    "Name": "TM_Potion_Mp_04_Name",
+    "Path": "UI/Item",
+    "FileName": "Potion_Mp_04",
+    "TakeHand": "TM_None",
+    "TakeHandID": "None",
+    "Classification": "TM_Item",
+    "ClassificationID": "Potion",
+    "Type": "TM_Potion",
+    "TypeID": "Potion",
+    "Intro": "TM_Potion_Mp_04_Intro",
+    "Stackability": true,
+    "CD": 9,
+    "Price": 10000,
+    "Redeem": 1,
+    "ItemEffectDataList": [
+      {
+        "CodeID": "Potion_Mp_04",
+        "ItemComponentID": "Restoration",
+        "EffectValue": 1000,
+        "InfluenceStatus": "MP",
+        "AddType": "Value",
+        "ConditionOR": [
+          "NeedLv"
+        ],
+        "EffectRecive": 0,
+        "TargetCount": 0
+      }
+    ]
+  },
+  {
+    "CodeID": "Potion_Detoxification_01",
+    "Lv": 1,
+    "Name": "TM_Potion_Detoxification_01_Name",
+    "Path": "UI/Item",
+    "FileName": "Potion_Detoxification_01",
+    "TakeHand": "TM_None",
+    "TakeHandID": "None",
+    "Classification": "TM_Item",
+    "ClassificationID": "Utility",
+    "Type": "TM_Potion",
+    "TypeID": "Potion",
+    "Intro": "TM_Potion_Detoxification_01_Intro",
+    "Stackability": true,
+    "CD": 1.5,
+    "Price": 150,
+    "Redeem": 15,
+    "ItemEffectDataList": [
+      {
+        "CodeID": "Potion_Detoxification_01",
+        "ItemComponentID": "Utility",
+        "EffectValue": 0,
+        "InfluenceStatus": "RemovePoison",
+        "ConditionOR": [
+          "NeedLv"
+        ],
+        "EffectRecive": 0,
+        "TargetCount": 0
+      }
+    ]
+  },
+  {
+    "CodeID": "DEF_Reel_01",
+    "Lv": 1,
+    "Name": "TM_DEF_Reel_01_Name",
+    "Path": "UI/Item",
+    "FileName": "DEF_Reel_01",
+    "TakeHand": "TM_None",
+    "TakeHandID": "None",
+    "Classification": "TM_Item",
+    "ClassificationID": "Buff",
+    "Type": "TM_Reel",
+    "TypeID": "Reel",
+    "Intro": "TM_DEF_Reel_01_Intro",
+    "Stackability": true,
+    "CD": 600,
+    "Price": 500,
+    "Redeem": 50,
+    "ItemEffectDataList": [
+      {
+        "CodeID": "DEF_Reel_01",
+        "ItemComponentID": "Continuance",
+        "EffectValue": 3,
+        "InfluenceStatus": "DEF",
+        "AddType": "Value",
+        "ConditionOR": [
+          "NeedLv"
+        ],
+        "EffectDurationTime": 600,
+        "EffectRecive": 0,
+        "TargetCount": 0
+      }
+    ]
+  },
+  {
+    "CodeID": "ATK_Reel_01",
+    "Lv": 1,
+    "Name": "TM_ATK_Reel_01_Name",
+    "Path": "UI/Item",
+    "FileName": "ATK_Reel_01",
+    "TakeHand": "TM_None",
+    "TakeHandID": "None",
+    "Classification": "TM_Item",
+    "ClassificationID": "Buff",
+    "Type": "TM_Reel",
+    "TypeID": "Reel",
+    "Intro": "TM_ATK_Reel_01_Intro",
+    "Stackability": true,
+    "CD": 600,
+    "Price": 500,
+    "Redeem": 50,
+    "ItemEffectDataList": [
+      {
+        "CodeID": "ATK_Reel_01",
+        "ItemComponentID": "Continuance",
+        "EffectValue": 3,
+        "InfluenceStatus": "ATK",
+        "AddType": "Value",
+        "ConditionOR": [
+          "NeedLv"
+        ],
+        "EffectDurationTime": 600,
+        "EffectRecive": 0,
+        "TargetCount": 0
+      }
+    ]
+  },
+  {
+    "CodeID": "Potion_AS_01",
+    "Lv": 10,
+    "Name": "TM_Potion_AS_01_Name",
+    "Path": "UI/Item",
+    "FileName": "Potion_AS_01",
+    "TakeHand": "TM_None",
+    "TakeHandID": "None",
+    "Classification": "TM_Item",
+    "ClassificationID": "Buff",
+    "Type": "TM_Reel",
+    "TypeID": "Reel",
+    "Intro": "TM_Potion_AS_01_Intro",
+    "Stackability": true,
+    "CD": 300,
+    "Price": 1200,
+    "Redeem": 120,
+    "ItemEffectDataList": [
+      {
+        "CodeID": "Potion_AS_01",
+        "ItemComponentID": "Continuance",
+        "EffectValue": 10,
+        "InfluenceStatus": "AS",
+        "AddType": "Value",
+        "ConditionOR": [
+          "NeedLv"
+        ],
+        "EffectDurationTime": 300,
+        "EffectRecive": 0,
+        "TargetCount": 0
+      }
+    ]
+  },
+  {
+    "CodeID": "Record_Reel_01",
+    "Lv": 1,
+    "Name": "TM_Record_Reel_01_Name",
+    "Path": "UI/Item",
+    "FileName": "Record_Reel_01",
+    "TakeHand": "TM_None",
+    "TakeHandID": "None",
+    "Classification": "TM_Item",
+    "ClassificationID": "Utility",
+    "Type": "TM_Reel",
+    "TypeID": "Reel",
+    "Intro": "TM_Record_Reel_01_Intro",
+    "Stackability": true,
+    "CD": 60,
+    "Price": 50,
+    "Redeem": 5,
+    "ItemEffectDataList": [
+      {
+        "CodeID": "Record_Reel_01",
+        "ItemComponentID": "Utility",
+        "EffectValue": 0,
+        "InfluenceStatus": "Record",
+        "ConditionOR": [
+          "NeedLv"
+        ],
+        "EffectRecive": 0,
+        "TargetCount": 0
+      }
+    ]
+  },
+  {
+    "CodeID": "Enhance_01",
+    "Lv": 1,
+    "Name": "TM_Enhance_01_Name",
+    "Path": "UI/Item",
+    "FileName": "Enhance_01",
+    "TakeHand": "TM_None",
+    "TakeHandID": "None",
+    "Classification": "TM_Item",
+    "ClassificationID": "Unavailable",
+    "Type": "TM_EnhanceItem",
+    "TypeID": "EnhanceItem",
+    "Intro": "TM_Enhance_01_Intro",
+    "Stackability": true,
+    "CD": 0,
+    "Price": 0,
+    "Redeem": 500
+  },
+  {
+    "CodeID": "Enhance_02",
+    "Lv": 1,
+    "Name": "TM_Enhance_02_Name",
+    "Path": "UI/Item",
+    "FileName": "Enhance_02",
+    "TakeHand": "TM_None",
+    "TakeHandID": "None",
+    "Classification": "TM_Item",
+    "ClassificationID": "Unavailable",
+    "Type": "TM_EnhanceItem",
+    "TypeID": "EnhanceItem",
+    "Intro": "TM_Enhance_02_Intro",
+    "Stackability": true,
+    "CD": 0,
+    "Price": 0,
+    "Redeem": 1000
+  },
+  {
+    "CodeID": "Enhance_03",
+    "Lv": 1,
+    "Name": "TM_Enhance_03_Name",
+    "Path": "UI/Item",
+    "FileName": "Enhance_03",
+    "TakeHand": "TM_None",
+    "TakeHandID": "None",
+    "Classification": "TM_Item",
+    "ClassificationID": "Unavailable",
+    "Type": "TM_EnhanceItem",
+    "TypeID": "EnhanceItem",
+    "Intro": "TM_Enhance_03_Intro",
+    "Stackability": true,
+    "CD": 0,
+    "Price": 0,
+    "Redeem": 1000000
+  },
+  {
+    "CodeID": "Enhance_04",
+    "Lv": 1,
+    "Name": "TM_Enhance_04_Name",
+    "Path": "UI/Item",
+    "FileName": "Enhance_04",
+    "TakeHand": "TM_None",
+    "TakeHandID": "None",
+    "Classification": "TM_Item",
+    "ClassificationID": "Unavailable",
+    "Type": "TM_EnhanceItem",
+    "TypeID": "EnhanceItem",
+    "Intro": "TM_Enhance_04_Intro",
+    "Stackability": true,
+    "CD": 0,
+    "Price": 0,
+    "Redeem": 1000000
+  },
+  {
+    "CodeID": "Booty_001",
+    "Lv": 0,
+    "Name": "TM_Booty_001_Name",
+    "Path": "UI/Item",
+    "FileName": "Booty_001",
+    "TakeHand": "TM_None",
+    "TakeHandID": "None",
+    "Classification": "TM_Item",
+    "ClassificationID": "Unavailable",
+    "Type": "TM_Booty",
+    "TypeID": "Booty",
+    "Intro": "TM_Booty_001_Intro",
+    "Stackability": true,
+    "CD": 0,
+    "Price": 0,
+    "Redeem": 25
+  },
+  {
+    "CodeID": "Booty_002",
+    "Lv": 0,
+    "Name": "TM_Booty_002_Name",
+    "Path": "UI/Item",
+    "FileName": "Booty_002",
+    "TakeHand": "TM_None",
+    "TakeHandID": "None",
+    "Classification": "TM_Item",
+    "ClassificationID": "Unavailable",
+    "Type": "TM_Booty",
+    "TypeID": "Booty",
+    "Intro": "TM_Booty_002_Intro",
+    "Stackability": true,
+    "CD": 0,
+    "Price": 0,
+    "Redeem": 60
+  },
+  {
+    "CodeID": "Booty_003",
+    "Lv": 0,
+    "Name": "TM_Booty_003_Name",
+    "Path": "UI/Item",
+    "FileName": "Booty_003",
+    "TakeHand": "TM_None",
+    "TakeHandID": "None",
+    "Classification": "TM_Item",
+    "ClassificationID": "Unavailable",
+    "Type": "TM_Booty",
+    "TypeID": "Booty",
+    "Intro": "TM_Booty_003_Intro",
+    "Stackability": true,
+    "CD": 0,
+    "Price": 0,
+    "Redeem": 30
+  },
+  {
+    "CodeID": "Booty_004",
+    "Lv": 0,
+    "Name": "TM_Booty_004_Name",
+    "Path": "UI/Item",
+    "FileName": "Booty_004",
+    "TakeHand": "TM_None",
+    "TakeHandID": "None",
+    "Classification": "TM_Item",
+    "ClassificationID": "Unavailable",
+    "Type": "TM_Booty",
+    "TypeID": "Booty",
+    "Intro": "TM_Booty_004_Intro",
+    "Stackability": true,
+    "CD": 0,
+    "Price": 0,
+    "Redeem": 50
+  },
+  {
+    "CodeID": "Booty_005",
+    "Lv": 0,
+    "Name": "TM_Booty_005_Name",
+    "Path": "UI/Item",
+    "FileName": "Booty_005",
+    "TakeHand": "TM_None",
+    "TakeHandID": "None",
+    "Classification": "TM_Item",
+    "ClassificationID": "Unavailable",
+    "Type": "TM_Booty",
+    "TypeID": "Booty",
+    "Intro": "TM_Booty_005_Intro",
+    "Stackability": true,
+    "CD": 0,
+    "Price": 0,
+    "Redeem": 50
+  },
+  {
+    "CodeID": "Booty_006",
+    "Lv": 0,
+    "Name": "TM_Booty_006_Name",
+    "Path": "UI/Item",
+    "FileName": "Booty_006",
+    "TakeHand": "TM_None",
+    "TakeHandID": "None",
+    "Classification": "TM_Item",
+    "ClassificationID": "Unavailable",
+    "Type": "TM_Booty",
+    "TypeID": "Booty",
+    "Intro": "TM_Booty_006_Intro",
+    "Stackability": true,
+    "CD": 0,
+    "Price": 0,
+    "Redeem": 50
+  },
+  {
+    "CodeID": "Booty_007",
+    "Lv": 0,
+    "Name": "TM_Booty_007_Name",
+    "Path": "UI/Item",
+    "FileName": "Booty_007",
+    "TakeHand": "TM_None",
+    "TakeHandID": "None",
+    "Classification": "TM_Item",
+    "ClassificationID": "Unavailable",
+    "Type": "TM_Booty",
+    "TypeID": "Booty",
+    "Intro": "TM_Booty_007_Intro",
+    "Stackability": true,
+    "CD": 0,
+    "Price": 0,
+    "Redeem": 35
+  },
+  {
+    "CodeID": "Booty_008",
+    "Lv": 0,
+    "Name": "TM_Booty_008_Name",
+    "Path": "UI/Item",
+    "FileName": "Booty_008",
+    "TakeHand": "TM_None",
+    "TakeHandID": "None",
+    "Classification": "TM_Item",
+    "ClassificationID": "Unavailable",
+    "Type": "TM_Booty",
+    "TypeID": "Booty",
+    "Intro": "TM_Booty_008_Intro",
+    "Stackability": true,
+    "CD": 0,
+    "Price": 0,
+    "Redeem": 75
+  },
+  {
+    "CodeID": "Booty_009",
+    "Lv": 0,
+    "Name": "TM_Booty_009_Name",
+    "Path": "UI/Item",
+    "FileName": "Booty_009",
+    "TakeHand": "TM_None",
+    "TakeHandID": "None",
+    "Classification": "TM_Item",
+    "ClassificationID": "Unavailable",
+    "Type": "TM_Booty",
+    "TypeID": "Booty",
+    "Intro": "TM_Booty_009_Intro",
+    "Stackability": true,
+    "CD": 0,
+    "Price": 0,
+    "Redeem": 70
+  },
+  {
+    "CodeID": "Booty_010",
+    "Lv": 0,
+    "Name": "TM_Booty_010_Name",
+    "Path": "UI/Item",
+    "FileName": "Booty_010",
+    "TakeHand": "TM_None",
+    "TakeHandID": "None",
+    "Classification": "TM_Item",
+    "ClassificationID": "Unavailable",
+    "Type": "TM_Booty",
+    "TypeID": "Booty",
+    "Intro": "TM_Booty_010_Intro",
+    "Stackability": true,
+    "CD": 0,
+    "Price": 0,
+    "Redeem": 150
+  },
+  {
+    "CodeID": "Booty_011",
+    "Lv": 0,
+    "Name": "TM_Booty_011_Name",
+    "Path": "UI/Item",
+    "FileName": "Booty_011",
+    "TakeHand": "TM_None",
+    "TakeHandID": "None",
+    "Classification": "TM_Item",
+    "ClassificationID": "Unavailable",
+    "Type": "TM_Booty",
+    "TypeID": "Booty",
+    "Intro": "TM_Booty_011_Intro",
+    "Stackability": true,
+    "CD": 0,
+    "Price": 0,
+    "Redeem": 100
+  },
+  {
+    "CodeID": "Booty_012",
+    "Lv": 0,
+    "Name": "TM_Booty_012_Name",
+    "Path": "UI/Item",
+    "FileName": "Booty_012",
+    "TakeHand": "TM_None",
+    "TakeHandID": "None",
+    "Classification": "TM_Item",
+    "ClassificationID": "Unavailable",
+    "Type": "TM_Booty",
+    "TypeID": "Booty",
+    "Intro": "TM_Booty_012_Intro",
+    "Stackability": true,
+    "CD": 0,
+    "Price": 0,
+    "Redeem": 200
+  },
+  {
+    "CodeID": "Potion_EXP_01",
+    "Lv": 1,
+    "Name": "TM_Potion_EXP_01_Name",
+    "Path": "UI/Item",
+    "FileName": "Potion_EXP_01",
+    "TakeHand": "TM_None",
+    "TakeHandID": "None",
+    "Classification": "TM_Item",
+    "ClassificationID": "Buff",
+    "Type": "TM_Potion",
+    "TypeID": "Potion",
+    "Intro": "TM_Potion_EXP_01_Intro",
+    "Stackability": true,
+    "CD": 1,
+    "Price": 0,
+    "Redeem": 0,
+    "ItemEffectDataList": [
+      {
+        "CodeID": "Potion_EXP_01",
+        "ItemComponentID": "Continuance",
+        "EffectValue": 50,
+        "InfluenceStatus": "ExpRate",
+        "AddType": "Value",
+        "ConditionOR": [
+          "NeedLv"
+        ],
+        "EffectDurationTime": 1800,
+        "EffectRecive": 0,
+        "TargetCount": 0
+      }
+    ]
+  }
+]

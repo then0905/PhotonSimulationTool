@@ -1,0 +1,54 @@
+[
+  {
+    "AreaID": "RestAreaTest",
+    "AreaName": "TM_RestAreaTest_Name",
+    "MiniMapPath": "MiniMap",
+    "UseRecord": true,
+    "RecordMapTarget": "RestAreaTest",
+    "RecordPosX": 0,
+    "RecordPosY": 2.85,
+    "RecordPosZ": -15
+  },
+  {
+    "AreaID": "DevelopmentTest",
+    "AreaName": "TM_DevelopmentTest_Name",
+    "MiniMapPath": "MiniMap",
+    "UseRecord": true,
+    "RecordMapTarget": "RestAreaTest",
+    "RecordPosX": 0,
+    "RecordPosY": 2.85,
+    "RecordPosZ": -100
+  },
+  {
+    "AreaID": "DevelopmentTest2",
+    "AreaName": "TM_DevelopmentTest2_Name",
+    "MiniMapPath": "MiniMap",
+    "UseRecord": true,
+    "RecordMapTarget": "RestAreaTest",
+    "RecordPosX": 0,
+    "RecordPosY": 2.85,
+    "RecordPosZ": -100
+  },
+  {
+    "AreaID": "OriginalVillage",
+    "AreaName": "TM_OriginalVillage_Name",
+    "MiniMapPath": "MiniMap",
+    "UseRecord": false
+  },
+  {
+    "AreaID": "OutskirtsOfGunnCity",
+    "AreaName": "TM_OutskirtsOfGunnCity_Name",
+    "MiniMapPath": "MiniMap",
+    "UseRecord": true,
+    "RecordMapTarget": "OriginalVillage",
+    "RecordPosX": 0,
+    "RecordPosY": 0,
+    "RecordPosZ": 0
+  },
+  {
+    "AreaID": "HardLaborMine",
+    "AreaName": "TM_HardLaborMine_Name",
+    "MiniMapPath": "MiniMap",
+    "UseRecord": false
+  }
+]

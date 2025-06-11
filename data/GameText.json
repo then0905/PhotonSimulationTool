@@ -1,0 +1,166 @@
+[
+  {
+    "TextID": "TM_TimeLeft",
+    "TextContent": "剩餘時間: {0}"
+  },
+  {
+    "TextID": "TM_CharacterStatusHintBuffFomat",
+    "TextContent": "{0}: {1}"
+  },
+  {
+    "TextID": "TM_Leave",
+    "TextContent": "離開"
+  },
+  {
+    "TextID": "TM_Trade",
+    "TextContent": "交易"
+  },
+  {
+    "TextID": "TM_Continue",
+    "TextContent": "繼續"
+  },
+  {
+    "TextID": "TM_Accept",
+    "TextContent": "接受"
+  },
+  {
+    "TextID": "TM_Reject",
+    "TextContent": "拒絕"
+  },
+  {
+    "TextID": "TM_SkillCastMageError",
+    "TextContent": "技能：{0}  所需消耗魔力不足…"
+  },
+  {
+    "TextID": "TM_SkillCoolDownError",
+    "TextContent": "技能：{0}  正在冷卻時間中…"
+  },
+  {
+    "TextID": "TM_SkillBuffError",
+    "TextContent": "技能：{0}  已有相同的效果…"
+  },
+  {
+    "TextID": "TM_SkillIsUsing",
+    "TextContent": "當前有技能正在使用中!"
+  },
+  {
+    "TextID": "TM_CancelAttackTarget",
+    "TextContent": "正在取消攻擊目標"
+  },
+  {
+    "TextID": "TM_ClaimReward",
+    "TextContent": "領取獎勵"
+  },
+  {
+    "TextID": "TM_TutorialSaveError",
+    "TextContent": "錯誤:已有存在的教學ID 請向開發人員反應 錯誤ID為 {0}"
+  },
+  {
+    "TextID": "TM_Equip_OneHandedSword",
+    "TextContent": "技能施放錯誤：需要裝備單手劍"
+  },
+  {
+    "TextID": "TM_Equip_TwoHandedSword",
+    "TextContent": "技能施放錯誤：需要裝備雙手劍"
+  },
+  {
+    "TextID": "TM_Equip_GiantMallet",
+    "TextContent": "技能施放錯誤：需要裝備雙手錘"
+  },
+  {
+    "TextID": "TM_Equip_Axe",
+    "TextContent": "技能施放錯誤：需要裝備雙手斧"
+  },
+  {
+    "TextID": "TM_Equip_Shield",
+    "TextContent": "技能施放錯誤：需要裝備盾牌"
+  },
+  {
+    "TextID": "TM_Equip_Hammer",
+    "TextContent": "技能施放錯誤：需要裝備單手錘"
+  },
+  {
+    "TextID": "TM_Close_Enemy",
+    "TextContent": "技能施放錯誤：並沒有正在靠近的敵人"
+  },
+  {
+    "TextID": "TM_SkillConditionError",
+    "TextContent": "技能施放錯誤：技能所需條件未達成！"
+  },
+  {
+    "TextID": "TM_SkillEnableError",
+    "TextContent": "技能施放錯誤：角色正在不可施放技能的狀態！"
+  },
+  {
+    "TextID": "TM_MoveEnableError",
+    "TextContent": "技能施放錯誤：角色正在不可移動的狀態！"
+  },
+  {
+    "TextID": "TM_AttackEnableError",
+    "TextContent": "技能施放錯誤：角色正在不可進行普通攻擊的狀態！"
+  },
+  {
+    "TextID": "TM_ForgeSuccessRate",
+    "TextContent": "強化成功率: {0}%"
+  },
+  {
+    "TextID": "TM_ForgeDestroyedRate",
+    "TextContent": "強化失敗裝備破損率: {0}%"
+  },
+  {
+    "TextID": "TM_ForgeLV",
+    "TextContent": "<color=#f3ff00>強化等級: {0}</color>"
+  },
+  {
+    "TextID": "TM_NextForgeLV",
+    "TextContent": "下一強化等級: {0}"
+  },
+  {
+    "TextID": "TM_ForgeSuccessMsg",
+    "TextContent": "恭喜！強化成功！"
+  },
+  {
+    "TextID": "TM_ForgeFailMsg",
+    "TextContent": "強化失敗，裝備並沒有發生任何事情"
+  },
+  {
+    "TextID": "TM_ForgeDestroyedMsg",
+    "TextContent": "強化失敗，裝備已經損毀了"
+  },
+  {
+    "TextID": "TM_ForgeError_CantForge",
+    "TextContent": "當前選擇的物品不可進行強化！"
+  },
+  {
+    "TextID": "TM_ForgeError_LvUpLimit",
+    "TextContent": "已達到強化等級的上限，不可再進行強化"
+  },
+  {
+    "TextID": "TM_ForgeError_LvDownLimit",
+    "TextContent": "已達到強化等級的下限，不可再進行強化"
+  },
+  {
+    "TextID": "TM_ForgeError_EnhanceItemNotEnough",
+    "TextContent": "強化錯誤，選擇的強化石在背包內不存在或是數量不足"
+  },
+  {
+    "TextID": "TM_ItemEffectQtyError",
+    "TextContent": "道具使用錯誤：背包內道具 {0} 數量不足！"
+  },
+  {
+    "TextID": "TM_ItemEffectCoolDownError",
+    "TextContent": "道具使用錯誤：道具 {0}正在冷卻時間中…"
+  },
+  {
+    "TextID": "TM_DeadMessage",
+    "TextContent": "已被<color=#ff0000> {0} </color> 擊殺"
+  },
+  {
+    "TextID": "TM_DiscardedItemHintMessage",
+    "TextContent": "是否要丟棄物品：\n<color=#e7d900> {0} </color>"
+  },
+  {
+    "TextID": "TM_DiscardedItemTitle",
+    "TextContent": "丟棄物品"
+  }
+]

@@ -1,0 +1,134 @@
+[
+  {
+    "TextID": "TM_MaxHP",
+    "TextContent": "最大血量"
+  },
+  {
+    "TextID": "TM_HP",
+    "TextContent": "當前生命"
+  },
+  {
+    "TextID": "TM_HP_Recovery",
+    "TextContent": "血量回復"
+  },
+  {
+    "TextID": "TM_MaxMP",
+    "TextContent": "最大魔力"
+  },
+  {
+    "TextID": "TM_MP",
+    "TextContent": "當前魔力"
+  },
+  {
+    "TextID": "TM_MP_Recovery",
+    "TextContent": "魔力回復"
+  },
+  {
+    "TextID": "TM_MeleeATK",
+    "TextContent": "近距離攻擊力"
+  },
+  {
+    "TextID": "TM_RemoteATK",
+    "TextContent": "遠距離攻擊力"
+  },
+  {
+    "TextID": "TM_MageATK",
+    "TextContent": "魔法攻擊力"
+  },
+  {
+    "TextID": "TM_MeleeHit",
+    "TextContent": "近距離命中值"
+  },
+  {
+    "TextID": "TM_RemoteHit",
+    "TextContent": "遠距離命中值"
+  },
+  {
+    "TextID": "TM_MageHit",
+    "TextContent": "魔法命中值"
+  },
+  {
+    "TextID": "TM_DEF",
+    "TextContent": "總物理防禦值"
+  },
+  {
+    "TextID": "TM_MDEF",
+    "TextContent": "總魔法防禦值"
+  },
+  {
+    "TextID": "TM_DamageReduction",
+    "TextContent": "傷害減緩"
+  },
+  {
+    "TextID": "TM_Avoid",
+    "TextContent": "總迴避值"
+  },
+  {
+    "TextID": "TM_Crt",
+    "TextContent": "暴擊率"
+  },
+  {
+    "TextID": "TM_CrtResistance",
+    "TextContent": "暴擊抵抗"
+  },
+  {
+    "TextID": "TM_CrtDamage",
+    "TextContent": "暴擊傷害"
+  },
+  {
+    "TextID": "TM_Speed",
+    "TextContent": "移動速度"
+  },
+  {
+    "TextID": "TM_STR",
+    "TextContent": "力量"
+  },
+  {
+    "TextID": "TM_DEX",
+    "TextContent": "敏捷"
+  },
+  {
+    "TextID": "TM_INT",
+    "TextContent": "智慧"
+  },
+  {
+    "TextID": "TM_AGI",
+    "TextContent": "靈巧"
+  },
+  {
+    "TextID": "TM_VIT",
+    "TextContent": "體力"
+  },
+  {
+    "TextID": "TM_WIS",
+    "TextContent": "感知"
+  },
+  {
+    "TextID": "TM_AS",
+    "TextContent": "攻擊速度"
+  },
+  {
+    "TextID": "TM_CS",
+    "TextContent": "詠唱速度"
+  },
+  {
+    "TextID": "TM_ElementDamageIncrease",
+    "TextContent": "屬性傷害增幅"
+  },
+  {
+    "TextID": "TM_ElementDamageReduction",
+    "TextContent": "屬性傷害抗性"
+  },
+  {
+    "TextID": "TM_DisorderResistance",
+    "TextContent": "異常狀態抗性"
+  },
+  {
+    "TextID": "TM_BlockRate",
+    "TextContent": "格檔率"
+  },
+  {
+    "TextID": "TM_ATK",
+    "TextContent": "所有攻擊力"
+  }
+]

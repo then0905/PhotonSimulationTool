@@ -1,0 +1,26 @@
+[
+  {
+    "TextID": "TM_RestAreaTest_Name",
+    "TextContent": "測試休息區"
+  },
+  {
+    "TextID": "TM_DevelopmentTest_Name",
+    "TextContent": "開發測試"
+  },
+  {
+    "TextID": "TM_DevelopmentTest2_Name",
+    "TextContent": "開發測試2"
+  },
+  {
+    "TextID": "TM_OriginalVillage_Name",
+    "TextContent": "初始之村"
+  },
+  {
+    "TextID": "TM_OutskirtsOfGunnCity_Name",
+    "TextContent": "葛恩城郊外"
+  },
+  {
+    "TextID": "TM_HardLaborMine_Name",
+    "TextContent": "苦役礦洞"
+  }
+]

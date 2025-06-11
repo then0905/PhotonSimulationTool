@@ -1,0 +1,106 @@
+[
+  {
+    "TextID": "TM_Monster_Test_0_Name",
+    "TextContent": "測試用巨人"
+  },
+  {
+    "TextID": "TM_Monster_Test_1_Name",
+    "TextContent": "測試用巨人2"
+  },
+  {
+    "TextID": "TM_Monster_Origin_0_Name",
+    "TextContent": "野豬"
+  },
+  {
+    "TextID": "TM_Monster_Origin_1_Name",
+    "TextContent": "史萊姆"
+  },
+  {
+    "TextID": "TM_Monster_Origin_2_Name",
+    "TextContent": "小牛怪"
+  },
+  {
+    "TextID": "TM_Monster_Origin_3_Name",
+    "TextContent": "狼犬"
+  },
+  {
+    "TextID": "TM_Monster_Origin_4_Name",
+    "TextContent": "巨型史萊姆"
+  },
+  {
+    "TextID": "TM_Monster_Gunn_0_Name",
+    "TextContent": "小哥布林"
+  },
+  {
+    "TextID": "TM_Monster_Gunn_1_Name",
+    "TextContent": "牛怪"
+  },
+  {
+    "TextID": "TM_Monster_Gunn_2_Name",
+    "TextContent": "哥布林戰士"
+  },
+  {
+    "TextID": "TM_Monster_Gunn_3_Name",
+    "TextContent": "哥布林偵查兵"
+  },
+  {
+    "TextID": "TM_Monster_Gunn_4_Name",
+    "TextContent": "哥布林薩滿"
+  },
+  {
+    "TextID": "TM_Monster_Gunn_5_Name",
+    "TextContent": "哥布林信使"
+  },
+  {
+    "TextID": "TM_Monster_Gunn_6_Name",
+    "TextContent": "哥布林狂熱者"
+  },
+  {
+    "TextID": "TM_Monster_Gunn_7_Name",
+    "TextContent": "哥布林守護兵"
+  },
+  {
+    "TextID": "TM_Monster_HardLabor_0_Name",
+    "TextContent": "哥布林戰士(礦洞幹部)"
+  },
+  {
+    "TextID": "TM_Monster_HardLabor_1_Name",
+    "TextContent": "哥布林偵查兵(礦洞幹部)"
+  },
+  {
+    "TextID": "TM_Monster_HardLabor_2_Name",
+    "TextContent": "哥布林薩滿(礦洞幹部)"
+  },
+  {
+    "TextID": "TM_Monster_HardLabor_3_Name",
+    "TextContent": "哥布林信使(礦洞幹部)"
+  },
+  {
+    "TextID": "TM_Monster_HardLabor_4_Name",
+    "TextContent": "哥布林狂熱者(礦洞幹部)"
+  },
+  {
+    "TextID": "TM_Monster_HardLabor_5_Name",
+    "TextContent": "哥布林守護兵(礦洞幹部)"
+  },
+  {
+    "TextID": "TM_Monster_HardLabor_6_Name",
+    "TextContent": "哥布林監工(礦洞幹部)"
+  },
+  {
+    "TextID": "TM_Monster_HardLabor_7_Name",
+    "TextContent": "哥布林警戒兵(礦洞幹部)"
+  },
+  {
+    "TextID": "TM_Monster_HardLabor_8_Name",
+    "TextContent": "哥布林督察(礦洞幹部)"
+  },
+  {
+    "TextID": "TM_Monster_HardLabor_9_Name",
+    "TextContent": "哥布林礦洞衛兵(礦洞幹部)"
+  },
+  {
+    "TextID": "TM_Monster_HardLabor_10_Name",
+    "TextContent": "哥布林大隊長\n崔西斯(礦洞幹部)"
+  }
+]

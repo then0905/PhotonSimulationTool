@@ -1,0 +1,50 @@
+[
+  {
+    "TextID": "TM_Quest01_Name",
+    "TextContent": "奧利伯的委託"
+  },
+  {
+    "TextID": "TM_Quest01_ChatContent1",
+    "TextContent": "你好，冒險家，歡迎來到初始之村，我是村長，奧利伯"
+  },
+  {
+    "TextID": "TM_Quest01_ChatContent2",
+    "TextContent": "最近村莊周圍多很多的魔物讓我們很困擾!"
+  },
+  {
+    "TextID": "TM_Quest01_ChatContent3",
+    "TextContent": "我想拜託你幫忙狩獵附近的魔物\"測試用巨人\"，3隻,若你完成了我會給予你豐厚的獎勵!"
+  },
+  {
+    "TextID": "TM_Quest01_ChatContent4",
+    "TextContent": "若你完成了我會給予你豐厚的獎勵!"
+  },
+  {
+    "TextID": "TM_Quest01_FinishContent1",
+    "TextContent": "感謝你為我們村莊的付出"
+  },
+  {
+    "TextID": "TM_Quest01_FinishContent2",
+    "TextContent": "這些是你的獎勵"
+  },
+  {
+    "TextID": "TM_Quest02_Name",
+    "TextContent": "與達蘭妲談話"
+  },
+  {
+    "TextID": "TM_Quest02_ChatContent1",
+    "TextContent": "你好，冒險家，我是初始之村的村民達蘭妲"
+  },
+  {
+    "TextID": "TM_Quest02_ChatContent2",
+    "TextContent": "你需要熟悉一下村莊的環境嗎?,我想你可以去找村長「奧利伯」了解一下環境!"
+  },
+  {
+    "TextID": "TM_Quest02_FinishContent1",
+    "TextContent": "是達蘭妲請你來找我的嗎?"
+  },
+  {
+    "TextID": "TM_Quest02_FinishContent2",
+    "TextContent": "好的我來跟你講一下村莊周遭環境"
+  }
+]
