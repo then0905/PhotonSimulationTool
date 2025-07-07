@@ -1,0 +1,10 @@
+[
+  {
+    "TextID": "TM_FirstEnterGame_Dialog1",
+    "TextContent": "你好{0}，歡迎來到聖地Online，我是新手指導員"
+  },
+  {
+    "TextID": "TM_FirstEnterGame_Dialog2",
+    "TextContent": "請讓我來帶領你熟悉一下這個世界吧！"
+  }
+]

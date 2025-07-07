@@ -41,7 +41,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Sword_Right_001",
-        "ForgeConfigList": "訓練用單手劍",
         "ForgeLv": 1,
         "SuccessProbability": 100,
         "SuperiorSuccessProbability": 100,
@@ -374,7 +373,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Sword_Both_001",
-        "ForgeConfigList": "訓練用雙手劍",
         "ForgeLv": 1,
         "SuccessProbability": 100,
         "SuperiorSuccessProbability": 100,
@@ -707,7 +705,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Mage_Both_001",
-        "ForgeConfigList": "訓練用長杖",
         "ForgeLv": 1,
         "SuccessProbability": 100,
         "SuperiorSuccessProbability": 100,
@@ -1040,7 +1037,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Bow_Both_001",
-        "ForgeConfigList": "訓練用長弓",
         "ForgeLv": 1,
         "SuccessProbability": 100,
         "SuperiorSuccessProbability": 100,
@@ -1373,7 +1369,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Dagger_Single_001",
-        "ForgeConfigList": "訓練用匕首",
         "ForgeLv": 1,
         "SuccessProbability": 100,
         "SuperiorSuccessProbability": 100,
@@ -1706,7 +1701,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Sword_Right_002",
-        "ForgeConfigList": "初心者單手劍",
         "ForgeLv": 1,
         "SuccessProbability": 100,
         "SuperiorSuccessProbability": 100,
@@ -2039,7 +2033,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Sword_Both_002",
-        "ForgeConfigList": "初心者雙手劍",
         "ForgeLv": 1,
         "SuccessProbability": 100,
         "SuperiorSuccessProbability": 100,
@@ -2372,7 +2365,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Mage_Both_002",
-        "ForgeConfigList": "初心者長法杖",
         "ForgeLv": 1,
         "SuccessProbability": 100,
         "SuperiorSuccessProbability": 100,
@@ -2705,7 +2697,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Bow_Both_002",
-        "ForgeConfigList": "初心者長弓",
         "ForgeLv": 1,
         "SuccessProbability": 100,
         "SuperiorSuccessProbability": 100,
@@ -3038,7 +3029,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Dagger_Single_002",
-        "ForgeConfigList": "初心者匕首",
         "ForgeLv": 1,
         "SuccessProbability": 100,
         "SuperiorSuccessProbability": 100,
@@ -3371,7 +3361,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Sword_Right_003",
-        "ForgeConfigList": "原始單手劍",
         "ForgeLv": 1,
         "SuccessProbability": 100,
         "SuperiorSuccessProbability": 100,
@@ -3704,7 +3693,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Sword_Both_003",
-        "ForgeConfigList": "原始雙手劍",
         "ForgeLv": 1,
         "SuccessProbability": 100,
         "SuperiorSuccessProbability": 100,
@@ -4037,7 +4025,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Mage_Both_003",
-        "ForgeConfigList": "原始長法杖",
         "ForgeLv": 1,
         "SuccessProbability": 100,
         "SuperiorSuccessProbability": 100,
@@ -4370,7 +4357,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Bow_Both_003",
-        "ForgeConfigList": "原始長弓",
         "ForgeLv": 1,
         "SuccessProbability": 100,
         "SuperiorSuccessProbability": 100,
@@ -4703,7 +4689,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Dagger_Single_003",
-        "ForgeConfigList": "原始匕首",
         "ForgeLv": 1,
         "SuccessProbability": 100,
         "SuperiorSuccessProbability": 100,
@@ -5036,7 +5021,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Sword_Right_004",
-        "ForgeConfigList": "精製單手劍",
         "ForgeLv": 1,
         "SuccessProbability": 100,
         "SuperiorSuccessProbability": 100,
@@ -5369,7 +5353,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Sword_Both_004",
-        "ForgeConfigList": "精製雙手劍",
         "ForgeLv": 1,
         "SuccessProbability": 100,
         "SuperiorSuccessProbability": 100,
@@ -5702,7 +5685,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Mage_Both_004",
-        "ForgeConfigList": "精製長法杖",
         "ForgeLv": 1,
         "SuccessProbability": 100,
         "SuperiorSuccessProbability": 100,
@@ -6035,7 +6017,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Bow_Both_004",
-        "ForgeConfigList": "精製長弓",
         "ForgeLv": 1,
         "SuccessProbability": 100,
         "SuperiorSuccessProbability": 100,
@@ -6368,7 +6349,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Dagger_Single_004",
-        "ForgeConfigList": "精製匕首",
         "ForgeLv": 1,
         "SuccessProbability": 100,
         "SuperiorSuccessProbability": 100,
@@ -6701,7 +6681,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Sword_Right_005",
-        "ForgeConfigList": "哥布林細劍",
         "ForgeLv": 1,
         "SuccessProbability": 80,
         "SuperiorSuccessProbability": 100,
@@ -7034,7 +7013,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Sword_Both_005",
-        "ForgeConfigList": "哥布林大劍",
         "ForgeLv": 1,
         "SuccessProbability": 80,
         "SuperiorSuccessProbability": 100,
@@ -7367,7 +7345,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Mage_Both_005",
-        "ForgeConfigList": "哥布林長木杖",
         "ForgeLv": 1,
         "SuccessProbability": 80,
         "SuperiorSuccessProbability": 100,
@@ -7700,7 +7677,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Bow_Both_005",
-        "ForgeConfigList": "哥布林木弓",
         "ForgeLv": 1,
         "SuccessProbability": 80,
         "SuperiorSuccessProbability": 100,
@@ -8033,7 +8009,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Dagger_Single_005",
-        "ForgeConfigList": "哥布林小刀",
         "ForgeLv": 1,
         "SuccessProbability": 80,
         "SuperiorSuccessProbability": 100,
@@ -8366,7 +8341,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Axe_Both_005",
-        "ForgeConfigList": "哥布林大斧",
         "ForgeLv": 1,
         "SuccessProbability": 80,
         "SuperiorSuccessProbability": 100,
@@ -8699,7 +8673,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Crossbow_Both_005",
-        "ForgeConfigList": "哥布林弩弓",
         "ForgeLv": 1,
         "SuccessProbability": 80,
         "SuperiorSuccessProbability": 100,
@@ -9032,7 +9005,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Stick_Right_005",
-        "ForgeConfigList": "哥布林小木杖",
         "ForgeLv": 1,
         "SuccessProbability": 80,
         "SuperiorSuccessProbability": 100,
@@ -9365,7 +9337,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Hammer_Right_005",
-        "ForgeConfigList": "哥布林木槌",
         "ForgeLv": 1,
         "SuccessProbability": 80,
         "SuperiorSuccessProbability": 100,
@@ -9698,7 +9669,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "GiantMallet_Both_005",
-        "ForgeConfigList": "哥布林巨槌",
         "ForgeLv": 1,
         "SuccessProbability": 80,
         "SuperiorSuccessProbability": 100,
@@ -10031,7 +10001,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Book_Left_005",
-        "ForgeConfigList": "哥布林魔書",
         "ForgeLv": 1,
         "SuccessProbability": 80,
         "SuperiorSuccessProbability": 100,
@@ -10364,7 +10333,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Shield_Left_005",
-        "ForgeConfigList": "哥布林木盾",
         "ForgeLv": 1,
         "SuccessProbability": 80,
         "SuperiorSuccessProbability": 100,

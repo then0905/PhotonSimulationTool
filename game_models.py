@@ -75,7 +75,7 @@ class SkillData:
     
 # 怪物生成資料
 @dataclass
-class MonsterSpwanDataModel:
+class MonsterSpawnDataModel:
     MonsterCodeID: str = ""
     SpawnPosX: float = 0
     SpawnPosY: float = 0
@@ -94,6 +94,7 @@ class MonsterSkillDataModel:
     EffectTarget: str = ""
     AdditionalEffect: str = ""
     AdditionalEffectValue: int = 0
+    AdditionalEffectTime: float = 0
     InfluenceStatus: str = ""
     EffectRecive: int = 0
     Distance: float = 0
@@ -131,7 +132,7 @@ class MonsterDataModel(BasalAttributesDataModel):
     PursueRange: int = 0
     WalkSpeed: int = 0
     RunSpeed: int = 0
-    MonsterSpawnPosList: List[MonsterSpwanDataModel] = field(default_factory=list)
+    MonsterSpawnPosList: List[MonsterSpawnDataModel ] = field(default_factory=list)
     MonsterSkillList: List[MonsterSkillDataModel] = field(default_factory=list)
 
     # 掉落物詳情資料
@@ -139,7 +140,7 @@ class MonsterDataModel(BasalAttributesDataModel):
 # 掉落物詳細資料(機率 物品ID 掉落數量等等)
 @dataclass
 class DropItemData:
-    MonsterCodeID: str = ""
+    CodeID: str = ""
     DropItemID: str = ""
     Probability: float = 0
     DropCountMax: int = 0
@@ -156,7 +157,7 @@ class MonsterDropItemDataModel:
 
 # 裝備強化屬性資料
 @dataclass
-class ForgeData:
+class ForgeData(BasalAttributesDataModel):
     CodeID: str = ""
     ForgeLv: int = 0
     SuccessProbability: float = 0
@@ -212,14 +213,12 @@ class WeaponDataModel(BasalAttributesDataModel):
     TypeID: str = ""
     Intro: str = ""
     Stackability: bool = False
-    AS: str = 0
-    ASID: str = 0
+    AS: str = ""
+    ASID: str = ""
     Redeem: int = 0
     Price: int = 0
     ForgeConfigList: List[ForgeData] = field(default_factory=list)
 
-    def get_key(self) -> str:
-        return self.SkillID
 # 道具資料結構
 @dataclass
 class ItemDataModel(BasalAttributesDataModel):
@@ -241,40 +240,54 @@ class ItemDataModel(BasalAttributesDataModel):
     Price: int = 0
     Redeem: int = 0
 
-    def get_key(self) -> str:
-        return self.SkillID
-
-
 # 職業能力值加成
 @dataclass
 class JobBonusDataModel:
-    Job: str = 0
-    STR: str = 0
-    DEX: str = 0
-    INT: str = 0
-    AGI: str = 0
-    WIS: str = 0
-    VIT: str = 0
-    HP: str = 0
-    MP: str = 0
-
-
+    Job: str = ""
+    STR: str = ""
+    DEX: str = ""
+    INT: str = ""
+    AGI: str = ""
+    WIS: str = ""
+    VIT: str = ""
+    HP: str = ""
+    MP: str = ""
 # 種族能力值加成
 @dataclass
 class StatusFormulaDataModel:
-    TargetStatus: str = 0
-    Race: str = 0
+    TargetStatus: str = ""
+    Race: str = ""
     STR: float = 0
     DEX: float = 0
     INT: float = 0
     AGI: float = 0
     WIS: float = 0
     VIT: float = 0
-    LvCodition: float = 0
+    LvCondition: float = 0
 
-    def get_key(self) -> str:
-        return self.SkillID
+# 地區資料
+@dataclass
+class AreaData:
+    AreaID: str = ""
+    AreaName: str =""
+    MiniMapPath: str = ""
+    UseRecord: bool = 0
+    RecordMapTarget: str = ""
+    RecordPosX: float = 0
+    RecordPosY: float = 0
+    RecordPosZ: float = 0
 
+# 文字資料
+@dataclass
+class GameText:
+    TextID: str = ""
+    TextContent: str = ""
+    
+# 遊戲設定資料
+@dataclass
+class GameSettingDataModel:
+    GameSettingID: str = ""
+    GameSettingValue: float = 0
 
 # 等級與經驗值的數值
 @dataclass
@@ -282,52 +295,23 @@ class LvAndExpDataModel:
     Lv: int = 0
     EXP: int = 0
 
-    def get_key(self) -> str:
-        return self.SkillID
-
-
-# 地區資料
-@dataclass
-class AreaData:
-    AreaID: str = 0
-    AreaName: str = 0
-    MiniMapPath: str = 0
-    UseRecord: bool = 0
-    RecordMapTarget: str = 0
-    RecordPosX: float = 0
-    RecordPosY: float = 0
-    RecordPosZ: float = 0
-
-    def get_key(self) -> str:
-        return self.SkillID
-
-
-# 文字資料
-@dataclass
-class GameText:
-    TextID: str = 0
-    TextContent: str = 0
-
-    def get_key(self) -> str:
-        return self.SkillID
-
+# 遊戲資料字典宣告區
+SkillDataDic: Dict[str, SkillData] = {}
+MonstersDataDic: Dict[str, MonsterDataModel] = {}
+MonsterDropItemDic: Dict[str, MonsterDropItemDataModel] = {}
+ArmorsDic: Dict[str, ArmorDataModel] = {}
+WeaponsDic: Dict[str, WeaponDataModel] = {}
+ItemsDic: Dict[str, ItemDataModel] = {}
+JobBonusDic: Dict[str, JobBonusDataModel] = {}
+StatusFormulaDic: Dict[str, StatusFormulaDataModel] = {}
+GameTextDataDic: Dict[str, GameText] = {}
+GameSettingDic: Dict[str, GameSettingDataModel] = {}   #這開始
+AreaDataDic: Dict[str, AreaData] = {}
+ExpAndLvDic: Dict[int, LvAndExpDataModel] = {}    
 
 class GameData:
     def __init__(self, data_dir="data"):
         self.data_dir = data_dir
-        self.SkillDataDic: Dict[str, SkillData] = {}
-        self.MonstersDataDic: Dict[str, MonsterDataModel] = {}
-        self.MonsterDropItemDic: Dict[str, MonsterDropItemDataModel] = {}
-        self.ArmorsDic: Dict[str, ArmorDataModel] = {}
-        self.WeaponsDic: Dict[str, WeaponDataModel] = {}
-        self.ItemsDic: Dict[str, ItemDataModel] = {}
-        self.JobBonusDic: Dict[str, JobBonusDataModel] = {}
-        self.StatusFormulaDic: Dict[str, StatusFormulaDataModel] = {}
-        self.GameTextDataDic: Dict[str, GameText] = {}
-        self.GameSettingDic: Dict[str, GameText] = {}   #這開始
-        self.AreaDataDic: Dict[str, GameText] = {}
-        self.ExpAndLvDic: Dict[str, GameText] = {}
-
         self.load_data()
 
     def load_data(self):
@@ -363,7 +347,7 @@ class GameData:
             for monserData in monsters_data:
                 if "MonsterSpawnPosList" in monserData:
                     monserData["MonsterSpawnPosList"] = [
-                        MonsterSpwanDataModel(**op)
+                        MonsterSpawnDataModel(**op)
                         for op in monserData["MonsterSpawnPosList"]
                     ]
 
@@ -383,7 +367,7 @@ class GameData:
                     ]
 
             # 轉換為 MonsterDropItemDic 物件
-            self.MonsterDropItemDic = {s["MonsterCodeID"]: MonsterDropItemDataModel(**s) for s in dropItemData}
+            self.MonsterDropItemDic = {s["MonsterCodeID"]: MonsterDropItemDataModel(**s) for s in dropItems_data}
 
         # 加載防具資料
         with open(f"{self.data_dir}/Armor.json", encoding="utf-8") as f:
@@ -430,12 +414,12 @@ class GameData:
         # 加載職業加成資料
         with open(f"{self.data_dir}/JobBonus.json", encoding="utf-8") as f:
             classes_data = json.load(f)
-            self.classes = {c["Job"]: JobBonusDataModel(**c) for c in classes_data}
+            self.JobBonusDic = {c["Job"]: JobBonusDataModel(**c) for c in classes_data}
             
         # 加載種族能力值資料
         with open(f"{self.data_dir}/StatusFormula.json", encoding="utf-8") as f:
             statusFormulas_data = json.load(f)
-            self.classes = {c["{TargetStatus}_{Race}"]: StatusFormulaDataModel(**c) for c in statusFormulas_data}            
+            self.StatusFormulaDic = {f"{c['TargetStatus']}_{c['Race']}": StatusFormulaDataModel(**c) for c in statusFormulas_data}            
             
         # 加載文字資料
         # 要讀取的檔案列表 (假設這些檔案結構都相同)
@@ -453,11 +437,26 @@ class GameData:
                 try:
                     with open(f"data/{file}", encoding="utf-8") as f:
                         data = json.load(f)
-                        self.GameTextDataDic.update({
+                        GameTextDataDic.update({
                             item["TextID"]: GameText(**item)
                             for item in data
                         })
                 except FileNotFoundError:
                     print(f"找不到檔案: {file}")
                 except Exception as e:
-                    print(f"讀取 {file} 時發生錯誤: {e}")            
+                    print(f"讀取 {file} 時發生錯誤: {e}")          
+                    
+        # 加載遊戲設定資料
+        with open(f"{self.data_dir}/GameSetting.json", encoding="utf-8") as f:
+            gameSetting_data = json.load(f)
+            self.GameSettingDic = {c["GameSettingID"]: GameSettingDataModel(**c) for c in gameSetting_data}        
+            
+        # 加載地區資料
+        with open(f"{self.data_dir}/Area.json", encoding="utf-8") as f:
+            areas_data = json.load(f)
+            self.AreaDataDic = {c["AreaID"]: AreaData(**c) for c in areas_data}   
+            
+        # 加載地區資料
+        with open(f"{self.data_dir}/LvAndExp.json", encoding="utf-8") as f:
+            lvAndExp_data = json.load(f)
+            self.ExpAndLvDic = {c["Lv"]: LvAndExpDataModel(**c) for c in lvAndExp_data}   

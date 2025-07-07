@@ -9,175 +9,175 @@
         "CodeID": "Monster_Test_0",
         "DropItemID": "Sword_Right_001",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_0",
         "DropItemID": "Sword_Both_001",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_0",
         "DropItemID": "Mage_Both_001",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_0",
         "DropItemID": "Bow_Both_001",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_0",
         "DropItemID": "Dagger_Single_001",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_0",
         "DropItemID": "Heavy_Head_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_0",
         "DropItemID": "Heavy_Body_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_0",
         "DropItemID": "Heavy_Leg_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_0",
         "DropItemID": "Heavy_Arm_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_0",
         "DropItemID": "Heavy_Foot_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_0",
         "DropItemID": "Light_Head_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_0",
         "DropItemID": "Light_Body_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_0",
         "DropItemID": "Light_Leg_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_0",
         "DropItemID": "Light_Arm_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_0",
         "DropItemID": "Light_Foot_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_0",
         "DropItemID": "Cloth_Head_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_0",
         "DropItemID": "Cloth_Body_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_0",
         "DropItemID": "Cloth_Leg_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_0",
         "DropItemID": "Cloth_Arm_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_0",
         "DropItemID": "Cloth_Foot_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_0",
         "DropItemID": "Potion_Hp_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_0",
         "DropItemID": "Potion_Mp_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_0",
         "DropItemID": "Record_Reel_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_0",
         "DropItemID": "Booty_007",
         "Probability": 25,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_0",
         "DropItemID": "Booty_008",
         "Probability": 10,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       }
     ]
@@ -192,175 +192,175 @@
         "CodeID": "Monster_Test_1",
         "DropItemID": "Sword_Right_001",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_1",
         "DropItemID": "Sword_Both_001",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_1",
         "DropItemID": "Mage_Both_001",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_1",
         "DropItemID": "Bow_Both_001",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_1",
         "DropItemID": "Dagger_Single_001",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_1",
         "DropItemID": "Heavy_Head_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_1",
         "DropItemID": "Heavy_Body_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_1",
         "DropItemID": "Heavy_Leg_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_1",
         "DropItemID": "Heavy_Arm_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_1",
         "DropItemID": "Heavy_Foot_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_1",
         "DropItemID": "Light_Head_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_1",
         "DropItemID": "Light_Body_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_1",
         "DropItemID": "Light_Leg_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_1",
         "DropItemID": "Light_Arm_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_1",
         "DropItemID": "Light_Foot_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_1",
         "DropItemID": "Cloth_Head_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_1",
         "DropItemID": "Cloth_Body_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_1",
         "DropItemID": "Cloth_Leg_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_1",
         "DropItemID": "Cloth_Arm_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_1",
         "DropItemID": "Cloth_Foot_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_1",
         "DropItemID": "Potion_Hp_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_1",
         "DropItemID": "Potion_Mp_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_1",
         "DropItemID": "Record_Reel_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_1",
         "DropItemID": "Booty_007",
         "Probability": 25,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Test_1",
         "DropItemID": "Booty_008",
         "Probability": 10,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       }
     ]
@@ -375,175 +375,175 @@
         "CodeID": "Monster_Origin_0",
         "DropItemID": "Sword_Right_001",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_0",
         "DropItemID": "Sword_Both_001",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_0",
         "DropItemID": "Mage_Both_001",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_0",
         "DropItemID": "Bow_Both_001",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_0",
         "DropItemID": "Dagger_Single_001",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_0",
         "DropItemID": "Heavy_Head_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_0",
         "DropItemID": "Heavy_Body_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_0",
         "DropItemID": "Heavy_Leg_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_0",
         "DropItemID": "Heavy_Arm_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_0",
         "DropItemID": "Heavy_Foot_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_0",
         "DropItemID": "Light_Head_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_0",
         "DropItemID": "Light_Body_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_0",
         "DropItemID": "Light_Leg_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_0",
         "DropItemID": "Light_Arm_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_0",
         "DropItemID": "Light_Foot_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_0",
         "DropItemID": "Cloth_Head_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_0",
         "DropItemID": "Cloth_Body_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_0",
         "DropItemID": "Cloth_Leg_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_0",
         "DropItemID": "Cloth_Arm_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_0",
         "DropItemID": "Cloth_Foot_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_0",
         "DropItemID": "Potion_Hp_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_0",
         "DropItemID": "Potion_Mp_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_0",
         "DropItemID": "Record_Reel_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_0",
         "DropItemID": "Booty_001",
         "Probability": 25,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_0",
         "DropItemID": "Booty_002",
         "Probability": 7.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       }
     ]
@@ -558,175 +558,175 @@
         "CodeID": "Monster_Origin_1",
         "DropItemID": "Sword_Right_001",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_1",
         "DropItemID": "Sword_Both_001",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_1",
         "DropItemID": "Mage_Both_001",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_1",
         "DropItemID": "Bow_Both_001",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_1",
         "DropItemID": "Dagger_Single_001",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_1",
         "DropItemID": "Heavy_Head_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_1",
         "DropItemID": "Heavy_Body_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_1",
         "DropItemID": "Heavy_Leg_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_1",
         "DropItemID": "Heavy_Arm_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_1",
         "DropItemID": "Heavy_Foot_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_1",
         "DropItemID": "Light_Head_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_1",
         "DropItemID": "Light_Body_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_1",
         "DropItemID": "Light_Leg_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_1",
         "DropItemID": "Light_Arm_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_1",
         "DropItemID": "Light_Foot_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_1",
         "DropItemID": "Cloth_Head_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_1",
         "DropItemID": "Cloth_Body_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_1",
         "DropItemID": "Cloth_Leg_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_1",
         "DropItemID": "Cloth_Arm_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_1",
         "DropItemID": "Cloth_Foot_01",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_1",
         "DropItemID": "Potion_Hp_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_1",
         "DropItemID": "Potion_Mp_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_1",
         "DropItemID": "Record_Reel_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_1",
         "DropItemID": "Booty_003",
         "Probability": 25,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_1",
         "DropItemID": "Booty_004",
         "Probability": 7.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       }
     ]
@@ -741,70 +741,70 @@
         "CodeID": "Monster_Origin_2",
         "DropItemID": "Sword_Right_002",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_2",
         "DropItemID": "Sword_Both_002",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_2",
         "DropItemID": "Mage_Both_002",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_2",
         "DropItemID": "Bow_Both_002",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_2",
         "DropItemID": "Dagger_Single_002",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_2",
         "DropItemID": "Potion_Hp_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_2",
         "DropItemID": "Potion_Mp_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_2",
         "DropItemID": "Record_Reel_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_2",
         "DropItemID": "Booty_001",
         "Probability": 25,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_2",
         "DropItemID": "Booty_002",
         "Probability": 7.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       }
     ]
@@ -819,140 +819,140 @@
         "CodeID": "Monster_Origin_3",
         "DropItemID": "Heavy_Head_02",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_3",
         "DropItemID": "Heavy_Body_02",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_3",
         "DropItemID": "Heavy_Leg_02",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_3",
         "DropItemID": "Heavy_Arm_02",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_3",
         "DropItemID": "Heavy_Foot_02",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_3",
         "DropItemID": "Light_Head_02",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_3",
         "DropItemID": "Light_Body_02",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_3",
         "DropItemID": "Light_Leg_02",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_3",
         "DropItemID": "Light_Arm_02",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_3",
         "DropItemID": "Light_Foot_02",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_3",
         "DropItemID": "Cloth_Head_02",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_3",
         "DropItemID": "Cloth_Body_02",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_3",
         "DropItemID": "Cloth_Leg_02",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_3",
         "DropItemID": "Cloth_Arm_02",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_3",
         "DropItemID": "Cloth_Foot_02",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_3",
         "DropItemID": "Potion_Hp_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_3",
         "DropItemID": "Potion_Mp_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_3",
         "DropItemID": "Record_Reel_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_3",
         "DropItemID": "Booty_001",
         "Probability": 25,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_3",
         "DropItemID": "Booty_002",
         "Probability": 7.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       }
     ]
@@ -967,77 +967,77 @@
         "CodeID": "Monster_Origin_4",
         "DropItemID": "Sword_Right_004",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_4",
         "DropItemID": "Sword_Both_004",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_4",
         "DropItemID": "Mage_Both_004",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_4",
         "DropItemID": "Bow_Both_004",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_4",
         "DropItemID": "Dagger_Single_004",
         "Probability": 5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_Origin_4",
         "DropItemID": "Potion_Hp_01",
         "Probability": 15,
-        "DropCountMIn": 5,
+        "DropCountMin": 5,
         "DropCountMax": 8
       },
       {
         "CodeID": "Monster_Origin_4",
         "DropItemID": "Potion_Mp_01",
         "Probability": 15,
-        "DropCountMIn": 3,
+        "DropCountMin": 3,
         "DropCountMax": 8
       },
       {
         "CodeID": "Monster_Origin_4",
         "DropItemID": "Record_Reel_01",
         "Probability": 15,
-        "DropCountMIn": 3,
+        "DropCountMin": 3,
         "DropCountMax": 5
       },
       {
         "CodeID": "Monster_Origin_4",
         "DropItemID": "Booty_003",
         "Probability": 25,
-        "DropCountMIn": 3,
+        "DropCountMin": 3,
         "DropCountMax": 4
       },
       {
         "CodeID": "Monster_Origin_4",
         "DropItemID": "Booty_004",
         "Probability": 7.5,
-        "DropCountMIn": 2,
+        "DropCountMin": 2,
         "DropCountMax": 5
       },
       {
         "CodeID": "Monster_Origin_4",
         "DropItemID": "Enhance_01",
         "Probability": 0.1,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       }
     ]
@@ -1046,49 +1046,1759 @@
     "MonsterCodeID": "Monster_Gunn_0",
     "AreaID": "OutskirtsOfGunnCity",
     "MinCoin": 10,
-    "MaxCoin": 15
+    "MaxCoin": 15,
+    "DropItemList": [
+      {
+        "CodeID": "Monster_Gunn_0",
+        "DropItemID": "Sword_Right_003",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_0",
+        "DropItemID": "Sword_Both_003",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_0",
+        "DropItemID": "Mage_Both_003",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_0",
+        "DropItemID": "Bow_Both_003",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_0",
+        "DropItemID": "Dagger_Single_003",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_0",
+        "DropItemID": "Heavy_Head_02",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_0",
+        "DropItemID": "Heavy_Body_02",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_0",
+        "DropItemID": "Heavy_Leg_02",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_0",
+        "DropItemID": "Heavy_Arm_02",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_0",
+        "DropItemID": "Heavy_Foot_02",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_0",
+        "DropItemID": "Light_Head_02",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_0",
+        "DropItemID": "Light_Body_02",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_0",
+        "DropItemID": "Light_Leg_02",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_0",
+        "DropItemID": "Light_Arm_02",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_0",
+        "DropItemID": "Light_Foot_02",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_0",
+        "DropItemID": "Cloth_Head_02",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_0",
+        "DropItemID": "Cloth_Body_02",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_0",
+        "DropItemID": "Cloth_Leg_02",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_0",
+        "DropItemID": "Cloth_Arm_02",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_0",
+        "DropItemID": "Cloth_Foot_02",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_0",
+        "DropItemID": "Potion_Hp_01",
+        "Probability": 15,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_0",
+        "DropItemID": "Potion_Mp_01",
+        "Probability": 15,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_0",
+        "DropItemID": "Record_Reel_01",
+        "Probability": 15,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_0",
+        "DropItemID": "Booty_005",
+        "Probability": 25,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_0",
+        "DropItemID": "Booty_006",
+        "Probability": 7.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      }
+    ]
   },
   {
     "MonsterCodeID": "Monster_Gunn_1",
     "AreaID": "OutskirtsOfGunnCity",
     "MinCoin": 10,
-    "MaxCoin": 15
+    "MaxCoin": 15,
+    "DropItemList": [
+      {
+        "CodeID": "Monster_Gunn_1",
+        "DropItemID": "Sword_Right_003",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_1",
+        "DropItemID": "Sword_Both_003",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_1",
+        "DropItemID": "Mage_Both_003",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_1",
+        "DropItemID": "Bow_Both_003",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_1",
+        "DropItemID": "Dagger_Single_003",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_1",
+        "DropItemID": "Heavy_Head_02",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_1",
+        "DropItemID": "Heavy_Body_02",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_1",
+        "DropItemID": "Heavy_Leg_02",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_1",
+        "DropItemID": "Heavy_Arm_02",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_1",
+        "DropItemID": "Heavy_Foot_02",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_1",
+        "DropItemID": "Light_Head_02",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_1",
+        "DropItemID": "Light_Body_02",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_1",
+        "DropItemID": "Light_Leg_02",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_1",
+        "DropItemID": "Light_Arm_02",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_1",
+        "DropItemID": "Light_Foot_02",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_1",
+        "DropItemID": "Cloth_Head_02",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_1",
+        "DropItemID": "Cloth_Body_02",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_1",
+        "DropItemID": "Cloth_Leg_02",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_1",
+        "DropItemID": "Cloth_Arm_02",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_1",
+        "DropItemID": "Cloth_Foot_02",
+        "Probability": 5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_1",
+        "DropItemID": "Potion_Hp_01",
+        "Probability": 15,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_1",
+        "DropItemID": "Potion_Mp_01",
+        "Probability": 15,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_1",
+        "DropItemID": "Record_Reel_01",
+        "Probability": 15,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_1",
+        "DropItemID": "Booty_001",
+        "Probability": 25,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_1",
+        "DropItemID": "Booty_002",
+        "Probability": 7.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      }
+    ]
   },
   {
     "MonsterCodeID": "Monster_Gunn_2",
     "AreaID": "OutskirtsOfGunnCity",
     "MinCoin": 10,
-    "MaxCoin": 20
+    "MaxCoin": 20,
+    "DropItemList": [
+      {
+        "CodeID": "Monster_Gunn_2",
+        "DropItemID": "Sword_Right_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_2",
+        "DropItemID": "Sword_Both_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_2",
+        "DropItemID": "Mage_Both_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_2",
+        "DropItemID": "Bow_Both_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_2",
+        "DropItemID": "Dagger_Single_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_2",
+        "DropItemID": "Axe_Both_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_2",
+        "DropItemID": "Crossbow_Both_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_2",
+        "DropItemID": "Stick_Right_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_2",
+        "DropItemID": "Hammer_Right_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_2",
+        "DropItemID": "GiantMallet_Both_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_2",
+        "DropItemID": "Book_Left_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_2",
+        "DropItemID": "Shield_Left_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_2",
+        "DropItemID": "Heavy_Head_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_2",
+        "DropItemID": "Heavy_Body_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_2",
+        "DropItemID": "Heavy_Leg_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_2",
+        "DropItemID": "Heavy_Arm_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_2",
+        "DropItemID": "Heavy_Foot_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_2",
+        "DropItemID": "Light_Head_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_2",
+        "DropItemID": "Light_Body_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_2",
+        "DropItemID": "Light_Leg_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_2",
+        "DropItemID": "Light_Arm_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_2",
+        "DropItemID": "Light_Foot_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_2",
+        "DropItemID": "Cloth_Head_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_2",
+        "DropItemID": "Cloth_Body_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_2",
+        "DropItemID": "Cloth_Leg_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_2",
+        "DropItemID": "Cloth_Arm_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_2",
+        "DropItemID": "Cloth_Foot_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_2",
+        "DropItemID": "Potion_Hp_01",
+        "Probability": 15,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_2",
+        "DropItemID": "Potion_Mp_01",
+        "Probability": 15,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_2",
+        "DropItemID": "Record_Reel_01",
+        "Probability": 15,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_2",
+        "DropItemID": "Booty_005",
+        "Probability": 25,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_2",
+        "DropItemID": "Booty_006",
+        "Probability": 7.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      }
+    ]
   },
   {
     "MonsterCodeID": "Monster_Gunn_3",
     "AreaID": "OutskirtsOfGunnCity",
     "MinCoin": 10,
-    "MaxCoin": 20
+    "MaxCoin": 20,
+    "DropItemList": [
+      {
+        "CodeID": "Monster_Gunn_3",
+        "DropItemID": "Sword_Right_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_3",
+        "DropItemID": "Sword_Both_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_3",
+        "DropItemID": "Mage_Both_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_3",
+        "DropItemID": "Bow_Both_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_3",
+        "DropItemID": "Dagger_Single_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_3",
+        "DropItemID": "Axe_Both_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_3",
+        "DropItemID": "Crossbow_Both_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_3",
+        "DropItemID": "Stick_Right_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_3",
+        "DropItemID": "Hammer_Right_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_3",
+        "DropItemID": "GiantMallet_Both_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_3",
+        "DropItemID": "Book_Left_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_3",
+        "DropItemID": "Shield_Left_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_3",
+        "DropItemID": "Heavy_Head_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_3",
+        "DropItemID": "Heavy_Body_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_3",
+        "DropItemID": "Heavy_Leg_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_3",
+        "DropItemID": "Heavy_Arm_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_3",
+        "DropItemID": "Heavy_Foot_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_3",
+        "DropItemID": "Light_Head_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_3",
+        "DropItemID": "Light_Body_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_3",
+        "DropItemID": "Light_Leg_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_3",
+        "DropItemID": "Light_Arm_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_3",
+        "DropItemID": "Light_Foot_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_3",
+        "DropItemID": "Cloth_Head_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_3",
+        "DropItemID": "Cloth_Body_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_3",
+        "DropItemID": "Cloth_Leg_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_3",
+        "DropItemID": "Cloth_Arm_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_3",
+        "DropItemID": "Cloth_Foot_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_3",
+        "DropItemID": "Potion_Hp_01",
+        "Probability": 15,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_3",
+        "DropItemID": "Potion_Mp_01",
+        "Probability": 15,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_3",
+        "DropItemID": "Record_Reel_01",
+        "Probability": 15,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_3",
+        "DropItemID": "Booty_005",
+        "Probability": 25,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_3",
+        "DropItemID": "Booty_006",
+        "Probability": 7.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      }
+    ]
   },
   {
     "MonsterCodeID": "Monster_Gunn_4",
     "AreaID": "OutskirtsOfGunnCity",
     "MinCoin": 10,
-    "MaxCoin": 20
+    "MaxCoin": 20,
+    "DropItemList": [
+      {
+        "CodeID": "Monster_Gunn_4",
+        "DropItemID": "Sword_Right_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_4",
+        "DropItemID": "Sword_Both_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_4",
+        "DropItemID": "Mage_Both_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_4",
+        "DropItemID": "Bow_Both_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_4",
+        "DropItemID": "Dagger_Single_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_4",
+        "DropItemID": "Axe_Both_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_4",
+        "DropItemID": "Crossbow_Both_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_4",
+        "DropItemID": "Stick_Right_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_4",
+        "DropItemID": "Hammer_Right_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_4",
+        "DropItemID": "GiantMallet_Both_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_4",
+        "DropItemID": "Book_Left_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_4",
+        "DropItemID": "Shield_Left_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_4",
+        "DropItemID": "Heavy_Head_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_4",
+        "DropItemID": "Heavy_Body_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_4",
+        "DropItemID": "Heavy_Leg_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_4",
+        "DropItemID": "Heavy_Arm_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_4",
+        "DropItemID": "Heavy_Foot_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_4",
+        "DropItemID": "Light_Head_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_4",
+        "DropItemID": "Light_Body_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_4",
+        "DropItemID": "Light_Leg_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_4",
+        "DropItemID": "Light_Arm_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_4",
+        "DropItemID": "Light_Foot_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_4",
+        "DropItemID": "Cloth_Head_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_4",
+        "DropItemID": "Cloth_Body_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_4",
+        "DropItemID": "Cloth_Leg_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_4",
+        "DropItemID": "Cloth_Arm_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_4",
+        "DropItemID": "Cloth_Foot_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_4",
+        "DropItemID": "Potion_Hp_01",
+        "Probability": 15,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_4",
+        "DropItemID": "Potion_Mp_01",
+        "Probability": 15,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_4",
+        "DropItemID": "Record_Reel_01",
+        "Probability": 15,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_4",
+        "DropItemID": "Booty_005",
+        "Probability": 25,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_4",
+        "DropItemID": "Booty_006",
+        "Probability": 7.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      }
+    ]
   },
   {
     "MonsterCodeID": "Monster_Gunn_5",
     "AreaID": "OutskirtsOfGunnCity",
     "MinCoin": 10,
-    "MaxCoin": 20
+    "MaxCoin": 20,
+    "DropItemList": [
+      {
+        "CodeID": "Monster_Gunn_5",
+        "DropItemID": "Sword_Right_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_5",
+        "DropItemID": "Sword_Both_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_5",
+        "DropItemID": "Mage_Both_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_5",
+        "DropItemID": "Bow_Both_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_5",
+        "DropItemID": "Dagger_Single_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_5",
+        "DropItemID": "Axe_Both_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_5",
+        "DropItemID": "Crossbow_Both_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_5",
+        "DropItemID": "Stick_Right_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_5",
+        "DropItemID": "Hammer_Right_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_5",
+        "DropItemID": "GiantMallet_Both_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_5",
+        "DropItemID": "Book_Left_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_5",
+        "DropItemID": "Shield_Left_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_5",
+        "DropItemID": "Heavy_Head_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_5",
+        "DropItemID": "Heavy_Body_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_5",
+        "DropItemID": "Heavy_Leg_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_5",
+        "DropItemID": "Heavy_Arm_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_5",
+        "DropItemID": "Heavy_Foot_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_5",
+        "DropItemID": "Light_Head_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_5",
+        "DropItemID": "Light_Body_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_5",
+        "DropItemID": "Light_Leg_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_5",
+        "DropItemID": "Light_Arm_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_5",
+        "DropItemID": "Light_Foot_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_5",
+        "DropItemID": "Cloth_Head_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_5",
+        "DropItemID": "Cloth_Body_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_5",
+        "DropItemID": "Cloth_Leg_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_5",
+        "DropItemID": "Cloth_Arm_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_5",
+        "DropItemID": "Cloth_Foot_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_5",
+        "DropItemID": "Potion_Hp_01",
+        "Probability": 15,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_5",
+        "DropItemID": "Potion_Mp_01",
+        "Probability": 15,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_5",
+        "DropItemID": "Record_Reel_01",
+        "Probability": 15,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_5",
+        "DropItemID": "Booty_005",
+        "Probability": 25,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_5",
+        "DropItemID": "Booty_006",
+        "Probability": 7.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      }
+    ]
   },
   {
     "MonsterCodeID": "Monster_Gunn_6",
     "AreaID": "OutskirtsOfGunnCity",
     "MinCoin": 10,
-    "MaxCoin": 20
+    "MaxCoin": 20,
+    "DropItemList": [
+      {
+        "CodeID": "Monster_Gunn_6",
+        "DropItemID": "Sword_Right_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_6",
+        "DropItemID": "Sword_Both_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_6",
+        "DropItemID": "Mage_Both_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_6",
+        "DropItemID": "Bow_Both_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_6",
+        "DropItemID": "Dagger_Single_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_6",
+        "DropItemID": "Axe_Both_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_6",
+        "DropItemID": "Crossbow_Both_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_6",
+        "DropItemID": "Stick_Right_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_6",
+        "DropItemID": "Hammer_Right_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_6",
+        "DropItemID": "GiantMallet_Both_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_6",
+        "DropItemID": "Book_Left_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_6",
+        "DropItemID": "Shield_Left_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_6",
+        "DropItemID": "Heavy_Head_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_6",
+        "DropItemID": "Heavy_Body_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_6",
+        "DropItemID": "Heavy_Leg_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_6",
+        "DropItemID": "Heavy_Arm_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_6",
+        "DropItemID": "Heavy_Foot_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_6",
+        "DropItemID": "Light_Head_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_6",
+        "DropItemID": "Light_Body_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_6",
+        "DropItemID": "Light_Leg_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_6",
+        "DropItemID": "Light_Arm_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_6",
+        "DropItemID": "Light_Foot_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_6",
+        "DropItemID": "Cloth_Head_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_6",
+        "DropItemID": "Cloth_Body_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_6",
+        "DropItemID": "Cloth_Leg_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_6",
+        "DropItemID": "Cloth_Arm_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_6",
+        "DropItemID": "Cloth_Foot_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_6",
+        "DropItemID": "Potion_Hp_01",
+        "Probability": 15,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_6",
+        "DropItemID": "Potion_Mp_01",
+        "Probability": 15,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_6",
+        "DropItemID": "Record_Reel_01",
+        "Probability": 15,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_6",
+        "DropItemID": "Booty_005",
+        "Probability": 25,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_6",
+        "DropItemID": "Booty_006",
+        "Probability": 7.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      }
+    ]
   },
   {
     "MonsterCodeID": "Monster_Gunn_7",
     "AreaID": "OutskirtsOfGunnCity",
     "MinCoin": 10,
-    "MaxCoin": 20
+    "MaxCoin": 20,
+    "DropItemList": [
+      {
+        "CodeID": "Monster_Gunn_7",
+        "DropItemID": "Sword_Right_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_7",
+        "DropItemID": "Sword_Both_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_7",
+        "DropItemID": "Mage_Both_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_7",
+        "DropItemID": "Bow_Both_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_7",
+        "DropItemID": "Dagger_Single_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_7",
+        "DropItemID": "Axe_Both_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_7",
+        "DropItemID": "Crossbow_Both_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_7",
+        "DropItemID": "Stick_Right_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_7",
+        "DropItemID": "Hammer_Right_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_7",
+        "DropItemID": "GiantMallet_Both_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_7",
+        "DropItemID": "Book_Left_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_7",
+        "DropItemID": "Shield_Left_005",
+        "Probability": 3,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_7",
+        "DropItemID": "Heavy_Head_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_7",
+        "DropItemID": "Heavy_Body_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_7",
+        "DropItemID": "Heavy_Leg_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_7",
+        "DropItemID": "Heavy_Arm_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_7",
+        "DropItemID": "Heavy_Foot_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_7",
+        "DropItemID": "Light_Head_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_7",
+        "DropItemID": "Light_Body_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_7",
+        "DropItemID": "Light_Leg_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_7",
+        "DropItemID": "Light_Arm_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_7",
+        "DropItemID": "Light_Foot_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_7",
+        "DropItemID": "Cloth_Head_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_7",
+        "DropItemID": "Cloth_Body_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_7",
+        "DropItemID": "Cloth_Leg_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_7",
+        "DropItemID": "Cloth_Arm_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_7",
+        "DropItemID": "Cloth_Foot_03",
+        "Probability": 2.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_7",
+        "DropItemID": "Potion_Hp_01",
+        "Probability": 15,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_7",
+        "DropItemID": "Potion_Mp_01",
+        "Probability": 15,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_7",
+        "DropItemID": "Record_Reel_01",
+        "Probability": 15,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_7",
+        "DropItemID": "Booty_005",
+        "Probability": 25,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      },
+      {
+        "CodeID": "Monster_Gunn_7",
+        "DropItemID": "Booty_006",
+        "Probability": 7.5,
+        "DropCountMin": 1,
+        "DropCountMax": 1
+      }
+    ]
   },
   {
     "MonsterCodeID": "Monster_HardLabor_0",
@@ -1100,224 +2810,224 @@
         "CodeID": "Monster_HardLabor_0",
         "DropItemID": "Sword_Right_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_0",
         "DropItemID": "Sword_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_0",
         "DropItemID": "Mage_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_0",
         "DropItemID": "Bow_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_0",
         "DropItemID": "Dagger_Single_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_0",
         "DropItemID": "Axe_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_0",
         "DropItemID": "Crossbow_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_0",
         "DropItemID": "Stick_Right_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_0",
         "DropItemID": "Hammer_Right_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_0",
         "DropItemID": "GiantMallet_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_0",
         "DropItemID": "Book_Left_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_0",
         "DropItemID": "Shield_Left_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_0",
         "DropItemID": "Heavy_Head_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_0",
         "DropItemID": "Heavy_Body_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_0",
         "DropItemID": "Heavy_Leg_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_0",
         "DropItemID": "Heavy_Arm_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_0",
         "DropItemID": "Heavy_Foot_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_0",
         "DropItemID": "Light_Head_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_0",
         "DropItemID": "Light_Body_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_0",
         "DropItemID": "Light_Leg_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_0",
         "DropItemID": "Light_Arm_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_0",
         "DropItemID": "Light_Foot_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_0",
         "DropItemID": "Cloth_Head_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_0",
         "DropItemID": "Cloth_Body_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_0",
         "DropItemID": "Cloth_Leg_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_0",
         "DropItemID": "Cloth_Arm_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_0",
         "DropItemID": "Cloth_Foot_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_0",
         "DropItemID": "Potion_Hp_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_0",
         "DropItemID": "Potion_Mp_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_0",
         "DropItemID": "Record_Reel_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_0",
         "DropItemID": "Booty_005",
         "Probability": 25,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_0",
         "DropItemID": "Booty_006",
         "Probability": 7.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       }
     ]
@@ -1332,224 +3042,224 @@
         "CodeID": "Monster_HardLabor_1",
         "DropItemID": "Sword_Right_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_1",
         "DropItemID": "Sword_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_1",
         "DropItemID": "Mage_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_1",
         "DropItemID": "Bow_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_1",
         "DropItemID": "Dagger_Single_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_1",
         "DropItemID": "Axe_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_1",
         "DropItemID": "Crossbow_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_1",
         "DropItemID": "Stick_Right_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_1",
         "DropItemID": "Hammer_Right_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_1",
         "DropItemID": "GiantMallet_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_1",
         "DropItemID": "Book_Left_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_1",
         "DropItemID": "Shield_Left_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_1",
         "DropItemID": "Heavy_Head_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_1",
         "DropItemID": "Heavy_Body_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_1",
         "DropItemID": "Heavy_Leg_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_1",
         "DropItemID": "Heavy_Arm_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_1",
         "DropItemID": "Heavy_Foot_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_1",
         "DropItemID": "Light_Head_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_1",
         "DropItemID": "Light_Body_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_1",
         "DropItemID": "Light_Leg_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_1",
         "DropItemID": "Light_Arm_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_1",
         "DropItemID": "Light_Foot_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_1",
         "DropItemID": "Cloth_Head_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_1",
         "DropItemID": "Cloth_Body_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_1",
         "DropItemID": "Cloth_Leg_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_1",
         "DropItemID": "Cloth_Arm_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_1",
         "DropItemID": "Cloth_Foot_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_1",
         "DropItemID": "Potion_Hp_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_1",
         "DropItemID": "Potion_Mp_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_1",
         "DropItemID": "Record_Reel_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_1",
         "DropItemID": "Booty_005",
         "Probability": 25,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_1",
         "DropItemID": "Booty_006",
         "Probability": 7.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       }
     ]
@@ -1564,224 +3274,224 @@
         "CodeID": "Monster_HardLabor_2",
         "DropItemID": "Sword_Right_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_2",
         "DropItemID": "Sword_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_2",
         "DropItemID": "Mage_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_2",
         "DropItemID": "Bow_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_2",
         "DropItemID": "Dagger_Single_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_2",
         "DropItemID": "Axe_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_2",
         "DropItemID": "Crossbow_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_2",
         "DropItemID": "Stick_Right_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_2",
         "DropItemID": "Hammer_Right_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_2",
         "DropItemID": "GiantMallet_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_2",
         "DropItemID": "Book_Left_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_2",
         "DropItemID": "Shield_Left_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_2",
         "DropItemID": "Heavy_Head_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_2",
         "DropItemID": "Heavy_Body_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_2",
         "DropItemID": "Heavy_Leg_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_2",
         "DropItemID": "Heavy_Arm_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_2",
         "DropItemID": "Heavy_Foot_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_2",
         "DropItemID": "Light_Head_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_2",
         "DropItemID": "Light_Body_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_2",
         "DropItemID": "Light_Leg_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_2",
         "DropItemID": "Light_Arm_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_2",
         "DropItemID": "Light_Foot_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_2",
         "DropItemID": "Cloth_Head_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_2",
         "DropItemID": "Cloth_Body_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_2",
         "DropItemID": "Cloth_Leg_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_2",
         "DropItemID": "Cloth_Arm_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_2",
         "DropItemID": "Cloth_Foot_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_2",
         "DropItemID": "Potion_Hp_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_2",
         "DropItemID": "Potion_Mp_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_2",
         "DropItemID": "Record_Reel_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_2",
         "DropItemID": "Booty_005",
         "Probability": 25,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_2",
         "DropItemID": "Booty_006",
         "Probability": 7.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       }
     ]
@@ -1796,224 +3506,224 @@
         "CodeID": "Monster_HardLabor_3",
         "DropItemID": "Sword_Right_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_3",
         "DropItemID": "Sword_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_3",
         "DropItemID": "Mage_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_3",
         "DropItemID": "Bow_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_3",
         "DropItemID": "Dagger_Single_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_3",
         "DropItemID": "Axe_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_3",
         "DropItemID": "Crossbow_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_3",
         "DropItemID": "Stick_Right_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_3",
         "DropItemID": "Hammer_Right_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_3",
         "DropItemID": "GiantMallet_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_3",
         "DropItemID": "Book_Left_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_3",
         "DropItemID": "Shield_Left_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_3",
         "DropItemID": "Heavy_Head_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_3",
         "DropItemID": "Heavy_Body_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_3",
         "DropItemID": "Heavy_Leg_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_3",
         "DropItemID": "Heavy_Arm_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_3",
         "DropItemID": "Heavy_Foot_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_3",
         "DropItemID": "Light_Head_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_3",
         "DropItemID": "Light_Body_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_3",
         "DropItemID": "Light_Leg_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_3",
         "DropItemID": "Light_Arm_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_3",
         "DropItemID": "Light_Foot_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_3",
         "DropItemID": "Cloth_Head_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_3",
         "DropItemID": "Cloth_Body_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_3",
         "DropItemID": "Cloth_Leg_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_3",
         "DropItemID": "Cloth_Arm_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_3",
         "DropItemID": "Cloth_Foot_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_3",
         "DropItemID": "Potion_Hp_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_3",
         "DropItemID": "Potion_Mp_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_3",
         "DropItemID": "Record_Reel_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_3",
         "DropItemID": "Booty_005",
         "Probability": 25,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_3",
         "DropItemID": "Booty_006",
         "Probability": 7.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       }
     ]
@@ -2028,224 +3738,224 @@
         "CodeID": "Monster_HardLabor_4",
         "DropItemID": "Sword_Right_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_4",
         "DropItemID": "Sword_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_4",
         "DropItemID": "Mage_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_4",
         "DropItemID": "Bow_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_4",
         "DropItemID": "Dagger_Single_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_4",
         "DropItemID": "Axe_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_4",
         "DropItemID": "Crossbow_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_4",
         "DropItemID": "Stick_Right_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_4",
         "DropItemID": "Hammer_Right_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_4",
         "DropItemID": "GiantMallet_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_4",
         "DropItemID": "Book_Left_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_4",
         "DropItemID": "Shield_Left_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_4",
         "DropItemID": "Heavy_Head_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_4",
         "DropItemID": "Heavy_Body_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_4",
         "DropItemID": "Heavy_Leg_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_4",
         "DropItemID": "Heavy_Arm_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_4",
         "DropItemID": "Heavy_Foot_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_4",
         "DropItemID": "Light_Head_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_4",
         "DropItemID": "Light_Body_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_4",
         "DropItemID": "Light_Leg_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_4",
         "DropItemID": "Light_Arm_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_4",
         "DropItemID": "Light_Foot_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_4",
         "DropItemID": "Cloth_Head_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_4",
         "DropItemID": "Cloth_Body_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_4",
         "DropItemID": "Cloth_Leg_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_4",
         "DropItemID": "Cloth_Arm_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_4",
         "DropItemID": "Cloth_Foot_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_4",
         "DropItemID": "Potion_Hp_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_4",
         "DropItemID": "Potion_Mp_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_4",
         "DropItemID": "Record_Reel_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_4",
         "DropItemID": "Booty_005",
         "Probability": 25,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_4",
         "DropItemID": "Booty_006",
         "Probability": 7.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       }
     ]
@@ -2260,224 +3970,224 @@
         "CodeID": "Monster_HardLabor_5",
         "DropItemID": "Sword_Right_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_5",
         "DropItemID": "Sword_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_5",
         "DropItemID": "Mage_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_5",
         "DropItemID": "Bow_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_5",
         "DropItemID": "Dagger_Single_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_5",
         "DropItemID": "Axe_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_5",
         "DropItemID": "Crossbow_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_5",
         "DropItemID": "Stick_Right_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_5",
         "DropItemID": "Hammer_Right_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_5",
         "DropItemID": "GiantMallet_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_5",
         "DropItemID": "Book_Left_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_5",
         "DropItemID": "Shield_Left_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_5",
         "DropItemID": "Heavy_Head_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_5",
         "DropItemID": "Heavy_Body_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_5",
         "DropItemID": "Heavy_Leg_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_5",
         "DropItemID": "Heavy_Arm_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_5",
         "DropItemID": "Heavy_Foot_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_5",
         "DropItemID": "Light_Head_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_5",
         "DropItemID": "Light_Body_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_5",
         "DropItemID": "Light_Leg_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_5",
         "DropItemID": "Light_Arm_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_5",
         "DropItemID": "Light_Foot_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_5",
         "DropItemID": "Cloth_Head_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_5",
         "DropItemID": "Cloth_Body_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_5",
         "DropItemID": "Cloth_Leg_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_5",
         "DropItemID": "Cloth_Arm_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_5",
         "DropItemID": "Cloth_Foot_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_5",
         "DropItemID": "Potion_Hp_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_5",
         "DropItemID": "Potion_Mp_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_5",
         "DropItemID": "Record_Reel_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_5",
         "DropItemID": "Booty_005",
         "Probability": 25,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_5",
         "DropItemID": "Booty_006",
         "Probability": 7.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       }
     ]
@@ -2492,224 +4202,224 @@
         "CodeID": "Monster_HardLabor_6",
         "DropItemID": "Sword_Right_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_6",
         "DropItemID": "Sword_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_6",
         "DropItemID": "Mage_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_6",
         "DropItemID": "Bow_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_6",
         "DropItemID": "Dagger_Single_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_6",
         "DropItemID": "Axe_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_6",
         "DropItemID": "Crossbow_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_6",
         "DropItemID": "Stick_Right_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_6",
         "DropItemID": "Hammer_Right_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_6",
         "DropItemID": "GiantMallet_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_6",
         "DropItemID": "Book_Left_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_6",
         "DropItemID": "Shield_Left_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_6",
         "DropItemID": "Heavy_Head_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_6",
         "DropItemID": "Heavy_Body_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_6",
         "DropItemID": "Heavy_Leg_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_6",
         "DropItemID": "Heavy_Arm_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_6",
         "DropItemID": "Heavy_Foot_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_6",
         "DropItemID": "Light_Head_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_6",
         "DropItemID": "Light_Body_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_6",
         "DropItemID": "Light_Leg_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_6",
         "DropItemID": "Light_Arm_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_6",
         "DropItemID": "Light_Foot_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_6",
         "DropItemID": "Cloth_Head_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_6",
         "DropItemID": "Cloth_Body_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_6",
         "DropItemID": "Cloth_Leg_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_6",
         "DropItemID": "Cloth_Arm_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_6",
         "DropItemID": "Cloth_Foot_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_6",
         "DropItemID": "Potion_Hp_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_6",
         "DropItemID": "Potion_Mp_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_6",
         "DropItemID": "Record_Reel_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_6",
         "DropItemID": "Booty_005",
         "Probability": 25,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_6",
         "DropItemID": "Booty_006",
         "Probability": 7.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       }
     ]
@@ -2724,224 +4434,224 @@
         "CodeID": "Monster_HardLabor_7",
         "DropItemID": "Sword_Right_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_7",
         "DropItemID": "Sword_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_7",
         "DropItemID": "Mage_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_7",
         "DropItemID": "Bow_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_7",
         "DropItemID": "Dagger_Single_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_7",
         "DropItemID": "Axe_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_7",
         "DropItemID": "Crossbow_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_7",
         "DropItemID": "Stick_Right_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_7",
         "DropItemID": "Hammer_Right_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_7",
         "DropItemID": "GiantMallet_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_7",
         "DropItemID": "Book_Left_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_7",
         "DropItemID": "Shield_Left_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_7",
         "DropItemID": "Heavy_Head_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_7",
         "DropItemID": "Heavy_Body_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_7",
         "DropItemID": "Heavy_Leg_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_7",
         "DropItemID": "Heavy_Arm_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_7",
         "DropItemID": "Heavy_Foot_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_7",
         "DropItemID": "Light_Head_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_7",
         "DropItemID": "Light_Body_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_7",
         "DropItemID": "Light_Leg_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_7",
         "DropItemID": "Light_Arm_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_7",
         "DropItemID": "Light_Foot_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_7",
         "DropItemID": "Cloth_Head_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_7",
         "DropItemID": "Cloth_Body_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_7",
         "DropItemID": "Cloth_Leg_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_7",
         "DropItemID": "Cloth_Arm_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_7",
         "DropItemID": "Cloth_Foot_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_7",
         "DropItemID": "Potion_Hp_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_7",
         "DropItemID": "Potion_Mp_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_7",
         "DropItemID": "Record_Reel_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_7",
         "DropItemID": "Booty_005",
         "Probability": 25,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_7",
         "DropItemID": "Booty_006",
         "Probability": 7.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       }
     ]
@@ -2956,224 +4666,224 @@
         "CodeID": "Monster_HardLabor_8",
         "DropItemID": "Sword_Right_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_8",
         "DropItemID": "Sword_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_8",
         "DropItemID": "Mage_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_8",
         "DropItemID": "Bow_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_8",
         "DropItemID": "Dagger_Single_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_8",
         "DropItemID": "Axe_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_8",
         "DropItemID": "Crossbow_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_8",
         "DropItemID": "Stick_Right_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_8",
         "DropItemID": "Hammer_Right_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_8",
         "DropItemID": "GiantMallet_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_8",
         "DropItemID": "Book_Left_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_8",
         "DropItemID": "Shield_Left_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_8",
         "DropItemID": "Heavy_Head_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_8",
         "DropItemID": "Heavy_Body_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_8",
         "DropItemID": "Heavy_Leg_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_8",
         "DropItemID": "Heavy_Arm_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_8",
         "DropItemID": "Heavy_Foot_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_8",
         "DropItemID": "Light_Head_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_8",
         "DropItemID": "Light_Body_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_8",
         "DropItemID": "Light_Leg_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_8",
         "DropItemID": "Light_Arm_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_8",
         "DropItemID": "Light_Foot_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_8",
         "DropItemID": "Cloth_Head_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_8",
         "DropItemID": "Cloth_Body_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_8",
         "DropItemID": "Cloth_Leg_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_8",
         "DropItemID": "Cloth_Arm_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_8",
         "DropItemID": "Cloth_Foot_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_8",
         "DropItemID": "Potion_Hp_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_8",
         "DropItemID": "Potion_Mp_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_8",
         "DropItemID": "Record_Reel_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_8",
         "DropItemID": "Booty_005",
         "Probability": 25,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_8",
         "DropItemID": "Booty_006",
         "Probability": 7.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       }
     ]
@@ -3188,224 +4898,224 @@
         "CodeID": "Monster_HardLabor_9",
         "DropItemID": "Sword_Right_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_9",
         "DropItemID": "Sword_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_9",
         "DropItemID": "Mage_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_9",
         "DropItemID": "Bow_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_9",
         "DropItemID": "Dagger_Single_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_9",
         "DropItemID": "Axe_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_9",
         "DropItemID": "Crossbow_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_9",
         "DropItemID": "Stick_Right_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_9",
         "DropItemID": "Hammer_Right_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_9",
         "DropItemID": "GiantMallet_Both_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_9",
         "DropItemID": "Book_Left_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_9",
         "DropItemID": "Shield_Left_005",
         "Probability": 3,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_9",
         "DropItemID": "Heavy_Head_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_9",
         "DropItemID": "Heavy_Body_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_9",
         "DropItemID": "Heavy_Leg_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_9",
         "DropItemID": "Heavy_Arm_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_9",
         "DropItemID": "Heavy_Foot_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_9",
         "DropItemID": "Light_Head_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_9",
         "DropItemID": "Light_Body_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_9",
         "DropItemID": "Light_Leg_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_9",
         "DropItemID": "Light_Arm_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_9",
         "DropItemID": "Light_Foot_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_9",
         "DropItemID": "Cloth_Head_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_9",
         "DropItemID": "Cloth_Body_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_9",
         "DropItemID": "Cloth_Leg_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_9",
         "DropItemID": "Cloth_Arm_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_9",
         "DropItemID": "Cloth_Foot_03",
         "Probability": 2.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_9",
         "DropItemID": "Potion_Hp_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_9",
         "DropItemID": "Potion_Mp_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_9",
         "DropItemID": "Record_Reel_01",
         "Probability": 15,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_9",
         "DropItemID": "Booty_005",
         "Probability": 25,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_9",
         "DropItemID": "Booty_006",
         "Probability": 7.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       }
     ]
@@ -3420,567 +5130,567 @@
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Heavy_Head_04",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Heavy_Body_04",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Heavy_Leg_04",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Heavy_Arm_04",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Heavy_Foot_04",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Heavy_Head_05",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Heavy_Body_05",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Heavy_Leg_05",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Heavy_Arm_05",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Heavy_Foot_05",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Heavy_Head_06",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Heavy_Body_06",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Heavy_Leg_06",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Heavy_Arm_06",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Heavy_Foot_06",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Light_Head_04",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Light_Body_04",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Light_Leg_04",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Light_Arm_04",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Light_Foot_04",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Light_Head_05",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Light_Body_05",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Light_Leg_05",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Light_Arm_05",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Light_Foot_05",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Light_Head_06",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Light_Body_06",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Light_Leg_06",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Light_Arm_06",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Light_Foot_06",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Cloth_Head_04",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Cloth_Body_04",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Cloth_Leg_04",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Cloth_Arm_04",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Cloth_Foot_04",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Cloth_Head_05",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Cloth_Body_05",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Cloth_Leg_05",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Cloth_Arm_05",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Cloth_Foot_05",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Cloth_Head_06",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Cloth_Body_06",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Cloth_Leg_06",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Cloth_Arm_06",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Cloth_Foot_06",
         "Probability": 1.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Sword_Right_005",
         "Probability": 10,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Sword_Both_005",
         "Probability": 10,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Mage_Both_005",
         "Probability": 10,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Bow_Both_005",
         "Probability": 10,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Dagger_Single_005",
         "Probability": 10,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Axe_Both_005",
         "Probability": 10,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Crossbow_Both_005",
         "Probability": 10,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Stick_Right_005",
         "Probability": 10,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Hammer_Right_005",
         "Probability": 10,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "GiantMallet_Both_005",
         "Probability": 10,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Book_Left_005",
         "Probability": 10,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Shield_Left_005",
         "Probability": 10,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Heavy_Head_03",
         "Probability": 7.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Heavy_Body_03",
         "Probability": 7.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Heavy_Leg_03",
         "Probability": 7.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Heavy_Arm_03",
         "Probability": 7.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Heavy_Foot_03",
         "Probability": 7.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Light_Head_03",
         "Probability": 7.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Light_Body_03",
         "Probability": 7.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Light_Leg_03",
         "Probability": 7.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Light_Arm_03",
         "Probability": 7.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Light_Foot_03",
         "Probability": 7.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Cloth_Head_03",
         "Probability": 7.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Cloth_Body_03",
         "Probability": 7.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Cloth_Leg_03",
         "Probability": 7.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Cloth_Arm_03",
         "Probability": 7.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Cloth_Foot_03",
         "Probability": 7.5,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Potion_Hp_01",
         "Probability": 15,
-        "DropCountMIn": 8,
+        "DropCountMin": 8,
         "DropCountMax": 12
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Potion_Mp_01",
         "Probability": 15,
-        "DropCountMIn": 5,
+        "DropCountMin": 5,
         "DropCountMax": 12
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Record_Reel_01",
         "Probability": 15,
-        "DropCountMIn": 5,
+        "DropCountMin": 5,
         "DropCountMax": 7
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Booty_005",
         "Probability": 25,
-        "DropCountMIn": 3,
+        "DropCountMin": 3,
         "DropCountMax": 5
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Booty_006",
         "Probability": 7.5,
-        "DropCountMIn": 2,
+        "DropCountMin": 2,
         "DropCountMax": 6
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Enhance_01",
         "Probability": 10,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Enhance_02",
         "Probability": 1,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Enhance_03",
         "Probability": 0.01,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       },
       {
         "CodeID": "Monster_HardLabor_10",
         "DropItemID": "Enhance_04",
         "Probability": 1,
-        "DropCountMIn": 1,
+        "DropCountMin": 1,
         "DropCountMax": 1
       }
     ]

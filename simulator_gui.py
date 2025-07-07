@@ -2,9 +2,10 @@
 import tkinter as tk
 from tkinter import ttk, messagebox, filedialog
 from typing import Dict, List
-from game_models import GameData, CharacterClass, Monster
+from game_models import GameData,SkillDataDic,MonstersDataDic,MonsterDropItemDic,ArmorsDic,WeaponsDic,ItemsDic,JobBonusDic,StatusFormulaDic,GameTextDataDic,GameSettingDic,AreaDataDic,ExpAndLvDic
 from battle_simulator import BattleSimulator, BattleCharacter
 from stats_analyzer import StatsAnalyzer
+from status_operation import CharacterStatusCalculator
 
 class BattleSimulatorGUI:
     def __init__(self, root):
@@ -39,7 +40,7 @@ class BattleSimulatorGUI:
         # 職業選擇
         ttk.Label(player_frame, text="職業:").grid(row=1, column=0, sticky=tk.W)
         self.class_var = tk.StringVar()
-        classes = [c.name for c in self.game_data.classes.values()]
+        classes = [c.Job for c in self.game_data.JobBonusDic.values()]
         ttk.Combobox(player_frame, textvariable=self.class_var, values=classes).grid(row=1, column=1)
         if classes:
             self.class_var.set(classes[0])
@@ -62,7 +63,7 @@ class BattleSimulatorGUI:
         # 怪物選擇
         ttk.Label(enemy_frame, text="選擇怪物:").grid(row=1, column=0, sticky=tk.W)
         self.monster_var = tk.StringVar()
-        monsters = [m.name for m in self.game_data.monsters.values()]
+        monsters = [m.MonsterCodeID for m in self.game_data.MonstersDataDic.values()]
         self.monster_combobox = ttk.Combobox(enemy_frame, textvariable=self.monster_var, values=monsters)
         self.monster_combobox.grid(row=1, column=1, columnspan=2)
         if monsters:
@@ -90,22 +91,22 @@ class BattleSimulatorGUI:
     def start_battle(self):
         # 創建玩家角色
         class_name = self.class_var.get()
-        char_class = next((c for c in self.game_data.classes.values() if c.name == class_name), None)
+        jobBonusData = next((c for c in self.game_data.JobBonusDic.values() if c.Job == class_name), None)
         
-        if not char_class:
+        if not jobBonusData:
             messagebox.showerror("錯誤", "請選擇有效的職業")
             return
         
         self.player_character = self.create_character(
             name=self.player_name.get(),
-            char_class=char_class,
+            jobBonusData=jobBonusData,
             level=self.level_var.get()
         )
-        
+
         # 創建敵人
         if self.enemy_type_var.get() == "monster":
             monster_name = self.monster_var.get()
-            monster = next((m for m in self.game_data.monsters.values() if m.name == monster_name), None)
+            monster = next((m for m in self.game_data.MonstersDataDic.values() if m.MonsterCodeID == monster_name), None)
             
             if not monster:
                 messagebox.showerror("錯誤", "請選擇有效的怪物")
@@ -116,7 +117,7 @@ class BattleSimulatorGUI:
             # 創建敵對玩家
             self.enemy_character = self.create_character(
                 name="敵對玩家",
-                char_class=char_class,  # 使用相同的職業
+                jobBonusData=jobBonusData,  # 使用相同的職業
                 level=self.level_var.get()
             )
         
@@ -138,50 +139,51 @@ class BattleSimulatorGUI:
             "result": result
         }
     
-    def create_character(self, name: str, char_class: CharacterClass, level: int) -> BattleCharacter:
+    def create_character(self, name: str, jobBonusData, level: int) -> BattleCharacter:
         # 根據職業和等級計算屬性
-        stats = {
-            "hp": char_class.base_hp * level,
-            "mp": char_class.base_mp * level,
-            "attack": char_class.base_attack * level,
-            "defense": char_class.base_defense * level,
-            "magic_attack": char_class.base_magic_attack * level,
-            "magic_defense": char_class.base_magic_defense * level
-        }
+        calculator = CharacterStatusCalculator(
+        player_data=None,  # 用 .create_character() 自行創建
+        weapon_list=[],
+        armor_list=[],
+        game_data=self.game_data
+        )
+        character_data = calculator.create_character(name, jobBonusData, level)
         
         # 獲取技能
-        skills = [self.game_data.skills[skill_id] for skill_id in char_class.available_skills 
-                 if skill_id in self.game_data.skills]
+        skills = [
+                skill
+                for skill in self.game_data.SkillDataDic.values()
+                if skill.Job == jobBonusData.Job and skill.Characteristic is True
+]    
         
         return BattleCharacter(
-            name=name,
-            char_class=char_class,
-            level=level,
-            stats=stats,
-            equipped_weapon=None,
-            equipped_armor=None,
-            skills=skills,
-            items=[]
+        name=character_data["name"],
+        level=character_data["level"],
+        jobBonusData=jobBonusData,
+        stats=character_data["stats"],
+        skills=skills,
+        items=[],
+        equipped_weapon=None,
+        equipped_armor=None
         )
     
-    def create_monster_character(self, monster: Monster) -> BattleCharacter:
+    def create_monster_character(self, monster) -> BattleCharacter:
         # 將怪物轉換為戰鬥角色
         stats = {
-            "hp": monster.hp,
-            "mp": 100,  # 示例值
-            "attack": monster.attack,
-            "defense": monster.defense,
-            "magic_attack": monster.magic_attack,
-            "magic_defense": monster.magic_defense
+            "hp": monster.HP,
+            "mp": monster.MP,  # 示例值
+            "attack": monster.MeleeATK,
+            "defense": monster.DEF,
+            "magic_attack": monster.MageATK,
+            "magic_defense": monster.MDEF
         }
         
-        skills = [self.game_data.skills[skill_id] for skill_id in monster.skills 
-                 if skill_id in self.game_data.skills]
+        skills = monster.MonsterSkillList
         
         return BattleCharacter(
-            name=monster.name,
-            char_class=None,
-            level=monster.level,
+            name=monster.MonsterCodeID,
+            jobBonusData=None,
+            level=monster.Lv,
             stats=stats,
             equipped_weapon=None,
             equipped_armor=None,

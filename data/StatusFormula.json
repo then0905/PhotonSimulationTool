@@ -8,7 +8,7 @@
     "AGI": 0,
     "VIT": 0,
     "WIS": 0,
-    "LvCodition": 0.3
+    "LvCondition": 0.3
   },
   {
     "TargetStatus": "MeleeATK",
@@ -19,7 +19,7 @@
     "AGI": 0,
     "VIT": 0,
     "WIS": 0,
-    "LvCodition": 0.25
+    "LvCondition": 0.25
   },
   {
     "TargetStatus": "MeleeATK",
@@ -30,7 +30,7 @@
     "AGI": 0,
     "VIT": 0,
     "WIS": 0,
-    "LvCodition": 0.25
+    "LvCondition": 0.25
   },
   {
     "TargetStatus": "RemoteATK",
@@ -41,7 +41,7 @@
     "AGI": 0,
     "VIT": 0,
     "WIS": 0,
-    "LvCodition": 0.3
+    "LvCondition": 0.3
   },
   {
     "TargetStatus": "RemoteATK",
@@ -52,7 +52,7 @@
     "AGI": 0,
     "VIT": 0,
     "WIS": 0,
-    "LvCodition": 0.3
+    "LvCondition": 0.3
   },
   {
     "TargetStatus": "RemoteATK",
@@ -63,7 +63,7 @@
     "AGI": 0,
     "VIT": 0,
     "WIS": 0,
-    "LvCodition": 0.25
+    "LvCondition": 0.25
   },
   {
     "TargetStatus": "MageATK",
@@ -74,7 +74,7 @@
     "AGI": 0,
     "VIT": 0,
     "WIS": 0,
-    "LvCodition": 0.2
+    "LvCondition": 0.2
   },
   {
     "TargetStatus": "MageATK",
@@ -85,7 +85,7 @@
     "AGI": 0,
     "VIT": 0,
     "WIS": 0,
-    "LvCodition": 0.25
+    "LvCondition": 0.25
   },
   {
     "TargetStatus": "MageATK",
@@ -96,7 +96,7 @@
     "AGI": 0,
     "VIT": 0,
     "WIS": 0,
-    "LvCodition": 0.3
+    "LvCondition": 0.3
   },
   {
     "TargetStatus": "HP",
@@ -107,7 +107,7 @@
     "AGI": 0,
     "VIT": 1.5,
     "WIS": 0,
-    "LvCodition": 10.5
+    "LvCondition": 10.5
   },
   {
     "TargetStatus": "HP",
@@ -118,7 +118,7 @@
     "AGI": 0,
     "VIT": 1.3,
     "WIS": 0,
-    "LvCodition": 10.3
+    "LvCondition": 10.3
   },
   {
     "TargetStatus": "HP",
@@ -129,7 +129,7 @@
     "AGI": 0,
     "VIT": 1.2,
     "WIS": 0,
-    "LvCodition": 10.2
+    "LvCondition": 10.2
   },
   {
     "TargetStatus": "MP",
@@ -140,7 +140,7 @@
     "AGI": 0,
     "VIT": 0,
     "WIS": 0,
-    "LvCodition": 9.8
+    "LvCondition": 9.8
   },
   {
     "TargetStatus": "MP",
@@ -151,7 +151,7 @@
     "AGI": 0,
     "VIT": 0,
     "WIS": 0,
-    "LvCodition": 10
+    "LvCondition": 10
   },
   {
     "TargetStatus": "MP",
@@ -162,7 +162,7 @@
     "AGI": 0,
     "VIT": 0,
     "WIS": 0,
-    "LvCodition": 10.4
+    "LvCondition": 10.4
   },
   {
     "TargetStatus": "DEF",
@@ -173,7 +173,7 @@
     "AGI": 0,
     "VIT": 1.1,
     "WIS": 0,
-    "LvCodition": 0.25
+    "LvCondition": 0.25
   },
   {
     "TargetStatus": "DEF",
@@ -184,7 +184,7 @@
     "AGI": 0,
     "VIT": 1.1,
     "WIS": 0,
-    "LvCodition": 0.25
+    "LvCondition": 0.25
   },
   {
     "TargetStatus": "DEF",
@@ -195,7 +195,7 @@
     "AGI": 0,
     "VIT": 1.1,
     "WIS": 0,
-    "LvCodition": 0.25
+    "LvCondition": 0.25
   },
   {
     "TargetStatus": "Avoid",
@@ -206,7 +206,7 @@
     "AGI": 1,
     "VIT": 0,
     "WIS": 0,
-    "LvCodition": 0
+    "LvCondition": 0
   },
   {
     "TargetStatus": "Avoid",
@@ -217,7 +217,7 @@
     "AGI": 1.1,
     "VIT": 0,
     "WIS": 0,
-    "LvCodition": 0
+    "LvCondition": 0
   },
   {
     "TargetStatus": "Avoid",
@@ -228,7 +228,7 @@
     "AGI": 1,
     "VIT": 0,
     "WIS": 0,
-    "LvCodition": 0
+    "LvCondition": 0
   },
   {
     "TargetStatus": "MeleeHit",
@@ -239,7 +239,7 @@
     "AGI": 0.6,
     "VIT": 0,
     "WIS": 0,
-    "LvCodition": 1
+    "LvCondition": 1
   },
   {
     "TargetStatus": "MeleeHit",
@@ -250,7 +250,7 @@
     "AGI": 0.6,
     "VIT": 0,
     "WIS": 0,
-    "LvCodition": 1
+    "LvCondition": 1
   },
   {
     "TargetStatus": "MeleeHit",
@@ -261,7 +261,7 @@
     "AGI": 0.55,
     "VIT": 0,
     "WIS": 0,
-    "LvCodition": 1
+    "LvCondition": 1
   },
   {
     "TargetStatus": "RemoteHit",
@@ -272,7 +272,7 @@
     "AGI": 0.6,
     "VIT": 0,
     "WIS": 0,
-    "LvCodition": 1
+    "LvCondition": 1
   },
   {
     "TargetStatus": "RemoteHit",
@@ -283,7 +283,7 @@
     "AGI": 0.7,
     "VIT": 0,
     "WIS": 0,
-    "LvCodition": 1
+    "LvCondition": 1
   },
   {
     "TargetStatus": "RemoteHit",
@@ -294,7 +294,7 @@
     "AGI": 0.6,
     "VIT": 0,
     "WIS": 0,
-    "LvCodition": 1
+    "LvCondition": 1
   },
   {
     "TargetStatus": "MageHit",
@@ -305,7 +305,7 @@
     "AGI": 0.55,
     "VIT": 0,
     "WIS": 0,
-    "LvCodition": 1
+    "LvCondition": 1
   },
   {
     "TargetStatus": "MageHit",
@@ -316,7 +316,7 @@
     "AGI": 0.6,
     "VIT": 0,
     "WIS": 0,
-    "LvCodition": 1
+    "LvCondition": 1
   },
   {
     "TargetStatus": "MageHit",
@@ -327,7 +327,7 @@
     "AGI": 0.75,
     "VIT": 0,
     "WIS": 0,
-    "LvCodition": 1
+    "LvCondition": 1
   },
   {
     "TargetStatus": "MDEF",
@@ -338,7 +338,7 @@
     "AGI": 0,
     "VIT": 0.8,
     "WIS": 1.2,
-    "LvCodition": 0
+    "LvCondition": 0
   },
   {
     "TargetStatus": "MDEF",
@@ -349,7 +349,7 @@
     "AGI": 0,
     "VIT": 1,
     "WIS": 1.2,
-    "LvCodition": 0
+    "LvCondition": 0
   },
   {
     "TargetStatus": "MDEF",
@@ -360,7 +360,7 @@
     "AGI": 0,
     "VIT": 1,
     "WIS": 1.5,
-    "LvCodition": 0
+    "LvCondition": 0
   },
   {
     "TargetStatus": "DamageReduction",
@@ -371,7 +371,7 @@
     "AGI": 0,
     "VIT": 0.1,
     "WIS": 0,
-    "LvCodition": 0
+    "LvCondition": 0
   },
   {
     "TargetStatus": "DamageReduction",
@@ -382,7 +382,7 @@
     "AGI": 0,
     "VIT": 0.1,
     "WIS": 0,
-    "LvCodition": 0
+    "LvCondition": 0
   },
   {
     "TargetStatus": "DamageReduction",
@@ -393,7 +393,7 @@
     "AGI": 0,
     "VIT": 0.1,
     "WIS": 0,
-    "LvCodition": 0
+    "LvCondition": 0
   },
   {
     "TargetStatus": "ElementDamageIncrease",
@@ -404,7 +404,7 @@
     "AGI": 0,
     "VIT": 0,
     "WIS": 0,
-    "LvCodition": 0
+    "LvCondition": 0
   },
   {
     "TargetStatus": "ElementDamageIncrease",
@@ -415,7 +415,7 @@
     "AGI": 0,
     "VIT": 0,
     "WIS": 0,
-    "LvCodition": 0
+    "LvCondition": 0
   },
   {
     "TargetStatus": "ElementDamageIncrease",
@@ -426,7 +426,7 @@
     "AGI": 0,
     "VIT": 0,
     "WIS": 0,
-    "LvCodition": 0
+    "LvCondition": 0
   },
   {
     "TargetStatus": "ElementDamageReduction",
@@ -437,7 +437,7 @@
     "AGI": 0,
     "VIT": 0,
     "WIS": 0.15,
-    "LvCodition": 0
+    "LvCondition": 0
   },
   {
     "TargetStatus": "ElementDamageReduction",
@@ -448,7 +448,7 @@
     "AGI": 0,
     "VIT": 0,
     "WIS": 0.2,
-    "LvCodition": 0
+    "LvCondition": 0
   },
   {
     "TargetStatus": "ElementDamageReduction",
@@ -459,7 +459,7 @@
     "AGI": 0,
     "VIT": 0,
     "WIS": 0.28,
-    "LvCodition": 0
+    "LvCondition": 0
   },
   {
     "TargetStatus": "HP_Recovery",
@@ -470,7 +470,7 @@
     "AGI": 0,
     "VIT": 0.5,
     "WIS": 0,
-    "LvCodition": 0.3
+    "LvCondition": 0.3
   },
   {
     "TargetStatus": "HP_Recovery",
@@ -481,7 +481,7 @@
     "AGI": 0,
     "VIT": 0.375,
     "WIS": 0,
-    "LvCodition": 0.25
+    "LvCondition": 0.25
   },
   {
     "TargetStatus": "HP_Recovery",
@@ -492,7 +492,7 @@
     "AGI": 0,
     "VIT": 0.3,
     "WIS": 0,
-    "LvCodition": 0.1
+    "LvCondition": 0.1
   },
   {
     "TargetStatus": "MP_Recovery",
@@ -503,7 +503,7 @@
     "AGI": 0,
     "VIT": 0,
     "WIS": 0.1,
-    "LvCodition": 0.1
+    "LvCondition": 0.1
   },
   {
     "TargetStatus": "MP_Recovery",
@@ -514,7 +514,7 @@
     "AGI": 0,
     "VIT": 0,
     "WIS": 0.35,
-    "LvCodition": 0.25
+    "LvCondition": 0.25
   },
   {
     "TargetStatus": "MP_Recovery",
@@ -525,6 +525,6 @@
     "AGI": 0,
     "VIT": 0,
     "WIS": 0.78,
-    "LvCodition": 0.3
+    "LvCondition": 0.3
   }
 ]

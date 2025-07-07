@@ -1,0 +1,41 @@
+[
+  {
+    "TutorialID": "FirstEnterGame",
+    "SaveTutorialID": "FirstEnterGame",
+    "TutorialBasalSettingList": [
+      {
+        "TutorialID": "FirstEnterGame",
+        "TutorialDialog": "TM_FirstEnterGame_Dialog1",
+        "TutorialDialogFormat": [
+          "PlayerName"
+        ],
+        "DiaologPosX": 0,
+        "DiaologPosY": 0,
+        "ApertureEnable": false,
+        "ApertureIsSquare": false,
+        "ClickLock": false,
+        "ClickRadio": 0,
+        "TimeScaleStop": false
+      },
+      {
+        "TutorialID": "FirstEnterGame",
+        "TutorialDialog": "TM_FirstEnterGame_Dialog2",
+        "DiaologPosX": 0,
+        "DiaologPosY": 0,
+        "ApertureEnable": true,
+        "ApertureIsSquare": true,
+        "ClickLock": true,
+        "ClickRadio": 200,
+        "TimeScaleStop": false
+      }
+    ],
+    "TutorialIDList": [
+      {
+        "TutorialID": "FirstEnterGame",
+        "NotIncludedID": [
+          "FirstEnterGame"
+        ]
+      }
+    ]
+  }
+]

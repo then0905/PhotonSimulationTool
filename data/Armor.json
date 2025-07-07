@@ -36,7 +36,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Heavy_Head_01",
-        "ForgeConfigList": "訓練用金屬頭盔",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -334,7 +333,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Heavy_Body_01",
-        "ForgeConfigList": "訓練用金屬護甲",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -632,7 +630,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Heavy_Leg_01",
-        "ForgeConfigList": "訓練用金屬護腿",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -930,7 +927,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Heavy_Arm_01",
-        "ForgeConfigList": "訓練用金屬護手",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -1228,7 +1224,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Heavy_Foot_01",
-        "ForgeConfigList": "訓練用金屬長靴",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -1526,7 +1521,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Light_Head_01",
-        "ForgeConfigList": "訓練用輕便頭盔",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -1824,7 +1818,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Light_Body_01",
-        "ForgeConfigList": "訓練用輕便護甲",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -2122,7 +2115,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Light_Leg_01",
-        "ForgeConfigList": "訓練用輕便護腿",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -2420,7 +2412,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Light_Arm_01",
-        "ForgeConfigList": "訓練用輕便護手",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -2718,7 +2709,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Light_Foot_01",
-        "ForgeConfigList": "訓練用輕便短靴",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -3016,7 +3006,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Cloth_Head_01",
-        "ForgeConfigList": "訓練用布料頭箍",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -3314,7 +3303,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Cloth_Body_01",
-        "ForgeConfigList": "訓練用布料護甲",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -3612,7 +3600,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Cloth_Leg_01",
-        "ForgeConfigList": "訓練用布料護腿",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -3910,7 +3897,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Cloth_Arm_01",
-        "ForgeConfigList": "訓練用布料護手",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -4208,7 +4194,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Cloth_Foot_01",
-        "ForgeConfigList": "訓練用布料靴",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -4506,7 +4491,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Heavy_Head_02",
-        "ForgeConfigList": "重金屬頭盔",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -4804,7 +4788,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Heavy_Body_02",
-        "ForgeConfigList": "重金屬護甲",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -5102,7 +5085,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Heavy_Leg_02",
-        "ForgeConfigList": "重金屬護腿",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -5400,7 +5382,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Heavy_Arm_02",
-        "ForgeConfigList": "重金屬護手",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -5698,7 +5679,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Heavy_Foot_02",
-        "ForgeConfigList": "重金屬長靴",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -5996,7 +5976,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Light_Head_02",
-        "ForgeConfigList": "野獸皮頭盔",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -6294,7 +6273,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Light_Body_02",
-        "ForgeConfigList": "野獸皮護甲",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -6592,7 +6570,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Light_Leg_02",
-        "ForgeConfigList": "野獸皮護腿",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -6890,7 +6867,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Light_Arm_02",
-        "ForgeConfigList": "野獸皮護手",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -7188,7 +7164,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Light_Foot_02",
-        "ForgeConfigList": "野獸皮短靴",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -7486,7 +7461,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Cloth_Head_02",
-        "ForgeConfigList": "高質布頭盔",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -7784,7 +7758,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Cloth_Body_02",
-        "ForgeConfigList": "高質布外衣",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -8082,7 +8055,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Cloth_Leg_02",
-        "ForgeConfigList": "高質布護腿",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -8380,7 +8352,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Cloth_Arm_02",
-        "ForgeConfigList": "高質布護手",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -8678,7 +8649,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Cloth_Foot_02",
-        "ForgeConfigList": "高質布靴",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -8976,7 +8946,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Heavy_Head_03",
-        "ForgeConfigList": "青銅頭盔",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -9274,7 +9243,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Heavy_Body_03",
-        "ForgeConfigList": "青銅護甲",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -9572,7 +9540,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Heavy_Leg_03",
-        "ForgeConfigList": "青銅護腿",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -9870,7 +9837,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Heavy_Arm_03",
-        "ForgeConfigList": "青銅護手",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -10168,7 +10134,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Heavy_Foot_03",
-        "ForgeConfigList": "青銅長靴",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -10466,7 +10431,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Light_Head_03",
-        "ForgeConfigList": "精皮革頭盔",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -10764,7 +10728,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Light_Body_03",
-        "ForgeConfigList": "精皮革護甲",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -11062,7 +11025,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Light_Leg_03",
-        "ForgeConfigList": "精皮革護腿",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -11360,7 +11322,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Light_Arm_03",
-        "ForgeConfigList": "精皮革護手",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -11658,7 +11619,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Light_Foot_03",
-        "ForgeConfigList": "精皮革短靴",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -11956,7 +11916,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Cloth_Head_03",
-        "ForgeConfigList": "蠶絲布頭箍",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -12254,7 +12213,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Cloth_Body_03",
-        "ForgeConfigList": "蠶絲布護甲",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -12552,7 +12510,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Cloth_Leg_03",
-        "ForgeConfigList": "蠶絲布護腿",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -12850,7 +12807,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Cloth_Arm_03",
-        "ForgeConfigList": "蠶絲布護手",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -13148,7 +13104,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Cloth_Foot_03",
-        "ForgeConfigList": "蠶絲布靴",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -13446,7 +13401,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Heavy_Head_04",
-        "ForgeConfigList": "伊卡洛黃金頭盔",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -13744,7 +13698,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Heavy_Body_04",
-        "ForgeConfigList": "伊卡洛黃金鎧甲",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -14042,7 +13995,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Heavy_Leg_04",
-        "ForgeConfigList": "伊卡洛黃金護腿",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -14340,7 +14292,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Heavy_Arm_04",
-        "ForgeConfigList": "伊卡洛黃金護手",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -14638,7 +14589,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Heavy_Foot_04",
-        "ForgeConfigList": "伊卡洛黃金長靴",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -14936,7 +14886,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Heavy_Head_05",
-        "ForgeConfigList": "崔西斯合金頭盔",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -15234,7 +15183,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Heavy_Body_05",
-        "ForgeConfigList": "崔西斯合金鎧甲",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -15532,7 +15480,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Heavy_Leg_05",
-        "ForgeConfigList": "崔西斯合金護腿",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -15830,7 +15777,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Heavy_Arm_05",
-        "ForgeConfigList": "崔西斯合金護手",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -16128,7 +16074,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Heavy_Foot_05",
-        "ForgeConfigList": "崔西斯合金長靴",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -16426,7 +16371,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Heavy_Head_06",
-        "ForgeConfigList": "卡倫迪歐琥珀頭盔",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -16724,7 +16668,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Heavy_Body_06",
-        "ForgeConfigList": "卡倫迪歐琥珀鎧甲",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -17022,7 +16965,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Heavy_Leg_06",
-        "ForgeConfigList": "卡倫迪歐琥珀護腿",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -17320,7 +17262,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Heavy_Arm_06",
-        "ForgeConfigList": "卡倫迪歐琥珀護手",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -17618,7 +17559,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Heavy_Foot_06",
-        "ForgeConfigList": "卡倫迪歐琥珀長靴",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -17916,7 +17856,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Light_Head_04",
-        "ForgeConfigList": "西拉爾疾風頭盔",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -18214,7 +18153,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Light_Body_04",
-        "ForgeConfigList": "西拉爾疾風護甲",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -18512,7 +18450,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Light_Leg_04",
-        "ForgeConfigList": "西拉爾疾風脛甲",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -18810,7 +18747,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Light_Arm_04",
-        "ForgeConfigList": "西拉爾疾風護手",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -19108,7 +19044,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Light_Foot_04",
-        "ForgeConfigList": "西拉爾疾風跑鞋",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -19406,7 +19341,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Light_Head_05",
-        "ForgeConfigList": "崔西斯苦痛頭盔",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -19704,7 +19638,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Light_Body_05",
-        "ForgeConfigList": "崔西斯苦痛護甲",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -20002,7 +19935,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Light_Leg_05",
-        "ForgeConfigList": "崔西斯苦痛脛甲",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -20300,7 +20232,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Light_Arm_05",
-        "ForgeConfigList": "崔西斯苦痛護手",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -20598,7 +20529,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Light_Foot_05",
-        "ForgeConfigList": "崔西斯苦痛短靴",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -20896,7 +20826,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Light_Head_06",
-        "ForgeConfigList": "洛哥尼野性頭盔",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -21194,7 +21123,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Light_Body_06",
-        "ForgeConfigList": "洛哥尼野性脛甲",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -21492,7 +21420,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Light_Leg_06",
-        "ForgeConfigList": "洛哥尼野性護腿",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -21790,7 +21717,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Light_Arm_06",
-        "ForgeConfigList": "洛哥尼野性護手",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -22088,7 +22014,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Light_Foot_06",
-        "ForgeConfigList": "洛哥尼野性短靴",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -22386,7 +22311,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Cloth_Head_04",
-        "ForgeConfigList": "莉娜魯多奉獻頭箍",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -22684,7 +22608,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Cloth_Body_04",
-        "ForgeConfigList": "莉娜魯多奉獻外衣",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -22982,7 +22905,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Cloth_Leg_04",
-        "ForgeConfigList": "莉娜魯多奉獻護腿",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -23280,7 +23202,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Cloth_Arm_04",
-        "ForgeConfigList": "莉娜魯多奉獻護手",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -23578,7 +23499,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Cloth_Foot_04",
-        "ForgeConfigList": "莉娜魯多奉獻長靴",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -23876,7 +23796,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Cloth_Head_05",
-        "ForgeConfigList": "崔西斯惡語頭箍",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -24174,7 +24093,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Cloth_Body_05",
-        "ForgeConfigList": "崔西斯惡語外衣",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -24472,7 +24390,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Cloth_Leg_05",
-        "ForgeConfigList": "崔西斯惡語護腿",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -24770,7 +24687,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Cloth_Arm_05",
-        "ForgeConfigList": "崔西斯惡語手套",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -25068,7 +24984,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Cloth_Foot_05",
-        "ForgeConfigList": "崔西斯惡語長靴",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -25366,7 +25281,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Cloth_Head_06",
-        "ForgeConfigList": "卡歐斯混亂頭箍",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -25664,7 +25578,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Cloth_Body_06",
-        "ForgeConfigList": "卡歐斯混亂長袍",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -25962,7 +25875,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Cloth_Leg_06",
-        "ForgeConfigList": "卡歐斯混亂長襪",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -26260,7 +26172,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Cloth_Arm_06",
-        "ForgeConfigList": "卡歐斯混亂手套",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
@@ -26558,7 +26469,6 @@
     "ForgeConfigList": [
       {
         "CodeID": "Cloth_Foot_06",
-        "ForgeConfigList": "卡歐斯混亂長靴",
         "ForgeLv": 1,
         "SuccessProbability": 90,
         "SuperiorSuccessProbability": 100,
