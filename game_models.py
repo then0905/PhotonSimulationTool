@@ -310,9 +310,12 @@ AreaDataDic: Dict[str, AreaData] = {}
 ExpAndLvDic: Dict[int, LvAndExpDataModel] = {}    
 
 class GameData:
+    Instance = None
+    
     def __init__(self, data_dir="data"):
         self.data_dir = data_dir
         self.load_data()
+        GameData.Instance = self
 
     def load_data(self):
         # 加載所有JSON數據
@@ -433,11 +436,12 @@ class GameData:
                 "StatusText.json",
                 "WeaponText.json"
         ]
+        self.GameTextDataDic = {}
         for file in TextJsonFile:
                 try:
                     with open(f"data/{file}", encoding="utf-8") as f:
                         data = json.load(f)
-                        GameTextDataDic.update({
+                        self.GameTextDataDic.update({
                             item["TextID"]: GameText(**item)
                             for item in data
                         })

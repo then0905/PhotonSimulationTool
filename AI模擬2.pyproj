@@ -20,6 +20,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="battle_simulator.py" />
+    <Compile Include="commonfunction.py" />
     <Compile Include="formula_parser.py" />
     <Compile Include="game_models.py" />
     <Compile Include="simulator_gui.py" />

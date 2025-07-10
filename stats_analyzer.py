@@ -1,7 +1,13 @@
 ﻿import matplotlib.pyplot as plt
+import seaborn as sns
 from typing import List, Dict
+from commonfunction import CommonFunction
 
 class StatsAnalyzer:
+    # seaborn通常對中文支援較好
+    sns.set_style("whitegrid")
+    plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei']
+    
     @staticmethod
     def plot_damage_distribution(damage_data: List[Dict], title="傷害分布"):
         damages = [d["damage"] for d in damage_data]
@@ -15,7 +21,9 @@ class StatsAnalyzer:
     
     @staticmethod
     def plot_skill_usage(skill_usage: Dict[str, int], title="技能使用頻率"):
-        skills = list(skill_usage.keys())
+        skills = list()
+        for skill in list(skill_usage.keys()):
+            skills.append(CommonFunction.get_text(skill));
         counts = list(skill_usage.values())
         
         plt.figure(figsize=(10, 5))

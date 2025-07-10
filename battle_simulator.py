@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from game_models import SkillData, MonsterDataModel, MonsterDropItemDataModel, ArmorDataModel, WeaponDataModel,ItemDataModel,JobBonusDataModel,StatusFormulaDataModel,GameText,GameSettingDataModel,AreaData,LvAndExpDataModel
 from formula_parser import FormulaParser
 from typing import Tuple
+from commonfunction import CommonFunction
 
 @dataclass
 class BattleCharacter:
@@ -41,7 +42,7 @@ class BattleCharacter:
         target.stats["hp"] -= damage
         self.stats["mp"] -= skill.CastMage
         
-        return f"{self.name} 使用 {skill.Name} 對 {target.name} 造成 {damage} 傷害！", damage
+        return f" <color=#00ffdc>{self.name}</color> 使用 <color=#ff9300>{CommonFunction.get_text(skill.Name)}</color> 對  <color=#83ff00>{target.name}</color> 造成 <color=#ff0000>{damage}</color> 傷害！", damage
 
 class BattleSimulator:
     def __init__(self, game_data):

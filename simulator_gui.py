@@ -1,11 +1,12 @@
 ﻿# -*- coding: utf-8 -*-
 import tkinter as tk
-from tkinter import ttk, messagebox, filedialog
-from typing import Dict, List
-from game_models import GameData,SkillDataDic,MonstersDataDic,MonsterDropItemDic,ArmorsDic,WeaponsDic,ItemsDic,JobBonusDic,StatusFormulaDic,GameTextDataDic,GameSettingDic,AreaDataDic,ExpAndLvDic
+from tkinter import ttk, messagebox
+from game_models import GameData
 from battle_simulator import BattleSimulator, BattleCharacter
+# import imp
 from stats_analyzer import StatsAnalyzer
 from status_operation import CharacterStatusCalculator
+from commonfunction import CommonFunction
 
 class BattleSimulatorGUI:
     def __init__(self, root):
@@ -40,7 +41,7 @@ class BattleSimulatorGUI:
         # 職業選擇
         ttk.Label(player_frame, text="職業:").grid(row=1, column=0, sticky=tk.W)
         self.class_var = tk.StringVar()
-        classes = [c.Job for c in self.game_data.JobBonusDic.values()]
+        classes = [c.Job for c in GameData.Instance.JobBonusDic.values()]
         ttk.Combobox(player_frame, textvariable=self.class_var, values=classes).grid(row=1, column=1)
         if classes:
             self.class_var.set(classes[0])
@@ -63,7 +64,7 @@ class BattleSimulatorGUI:
         # 怪物選擇
         ttk.Label(enemy_frame, text="選擇怪物:").grid(row=1, column=0, sticky=tk.W)
         self.monster_var = tk.StringVar()
-        monsters = [m.MonsterCodeID for m in self.game_data.MonstersDataDic.values()]
+        monsters = [m.MonsterCodeID for m in GameData.Instance.MonstersDataDic.values()]
         self.monster_combobox = ttk.Combobox(enemy_frame, textvariable=self.monster_var, values=monsters)
         self.monster_combobox.grid(row=1, column=1, columnspan=2)
         if monsters:
@@ -91,7 +92,7 @@ class BattleSimulatorGUI:
     def start_battle(self):
         # 創建玩家角色
         class_name = self.class_var.get()
-        jobBonusData = next((c for c in self.game_data.JobBonusDic.values() if c.Job == class_name), None)
+        jobBonusData = next((c for c in GameData.Instance.JobBonusDic.values() if c.Job == class_name), None)
         
         if not jobBonusData:
             messagebox.showerror("錯誤", "請選擇有效的職業")
@@ -106,7 +107,7 @@ class BattleSimulatorGUI:
         # 創建敵人
         if self.enemy_type_var.get() == "monster":
             monster_name = self.monster_var.get()
-            monster = next((m for m in self.game_data.MonstersDataDic.values() if m.MonsterCodeID == monster_name), None)
+            monster = next((m for m in GameData.Instance.MonstersDataDic.values() if m.MonsterCodeID == monster_name), None)
             
             if not monster:
                 messagebox.showerror("錯誤", "請選擇有效的怪物")
@@ -120,17 +121,17 @@ class BattleSimulatorGUI:
                 jobBonusData=jobBonusData,  # 使用相同的職業
                 level=self.level_var.get()
             )
-        
+
         # 進行戰鬥模擬
-        simulator = BattleSimulator(self.game_data)
+        simulator = BattleSimulator(GameData.Instance)
         result = simulator.simulate_battle(self.player_character, self.enemy_character)
         self.battle_results.append(result)
         
         # 顯示戰鬥日誌
-        self.log_text.config(state=tk.NORMAL)
-        self.log_text.delete(1.0, tk.END)
-        self.log_text.insert(tk.END, "\n".join(simulator.get_battle_log()))
-        self.log_text.config(state=tk.DISABLED)
+        # self.log_text.config(state=tk.NORMAL)
+        # self.log_text.delete(1.0, tk.END)
+        self.display_battle_log(simulator.get_battle_log())
+        # self.log_text.config(state=tk.DISABLED)
         
         # 保存戰鬥數據用於統計
         self.last_battle_data = {
@@ -145,14 +146,14 @@ class BattleSimulatorGUI:
         player_data=None,  # 用 .create_character() 自行創建
         weapon_list=[],
         armor_list=[],
-        game_data=self.game_data
+        game_data=GameData.Instance
         )
         character_data = calculator.create_character(name, jobBonusData, level)
         
         # 獲取技能
         skills = [
                 skill
-                for skill in self.game_data.SkillDataDic.values()
+                for skill in GameData.Instance.SkillDataDic.values()
                 if skill.Job == jobBonusData.Job and skill.Characteristic is True
 ]    
         
@@ -181,7 +182,7 @@ class BattleSimulatorGUI:
         skills = monster.MonsterSkillList
         
         return BattleCharacter(
-            name=monster.MonsterCodeID,
+            name=CommonFunction.get_text(f"TM_{monster.MonsterCodeID}_Name"),
             jobBonusData=None,
             level=monster.Lv,
             stats=stats,
@@ -212,6 +213,44 @@ class BattleSimulatorGUI:
         
         win_rate = StatsAnalyzer.calculate_win_rate(self.battle_results)
         messagebox.showinfo("勝率統計", f"當前勝率: {win_rate*100:.1f}% ({sum(self.battle_results)}勝/{len(self.battle_results)}場)")
+    
+    def display_battle_log(self, log_lines):
+        self.log_text.config(state=tk.NORMAL)
+        self.log_text.delete(1.0, tk.END)
+
+        for line in log_lines:
+            self._insert_colored_log(line)
+
+        self.log_text.config(state=tk.DISABLED)        
+
+    def _insert_colored_log(self, log_line: str):
+        """
+        將含有 <color=#xxxxxx>...</color> 的字串，動態解析顏色並套用 tkinter 標籤顯示。
+        會自動為每種出現的顏色建立一個 tag。
+        """
+        import re;
+
+        parts = re.split(r'(<color=#\w+>|</color>)', log_line)
+        current_tag = None
+
+        for part in parts:
+            if part.startswith("<color="):
+                color_code = part[7:-1].lower()
+                tag_name = f"color_{color_code[1:]}"  # e.g. color_ff0000
+
+                # 如果這個 tag 沒定義過，就定義一個
+                if not self.log_text.tag_names().__contains__(tag_name):
+                    self.log_text.tag_config(tag_name, foreground=color_code)
+
+                current_tag = tag_name
+
+            elif part == "</color>":
+                current_tag = None
+
+            else:
+                self.log_text.insert(tk.END, part, current_tag)
+
+        self.log_text.insert(tk.END, "\n")
 
 if __name__ == "__main__":
     root = tk.Tk()
