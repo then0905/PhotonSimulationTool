@@ -15,5 +15,11 @@ class CommonFunction:
             return text_obj.TextContent
         return f"[{text_id}]"
 
+    def clamp(value, min_value, max_value):
+        """
+         控制一個數的範圍不超過最小值與最大值
+        """
+        return max(min_value, min(value, max_value))
+
 
 

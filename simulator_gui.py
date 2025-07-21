@@ -7,8 +7,11 @@ from battle_simulator import BattleSimulator, BattleCharacter
 from stats_analyzer import StatsAnalyzer
 from status_operation import CharacterStatusCalculator
 from commonfunction import CommonFunction
+from typing import Dict
 
 class BattleSimulatorGUI:
+    jobNameDict: Dict[str, str] = {}
+
     def __init__(self, root):
         self.root = root
         self.root.title("UnityAI")
@@ -41,10 +44,13 @@ class BattleSimulatorGUI:
         # 職業選擇
         ttk.Label(player_frame, text="職業:").grid(row=1, column=0, sticky=tk.W)
         self.class_var = tk.StringVar()
-        classes = [c.Job for c in GameData.Instance.JobBonusDic.values()]
-        ttk.Combobox(player_frame, textvariable=self.class_var, values=classes).grid(row=1, column=1)
-        if classes:
-            self.class_var.set(classes[0])
+        for jobData in GameData.Instance.JobBonusDic.values():
+            self.jobNameDict.update({jobData.Job: CommonFunction.get_text("TM_"+jobData.Job)})
+            
+        tempJobNameList = list(self.jobNameDict.values())
+        ttk.Combobox(player_frame, textvariable=self.class_var, values=tempJobNameList).grid(row=1, column=1)
+            
+        self.class_var.set(next(iter(self.jobNameDict)))
         
         # 等級
         ttk.Label(player_frame, text="等級:").grid(row=2, column=0, sticky=tk.W)
@@ -165,18 +171,28 @@ class BattleSimulatorGUI:
         skills=skills,
         items=[],
         equipped_weapon=None,
-        equipped_armor=None
+        equipped_armor=None,
+        characterType=True
         )
     
     def create_monster_character(self, monster) -> BattleCharacter:
         # 將怪物轉換為戰鬥角色
         stats = {
-            "hp": monster.HP,
-            "mp": monster.MP,  # 示例值
-            "attack": monster.MeleeATK,
-            "defense": monster.DEF,
-            "magic_attack": monster.MageATK,
-            "magic_defense": monster.MDEF
+            "MaxHP": monster.HP,
+            "HP": monster.HP,
+            "MaxMP": monster.MP,
+            "MP": monster.MP,
+            "ATK": monster.ATK,
+            "DEF": monster.DEF,
+            "Crt": monster.Crt,
+            "CrtResistance": monster.CrtResistance,
+            "CrtDamage": 0,
+            "Avoid": monster.Avoid,
+            "Hit": monster.Hit,
+            "AtkSpeed": monster.AtkSpeed,
+            "AttackMode" : monster.AttackMode,
+            "BlockRate" :0,
+            "DamageReduction": 0,
         }
         
         skills = monster.MonsterSkillList
@@ -189,7 +205,8 @@ class BattleSimulatorGUI:
             equipped_weapon=None,
             equipped_armor=None,
             skills=skills,
-            items=[]
+            items=[],
+            characterType=False
         )
     
     def show_damage_stats(self):

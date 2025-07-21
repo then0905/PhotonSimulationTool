@@ -1,4 +1,5 @@
 ﻿import random
+from re import S
 from typing import Dict, Optional, List
 from dataclasses import dataclass
 from game_models import SkillData, MonsterDataModel, MonsterDropItemDataModel, ArmorDataModel, WeaponDataModel,ItemDataModel,JobBonusDataModel,StatusFormulaDataModel,GameText,GameSettingDataModel,AreaData,LvAndExpDataModel
@@ -11,38 +12,139 @@ class BattleCharacter:
     name: str
     jobBonusData: JobBonusDataModel
     level: int
-    stats: Dict[str, int]  # hp, mp, attack, defense, etc.
+    stats: Dict[str, int]
     equipped_weapon: Optional[WeaponDataModel]
     equipped_armor: Optional[ArmorDataModel]
     skills: List[SkillData]
     items: List[ItemDataModel]
-    
+    characterType:bool  #當前攻擊者類型 True:人物 False:怪物
+
     def is_alive(self) -> bool:
-        return self.stats["hp"] > 0
+        return self.stats["HP"] > 0
     
-    def use_skill(self, skill: SkillData, target) -> Tuple[str, int]:
+    def HitCalculator(self, skill: SkillData, target) -> Tuple[str, int]:
+        """
+        命中計算
+        """
+        selfHit = 0;
+        if self.characterType:
+            if(skill.Name !="普通攻擊"):
+                match skill.AdditionMode:
+                    case "MeleeATK":
+                        selfHit = self.stats["MeleeHit"];
+                    case "RemoteATK":
+                        selfHit = self.stats["RemoteHit"];
+                    case "MageATK":
+                        selfHit = self.stats["MageHit"];
+                    case _:
+                        print("未知屬性")
+            else:
+                selfHit = self.stats["MeleeHit"];
+        else:
+            selfHit = self.stats["Hit"];
+        
+        # 命中率 四捨五入取整數
+        hit_value = round(selfHit * 100 / (selfHit + target.stats["Avoid"]))
+        # 命中判定  0～100 隨機
+        is_hit = random.randint(0, 100)
+        
+        if is_hit <= hit_value:
+            return self.BlockCalculator(skill,target)
+        else:
+            return f" <color=#00ffdc>{self.name}</color> 使用 <color=#ff9300>{CommonFunction.get_text(skill.Name)}</color> 但攻擊並沒有命中！", 0
+    
+    def BlockCalculator(self, skill: SkillData, target)-> Tuple[str, int]:
+        """
+        格檔計算
+        """
+        is_block = random.randint(0,100)    
+        if(is_block <= self.stats["BlockRate"]):
+            return f" <color=#00ffdc>{self.name}</color> 使用 <color=#ff9300>{CommonFunction.get_text(skill.Name)}</color> 但被格檔了！", 0
+        else:
+            return self.CrtCalculator(skill,target)
+            
+
+    def CrtCalculator(self, skill: SkillData, target)-> Tuple[str, int]:
+        """
+        暴擊計算
+        """
+        #暴擊率 
+        crt_resistance = self.stats["Crt"] + target.stats["CrtResistance"]
+        crt_value = 0
+        if crt_resistance!=0:
+            crt_value = round(self.stats["Crt"] * 100 / (self.stats["Crt"] + crt_resistance))
+        #暴擊判定
+        is_Crt = random.randint(0,100)
+        
+        return self.AttackCalculator(skill,target,(is_Crt<=crt_value));
+            
+
+    def AttackCalculator(self, skill: SkillData, target,is_Crt:bool) -> Tuple[str, int]:
+        """
+        攻擊計算
+        """
+        selfATK = 0;
+        targetDEF = 0;
+        if self.characterType:
+            if skill.Name !="普通攻擊":
+                match skill.AdditionMode:
+                    case "MeleeATK":
+                        selfATK = self.stats["MeleeATK"];
+                        targetDEF = target.stats["DEF"];
+                    case "RemoteATK":
+                        selfATK = self.stats["RemoteATK"];
+                        targetDEF = target.stats["DEF"];
+                    case "MageATK":
+                        selfATK = self.stats["MageATK"];
+                        targetDEF = target.stats["MDEF"];
+                    case _:
+                        print("未知屬性")
+            else:
+                selfATK = self.stats["MeleeATK"];
+                targetDEF = target.stats["DEF"];
+        else:
+            selfATK = self.stats["ATK"];
+            match self.stats["AttackMode"]:
+                case "MeleeATK":
+                    targetDEF = target.stats["DEF"];
+                case "RemoteATK":
+                    targetDEF = target.stats["DEF"];
+                case "MageATK":
+                    targetDEF = target.stats["MDEF"];
+                case _:
+                    print("未知屬性")
+
         # 實現技能效果
         parser = FormulaParser()
         variables = {
-                "attacker_attack": self.stats["attack"] + (self.equipped_weapon.attack if self.equipped_weapon else 0),
-                "target_defense": target.stats["defense"] + (target.equipped_armor.defense if target.equipped_armor else 0),
-                "skill_power": skill.Damage,  # 直接使用技能資料中的 Damage 值
-                "attacker_level": self.level,
-                "target_level": target.level,
+                "attacker_attack": selfATK, #攻擊者的攻擊力
+                "target_defense": targetDEF, #受攻擊者防禦
+                "skill_power": skill.Damage,  #傷害倍率
+                "attacker_level": self.level, #攻擊者等級
+                "target_level": target.level, #受攻擊者等級
                 "random_factor": random.uniform(0.85, 1.15),
-                "base_damage": skill.Damage  # 新增基礎傷害參考值
+                "base_damage": skill.Damage
         }
         parser.set_variables(variables)
-        # 假設 skill.Damage 是公式（字串）
-        if isinstance(skill.Damage, str):
-            damage = int(parser.evaluate(skill.Damage))
+
+        #計算防禦減免
+        defenseRatio = CommonFunction.clamp(variables["target_defense"] / (variables["target_defense"] + 9), 0.1, 0.75)
+        print(f"技能傷害倍率:{skill.Damage}")
+        #計算傷害
+        if is_Crt:
+            damage = round(variables["attacker_attack"]*int(skill.Damage)*1.5)+self.stats["CrtDamage"]
         else:
-            damage = int(skill.Damage)
+            damage = round(variables["attacker_attack"]*int(skill.Damage))
+
+        finalDamage = CommonFunction.clamp(round(damage * (1 - defenseRatio)) - target.stats["DamageReduction"],0,round(damage * (1 - defenseRatio)) - target.stats["DamageReduction"])
+        print(f"攻擊對象:{self.characterType}，攻擊者傷害:{damage}，防禦減免{defenseRatio}，最後傷害{finalDamage}")
         
-        target.stats["hp"] -= damage
-        self.stats["mp"] -= skill.CastMage
+        target.stats["HP"] -= finalDamage
+        self.stats["MP"] -= skill.CastMage
         
-        return f" <color=#00ffdc>{self.name}</color> 使用 <color=#ff9300>{CommonFunction.get_text(skill.Name)}</color> 對  <color=#83ff00>{target.name}</color> 造成 <color=#ff0000>{damage}</color> 傷害！", damage
+        color_code = '#ffba01' if is_Crt else '#ff0000'
+        
+        return f" <color=#00ffdc>{self.name}</color> 使用 <color=#ff9300>{CommonFunction.get_text(skill.Name)}</color> 對  <color=#83ff00>{target.name}</color> 造成 <color={color_code}>{finalDamage}</color> 傷害！", finalDamage
 
 class BattleSimulator:
     def __init__(self, game_data):
@@ -63,7 +165,7 @@ class BattleSimulator:
             # 玩家行動
             if player.is_alive():
                 skill = self._choose_skill(player)
-                log_msg, damage = player.use_skill(skill, enemy)
+                log_msg, damage = player.HitCalculator(skill, enemy)
                 self.battle_log.append(log_msg)
                 self.damage_data.append({
                     "turn": turn,
@@ -78,7 +180,7 @@ class BattleSimulator:
             # 敵人行動
             if enemy.is_alive():
                 skill = self._choose_skill(enemy)
-                log_msg, damage = enemy.use_skill(skill, player)
+                log_msg, damage = enemy.HitCalculator(skill, player)
                 self.battle_log.append(log_msg)
                 self.damage_data.append({
                     "turn": turn,
@@ -101,13 +203,13 @@ class BattleSimulator:
     
     def _choose_skill(self, character: BattleCharacter) -> SkillData :
         # 簡單的AI選擇技能邏輯
-        available_skills = [s for s in character.skills if character.stats["mp"] >= s.CastMage]
+        available_skills = [s for s in character.skills if character.stats["MP"] >= s.CastMage]
         if not available_skills:
             # 沒有MP時使用普通攻擊
             return SkillData(
                     SkillID="NORMAL_ATTACK",
                     Name="普通攻擊",
-                    Damage="attacker_attack * 0.8 - target_defense * 0.5",
+                    Damage=1,
                     CastMage=0,
                      # 其他必要參數...
             )

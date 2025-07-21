@@ -14,7 +14,9 @@ class StatusValues:
     RemoteATK: int = 0  # 遠程攻擊力
     MageATK: int = 0  # 魔法攻擊力
     MaxHP: int = 0  # 最大生命值
+    HP: int = 0  # 當前生命值
     MaxMP: int = 0  # 最大魔法值
+    MP: int = 0  # 當前魔法值
     DEF: int = 0  # 物理防禦力
     Avoid: int = 0  # 迴避率
     MeleeHit: int = 0  # 近戰命中率
@@ -28,6 +30,10 @@ class StatusValues:
     ElementDamageReduction: int = 0  # 元素傷害減免
     HP_Recovery: int = 0  # 生命值回復
     MP_Recovery: int = 0  # 魔法值回復
+    Crt: int = 0  # 暴擊
+    CrtResistance: int = 0  # 暴擊抵抗
+    CrtDamage: int = 0  # 暴擊附加傷害
+    BlockRate: int = 0  # 格檔率
 
 
 class CharacterStatusCalculator:
@@ -82,6 +88,10 @@ class CharacterStatusCalculator:
         self.element_damage_reduction()  # 元素傷害減免
         self.hp_recovery()  # 生命值回復
         self.mp_recovery()  # 魔法值回復
+        self.crt()  # 暴擊
+        self.crtResistance()  # 暴擊抵抗
+        self.crtDamage()  # 暴擊附加傷害
+        self.block()  # 格檔率
 
         # 返回計算結果
         return {
@@ -92,52 +102,47 @@ class CharacterStatusCalculator:
     def melee_atk(self):
         """
         計算近戰攻擊力
-        分為裝備加成和基礎屬性兩部分
         """
         # 根據玩家種族獲取對應的屬性計算公式
         if not self.player_data:
             print("player_data 是空的或未初始化")
             return  # 或 raise Exception("缺少玩家資料")
+
         target_status = self.game_data.StatusFormulaDic[
             f"MeleeATK_{self.player_data["race"]}"
         ]
 
         # 計算裝備提供的近戰攻擊力加成
         self.temp_equip_status.MeleeATK = sum(
-            # 每件武器的基礎攻擊力 + 鍛造等級加成
             weapon.MeleeATK
             + next(
-                # 查找對應鍛造等級的屬性加成
                 (
                     forge.MeleeATK
                     for forge in weapon.ForgeConfigList
                     if forge.ForgeLv == weapon.ForceLv
                 ),
-                0,  # 如果沒找到對應等級，預設為0
+                0,
             )
-            for weapon in self.weapon_list  # 遍歷所有武器
+            for weapon in self.weapon_list
         )
 
         # 計算基礎近戰攻擊力（根據屬性點和等級）
         self.temp_basal_status.MeleeATK = int(
             round(
-                self.player_data["STR"] * target_status.STR  # 力量屬性 × 力量係數
-                + self.player_data["level"]
-                * target_status.LvCondition  # 等級 × 等級係數
+                self.player_data["STR"] * target_status.STR
+                + self.player_data["level"] * target_status.LvCondition
             )
         )
 
     def remote_atk(self):
         """
         計算遠程攻擊力
-        計算邏輯與近戰攻擊力相似，但使用敏捷(DEX)屬性
         """
-        # 獲取遠程攻擊力計算公式
+
         target_status = self.game_data.StatusFormulaDic[
             f"RemoteATK_{self.player_data["race"]}"
         ]
 
-        # 裝備加成：遠程攻擊力
         self.temp_equip_status.RemoteATK = sum(
             weapon.RemoteATK
             + next(
@@ -151,11 +156,10 @@ class CharacterStatusCalculator:
             for weapon in self.weapon_list
         )
 
-        # 基礎遠程攻擊力（主要基於敏捷屬性）
         self.temp_basal_status.RemoteATK = int(
             round(
-                self.player_data["DEX"] * target_status.DEX  # 敏捷屬性 × 敏捷係數
-                + self.player_data["level"] * target_status.LvCondition  # 等級加成
+                self.player_data["DEX"] * target_status.DEX
+                + self.player_data["level"] * target_status.LvCondition
             )
         )
 
@@ -164,12 +168,11 @@ class CharacterStatusCalculator:
         計算魔法攻擊力
         主要基於智力(INT)屬性
         """
-        # 獲取魔法攻擊力計算公式
+
         target_status = self.game_data.StatusFormulaDic[
             f"MageATK_{self.player_data["race"]}"
         ]
 
-        # 裝備加成：魔法攻擊力
         self.temp_equip_status.MageATK = sum(
             weapon.MageATK
             + next(
@@ -183,25 +186,22 @@ class CharacterStatusCalculator:
             for weapon in self.weapon_list
         )
 
-        # 基礎魔法攻擊力（主要基於智力屬性）
         self.temp_basal_status.MageATK = int(
             round(
-                self.player_data["INT"] * target_status.INT  # 智力屬性 × 智力係數
-                + self.player_data["level"] * target_status.LvCondition  # 等級加成
+                self.player_data["INT"] * target_status.INT
+                + self.player_data["level"] * target_status.LvCondition
             )
         )
 
     def max_hp(self):
         """
         計算最大生命值
-        包含武器、防具的加成，以及基於體力(VIT)和力量(STR)的基礎值
         """
-        # 獲取生命值計算公式
+
         target_status = self.game_data.StatusFormulaDic[
             f"HP_{self.player_data["race"]}"
         ]
 
-        # 計算武器提供的生命值加成
         weapon_hp = sum(
             weapon.HP
             + next(
@@ -215,7 +215,6 @@ class CharacterStatusCalculator:
             for weapon in self.weapon_list
         )
 
-        # 計算防具提供的生命值加成
         armor_hp = sum(
             armor.HP
             + next(
@@ -229,16 +228,15 @@ class CharacterStatusCalculator:
             for armor in self.armor_list
         )
 
-        # 總裝備生命值加成
         self.temp_equip_status.MaxHP = weapon_hp + armor_hp
 
         # 基礎生命值計算
         self.temp_basal_status.MaxHP = (
             int(
                 round(
-                    self.player_data["VIT"] * target_status.VIT  # 體力屬性 × 體力係數
-                    + self.player_data["STR"] * target_status.STR  # 力量屬性 × 力量係數
-                    + self.player_data["level"] * target_status.LvCondition  # 等級加成
+                    self.player_data["VIT"] * target_status.VIT
+                    + self.player_data["STR"] * target_status.STR
+                    + self.player_data["level"] * target_status.LvCondition
                 )
             )
             + self.player_data["MaxHP"]
@@ -247,13 +245,11 @@ class CharacterStatusCalculator:
     def max_mp(self):
         """
         計算最大魔法值
-        主要基於智力(INT)屬性
         """
         target_status = self.game_data.StatusFormulaDic[
             f"MP_{self.player_data["race"]}"
         ]
 
-        # 裝備魔法值加成計算（武器 + 防具）
         weapon_mp = sum(
             weapon.MP
             + next(
@@ -282,7 +278,6 @@ class CharacterStatusCalculator:
 
         self.temp_equip_status.MaxMP = weapon_mp + armor_mp
 
-        # 基礎魔法值（主要基於智力）
         self.temp_basal_status.MaxMP = (
             int(
                 round(
@@ -296,13 +291,11 @@ class CharacterStatusCalculator:
     def defense(self):
         """
         計算物理防禦力
-        主要基於體力(VIT)屬性和裝備防禦
         """
         target_status = self.game_data.StatusFormulaDic[
             f"DEF_{self.player_data["race"]}"
         ]
 
-        # 裝備防禦力加成
         weapon_def = sum(
             weapon.DEF
             + next(
@@ -331,7 +324,6 @@ class CharacterStatusCalculator:
 
         self.temp_equip_status.DEF = weapon_def + armor_def
 
-        # 基礎防禦力（主要基於體力）
         self.temp_basal_status.DEF = int(
             round(
                 self.player_data["VIT"] * target_status.VIT
@@ -341,8 +333,7 @@ class CharacterStatusCalculator:
 
     def avoid(self):
         """
-        計算迴避率
-        主要基於敏捷(DEX)和靈巧(AGI)屬性
+        計算迴避值
         """
         target_status = self.game_data.StatusFormulaDic[
             f"Avoid_{self.player_data["race"]}"
@@ -385,125 +376,105 @@ class CharacterStatusCalculator:
             )
         )
 
-    # 以下方法採用相似的計算模式，為了節省空間只提供架構
     def melee_hit(self):
         """
-        計算近戰命中率
-        分為裝備加成和基礎屬性兩部分
+        計算近戰命中值
         """
-        # 根據玩家種族獲取對應的屬性計算公式
+
         target_status = self.game_data.StatusFormulaDic[
             f"MeleeHit_{self.player_data["race"]}"
         ]
 
-        # 計算裝備提供的近戰攻擊力加成
         self.temp_equip_status.MeleeHit = sum(
-            # 每件武器的基礎攻擊力 + 鍛造等級加成
             weapon.MeleeHit
             + next(
-                # 查找對應鍛造等級的屬性加成
                 (
                     forge.MeleeHit
                     for forge in weapon.ForgeConfigList
                     if forge.ForgeLv == weapon.ForceLv
                 ),
-                0,  # 如果沒找到對應等級，預設為0
+                0,
             )
-            for weapon in self.weapon_list  # 遍歷所有武器
+            for weapon in self.weapon_list
         )
 
-        # 計算基礎近戰攻擊力（根據屬性點和等級）
         self.temp_basal_status.MeleeHit = int(
             round(
-                self.player_data["STR"] * target_status.STR  # 力量屬性 × 力量係數
-                + self.player_data["AGI"] * target_status.AGI  # 靈巧屬性 × 靈巧係數
-                + self.player_data["level"]
-                * target_status.LvCondition  # 等級 × 等級係數
+                self.player_data["STR"] * target_status.STR
+                + self.player_data["AGI"] * target_status.AGI
+                + self.player_data["level"] * target_status.LvCondition
             )
         )
 
     def remote_hit(self):
         """
-        計算遠程命中率 - 基於敏捷和等級
-        分為裝備加成和基礎屬性兩部分
+        計算遠程命中值
         """
-        # 根據玩家種族獲取對應的屬性計算公式
+
         target_status = self.game_data.StatusFormulaDic[
             f"RemoteHit_{self.player_data["race"]}"
         ]
 
-        # 計算裝備提供的近戰攻擊力加成
         self.temp_equip_status.RemoteHit = sum(
-            # 每件武器的基礎攻擊力 + 鍛造等級加成
             weapon.RemoteHit
             + next(
-                # 查找對應鍛造等級的屬性加成
                 (
                     forge.RemoteHit
                     for forge in weapon.ForgeConfigList
                     if forge.ForgeLv == weapon.ForceLv
                 ),
-                0,  # 如果沒找到對應等級，預設為0
+                0,
             )
-            for weapon in self.weapon_list  # 遍歷所有武器
+            for weapon in self.weapon_list
         )
 
-        # 計算基礎近戰攻擊力（根據屬性點和等級）
         self.temp_basal_status.RemoteHit = int(
             round(
-                self.player_data["DEX"] * target_status.DEX  # 敏捷屬性 × 敏捷係數
-                + self.player_data["AGI"] * target_status.AGI  # 靈巧屬性 × 靈巧係數
-                + self.player_data["level"]
-                * target_status.LvCondition  # 等級 × 等級係數
+                self.player_data["DEX"] * target_status.DEX
+                + self.player_data["AGI"] * target_status.AGI
+                + self.player_data["level"] * target_status.LvCondition
             )
         )
 
     def mage_hit(self):
         """
-        計算魔法命中率 - 基於智力和等級
-         分為裝備加成和基礎屬性兩部分
+        計算魔法命中值
         """
-        # 根據玩家種族獲取對應的屬性計算公式
+
         target_status = self.game_data.StatusFormulaDic[
             f"MageHit_{self.player_data["race"]}"
         ]
 
-        # 計算裝備提供的近戰攻擊力加成
         self.temp_equip_status.MageHit = sum(
-            # 每件武器的基礎攻擊力 + 鍛造等級加成
             weapon.MageHit
             + next(
-                # 查找對應鍛造等級的屬性加成
                 (
                     forge.MageHit
                     for forge in weapon.ForgeConfigList
                     if forge.ForgeLv == weapon.ForceLv
                 ),
-                0,  # 如果沒找到對應等級，預設為0
+                0,
             )
-            for weapon in self.weapon_list  # 遍歷所有武器
+            for weapon in self.weapon_list
         )
 
-        # 計算基礎近戰攻擊力（根據屬性點和等級）
         self.temp_basal_status.RemoteHit = int(
             round(
-                self.player_data["INT"] * target_status.INT  # 智力屬性 × 智力係數
-                + self.player_data["AGI"] * target_status.AGI  # 靈巧屬性 × 靈巧係數
-                + self.player_data["level"]
-                * target_status.LvCondition  # 等級 × 等級係數
+                self.player_data["INT"] * target_status.INT
+                + self.player_data["AGI"] * target_status.AGI
+                + self.player_data["level"] * target_status.LvCondition
             )
         )
 
     def mdef(self):
         """
-        計算魔法防禦力 -
-        基於智力和感知和裝備屬性
+        計算魔法防禦力
         """
+
         target_status = self.game_data.StatusFormulaDic[
             f"MDEF_{self.player_data["race"]}"
         ]
 
-        # 裝備防禦力加成
         weapon_mdef = sum(
             weapon.MDEF
             + next(
@@ -532,8 +503,7 @@ class CharacterStatusCalculator:
 
         self.temp_equip_status.MDEF = weapon_mdef + armor_mdef
 
-        # 基礎防禦力（基於智力和感知）
-        self.temp_basal_status.DEF = int(
+        self.temp_basal_status.MDEF = int(
             round(
                 self.player_data["VIT"] * target_status.VIT
                 + self.player_data["WIS"] * target_status.WIS
@@ -541,8 +511,8 @@ class CharacterStatusCalculator:
         )
 
     def speed(self):
-        """計算移動速度 - 基於敏捷和裝備"""
-        # 獲取防具能力值數據
+        """計算移動速度"""
+
         self.temp_equip_status.Speed = sum(
             armor.Armor.Speed
             + next(
@@ -556,32 +526,234 @@ class CharacterStatusCalculator:
             for armor in self.armor_list
         )
 
-        # 獲取基礎加成能力值數據
         self.temp_basal_status.Speed = 1
 
     def attack_speed(self):
-        """計算攻擊速度 - 基於武器和敏捷"""
-        pass
+        """計算攻擊速度"""
+        self.temp_equip_status.AS = next(
+            (
+                self.game_data.game_setting_dic[weapon.weapon.ASID].game_setting_value
+                for weapon in self.weapon_list
+            ),
+            0,
+        )
+
+        self.temp_basal_status.AS = 1
 
     def damage_reduction(self):
-        """計算傷害減免 - 主要來自裝備"""
-        pass
+        """計算傷害減免"""
+        target_status = self.game_data.StatusFormulaDic[
+            f"DamageReduction_{self.player_data["race"]}"
+        ]
+
+        # 裝備防禦力加成
+        armorDamageReduction = sum(
+            armor.DamageReduction
+            + next(
+                (
+                    forge.DamageReduction
+                    for forge in armor.ForgeConfigList
+                    if forge.ForgeLv == armor.ForceLv
+                ),
+                0,
+            )
+            for armor in self.armor_list
+        )
+
+        self.temp_equip_status.DamageReduction = armorDamageReduction
+
+        # 基礎傷害減晚（基於VIT）
+        self.temp_basal_status.DamageReduction = int(
+            round(self.player_data["VIT"] * target_status.VIT)
+        )
 
     def element_damage_increase(self):
-        """計算元素傷害增加 - 主要來自裝備和技能"""
-        pass
+        """計算屬性傷害增幅加成 - 主要來自裝備和技能"""
+        target_status = self.game_data.StatusFormulaDic[
+            f"ElementDamageIncrease_{self.player_data["race"]}"
+        ]
+
+        # 武器加成
+        weaponElementDamageIncrease = sum(
+            weapon.ElementDamageIncrease
+            + next(
+                (
+                    forge.ElementDamageIncrease
+                    for forge in weapon.ForgeConfigList
+                    if forge.ForgeLv == weapon.ForceLv
+                ),
+                0,
+            )
+            for weapon in self.weapon_list
+        )
+
+        self.temp_equip_status.ElementDamageIncrease = weaponElementDamageIncrease
+
+        # 基礎屬性傷害增幅
+        self.temp_basal_status.ElementDamageIncrease = int(
+            round(self.player_data["INT"] * target_status.INT)
+        )
 
     def element_damage_reduction(self):
-        """計算元素傷害減免 - 主要來自裝備"""
-        pass
+        """計算屬性傷害減免"""
+        target_status = self.game_data.StatusFormulaDic[
+            f"ElementDamageReduction_{self.player_data["race"]}"
+        ]
+
+        # 裝備屬性傷害減免加成
+        armorElementDamageReduction = sum(
+            armor.ElementDamageReduction
+            + next(
+                (
+                    forge.MDEF
+                    for forge in armor.ForgeConfigList
+                    if forge.ForgeLv == armor.ForceLv
+                ),
+                0,
+            )
+            for armor in self.armor_list
+        )
+
+        self.temp_equip_status.ElementDamageReduction = armorElementDamageReduction
+
+        # 基礎屬性傷害減免
+        self.temp_basal_status.ElementDamageReduction = int(
+            round(self.player_data["WIS"] * target_status.WIS)
+        )
 
     def hp_recovery(self):
         """計算生命值回復 - 來自裝備和技能"""
-        pass
+        target_status = self.game_data.StatusFormulaDic[
+            f"HP_Recovery_{self.player_data["race"]}"
+        ]
+
+        # 裝備屬性傷害減免加成
+        armorHP_Recovery = sum(
+            armor.HP_Recovery
+            + next(
+                (
+                    forge.HP_Recovery
+                    for forge in armor.ForgeConfigList
+                    if forge.ForgeLv == armor.ForceLv
+                ),
+                0,
+            )
+            for armor in self.armor_list
+        )
+
+        self.temp_equip_status.HP_Recovery = armorHP_Recovery
+
+        # 基礎屬性傷害減免
+        self.temp_basal_status.HP_Recovery = int(
+            round(self.player_data["VIT"] * target_status.VIT)
+        )
 
     def mp_recovery(self):
         """計算魔法值回復 - 來自裝備和技能"""
-        pass
+        target_status = self.game_data.StatusFormulaDic[
+            f"MP_Recovery_{self.player_data["race"]}"
+        ]
+
+        # 裝備屬性傷害減免加成
+        armorMP_Recovery = sum(
+            armor.MP_Recovery
+            + next(
+                (
+                    forge.MP_Recovery
+                    for forge in armor.ForgeConfigList
+                    if forge.ForgeLv == armor.ForceLv
+                ),
+                0,
+            )
+            for armor in self.armor_list
+        )
+
+        self.temp_equip_status.MP_Recovery = armorMP_Recovery
+
+        # 基礎屬性傷害減免
+        self.temp_basal_status.MP_Recovery = int(
+            round(self.player_data["WIS"] * target_status.WIS)
+        )
+
+    def crt(self):
+        """
+        暴擊計算
+        """
+
+        weapon_crt = sum(
+            weapon.Crt
+            + next(
+                (
+                    forge.Crt
+                    for forge in weapon.ForgeConfigList
+                    if forge.ForgeLv == weapon.ForceLv
+                ),
+                0,
+            )
+            for weapon in self.weapon_list
+        )
+
+        self.temp_equip_status.Crt = weapon_crt
+
+    def crtResistance(self):
+        """
+        暴擊抵抗計算
+        """
+
+        armor_crtResistance = sum(
+            armor.CrtResistance
+            + next(
+                (
+                    forge.CrtResistance
+                    for forge in armor.ForgeConfigList
+                    if forge.ForgeLv == armor.ForceLv
+                ),
+                0,
+            )
+            for armor in self.armor_list
+        )
+
+        self.temp_equip_status.CrtResistance = armor_crtResistance
+        
+    def crtDamage(self):
+        """
+        暴擊附加傷害計算
+        """
+
+        weapon_crtDamage = sum(
+            weapon.CrtDamage
+            + next(
+                (
+                    forge.CrtDamage
+                    for forge in weapon.ForgeConfigList
+                    if forge.ForgeLv == weapon.ForceLv
+                ),
+                0,
+            )
+            for weapon in self.weapon_list
+        )
+
+        self.temp_equip_status.CrtDamage = weapon_crtDamage
+        
+    def block(self):
+        """
+        格檔計算
+        """
+
+        armor_blockRate = sum(
+            armor.BlockRate
+            + next(
+                (
+                    forge.BlockRate
+                    for forge in armor.ForgeConfigList
+                    if forge.ForgeLv == armor.ForceLv
+                ),
+                0,
+            )
+            for armor in self.armor_list
+        )
+
+        self.temp_equip_status.BlockRate = armor_blockRate
 
     def create_character(self, name: str, jobBonusData, level: int) -> Dict:
         """
@@ -615,12 +787,29 @@ class CharacterStatusCalculator:
             "char_class": jobBonusData,  # 職業資料
             "level": level,  # 等級
             "stats": {  # 計算後的屬性值
-                "hp": status["basal"].MaxHP,  # 生命值
-                "mp": status["basal"].MaxMP,  # 魔法值
-                "attack": status["basal"].MeleeATK,  # 攻擊力（預設近戰）
-                "defense": status["basal"].DEF,  # 防禦力
-                "magic_attack": status["basal"].MageATK,  # 魔法攻擊力
-                "magic_defense": status["basal"].MDEF,  # 魔法防禦力
+                "MaxHP": status["basal"].MaxHP,
+                "HP": status["basal"].MaxHP,
+                "MaxMP": status["basal"].MaxMP,
+                "MP": status["basal"].MaxMP,
+                "MeleeATK": status["basal"].MeleeATK,
+                "RemoteATK": status["basal"].RemoteATK,
+                "MageATK": status["basal"].MageATK,
+                "DEF": status["basal"].DEF,
+                "Avoid": status["basal"].Avoid,
+                "MeleeHit": status["basal"].MeleeHit,
+                "RemoteHit": status["basal"].RemoteHit,
+                "MageHit": status["basal"].MageHit,
+                "MDEF": status["basal"].MDEF,
+                "AS": status["basal"].AS,
+                "DamageReduction": status["basal"].DamageReduction,
+                "ElementDamageIncrease": status["basal"].ElementDamageIncrease,
+                "ElementDamageReduction": status["basal"].ElementDamageReduction,
+                "HP_Recovery": status["basal"].HP_Recovery,
+                "MP_Recovery": status["basal"].MP_Recovery,
+                "Crt": status["basal"].Crt,
+                "CrtResistance": status["basal"].CrtResistance,
+                "CrtDamage": status["basal"].CrtDamage,
+                "BlockRate": status["basal"].BlockRate,
             },
             "equipped_weapon": None,  # 裝備的武器（初始為空）
             "equipped_armor": None,  # 裝備的防具（初始為空）
@@ -663,7 +852,7 @@ class CharacterStatusCalculator:
             list: 可用技能列表
         """
         #
-        
+
         return [
             skill
             for skill in self.game_data.SkillDataDic.values()
@@ -724,10 +913,30 @@ class CharacterStatusCalculator:
 
         # 更新角色屬性
         character["stats"] = {
-            "hp": status["basal"].MaxHP + status["equip"].MaxHP,
-            "mp": status["basal"].MaxMP + status["equip"].MaxMP,
-            "attack": status["basal"].MeleeATK + status["equip"].MeleeATK,
-            "defense": status["basal"].DEF + status["equip"].DEF,
-            "magic_attack": status["basal"].MageATK + status["equip"].MageATK,
-            "magic_defense": status["basal"].MDEF + status["equip"].MDEF,
+            "MaxHP": status["basal"].MaxHP + status["equip"].MaxHP,
+            # "HP": status["basal"].MaxHP + status["equip"].MaxHP,
+            "MaxMP": status["basal"].MaxMP + status["equip"].MaxHP,
+            # "MP": status["basal"].MaxMP + status["equip"].MaxHP,
+            "MeleeATK": status["basal"].MeleeATK + status["equip"].MeleeATK,
+            "RemoteATK": status["basal"].RemoteATK + status["equip"].RemoteATK,
+            "MageATK": status["basal"].MageATK + status["equip"].MageATK,
+            "DEF": status["basal"].DEF + status["equip"].DEF,
+            "Avoid": status["basal"].Avoid + status["equip"].Avoid,
+            "MeleeHit": status["basal"].MeleeHit + status["equip"].MeleeHit,
+            "RemoteHit": status["basal"].RemoteHit + status["equip"].RemoteHit,
+            "MageHit": status["basal"].MageHit + status["equip"].MageHit,
+            "MDEF": status["basal"].MDEF + status["equip"].MDEF,
+            "Speed": status["basal"].Speed + status["equip"].Speed,
+            "AS": status["basal"].AS + status["equip"].AS,
+            "DamageReduction": status["DamageReduction"].DamageReduction + status["equip"].DamageReduction,
+            "ElementDamageIncrease": status["basal"].ElementDamageIncrease
+            + status["equip"].ElementDamageIncrease,
+            "ElementDamageReduction": status["basal"].ElementDamageReduction
+            + status["equip"].ElementDamageReduction,
+            "HP_Recovery": status["basal"].HP_Recovery + status["equip"].HP_Recovery,
+            "MP_Recovery": status["basal"].MP_Recovery + status["equip"].MP_Recovery,
+            "Crt": status["basal"].Crt+ status["equip"].Crt,
+            "CrtResistance": status["basal"].CrtResistance+ status["equip"].CrtResistance,
+            "CrtDamage": status["basal"].CrtDamage+ status["equip"].CrtDamage,
+            "BlockRate": status["basal"].BlockRate+ status["equip"].BlockRate,
         }
