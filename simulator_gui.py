@@ -49,8 +49,8 @@ class BattleSimulatorGUI:
             
         tempJobNameList = list(self.jobNameDict.values())
         ttk.Combobox(player_frame, textvariable=self.class_var, values=tempJobNameList).grid(row=1, column=1)
-            
-        self.class_var.set(next(iter(self.jobNameDict)))
+        
+        self.class_var.set(next(iter(self.jobNameDict.values())))
         
         # 等級
         ttk.Label(player_frame, text="等級:").grid(row=2, column=0, sticky=tk.W)
@@ -98,7 +98,8 @@ class BattleSimulatorGUI:
     def start_battle(self):
         # 創建玩家角色
         class_name = self.class_var.get()
-        jobBonusData = next((c for c in GameData.Instance.JobBonusDic.values() if c.Job == class_name), None)
+        jobID = next((key for key, value in self.jobNameDict.items() if value == class_name), None)
+        jobBonusData = next((c for c in GameData.Instance.JobBonusDic.values() if c.Job == jobID), None)
         
         if not jobBonusData:
             messagebox.showerror("錯誤", "請選擇有效的職業")
