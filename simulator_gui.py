@@ -1,4 +1,5 @@
 ﻿# -*- coding: utf-8 -*-
+from ast import Lambda
 import tkinter as tk
 from tkinter import ttk, messagebox
 from game_models import GameData
@@ -33,48 +34,127 @@ class BattleSimulatorGUI:
         main_frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
         
         # 左側玩家設置
-        player_frame = ttk.LabelFrame(main_frame, text="玩家設置", padding="10")
+        player_frame = ttk.LabelFrame(main_frame, text="玩家設置", padding="20")
         player_frame.grid(row=0, column=0, sticky=tk.N, padx=5, pady=5)
-        
+        # player_frame.columnconfigure(0, minsize=100)
+        # player_frame.columnconfigure(1, minsize=100)
+        # player_frame.columnconfigure(2, minsize=100)
+        # player_frame.columnconfigure(3, minsize=100)
         # 角色名稱
         ttk.Label(player_frame, text="角色名稱:").grid(row=0, column=0, sticky=tk.W)
         self.player_name = tk.StringVar(value="玩家1")
-        ttk.Entry(player_frame, textvariable=self.player_name).grid(row=0, column=1)
+        ttk.Entry(player_frame, textvariable=self.player_name,width = 15).grid(row=0, column=1)
         
         # 職業選擇
         ttk.Label(player_frame, text="職業:").grid(row=1, column=0, sticky=tk.W)
-        self.class_var = tk.StringVar()
+        self.player_class_var = tk.StringVar()
         for jobData in GameData.Instance.JobBonusDic.values():
             self.jobNameDict.update({jobData.Job: CommonFunction.get_text("TM_"+jobData.Job)})
             
         tempJobNameList = list(self.jobNameDict.values())
-        ttk.Combobox(player_frame, textvariable=self.class_var, values=tempJobNameList).grid(row=1, column=1)
+        ttk.Combobox(player_frame, textvariable=self.player_class_var, values=tempJobNameList,width = 15).grid(row=1, column=1)
         
-        self.class_var.set(next(iter(self.jobNameDict.values())))
+        self.player_class_var.set(next(iter(self.jobNameDict.values())))
         
         # 等級
         ttk.Label(player_frame, text="等級:").grid(row=2, column=0, sticky=tk.W)
         self.level_var = tk.IntVar(value=1)
-        ttk.Spinbox(player_frame, from_=1, to=100, textvariable=self.level_var).grid(row=2, column=1)
+        ttk.Spinbox(player_frame, from_=1, to=100, textvariable=self.level_var,width = 15).grid(row=2, column=1)
         
-        # 右側敵人設置
-        enemy_frame = ttk.LabelFrame(main_frame, text="敵人設置", padding="10")
+        # ────────────────────────────────
+        # ▼ 左側裝備區 - Equipment UI
+        # ────────────────────────────────
+        #region
+        player_equipment_frame = ttk.LabelFrame(player_frame, text="裝備欄", padding="10")
+        player_equipment_frame.grid(row=4, column=0,columnspan=2, padx=1, pady=1, sticky=tk.W)
+         # 裝備部位
+        self.equipment_vars = {}
+        parts = ["頭部", "身體", "手部", "腿部", "腳部"]
+        for i, part in enumerate(parts):
+            ttk.Label(player_equipment_frame, text=part + ":").grid(row=i, column=0, sticky=tk.W)
+            var = tk.StringVar()
+            self.equipment_vars[part] = var
+            ttk.Combobox(player_equipment_frame, textvariable=var, values=["無", f"{part}裝備A", f"{part}裝備B"],width=15).grid(row=i, column=1)
+
+        # 武器（主手 / 副手）
+        ttk.Label(player_equipment_frame, text="主手武器:").grid(row=len(parts), column=0, sticky=tk.W)
+        self.main_hand_var = tk.StringVar()
+        ttk.Combobox(player_equipment_frame, textvariable=self.main_hand_var, values=["無", "劍", "杖", "弓"],width=15).grid(row=len(parts), column=1)
+
+        ttk.Label(player_equipment_frame, text="副手武器:").grid(row=len(parts)+1, column=0, sticky=tk.W)
+        self.off_hand_var = tk.StringVar()
+        ttk.Combobox(player_equipment_frame, textvariable=self.off_hand_var, values=["無", "盾", "短刀", "書"],width=15).grid(row=len(parts)+1, column=1)
+
+        #endregion
+
+        # ────────────────────────────────
+        # ▼ 右側敵人設置 - Equipment UI
+        # ────────────────────────────────
+        enemy_frame = ttk.LabelFrame(main_frame, text="敵人設置", padding="20")
         enemy_frame.grid(row=0, column=1, sticky=tk.N, padx=5, pady=5)
-        
+        enemy_frame.columnconfigure(0, minsize=60)
+        enemy_frame.columnconfigure(1, minsize=60)
+        enemy_frame.columnconfigure(2, minsize=60)
+        enemy_frame.columnconfigure(3, minsize=60)
+
         # 敵人類型選擇
-        ttk.Label(enemy_frame, text="敵人類型:").grid(row=0, column=0, sticky=tk.W)
-        self.enemy_type_var = tk.StringVar(value="monster")
-        ttk.Radiobutton(enemy_frame, text="怪物", variable=self.enemy_type_var, value="monster").grid(row=0, column=1, sticky=tk.W)
-        ttk.Radiobutton(enemy_frame, text="玩家", variable=self.enemy_type_var, value="player").grid(row=0, column=2, sticky=tk.W)
+        ttk.Label(enemy_frame, text="敵人類型:").grid(row=0, column=0, sticky=tk.W)   
         
         # 怪物選擇
         ttk.Label(enemy_frame, text="選擇怪物:").grid(row=1, column=0, sticky=tk.W)
         self.monster_var = tk.StringVar()
         monsters = [m.MonsterCodeID for m in GameData.Instance.MonstersDataDic.values()]
-        self.monster_combobox = ttk.Combobox(enemy_frame, textvariable=self.monster_var, values=monsters)
-        self.monster_combobox.grid(row=1, column=1, columnspan=2)
+        self.monster_combobox = ttk.Combobox(enemy_frame, textvariable=self.monster_var, values=monsters,width = 15)
+        self.monster_combobox.grid(row=1, column=1, columnspan=1)
         if monsters:
             self.monster_var.set(monsters[0])
+
+        #敵對玩家職業
+        enemy_class_label = ttk.Label(enemy_frame, text="職業:")
+        enemy_class_label.grid(row=2, column=0, sticky=tk.W)
+        self.enemy_class_var = tk.StringVar()
+        for jobData in GameData.Instance.JobBonusDic.values():
+            self.jobNameDict.update({jobData.Job: CommonFunction.get_text("TM_"+jobData.Job)})
+            
+        tempJobNameList = list(self.jobNameDict.values())
+        enemy_class_combobox = ttk.Combobox(enemy_frame, textvariable=self.enemy_class_var, values=tempJobNameList,width = 15)
+        enemy_class_combobox.grid(row=2, column=1)
+        
+        self.enemy_class_var.set(next(iter(self.jobNameDict.values())))
+
+        # ────────────────────────────────
+        # ▼ 右側裝備區 - Equipment UI
+        # ────────────────────────────────
+        #region
+        enemy_equipment_frame = ttk.LabelFrame(enemy_frame, text="裝備欄", padding="5")
+        enemy_equipment_frame.grid(row=3, column=0,columnspan=2, padx=1, pady=1, sticky=tk.W)
+         # 裝備部位
+        self.equipment_vars = {}
+        parts = ["頭部", "身體", "手部", "腿部", "腳部"]
+        for i, part in enumerate(parts):
+            ttk.Label(enemy_equipment_frame, text=part + ":").grid(row=i, column=0, sticky=tk.W)
+            var = tk.StringVar()
+            self.equipment_vars[part] = var
+            ttk.Combobox(enemy_equipment_frame, textvariable=var, values=["無", f"{part}裝備A", f"{part}裝備B"],width=15).grid(row=i, column=1)
+
+        # 武器（主手 / 副手）
+        ttk.Label(enemy_equipment_frame, text="主手武器:").grid(row=len(parts), column=0, sticky=tk.W)
+        self.main_hand_var = tk.StringVar()
+        ttk.Combobox(enemy_equipment_frame, textvariable=self.main_hand_var, values=["無", "劍", "杖", "弓"],width=15).grid(row=len(parts), column=1)
+
+        ttk.Label(enemy_equipment_frame, text="副手武器:").grid(row=len(parts)+1, column=0, sticky=tk.W)
+        self.off_hand_var = tk.StringVar()
+        ttk.Combobox(enemy_equipment_frame, textvariable=self.off_hand_var, values=["無", "盾", "短刀", "書"],width=15).grid(row=len(parts)+1, column=1)
+
+        #endregion
+
+        self.enemy_type_var = tk.StringVar(value="monster")
+        ttk.Radiobutton(enemy_frame, text="怪物", variable=self.enemy_type_var, value="monster",command = lambda:self.enemy_ui_switch(True,enemy_equipment_frame,enemy_class_label,enemy_class_combobox)).grid(row=0, column=1, sticky=tk.W)
+        ttk.Radiobutton(enemy_frame, text="玩家", variable=self.enemy_type_var, value="player",command = lambda:self.enemy_ui_switch(False,enemy_equipment_frame,enemy_class_label,enemy_class_combobox)).grid(row=0, column=2, sticky=tk.W)
+        if self.enemy_type_var.get() == "monster":
+            self.enemy_ui_switch(True,enemy_equipment_frame,enemy_class_label,enemy_class_combobox)
+        else:
+            self.enemy_ui_switch(False,enemy_equipment_frame,enemy_class_label,enemy_class_combobox)
         
         # 戰鬥按鈕
         battle_button = ttk.Button(main_frame, text="開始戰鬥模擬", command=self.start_battle)
@@ -95,9 +175,16 @@ class BattleSimulatorGUI:
         ttk.Button(stats_frame, text="技能使用", command=self.show_skill_stats).pack(side=tk.LEFT, padx=5)
         ttk.Button(stats_frame, text="勝率統計", command=self.show_win_rate).pack(side=tk.LEFT, padx=5)
     
+    def enemy_ui_switch(self,type:bool,*frames):
+        for frame in frames:
+            if(type):
+                frame.grid_remove()
+            else:
+                frame.grid()
+
     def start_battle(self):
         # 創建玩家角色
-        class_name = self.class_var.get()
+        class_name = self.player_class_var.get()
         jobID = next((key for key, value in self.jobNameDict.items() if value == class_name), None)
         jobBonusData = next((c for c in GameData.Instance.JobBonusDic.values() if c.Job == jobID), None)
         

@@ -859,7 +859,7 @@ class CharacterStatusCalculator:
             if skill.Job in char_class.Job
         ]
 
-    def equip_item(self, character: Dict, item: Dict) -> Dict:
+    def equip_item(self, character: Dict, item: Dict):
         """
         為角色裝備物品並重新計算屬性
 
@@ -871,9 +871,9 @@ class CharacterStatusCalculator:
             dict: 更新後的角色數據
         """
         # 根據物品類型決定裝備位置
-        if item["Type"] == "Weapon":
+        if item["ClassificationID"] == "Weapon":
             character["equipped_weapon"] = item
-        elif item["Type"] == "Armor":
+        elif item["ClassificationID"] == "Armor":
             character["equipped_armor"] = item
 
         # 重新計算屬性

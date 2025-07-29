@@ -2,10 +2,11 @@
 from re import S
 from typing import Dict, Optional, List
 from dataclasses import dataclass
-from game_models import SkillData, MonsterDataModel, MonsterDropItemDataModel, ArmorDataModel, WeaponDataModel,ItemDataModel,JobBonusDataModel,StatusFormulaDataModel,GameText,GameSettingDataModel,AreaData,LvAndExpDataModel
+from game_models import SkillData,SkillOperationData, MonsterDataModel, MonsterDropItemDataModel, ArmorDataModel, WeaponDataModel,ItemDataModel,JobBonusDataModel,StatusFormulaDataModel,GameText,GameSettingDataModel,AreaData,LvAndExpDataModel
 from formula_parser import FormulaParser
 from typing import Tuple
 from commonfunction import CommonFunction
+# from skill_processor import SkillProcessor
 
 @dataclass
 class BattleCharacter:
@@ -18,10 +19,36 @@ class BattleCharacter:
     skills: List[SkillData]
     items: List[ItemDataModel]
     characterType:bool  #當前攻擊者類型 True:人物 False:怪物
+    controlled_for_attack:float = 0 #受到控制不得使用普通攻擊類型
+    controlled_for_skill:float = 0  #受到控制不得使用技能類型
+
+    def action_check(self,skill:SkillData)->bool:
+        if(skill.Name == "普通攻擊"):
+            return self.stats["HP"] > 0 & self.controlled_for_attack <=0
+        else:
+            return self.stats["HP"] > 0 & self.controlled_for_skill <=0
 
     def is_alive(self) -> bool:
         return self.stats["HP"] > 0
+
+    def PassTimeControll(self,passtime:float):
+        """
+        處理經過時間
+        """
+        if(controlled_for_attack!=0):
+            controlled_for_attack = CommonFunction.clamp((controlled_for_attack-passtime),0,controlled_for_attack);
+        if(controlled_for_skill!=0):
+            controlled_for_skill = CommonFunction.clamp((controlled_for_skill-passtime),0,controlled_for_skill);
     
+    def CrowdControlCalculator(self,op: SkillOperationData):
+        """
+        控制效果計算
+        """
+        match(op.InfluenceStatus):
+            case "Taunt" | "Stun":
+                controlled_for_skill+=op.EffectDurationTime
+                controlled_for_attack+=op.EffectDurationTime
+
     def HitCalculator(self, skill: SkillData, target) -> Tuple[str, int]:
         """
         命中計算
@@ -44,7 +71,7 @@ class BattleCharacter:
             selfHit = self.stats["Hit"];
         
         # 命中率 四捨五入取整數
-        hit_value = round(selfHit * 100 / (selfHit + target.stats["Avoid"]))
+        hit_value = round(selfHit * 100 /max(1, selfHit + target.stats["Avoid"]))
         # 命中判定  0～100 隨機
         is_hit = random.randint(0, 100)
         
@@ -63,7 +90,6 @@ class BattleCharacter:
         else:
             return self.CrtCalculator(skill,target)
             
-
     def CrtCalculator(self, skill: SkillData, target)-> Tuple[str, int]:
         """
         暴擊計算
@@ -78,7 +104,6 @@ class BattleCharacter:
         
         return self.AttackCalculator(skill,target,(is_Crt<=crt_value));
             
-
     def AttackCalculator(self, skill: SkillData, target,is_Crt:bool) -> Tuple[str, int]:
         """
         攻擊計算
@@ -163,8 +188,8 @@ class BattleSimulator:
             self.battle_log.append(f"=== 第 {turn} 回合 ===")
             
             # 玩家行動
-            if player.is_alive():
-                skill = self._choose_skill(player)
+            skill = self._choose_skill(player)
+            if player.action_check(skill):
                 log_msg, damage = player.HitCalculator(skill, enemy)
                 self.battle_log.append(log_msg)
                 self.damage_data.append({
@@ -178,8 +203,8 @@ class BattleSimulator:
                     self.skill_usage[skill.Name] += 1
             
             # 敵人行動
-            if enemy.is_alive():
-                skill = self._choose_skill(enemy)
+            skill = self._choose_skill(enemy)
+            if enemy.action_check(skill):
                 log_msg, damage = enemy.HitCalculator(skill, player)
                 self.battle_log.append(log_msg)
                 self.damage_data.append({
@@ -213,8 +238,8 @@ class BattleSimulator:
                     CastMage=0,
                      # 其他必要參數...
             )
-        return random.choice(available_skills)
-    
+        return random.choice(available_skills) 
+
     def get_battle_log(self) -> List[str]:
         return self.battle_log
     

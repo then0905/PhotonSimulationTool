@@ -24,6 +24,7 @@
     <Compile Include="formula_parser.py" />
     <Compile Include="game_models.py" />
     <Compile Include="simulator_gui.py" />
+    <Compile Include="skill_processor.py" />
     <Compile Include="stats_analyzer.py" />
     <Compile Include="status_operation.py" />
   </ItemGroup>
