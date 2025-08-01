@@ -427,14 +427,20 @@ class GameData:
         # 加載文字資料
         # 要讀取的檔案列表 (假設這些檔案結構都相同)
         TextJsonFile = [
-                "ItemText.json",
-                "MonsterText.json",
-                "JobText.json",
-                "NpcText.json",
-                "QuestText.json",
-                "SkillText.json",
+                "GameText.json",
                 "StatusText.json",
-                "WeaponText.json"
+                "CommonText.json",
+                "EffectText.json",
+                "QuestText.json",
+                "TutorialText.json",
+                "JobText.json",
+                "MonsterText.json",
+                "AreaText.json",
+                "NpcText.json",
+                "ItemText.json",
+                "WeaponText.json",
+                "ArmorText.json",
+                "SkillText.json",
         ]
         self.GameTextDataDic = {}
         for file in TextJsonFile:

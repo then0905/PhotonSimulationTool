@@ -33,13 +33,11 @@ class BattleSimulatorGUI:
         main_frame = ttk.Frame(self.root, padding="10")
         main_frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
         
-        # 左側玩家設置
+        #region 左側玩家設置
+        
         player_frame = ttk.LabelFrame(main_frame, text="玩家設置", padding="20")
         player_frame.grid(row=0, column=0, sticky=tk.N, padx=5, pady=5)
-        # player_frame.columnconfigure(0, minsize=100)
-        # player_frame.columnconfigure(1, minsize=100)
-        # player_frame.columnconfigure(2, minsize=100)
-        # player_frame.columnconfigure(3, minsize=100)
+        
         # 角色名稱
         ttk.Label(player_frame, text="角色名稱:").grid(row=0, column=0, sticky=tk.W)
         self.player_name = tk.StringVar(value="玩家1")
@@ -61,34 +59,25 @@ class BattleSimulatorGUI:
         self.level_var = tk.IntVar(value=1)
         ttk.Spinbox(player_frame, from_=1, to=100, textvariable=self.level_var,width = 15).grid(row=2, column=1)
         
-        # ────────────────────────────────
-        # ▼ 左側裝備區 - Equipment UI
-        # ────────────────────────────────
-        #region
+        # 左側裝備區
         player_equipment_frame = ttk.LabelFrame(player_frame, text="裝備欄", padding="10")
         player_equipment_frame.grid(row=4, column=0,columnspan=2, padx=1, pady=1, sticky=tk.W)
-         # 裝備部位
-        self.equipment_vars = {}
-        parts = ["頭部", "身體", "手部", "腿部", "腳部"]
-        for i, part in enumerate(parts):
-            ttk.Label(player_equipment_frame, text=part + ":").grid(row=i, column=0, sticky=tk.W)
-            var = tk.StringVar()
-            self.equipment_vars[part] = var
-            ttk.Combobox(player_equipment_frame, textvariable=var, values=["無", f"{part}裝備A", f"{part}裝備B"],width=15).grid(row=i, column=1)
+        self.common_EquipmentUI(player_equipment_frame)
+        # === 道具按鈕 ===
+        ttk.Button(player_equipment_frame, text="選擇攜帶道具", command=self.open_item_window).grid(row=999, column=0, pady=10)
 
-        # 武器（主手 / 副手）
-        ttk.Label(player_equipment_frame, text="主手武器:").grid(row=len(parts), column=0, sticky=tk.W)
-        self.main_hand_var = tk.StringVar()
-        ttk.Combobox(player_equipment_frame, textvariable=self.main_hand_var, values=["無", "劍", "杖", "弓"],width=15).grid(row=len(parts), column=1)
-
-        ttk.Label(player_equipment_frame, text="副手武器:").grid(row=len(parts)+1, column=0, sticky=tk.W)
-        self.off_hand_var = tk.StringVar()
-        ttk.Combobox(player_equipment_frame, textvariable=self.off_hand_var, values=["無", "盾", "短刀", "書"],width=15).grid(row=len(parts)+1, column=1)
 
         #endregion
-
+   
+        # region 右側敵人設置
         # ────────────────────────────────
-        # ▼ 右側敵人設置 - Equipment UI
+        # 雖然理想的順序是:
+        # 敵人類型
+        # 選擇怪物
+        # 職業
+        # 裝備欄
+        # 但因為有些需要互相參考 如切換敵人類型 職業跟裝備欄要開關 需要參考到職業裝備的frame
+        # 所以UI的建立就沒有照上面的換
         # ────────────────────────────────
         enemy_frame = ttk.LabelFrame(main_frame, text="敵人設置", padding="20")
         enemy_frame.grid(row=0, column=1, sticky=tk.N, padx=5, pady=5)
@@ -96,16 +85,15 @@ class BattleSimulatorGUI:
         enemy_frame.columnconfigure(1, minsize=60)
         enemy_frame.columnconfigure(2, minsize=60)
         enemy_frame.columnconfigure(3, minsize=60)
-
-        # 敵人類型選擇
-        ttk.Label(enemy_frame, text="敵人類型:").grid(row=0, column=0, sticky=tk.W)   
+        enemy_frame.columnconfigure(4, minsize=60)
         
         # 怪物選擇
-        ttk.Label(enemy_frame, text="選擇怪物:").grid(row=1, column=0, sticky=tk.W)
+        monster_label = ttk.Label(enemy_frame, text="選擇怪物:")
+        monster_label.grid(row=1, column=0, sticky=tk.W)
         self.monster_var = tk.StringVar()
         monsters = [m.MonsterCodeID for m in GameData.Instance.MonstersDataDic.values()]
-        self.monster_combobox = ttk.Combobox(enemy_frame, textvariable=self.monster_var, values=monsters,width = 15)
-        self.monster_combobox.grid(row=1, column=1, columnspan=1)
+        monster_combobox = ttk.Combobox(enemy_frame, textvariable=self.monster_var, values=monsters,width = 15)
+        monster_combobox.grid(row=1, column=1, columnspan=1)
         if monsters:
             self.monster_var.set(monsters[0])
 
@@ -122,40 +110,32 @@ class BattleSimulatorGUI:
         
         self.enemy_class_var.set(next(iter(self.jobNameDict.values())))
 
-        # ────────────────────────────────
-        # ▼ 右側裝備區 - Equipment UI
-        # ────────────────────────────────
-        #region
+        # 敵對玩家等級
+        enemy_lv_label = ttk.Label(enemy_frame, text="等級:")
+        enemy_lv_label.grid(row=3, column=0, sticky=tk.W)
+        self.level_var = tk.IntVar(value=1)
+        enemy_lv_spinbox = ttk.Spinbox(enemy_frame, from_=1, to=100, textvariable=self.level_var,width = 15)
+        enemy_lv_spinbox.grid(row=3, column=1)
+
+        # 右側裝備區
         enemy_equipment_frame = ttk.LabelFrame(enemy_frame, text="裝備欄", padding="5")
-        enemy_equipment_frame.grid(row=3, column=0,columnspan=2, padx=1, pady=1, sticky=tk.W)
-         # 裝備部位
-        self.equipment_vars = {}
-        parts = ["頭部", "身體", "手部", "腿部", "腳部"]
-        for i, part in enumerate(parts):
-            ttk.Label(enemy_equipment_frame, text=part + ":").grid(row=i, column=0, sticky=tk.W)
-            var = tk.StringVar()
-            self.equipment_vars[part] = var
-            ttk.Combobox(enemy_equipment_frame, textvariable=var, values=["無", f"{part}裝備A", f"{part}裝備B"],width=15).grid(row=i, column=1)
-
-        # 武器（主手 / 副手）
-        ttk.Label(enemy_equipment_frame, text="主手武器:").grid(row=len(parts), column=0, sticky=tk.W)
-        self.main_hand_var = tk.StringVar()
-        ttk.Combobox(enemy_equipment_frame, textvariable=self.main_hand_var, values=["無", "劍", "杖", "弓"],width=15).grid(row=len(parts), column=1)
-
-        ttk.Label(enemy_equipment_frame, text="副手武器:").grid(row=len(parts)+1, column=0, sticky=tk.W)
-        self.off_hand_var = tk.StringVar()
-        ttk.Combobox(enemy_equipment_frame, textvariable=self.off_hand_var, values=["無", "盾", "短刀", "書"],width=15).grid(row=len(parts)+1, column=1)
-
-        #endregion
-
-        self.enemy_type_var = tk.StringVar(value="monster")
-        ttk.Radiobutton(enemy_frame, text="怪物", variable=self.enemy_type_var, value="monster",command = lambda:self.enemy_ui_switch(True,enemy_equipment_frame,enemy_class_label,enemy_class_combobox)).grid(row=0, column=1, sticky=tk.W)
-        ttk.Radiobutton(enemy_frame, text="玩家", variable=self.enemy_type_var, value="player",command = lambda:self.enemy_ui_switch(False,enemy_equipment_frame,enemy_class_label,enemy_class_combobox)).grid(row=0, column=2, sticky=tk.W)
-        if self.enemy_type_var.get() == "monster":
-            self.enemy_ui_switch(True,enemy_equipment_frame,enemy_class_label,enemy_class_combobox)
-        else:
-            self.enemy_ui_switch(False,enemy_equipment_frame,enemy_class_label,enemy_class_combobox)
+        enemy_equipment_frame.grid(row=4, column=0,columnspan=2, padx=1, pady=1, sticky=tk.W)
+        self.common_EquipmentUI(enemy_equipment_frame)
+        # === 道具按鈕 ===
+        ttk.Button(enemy_equipment_frame, text="選擇攜帶道具", command=self.open_item_window).grid(row=10, column=0, pady=10)
         
+        # 敵人類型選擇
+        ttk.Label(enemy_frame, text="敵人類型:").grid(row=0, column=0, sticky=tk.W) 
+        self.enemy_type_var = tk.StringVar(value="monster")
+        ttk.Radiobutton(enemy_frame, text="怪物", variable=self.enemy_type_var, value="monster",command = lambda:(self.enemy_ui_switch(True,enemy_equipment_frame,enemy_class_label,enemy_class_combobox,enemy_lv_label,enemy_lv_spinbox),self.enemy_ui_switch(False,monster_combobox,monster_label))).grid(row=0, column=1, sticky=tk.W)
+        ttk.Radiobutton(enemy_frame, text="玩家", variable=self.enemy_type_var, value="player",command = lambda:(self.enemy_ui_switch(False,enemy_equipment_frame,enemy_class_label,enemy_class_combobox,enemy_lv_label,enemy_lv_spinbox),self.enemy_ui_switch(True,monster_combobox,monster_label))).grid(row=0, column=2, sticky=tk.W)
+        if self.enemy_type_var.get() == "monster":
+            self.enemy_ui_switch(True,enemy_equipment_frame,enemy_class_label,enemy_class_combobox,enemy_lv_label,enemy_lv_spinbox)
+        else:
+            self.enemy_ui_switch(False,enemy_equipment_frame,enemy_class_label,enemy_class_combobox,enemy_lv_label,enemy_lv_spinbox)
+       
+        #endregion    
+
         # 戰鬥按鈕
         battle_button = ttk.Button(main_frame, text="開始戰鬥模擬", command=self.start_battle)
         battle_button.grid(row=1, column=0, columnspan=2, pady=10)
@@ -175,12 +155,74 @@ class BattleSimulatorGUI:
         ttk.Button(stats_frame, text="技能使用", command=self.show_skill_stats).pack(side=tk.LEFT, padx=5)
         ttk.Button(stats_frame, text="勝率統計", command=self.show_win_rate).pack(side=tk.LEFT, padx=5)
     
+    def common_EquipmentUI(self,frame):
+        """
+        通用的裝備以及道具攜帶的UI建立
+        """
+        # 裝備部位
+        equipment_vars = {}
+        parts = list({item.WearPartID: item.WearPartID for item in GameData.Instance.ArmorsDic.values()}.values())
+        for i, part in enumerate(parts):
+            ttk.Label(frame, text=(CommonFunction.get_text(f"TM_{part}"))+" :").grid(row=i, column=0, sticky=tk.W)
+            var = tk.StringVar()
+            equipment_vars[part] = var
+            ttk.Combobox(frame, textvariable=var, values=[CommonFunction.get_text(item.Name) for item in GameData.Instance.ArmorsDic.values() if item.WearPartID == part],width=15).grid(row=i, column=1)
+            armor_forgeLv_spinbox = ttk.Spinbox(frame, from_=0, to=10, textvariable=tk.IntVar(value=0), width=5)
+            armor_forgeLv_spinbox.grid(row=i, column=2)
+            armor_forgeLv_spinbox.set(0)
+
+        # 武器（主手 / 副手）
+        ttk.Label(frame, text="主手武器:").grid(row=len(parts), column=0, sticky=tk.W)
+        main_hand_var = tk.StringVar()
+        #主手武器清單
+        mainhandweapon = list(weapon for weapon in GameData.Instance.WeaponsDic.values() if weapon.TakeHandID in ["RightHand", "BothHand", "SingleHand"])
+        ttk.Combobox(frame, textvariable=main_hand_var, values=[CommonFunction.get_text(weapon.Name)for weapon in mainhandweapon],width=15).grid(row=len(parts), column=1)
+        mainhandweapon_forgeLv_spinbox = ttk.Spinbox(frame, from_=0, to=10, textvariable=tk.IntVar(value=0), width=5)
+        mainhandweapon_forgeLv_spinbox.grid(row=len(parts), column=2)
+        mainhandweapon_forgeLv_spinbox.set(0)
+        
+        ttk.Label(frame, text="副手武器:").grid(row=len(parts)+1, column=0, sticky=tk.W)
+        off_hand_var = tk.StringVar()
+        #副手武器清單
+        offhandweapon = list(weapon for weapon in GameData.Instance.WeaponsDic.values() if weapon.TakeHandID in ["SingleHand", "LeftHand"])
+        ttk.Combobox(frame, textvariable=off_hand_var, values=[CommonFunction.get_text(weapon.Name)for weapon in offhandweapon],width=15).grid(row=len(parts)+1, column=1)
+        offhandweapon_forgeLv_spinbox =  ttk.Spinbox(frame, from_=0, to=10, textvariable=tk.IntVar(value=1), width=5)
+        offhandweapon_forgeLv_spinbox.grid(row=len(parts)+1, column=2)
+        offhandweapon_forgeLv_spinbox.set(0)
+        
     def enemy_ui_switch(self,type:bool,*frames):
+        """
+        對手UI設定切換(玩家與怪物)
+        """
         for frame in frames:
             if(type):
                 frame.grid_remove()
             else:
                 frame.grid()
+
+    def open_item_window(self):
+        """
+        道具面板的呼叫
+        """
+        item_window = tk.Toplevel(self.root)
+        item_window.title("道具選擇")
+        
+        self.item_vars = {}
+        self.item_counts = {}
+
+        #過濾出 有技能效果(可作用的部分)
+        filtered_items = [item for item in GameData.Instance.ItemsDic.values() if len(item.ItemEffectDataList) > 0]
+        
+        for i,item in enumerate (filtered_items):
+            var = tk.BooleanVar()
+            count_var = tk.IntVar(value=1)
+            self.item_vars[item.CodeID] = var
+            self.item_counts[item.CodeID] = count_var
+
+            ttk.Checkbutton(item_window, text=CommonFunction.get_text(item.Name), variable=var).grid(row=i, column=0, sticky=tk.W)
+            ttk.Spinbox(item_window, from_=1, to=99, textvariable=count_var, width=5).grid(row=i, column=1)
+
+        ttk.Button(item_window, text="確定", command=item_window.destroy).grid(row=len(filtered_items), column=0, columnspan=2, pady=10)
 
     def start_battle(self):
         # 創建玩家角色
