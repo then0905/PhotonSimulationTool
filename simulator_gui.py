@@ -1,5 +1,7 @@
 ﻿# -*- coding: utf-8 -*-
 from ast import Lambda
+from multiprocessing import Value
+from optparse import Values
 import tkinter as tk
 from tkinter import ttk, messagebox
 from game_models import GameData
@@ -58,11 +60,12 @@ class BattleSimulatorGUI:
         ttk.Label(player_frame, text="等級:").grid(row=2, column=0, sticky=tk.W)
         self.level_var = tk.IntVar(value=1)
         ttk.Spinbox(player_frame, from_=1, to=100, textvariable=self.level_var,width = 15).grid(row=2, column=1)
+        self.level_var.set(1)
         
         # 左側裝備區
         player_equipment_frame = ttk.LabelFrame(player_frame, text="裝備欄", padding="10")
         player_equipment_frame.grid(row=4, column=0,columnspan=2, padx=1, pady=1, sticky=tk.W)
-        self.common_EquipmentUI(player_equipment_frame)
+        self.player_equipment_data = self.common_EquipmentUI(player_equipment_frame)
         # === 道具按鈕 ===
         ttk.Button(player_equipment_frame, text="選擇攜帶道具", command=self.open_item_window).grid(row=999, column=0, pady=10)
 
@@ -120,7 +123,7 @@ class BattleSimulatorGUI:
         # 右側裝備區
         enemy_equipment_frame = ttk.LabelFrame(enemy_frame, text="裝備欄", padding="5")
         enemy_equipment_frame.grid(row=4, column=0,columnspan=2, padx=1, pady=1, sticky=tk.W)
-        self.common_EquipmentUI(enemy_equipment_frame)
+        self.enemy_equipment_data = self.common_EquipmentUI(enemy_equipment_frame)
         # === 道具按鈕 ===
         ttk.Button(enemy_equipment_frame, text="選擇攜帶道具", command=self.open_item_window).grid(row=10, column=0, pady=10)
         
@@ -159,37 +162,62 @@ class BattleSimulatorGUI:
         """
         通用的裝備以及道具攜帶的UI建立
         """
-        # 裝備部位
+        # 裝備部位資料
         equipment_vars = {}
+        # 裝備部位強化等級資料
+        equipment_forge_vars = {}
+        #儲存所有widget參考
+        widgets_dict = {} 
+
         parts = list({item.WearPartID: item.WearPartID for item in GameData.Instance.ArmorsDic.values()}.values())
         for i, part in enumerate(parts):
             ttk.Label(frame, text=(CommonFunction.get_text(f"TM_{part}"))+" :").grid(row=i, column=0, sticky=tk.W)
-            var = tk.StringVar()
-            equipment_vars[part] = var
-            ttk.Combobox(frame, textvariable=var, values=[CommonFunction.get_text(item.Name) for item in GameData.Instance.ArmorsDic.values() if item.WearPartID == part],width=15).grid(row=i, column=1)
-            armor_forgeLv_spinbox = ttk.Spinbox(frame, from_=0, to=10, textvariable=tk.IntVar(value=0), width=5)
+            armor_id = tk.StringVar()        
+            ttk.Combobox(frame, textvariable=armor_id, values=[CommonFunction.get_text(item.Name) for item in GameData.Instance.ArmorsDic.values() if item.WearPartID == part],width=15).grid(row=i, column=1)
+            armor_forge_lv = tk.IntVar(value=0)
+            armor_forgeLv_spinbox = ttk.Spinbox(frame, from_=0, to=10, textvariable=armor_forge_lv, width=5)
             armor_forgeLv_spinbox.grid(row=i, column=2)
             armor_forgeLv_spinbox.set(0)
+            equipment_vars[part] = armor_id#next((k for k, v in GameData.Instance.GameTextDataDic.items() if v.TextContent == armor_id), None)
+            equipment_forge_vars[part] = armor_forge_lv
 
         # 武器（主手 / 副手）
         ttk.Label(frame, text="主手武器:").grid(row=len(parts), column=0, sticky=tk.W)
-        main_hand_var = tk.StringVar()
+        
         #主手武器清單
         mainhandweapon = list(weapon for weapon in GameData.Instance.WeaponsDic.values() if weapon.TakeHandID in ["RightHand", "BothHand", "SingleHand"])
-        ttk.Combobox(frame, textvariable=main_hand_var, values=[CommonFunction.get_text(weapon.Name)for weapon in mainhandweapon],width=15).grid(row=len(parts), column=1)
-        mainhandweapon_forgeLv_spinbox = ttk.Spinbox(frame, from_=0, to=10, textvariable=tk.IntVar(value=0), width=5)
+        
+        mainhandweapon_id = tk.StringVar()
+        mainhandweapon_combobox = ttk.Combobox(frame, textvariable=mainhandweapon_id, values=[CommonFunction.get_text(weapon.Name)for weapon in mainhandweapon],width=15)
+        mainhandweapon_combobox.grid(row=len(parts), column=1)
+        mainhandweapon_forge_lv = tk.IntVar(value=0)
+        mainhandweapon_forgeLv_spinbox = ttk.Spinbox(frame, from_=0, to=10, textvariable=mainhandweapon_forge_lv, width=5)
         mainhandweapon_forgeLv_spinbox.grid(row=len(parts), column=2)
         mainhandweapon_forgeLv_spinbox.set(0)
+        equipment_vars["mainhand"] = mainhandweapon_id#next((k for k, v in GameData.Instance.GameTextDataDic.items() if v.TextContent == mainhandweapon_id), None)
+        equipment_forge_vars["mainhand"] = mainhandweapon_forge_lv
         
         ttk.Label(frame, text="副手武器:").grid(row=len(parts)+1, column=0, sticky=tk.W)
-        off_hand_var = tk.StringVar()
+        
         #副手武器清單
         offhandweapon = list(weapon for weapon in GameData.Instance.WeaponsDic.values() if weapon.TakeHandID in ["SingleHand", "LeftHand"])
-        ttk.Combobox(frame, textvariable=off_hand_var, values=[CommonFunction.get_text(weapon.Name)for weapon in offhandweapon],width=15).grid(row=len(parts)+1, column=1)
-        offhandweapon_forgeLv_spinbox =  ttk.Spinbox(frame, from_=0, to=10, textvariable=tk.IntVar(value=1), width=5)
+        
+        offhandweapon_id = tk.StringVar()
+        offhandweapon_combobox = ttk.Combobox(frame, textvariable=offhandweapon_id, values=[CommonFunction.get_text(weapon.Name)for weapon in offhandweapon],width=15)
+        offhandweapon_combobox.grid(row=len(parts)+1, column=1)
+        offhandweapon_forge_lv = tk.IntVar(value=0)
+        offhandweapon_forgeLv_spinbox =  ttk.Spinbox(frame, from_=0, to=10, textvariable=offhandweapon_forge_lv, width=5)
         offhandweapon_forgeLv_spinbox.grid(row=len(parts)+1, column=2)
         offhandweapon_forgeLv_spinbox.set(0)
-        
+        equipment_vars["offhand"] = offhandweapon_id#next((k for k, v in GameData.Instance.GameTextDataDic.items() if v.TextContent == offhandweapon_id), None)
+        equipment_forge_vars["offhand"] = offhandweapon_forge_lv
+
+        widgets_dict.update({
+        'equipment_vars': equipment_vars,
+        'equipment_forge_vars': equipment_forge_vars
+    })
+        return widgets_dict
+
     def enemy_ui_switch(self,type:bool,*frames):
         """
         對手UI設定切換(玩家與怪物)
@@ -229,15 +257,16 @@ class BattleSimulatorGUI:
         class_name = self.player_class_var.get()
         jobID = next((key for key, value in self.jobNameDict.items() if value == class_name), None)
         jobBonusData = next((c for c in GameData.Instance.JobBonusDic.values() if c.Job == jobID), None)
-        
+        #取得職業
         if not jobBonusData:
             messagebox.showerror("錯誤", "請選擇有效的職業")
             return
-        
+                    
         self.player_character = self.create_character(
             name=self.player_name.get(),
             jobBonusData=jobBonusData,
-            level=self.level_var.get()
+            level=self.level_var.get(),
+            equipment=self.player_equipment_data
         )
 
         # 創建敵人
@@ -255,7 +284,8 @@ class BattleSimulatorGUI:
             self.enemy_character = self.create_character(
                 name="敵對玩家",
                 jobBonusData=jobBonusData,  # 使用相同的職業
-                level=self.level_var.get()
+                level=self.level_var.get(),
+                equipment=self.enemy_equipment_data
             )
 
         # 進行戰鬥模擬
@@ -276,12 +306,30 @@ class BattleSimulatorGUI:
             "result": result
         }
     
-    def create_character(self, name: str, jobBonusData, level: int) -> BattleCharacter:
+    def create_character(self, name: str, jobBonusData, level: int , equipment = {}) -> BattleCharacter:
+        """
+        創建人物
+        """
+        
+        self.weapon_list = [
+            (weapon, equipment["equipment_forge_vars"][part_id].get())
+            for part_id, var in equipment["equipment_vars"].items()
+            for weapon in GameData.Instance.WeaponsDic.values()
+            if CommonFunction.get_text(weapon.Name) == var.get()
+        ]
+        
+        self.armor_list = [
+            (armor, equipment["equipment_forge_vars"][part_id].get())
+            for part_id, var in equipment["equipment_vars"].items()
+            for armor in GameData.Instance.ArmorsDic.values()
+            if CommonFunction.get_text(armor.Name) == var.get()
+        ]
+
         # 根據職業和等級計算屬性
         calculator = CharacterStatusCalculator(
-        player_data=None,  # 用 .create_character() 自行創建
-        weapon_list=[],
-        armor_list=[],
+        player_data=None, 
+        weapon_list=self.weapon_list,
+        armor_list=self.armor_list,
         game_data=GameData.Instance
         )
         character_data = calculator.create_character(name, jobBonusData, level)
@@ -300,9 +348,10 @@ class BattleSimulatorGUI:
         stats=character_data["stats"],
         skills=skills,
         items=[],
-        equipped_weapon=None,
-        equipped_armor=None,
-        characterType=True
+        equipped_weapon=self.weapon_list,
+        equipped_armor=self.armor_list,
+        characterType=True,
+        attackTimer=(1/character_data["stats"]["AS"])
         )
     
     def create_monster_character(self, monster) -> BattleCharacter:
@@ -336,7 +385,8 @@ class BattleSimulatorGUI:
             equipped_armor=None,
             skills=skills,
             items=[],
-            characterType=False
+            characterType=False,
+            attackTimer = 1/monster.AtkSpeed
         )
     
     def show_damage_stats(self):

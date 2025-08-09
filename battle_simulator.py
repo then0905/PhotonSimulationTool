@@ -21,6 +21,7 @@ class BattleCharacter:
     characterType:bool  #當前攻擊者類型 True:人物 False:怪物
     controlled_for_attack:float = 0 #受到控制不得使用普通攻擊類型
     controlled_for_skill:float = 0  #受到控制不得使用技能類型
+    attackTimer:float = 0   #普通攻擊計時器
 
     def action_check(self,skill:SkillData)->bool:
         if(skill.Name == "普通攻擊"):
@@ -53,6 +54,7 @@ class BattleCharacter:
         """
         命中計算
         """
+        print(f"{self.name} 當前普工計時器{self.attackTimer}")
         selfHit = 0;
         if self.characterType:
             if(skill.Name !="普通攻擊"):

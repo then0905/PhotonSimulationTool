@@ -2,6 +2,8 @@
 from dataclasses import dataclass
 import math
 
+from game_models import GameData
+
 
 @dataclass
 class StatusValues:
@@ -109,7 +111,7 @@ class CharacterStatusCalculator:
             return  # 或 raise Exception("缺少玩家資料")
 
         target_status = self.game_data.StatusFormulaDic[
-            f"MeleeATK_{self.player_data["race"]}"
+            f"MeleeATK_{self.player_data['race']}"
         ]
 
         # 計算裝備提供的近戰攻擊力加成
@@ -119,11 +121,11 @@ class CharacterStatusCalculator:
                 (
                     forge.MeleeATK
                     for forge in weapon.ForgeConfigList
-                    if forge.ForgeLv == weapon.ForceLv
+                    if forge.ForgeLv == forgeLv
                 ),
                 0,
             )
-            for weapon in self.weapon_list
+            for weapon , forgeLv in self.weapon_list
         )
 
         # 計算基礎近戰攻擊力（根據屬性點和等級）
@@ -149,11 +151,11 @@ class CharacterStatusCalculator:
                 (
                     forge.RemoteATK
                     for forge in weapon.ForgeConfigList
-                    if forge.ForgeLv == weapon.ForceLv
+                    if forge.ForgeLv == forgeLv
                 ),
                 0,
             )
-            for weapon in self.weapon_list
+            for weapon , forgeLv in self.weapon_list
         )
 
         self.temp_basal_status.RemoteATK = int(
@@ -179,11 +181,11 @@ class CharacterStatusCalculator:
                 (
                     forge.MageATK
                     for forge in weapon.ForgeConfigList
-                    if forge.ForgeLv == weapon.ForceLv
+                    if forge.ForgeLv == forgeLv
                 ),
                 0,
             )
-            for weapon in self.weapon_list
+            for weapon , forgeLv in self.weapon_list
         )
 
         self.temp_basal_status.MageATK = int(
@@ -208,24 +210,23 @@ class CharacterStatusCalculator:
                 (
                     forge.HP
                     for forge in weapon.ForgeConfigList
-                    if forge.ForgeLv == weapon.ForceLv
+                    if forge.ForgeLv == forgeLv
                 ),
                 0,
             )
-            for weapon in self.weapon_list
+            for weapon , forgeLv in self.weapon_list
         )
 
         armor_hp = sum(
-            armor.HP
-            + next(
+            armor.HP + next(
                 (
-                    forge.HP
-                    for forge in armor.ForgeConfigList
-                    if forge.ForgeLv == armor.ForceLv
+                forge.HP
+                for forge in armor.ForgeConfigList
+                if forge.ForgeLv == forge_lv
                 ),
-                0,
+                0
             )
-            for armor in self.armor_list
+            for armor, forge_lv in self.armor_list
         )
 
         self.temp_equip_status.MaxHP = weapon_hp + armor_hp
@@ -256,11 +257,11 @@ class CharacterStatusCalculator:
                 (
                     forge.MP
                     for forge in weapon.ForgeConfigList
-                    if forge.ForgeLv == weapon.ForceLv
+                    if forge.ForgeLv == forgeLv
                 ),
                 0,
             )
-            for weapon in self.weapon_list
+            for weapon , forgeLv in self.weapon_list
         )
 
         armor_mp = sum(
@@ -269,11 +270,11 @@ class CharacterStatusCalculator:
                 (
                     forge.MP
                     for forge in armor.ForgeConfigList
-                    if forge.ForgeLv == armor.ForceLv
+                    if forge.ForgeLv == forgeLv
                 ),
                 0,
             )
-            for armor in self.armor_list
+            for armor , forgeLv in self.armor_list
         )
 
         self.temp_equip_status.MaxMP = weapon_mp + armor_mp
@@ -302,11 +303,11 @@ class CharacterStatusCalculator:
                 (
                     forge.DEF
                     for forge in weapon.ForgeConfigList
-                    if forge.ForgeLv == weapon.ForceLv
+                    if forge.ForgeLv == forgeLv
                 ),
                 0,
             )
-            for weapon in self.weapon_list
+            for weapon , forgeLv in self.weapon_list
         )
 
         armor_def = sum(
@@ -315,11 +316,11 @@ class CharacterStatusCalculator:
                 (
                     forge.DEF
                     for forge in armor.ForgeConfigList
-                    if forge.ForgeLv == armor.ForceLv
+                    if forge.ForgeLv == forgeLv
                 ),
                 0,
             )
-            for armor in self.armor_list
+            for armor , forgeLv in self.armor_list
         )
 
         self.temp_equip_status.DEF = weapon_def + armor_def
@@ -346,11 +347,11 @@ class CharacterStatusCalculator:
                 (
                     forge.Avoid
                     for forge in weapon.ForgeConfigList
-                    if forge.ForgeLv == weapon.ForceLv
+                    if forge.ForgeLv == forgeLv
                 ),
                 0,
             )
-            for weapon in self.weapon_list
+            for weapon , forgeLv in self.weapon_list
         )
 
         armor_avoid = sum(
@@ -359,11 +360,11 @@ class CharacterStatusCalculator:
                 (
                     forge.Avoid
                     for forge in armor.ForgeConfigList
-                    if forge.ForgeLv == armor.ForceLv
+                    if forge.ForgeLv == forgeLv
                 ),
                 0,
             )
-            for armor in self.armor_list
+            for armor , forgeLv in self.armor_list
         )
 
         self.temp_equip_status.Avoid = weapon_avoid + armor_avoid
@@ -391,11 +392,11 @@ class CharacterStatusCalculator:
                 (
                     forge.MeleeHit
                     for forge in weapon.ForgeConfigList
-                    if forge.ForgeLv == weapon.ForceLv
+                    if forge.ForgeLv == forgeLv
                 ),
                 0,
             )
-            for weapon in self.weapon_list
+            for weapon , forgeLv in self.weapon_list
         )
 
         self.temp_basal_status.MeleeHit = int(
@@ -421,11 +422,11 @@ class CharacterStatusCalculator:
                 (
                     forge.RemoteHit
                     for forge in weapon.ForgeConfigList
-                    if forge.ForgeLv == weapon.ForceLv
+                    if forge.ForgeLv == forgeLv
                 ),
                 0,
             )
-            for weapon in self.weapon_list
+            for weapon , forgeLv in self.weapon_list
         )
 
         self.temp_basal_status.RemoteHit = int(
@@ -451,14 +452,14 @@ class CharacterStatusCalculator:
                 (
                     forge.MageHit
                     for forge in weapon.ForgeConfigList
-                    if forge.ForgeLv == weapon.ForceLv
+                    if forge.ForgeLv == forgeLv
                 ),
                 0,
             )
-            for weapon in self.weapon_list
+            for weapon , forgeLv in self.weapon_list
         )
 
-        self.temp_basal_status.RemoteHit = int(
+        self.temp_basal_status.MageHit = int(
             round(
                 self.player_data["INT"] * target_status.INT
                 + self.player_data["AGI"] * target_status.AGI
@@ -481,11 +482,11 @@ class CharacterStatusCalculator:
                 (
                     forge.MDEF
                     for forge in weapon.ForgeConfigList
-                    if forge.ForgeLv == weapon.ForceLv
+                    if forge.ForgeLv == forgeLv
                 ),
                 0,
             )
-            for weapon in self.weapon_list
+            for weapon , forgeLv in self.weapon_list
         )
 
         armor_mdef = sum(
@@ -494,11 +495,11 @@ class CharacterStatusCalculator:
                 (
                     forge.MDEF
                     for forge in armor.ForgeConfigList
-                    if forge.ForgeLv == armor.ForceLv
+                    if forge.ForgeLv == forgeLv
                 ),
                 0,
             )
-            for armor in self.armor_list
+            for armor , forgeLv in self.armor_list
         )
 
         self.temp_equip_status.MDEF = weapon_mdef + armor_mdef
@@ -514,16 +515,16 @@ class CharacterStatusCalculator:
         """計算移動速度"""
 
         self.temp_equip_status.Speed = sum(
-            armor.Armor.Speed
+            armor.Speed
             + next(
                 (
                     forge.Speed
-                    for forge in armor.Armor.ForgeConfigList
-                    if forge.ForgeLv == armor.ForceLv
+                    for forge in armor.ForgeConfigList
+                    if forge.ForgeLv == forgeLv
                 ),
                 0,
             )
-            for armor in self.armor_list
+            for armor , forgeLv in self.armor_list
         )
 
         self.temp_basal_status.Speed = 1
@@ -532,8 +533,8 @@ class CharacterStatusCalculator:
         """計算攻擊速度"""
         self.temp_equip_status.AS = next(
             (
-                self.game_data.game_setting_dic[weapon.weapon.ASID].game_setting_value
-                for weapon in self.weapon_list
+                GameData.Instance.GameSettingDic[weapon.ASID].GameSettingValue
+                for weapon , forgeLv in self.weapon_list
             ),
             0,
         )
@@ -553,11 +554,11 @@ class CharacterStatusCalculator:
                 (
                     forge.DamageReduction
                     for forge in armor.ForgeConfigList
-                    if forge.ForgeLv == armor.ForceLv
+                    if forge.ForgeLv == forgeLv
                 ),
                 0,
             )
-            for armor in self.armor_list
+            for armor , forgeLv in self.armor_list
         )
 
         self.temp_equip_status.DamageReduction = armorDamageReduction
@@ -580,11 +581,11 @@ class CharacterStatusCalculator:
                 (
                     forge.ElementDamageIncrease
                     for forge in weapon.ForgeConfigList
-                    if forge.ForgeLv == weapon.ForceLv
+                    if forge.ForgeLv == forgeLv
                 ),
                 0,
             )
-            for weapon in self.weapon_list
+            for weapon , forgeLv in self.weapon_list
         )
 
         self.temp_equip_status.ElementDamageIncrease = weaponElementDamageIncrease
@@ -607,11 +608,11 @@ class CharacterStatusCalculator:
                 (
                     forge.MDEF
                     for forge in armor.ForgeConfigList
-                    if forge.ForgeLv == armor.ForceLv
+                    if forge.ForgeLv == forgeLv
                 ),
                 0,
             )
-            for armor in self.armor_list
+            for armor , forgeLv in self.armor_list
         )
 
         self.temp_equip_status.ElementDamageReduction = armorElementDamageReduction
@@ -629,16 +630,16 @@ class CharacterStatusCalculator:
 
         # 裝備屬性傷害減免加成
         armorHP_Recovery = sum(
-            armor.HP_Recovery
+            armor.HpRecovery
             + next(
                 (
-                    forge.HP_Recovery
+                    forge.HpRecovery
                     for forge in armor.ForgeConfigList
-                    if forge.ForgeLv == armor.ForceLv
+                    if forge.ForgeLv == forgeLv
                 ),
                 0,
             )
-            for armor in self.armor_list
+            for armor , forgeLv in self.armor_list
         )
 
         self.temp_equip_status.HP_Recovery = armorHP_Recovery
@@ -656,16 +657,16 @@ class CharacterStatusCalculator:
 
         # 裝備屬性傷害減免加成
         armorMP_Recovery = sum(
-            armor.MP_Recovery
+            armor.MpRecovery
             + next(
                 (
-                    forge.MP_Recovery
+                    forge.MpRecovery
                     for forge in armor.ForgeConfigList
-                    if forge.ForgeLv == armor.ForceLv
+                    if forge.ForgeLv == forgeLv
                 ),
                 0,
             )
-            for armor in self.armor_list
+            for armor , forgeLv in self.armor_list
         )
 
         self.temp_equip_status.MP_Recovery = armorMP_Recovery
@@ -686,11 +687,11 @@ class CharacterStatusCalculator:
                 (
                     forge.Crt
                     for forge in weapon.ForgeConfigList
-                    if forge.ForgeLv == weapon.ForceLv
+                    if forge.ForgeLv == forgeLv
                 ),
                 0,
             )
-            for weapon in self.weapon_list
+            for weapon , forgeLv in self.weapon_list
         )
 
         self.temp_equip_status.Crt = weapon_crt
@@ -706,11 +707,11 @@ class CharacterStatusCalculator:
                 (
                     forge.CrtResistance
                     for forge in armor.ForgeConfigList
-                    if forge.ForgeLv == armor.ForceLv
+                    if forge.ForgeLv == forgeLv
                 ),
                 0,
             )
-            for armor in self.armor_list
+            for armor , forgeLv in self.armor_list
         )
 
         self.temp_equip_status.CrtResistance = armor_crtResistance
@@ -726,11 +727,11 @@ class CharacterStatusCalculator:
                 (
                     forge.CrtDamage
                     for forge in weapon.ForgeConfigList
-                    if forge.ForgeLv == weapon.ForceLv
+                    if forge.ForgeLv == forgeLv
                 ),
                 0,
             )
-            for weapon in self.weapon_list
+            for weapon , forgeLv in self.weapon_list
         )
 
         self.temp_equip_status.CrtDamage = weapon_crtDamage
@@ -746,11 +747,11 @@ class CharacterStatusCalculator:
                 (
                     forge.BlockRate
                     for forge in armor.ForgeConfigList
-                    if forge.ForgeLv == armor.ForceLv
+                    if forge.ForgeLv == forgeLv
                 ),
                 0,
             )
-            for armor in self.armor_list
+            for armor , forgeLv in self.armor_list
         )
 
         self.temp_equip_status.BlockRate = armor_blockRate
@@ -759,7 +760,7 @@ class CharacterStatusCalculator:
         """
         創建新角色並計算初始屬性
 
-        Args:
+        Args: 
             name: 角色名稱
             char_class: 職業配置資料
             level: 角色等級
@@ -770,46 +771,44 @@ class CharacterStatusCalculator:
         # 創建臨時玩家數據用於屬性計算
         temp_player_data = self._create_player_data(jobBonusData, level)
 
-        # 建立計算器實例（無裝備狀態）
-        calculator = CharacterStatusCalculator(
-            player_data=temp_player_data,
-            weapon_list=[],  # 新角色沒有武器
-            armor_list=[],  # 新角色沒有防具
-            game_data=self.game_data,
-        )
+        # 更新當前實例的玩家數據
+        self.player_data = temp_player_data
 
-        # 計算屬性
-        status = calculator.calculate_all_status()
-
+        # 使用當前實例的裝備進行計算
+        status = self.calculate_all_status()
+        
         # 返回完整角色數據
         return {
             "name": name,  # 角色名稱
             "char_class": jobBonusData,  # 職業資料
             "level": level,  # 等級
             "stats": {  # 計算後的屬性值
-                "MaxHP": status["basal"].MaxHP,
-                "HP": status["basal"].MaxHP,
-                "MaxMP": status["basal"].MaxMP,
-                "MP": status["basal"].MaxMP,
-                "MeleeATK": status["basal"].MeleeATK,
-                "RemoteATK": status["basal"].RemoteATK,
-                "MageATK": status["basal"].MageATK,
-                "DEF": status["basal"].DEF,
-                "Avoid": status["basal"].Avoid,
-                "MeleeHit": status["basal"].MeleeHit,
-                "RemoteHit": status["basal"].RemoteHit,
-                "MageHit": status["basal"].MageHit,
-                "MDEF": status["basal"].MDEF,
-                "AS": status["basal"].AS,
-                "DamageReduction": status["basal"].DamageReduction,
-                "ElementDamageIncrease": status["basal"].ElementDamageIncrease,
-                "ElementDamageReduction": status["basal"].ElementDamageReduction,
-                "HP_Recovery": status["basal"].HP_Recovery,
-                "MP_Recovery": status["basal"].MP_Recovery,
-                "Crt": status["basal"].Crt,
-                "CrtResistance": status["basal"].CrtResistance,
-                "CrtDamage": status["basal"].CrtDamage,
-                "BlockRate": status["basal"].BlockRate,
+                "MaxHP": status["basal"].MaxHP + status["equip"].MaxHP,
+            "HP": status["basal"].MaxHP + status["equip"].MaxHP,
+            "MaxMP": status["basal"].MaxMP + status["equip"].MaxHP,
+            "MP": status["basal"].MaxMP + status["equip"].MaxHP,
+            "MeleeATK": status["basal"].MeleeATK + status["equip"].MeleeATK,
+            "RemoteATK": status["basal"].RemoteATK + status["equip"].RemoteATK,
+            "MageATK": status["basal"].MageATK + status["equip"].MageATK,
+            "DEF": status["basal"].DEF + status["equip"].DEF,
+            "Avoid": status["basal"].Avoid + status["equip"].Avoid,
+            "MeleeHit": status["basal"].MeleeHit + status["equip"].MeleeHit,
+            "RemoteHit": status["basal"].RemoteHit + status["equip"].RemoteHit,
+            "MageHit": status["basal"].MageHit + status["equip"].MageHit,
+            "MDEF": status["basal"].MDEF + status["equip"].MDEF,
+            "Speed": status["basal"].Speed + status["equip"].Speed,
+            "AS": status["basal"].AS + status["equip"].AS,
+            "DamageReduction": status["basal"].DamageReduction + status["equip"].DamageReduction,
+            "ElementDamageIncrease": status["basal"].ElementDamageIncrease
+            + status["equip"].ElementDamageIncrease,
+            "ElementDamageReduction": status["basal"].ElementDamageReduction
+            + status["equip"].ElementDamageReduction,
+            "HP_Recovery": status["basal"].HP_Recovery + status["equip"].HP_Recovery,
+            "MP_Recovery": status["basal"].MP_Recovery + status["equip"].MP_Recovery,
+            "Crt": status["basal"].Crt+ status["equip"].Crt,
+            "CrtResistance": status["basal"].CrtResistance+ status["equip"].CrtResistance,
+            "CrtDamage": status["basal"].CrtDamage+ status["equip"].CrtDamage,
+            "BlockRate": status["basal"].BlockRate+ status["equip"].BlockRate,
             },
             "equipped_weapon": None,  # 裝備的武器（初始為空）
             "equipped_armor": None,  # 裝備的防具（初始為空）

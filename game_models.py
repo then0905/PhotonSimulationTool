@@ -127,7 +127,7 @@ class MonsterDataModel(BasalAttributesDataModel):
     UseSkill: bool = False
     ATK: int = 0
     Hit: int = 0
-    AtkSpeed: int = 0
+    AtkSpeed: float = 0.0
     AttackRange: int = 0
     PursueRange: int = 0
     WalkSpeed: int = 0
