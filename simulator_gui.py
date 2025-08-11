@@ -6,7 +6,6 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from game_models import GameData
 from battle_simulator import BattleSimulator, BattleCharacter
-# import imp
 from stats_analyzer import StatsAnalyzer
 from status_operation import CharacterStatusCalculator
 from commonfunction import CommonFunction
@@ -14,7 +13,7 @@ from typing import Dict
 
 class BattleSimulatorGUI:
     jobNameDict: Dict[str, str] = {}
-
+    
     def __init__(self, root):
         self.root = root
         self.root.title("UnityAI")
@@ -29,7 +28,7 @@ class BattleSimulatorGUI:
         self.player_character = None
         self.enemy_character = None
         self.battle_results = []
-    
+        
     def create_widgets(self):
         # 主框架
         main_frame = ttk.Frame(self.root, padding="10")
@@ -58,9 +57,9 @@ class BattleSimulatorGUI:
         
         # 等級
         ttk.Label(player_frame, text="等級:").grid(row=2, column=0, sticky=tk.W)
-        self.level_var = tk.IntVar(value=1)
-        ttk.Spinbox(player_frame, from_=1, to=100, textvariable=self.level_var,width = 15).grid(row=2, column=1)
-        self.level_var.set(1)
+        self.player_level_var = tk.IntVar(value=1)
+        ttk.Spinbox(player_frame, from_=1, to=100, textvariable=self.player_level_var,width = 15).grid(row=2, column=1)
+        self.player_level_var.set(1)
         
         # 左側裝備區
         player_equipment_frame = ttk.LabelFrame(player_frame, text="裝備欄", padding="10")
@@ -116,8 +115,8 @@ class BattleSimulatorGUI:
         # 敵對玩家等級
         enemy_lv_label = ttk.Label(enemy_frame, text="等級:")
         enemy_lv_label.grid(row=3, column=0, sticky=tk.W)
-        self.level_var = tk.IntVar(value=1)
-        enemy_lv_spinbox = ttk.Spinbox(enemy_frame, from_=1, to=100, textvariable=self.level_var,width = 15)
+        self.enemy_level_var = tk.IntVar(value=1)
+        enemy_lv_spinbox = ttk.Spinbox(enemy_frame, from_=1, to=100, textvariable=self.enemy_level_var,width = 15)
         enemy_lv_spinbox.grid(row=3, column=1)
 
         # 右側裝備區
@@ -265,7 +264,7 @@ class BattleSimulatorGUI:
         self.player_character = self.create_character(
             name=self.player_name.get(),
             jobBonusData=jobBonusData,
-            level=self.level_var.get(),
+            level=self.player_level_var.get(),
             equipment=self.player_equipment_data
         )
 
@@ -284,27 +283,13 @@ class BattleSimulatorGUI:
             self.enemy_character = self.create_character(
                 name="敵對玩家",
                 jobBonusData=jobBonusData,  # 使用相同的職業
-                level=self.level_var.get(),
+                level=self.enemy_level_var.get(),
                 equipment=self.enemy_equipment_data
             )
 
         # 進行戰鬥模擬
-        simulator = BattleSimulator(GameData.Instance)
-        result = simulator.simulate_battle(self.player_character, self.enemy_character)
-        self.battle_results.append(result)
-        
-        # 顯示戰鬥日誌
-        # self.log_text.config(state=tk.NORMAL)
-        # self.log_text.delete(1.0, tk.END)
-        self.display_battle_log(simulator.get_battle_log())
-        # self.log_text.config(state=tk.DISABLED)
-        
-        # 保存戰鬥數據用於統計
-        self.last_battle_data = {
-            "damage": simulator.get_damage_data(),
-            "skill_usage": simulator.get_skill_usage(),
-            "result": result
-        }
+        simulator = BattleSimulator(GameData.Instance,self)
+        simulator.simulate_battle(self.player_character, self.enemy_character)
     
     def create_character(self, name: str, jobBonusData, level: int , equipment = {}) -> BattleCharacter:
         """
@@ -419,6 +404,8 @@ class BattleSimulatorGUI:
             self._insert_colored_log(line)
 
         self.log_text.config(state=tk.DISABLED)        
+        # 滾動到最新訊息
+        self.log_text.see(tk.END)
 
     def _insert_colored_log(self, log_line: str):
         """

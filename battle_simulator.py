@@ -22,6 +22,7 @@ class BattleCharacter:
     controlled_for_attack:float = 0 #受到控制不得使用普通攻擊類型
     controlled_for_skill:float = 0  #受到控制不得使用技能類型
     attackTimer:float = 0   #普通攻擊計時器
+    attackTimerFunc = None #儲存普攻計時任務
 
     def action_check(self,skill:SkillData)->bool:
         if(skill.Name == "普通攻擊"):
@@ -50,11 +51,10 @@ class BattleCharacter:
                 controlled_for_skill+=op.EffectDurationTime
                 controlled_for_attack+=op.EffectDurationTime
 
-    def HitCalculator(self, skill: SkillData, target) -> Tuple[str, int]:
+    def HitCalculator(self, skill: SkillData, target) -> Tuple[str, int, int]:
         """
         命中計算
         """
-        print(f"{self.name} 當前普工計時器{self.attackTimer}")
         selfHit = 0;
         if self.characterType:
             if(skill.Name !="普通攻擊"):
@@ -80,19 +80,19 @@ class BattleCharacter:
         if is_hit <= hit_value:
             return self.BlockCalculator(skill,target)
         else:
-            return f" <color=#00ffdc>{self.name}</color> 使用 <color=#ff9300>{CommonFunction.get_text(skill.Name)}</color> 但攻擊並沒有命中！", 0
+            return f" <color=#00ffdc>{self.name}</color> 使用 <color=#ff9300>{CommonFunction.get_text(skill.Name)}</color> 但攻擊並沒有命中！", 0, self.attackTimer
     
-    def BlockCalculator(self, skill: SkillData, target)-> Tuple[str, int]:
+    def BlockCalculator(self, skill: SkillData, target)-> Tuple[str, int, int]:
         """
         格檔計算
         """
         is_block = random.randint(0,100)    
         if(is_block <= self.stats["BlockRate"]):
-            return f" <color=#00ffdc>{self.name}</color> 使用 <color=#ff9300>{CommonFunction.get_text(skill.Name)}</color> 但被格檔了！", 0
+            return f" <color=#00ffdc>{self.name}</color> 使用 <color=#ff9300>{CommonFunction.get_text(skill.Name)}</color> 但被格檔了！", 0, self.attackTimer
         else:
             return self.CrtCalculator(skill,target)
             
-    def CrtCalculator(self, skill: SkillData, target)-> Tuple[str, int]:
+    def CrtCalculator(self, skill: SkillData, target)-> Tuple[str, int, int]:
         """
         暴擊計算
         """
@@ -106,7 +106,7 @@ class BattleCharacter:
         
         return self.AttackCalculator(skill,target,(is_Crt<=crt_value));
             
-    def AttackCalculator(self, skill: SkillData, target,is_Crt:bool) -> Tuple[str, int]:
+    def AttackCalculator(self, skill: SkillData, target,is_Crt:bool) -> Tuple[str, int, int]:
         """
         攻擊計算
         """
@@ -171,63 +171,72 @@ class BattleCharacter:
         
         color_code = '#ffba01' if is_Crt else '#ff0000'
         
-        return f" <color=#00ffdc>{self.name}</color> 使用 <color=#ff9300>{CommonFunction.get_text(skill.Name)}</color> 對  <color=#83ff00>{target.name}</color> 造成 <color={color_code}>{finalDamage}</color> 傷害！", finalDamage
+        return f" <color=#00ffdc>{self.name}</color> 使用 <color=#ff9300>{CommonFunction.get_text(skill.Name)}</color> 對  <color=#83ff00>{target.name}</color> 造成 <color={color_code}>{finalDamage}</color> 傷害！", finalDamage, self.attackTimer
 
 class BattleSimulator:
-    def __init__(self, game_data):
+    def __init__(self, game_data,gui):
         self.game_data = game_data
+        self.gui = gui
         self.battle_log: List[str] = []
         self.damage_data: List[Dict] = []
         self.skill_usage: Dict[str, int] = {}
     
-    def simulate_battle(self, player: BattleCharacter, enemy: BattleCharacter, max_turns=50) -> bool:
-        """返回True表示玩家勝利"""
+
+
+    def simulate_battle(self, player: BattleCharacter, enemy: BattleCharacter):
+        """開啟戰鬥模擬"""
         self.battle_log.clear()
         self.damage_data.clear()
         self.skill_usage = {s.Name: 0 for s in player.skills}
-        
-        for turn in range(1, max_turns + 1):
-            self.battle_log.append(f"=== 第 {turn} 回合 ===")
-            
-            # 玩家行動
-            skill = self._choose_skill(player)
-            if player.action_check(skill):
-                log_msg, damage = player.HitCalculator(skill, enemy)
-                self.battle_log.append(log_msg)
-                self.damage_data.append({
-                    "turn": turn,
-                    "attacker": player.name,
-                    "target": enemy.name,
-                    "skill": skill.Name,
-                    "damage": damage
-                })
-                if skill.Name != '普通攻擊':
-                    self.skill_usage[skill.Name] += 1
-            
-            # 敵人行動
-            skill = self._choose_skill(enemy)
-            if enemy.action_check(skill):
-                log_msg, damage = enemy.HitCalculator(skill, player)
-                self.battle_log.append(log_msg)
-                self.damage_data.append({
-                    "turn": turn,
-                    "attacker": enemy.name,
-                    "target": player.name,
-                    "skill": skill.Name,
-                    "damage": damage
-                })
-            
-            # 檢查戰鬥結束
-            if not enemy.is_alive():
-                self.battle_log.append(f"{enemy.name} 被擊敗了！{player.name} 獲勝！")
-                return True
-            if not player.is_alive():
-                self.battle_log.append(f"{player.name} 被擊敗了！{enemy.name} 獲勝！")
-                return False
-        
-        self.battle_log.append("戰鬥超過最大回合數，判定為平局！")
-        return False
+       
+
+        #雙方同時運作攻擊計時器
+        self.attack_loop(player, enemy)
+        self.attack_loop(enemy, player)
     
+    def check_battle_result(self, player: BattleCharacter, enemy: BattleCharacter):
+        """
+        進行戰鬥結果確認
+        """
+        if player.is_alive():
+            print(f"{enemy.name} 被擊敗了！{player.name} 獲勝！")
+            self.battle_log.append(f"{enemy.name} 被擊敗了！{player.name} 獲勝！")
+            self.gui.battle_results.append(True);
+        else:
+            print(f"{player.name} 被擊敗了！{enemy.name} 獲勝！")
+            self.battle_log.append(f"{player.name} 被擊敗了！{enemy.name} 獲勝！")
+        
+        self.gui.display_battle_log(self.get_battle_log());
+            # 保存戰鬥數據用於統計
+        self.gui.last_battle_data = {
+            "damage": self.get_damage_data(),
+            "skill_usage": self.get_skill_usage(),
+            "result": player.is_alive()
+        }
+
+    def attack_loop(self, attacker: BattleCharacter, target):
+        """獨立的攻擊計時器迴圈"""
+        
+        if attacker.is_alive() and target.is_alive():
+            skill = self._choose_skill(attacker)
+            if attacker.action_check(skill):
+                log_msg, damage, attack_timer = attacker.HitCalculator(skill, target)
+                self.battle_log.append(log_msg)
+                if(skill.SkillID == "NORMAL_ATTACK"):
+                    self.battle_log.append(f"<color=#00ffdc>{attacker.name}</color> 進入<color=#ff0000>普攻</color>計時 {attack_timer:.2f} 秒")
+                    self.gui.display_battle_log(self.get_battle_log());
+                    attacker.attackTimerFunc = self.gui.root.after(int(attack_timer*1000) ,lambda: self.attack_loop(attacker, target))
+                else:
+                    self.battle_log.append(f"<color=#00ffdc>{attacker.name}</color> 施放了 <color=#ff0000>{CommonFunction.get_text(skill.Name)}</color> 需等待 {skill.CD} 秒")
+                    self.gui.display_battle_log(self.get_battle_log());
+                    attacker.attackTimerFunc = self.gui.root.after(int(skill.CD*1000) ,lambda: self.attack_loop(attacker, target))
+            else:
+                attacker.attackTimerFunc = self.gui.root.after(100, lambda: self.attack_loop(attacker, target))
+        else:
+            if(attacker.attackTimerFunc is not None):
+                self.gui.root.after_cancel(attacker.attackTimerFunc)
+                self.check_battle_result(attacker,target)
+        
     def _choose_skill(self, character: BattleCharacter) -> SkillData :
         # 簡單的AI選擇技能邏輯
         available_skills = [s for s in character.skills if character.stats["MP"] >= s.CastMage]
