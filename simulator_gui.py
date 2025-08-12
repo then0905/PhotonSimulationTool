@@ -34,6 +34,43 @@ class BattleSimulatorGUI:
         main_frame = ttk.Frame(self.root, padding="10")
         main_frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
         
+        class ColoredBar(tk.Canvas):
+            """
+            彩色條
+            """
+            def __init__(self, master, width=200, height=20, fg_color="red", **kwargs):
+                super().__init__(master, width=width, height=height, bg="gray20", highlightthickness=0, **kwargs)
+                self.width = width
+                self.height = height
+                self.fg_color = fg_color
+                self.current_value = 0
+                self.max_value = 100
+                self.draw_bar()
+
+            def set_value(self, current, max_value):
+                """
+                設定bar的數值
+                
+                 Args:
+                    current: 當前值
+                    max_value: 最大值
+                """
+                self.current_value = max(0, min(current, max_value))
+                self.max_value = max_value
+                self.draw_bar()
+
+            def draw_bar(self):
+                """
+                繪畫bar的顏色、樣子
+                """
+                self.delete("all")
+                ratio = self.current_value / self.max_value if self.max_value > 0 else 0
+                bar_width = int(self.width * ratio)
+                self.create_rectangle(0, 0, bar_width, self.height, fill=self.fg_color, outline="")
+                self.create_text(self.width // 2, self.height // 2,
+                            text=f"{self.current_value}/{self.max_value}",
+                            fill="white", font=("Arial", 10, "bold"))
+                
         #region 左側玩家設置
         
         player_frame = ttk.LabelFrame(main_frame, text="玩家設置", padding="20")
@@ -43,27 +80,37 @@ class BattleSimulatorGUI:
         ttk.Label(player_frame, text="角色名稱:").grid(row=0, column=0, sticky=tk.W)
         self.player_name = tk.StringVar(value="玩家1")
         ttk.Entry(player_frame, textvariable=self.player_name,width = 15).grid(row=0, column=1)
-        
+
         # 職業選擇
         ttk.Label(player_frame, text="職業:").grid(row=1, column=0, sticky=tk.W)
         self.player_class_var = tk.StringVar()
+        
         for jobData in GameData.Instance.JobBonusDic.values():
             self.jobNameDict.update({jobData.Job: CommonFunction.get_text("TM_"+jobData.Job)})
-            
         tempJobNameList = list(self.jobNameDict.values())
-        ttk.Combobox(player_frame, textvariable=self.player_class_var, values=tempJobNameList,width = 15).grid(row=1, column=1)
         
+        ttk.Combobox(player_frame, textvariable=self.player_class_var, values=tempJobNameList,width = 15).grid(row=1, column=1)
         self.player_class_var.set(next(iter(self.jobNameDict.values())))
+            
+        #角色血量
+        self.player_hp_bar = ColoredBar(player_frame, width=150, height=20, fg_color="red")
+        self.player_hp_bar.grid(row=2, column=1, columnspan=2, pady=2)
+        self.player_hp_bar.set_value(100, 100)  # 預設滿血，可根據角色資料初始化
+        
+        #角色魔力
+        self.player_mp_bar = ColoredBar(player_frame, width=150, height=20, fg_color="blue")
+        self.player_mp_bar.grid(row=3, column=1, columnspan=2, pady=2)
+        self.player_mp_bar.set_value(50, 50)  # 預設滿魔力，可根據角色資料初始化
         
         # 等級
-        ttk.Label(player_frame, text="等級:").grid(row=2, column=0, sticky=tk.W)
+        ttk.Label(player_frame, text="等級:").grid(row=4, column=0, sticky=tk.W)
         self.player_level_var = tk.IntVar(value=1)
-        ttk.Spinbox(player_frame, from_=1, to=100, textvariable=self.player_level_var,width = 15).grid(row=2, column=1)
+        ttk.Spinbox(player_frame, from_=1, to=100, textvariable=self.player_level_var,width = 15).grid(row=4, column=1)
         self.player_level_var.set(1)
         
         # 左側裝備區
         player_equipment_frame = ttk.LabelFrame(player_frame, text="裝備欄", padding="10")
-        player_equipment_frame.grid(row=4, column=0,columnspan=2, padx=1, pady=1, sticky=tk.W)
+        player_equipment_frame.grid(row=5, column=0,columnspan=2, padx=1, pady=1, sticky=tk.W)
         self.player_equipment_data = self.common_EquipmentUI(player_equipment_frame)
         # === 道具按鈕 ===
         ttk.Button(player_equipment_frame, text="選擇攜帶道具", command=self.open_item_window).grid(row=999, column=0, pady=10)
@@ -114,14 +161,23 @@ class BattleSimulatorGUI:
 
         # 敵對玩家等級
         enemy_lv_label = ttk.Label(enemy_frame, text="等級:")
-        enemy_lv_label.grid(row=3, column=0, sticky=tk.W)
+        enemy_lv_label.grid(row=5, column=0, sticky=tk.W)
         self.enemy_level_var = tk.IntVar(value=1)
         enemy_lv_spinbox = ttk.Spinbox(enemy_frame, from_=1, to=100, textvariable=self.enemy_level_var,width = 15)
-        enemy_lv_spinbox.grid(row=3, column=1)
-
+        enemy_lv_spinbox.grid(row=5, column=1)
+        
+        #角色血量
+        self.enemy_hp_bar = ColoredBar(enemy_frame, width=150, height=20, fg_color="red")
+        self.enemy_hp_bar.grid(row=3, column=1, columnspan=2, pady=2)
+        self.enemy_hp_bar.set_value(100, 100)  # 預設滿血，可根據角色資料初始化
+        #角色魔力
+        self.enemy_mp_bar = ColoredBar(enemy_frame, width=150, height=20, fg_color="blue")
+        self.enemy_mp_bar.grid(row=4, column=1, columnspan=2, pady=2)
+        self.enemy_mp_bar.set_value(50, 50)  # 預設滿魔力，可根據角色資料初始化
+        
         # 右側裝備區
         enemy_equipment_frame = ttk.LabelFrame(enemy_frame, text="裝備欄", padding="5")
-        enemy_equipment_frame.grid(row=4, column=0,columnspan=2, padx=1, pady=1, sticky=tk.W)
+        enemy_equipment_frame.grid(row=5, column=0,columnspan=2, padx=1, pady=1, sticky=tk.W)
         self.enemy_equipment_data = self.common_EquipmentUI(enemy_equipment_frame)
         # === 道具按鈕 ===
         ttk.Button(enemy_equipment_frame, text="選擇攜帶道具", command=self.open_item_window).grid(row=10, column=0, pady=10)
@@ -157,6 +213,8 @@ class BattleSimulatorGUI:
         ttk.Button(stats_frame, text="技能使用", command=self.show_skill_stats).pack(side=tk.LEFT, padx=5)
         ttk.Button(stats_frame, text="勝率統計", command=self.show_win_rate).pack(side=tk.LEFT, padx=5)
     
+
+
     def common_EquipmentUI(self,frame):
         """
         通用的裝備以及道具攜帶的UI建立

@@ -180,7 +180,7 @@ class BattleSimulator:
         self.battle_log: List[str] = []
         self.damage_data: List[Dict] = []
         self.skill_usage: Dict[str, int] = {}
-    
+        self.update_hp_mp = None    #用來儲存更新雙方血量魔力的匿名方法
 
 
     def simulate_battle(self, player: BattleCharacter, enemy: BattleCharacter):
@@ -188,8 +188,18 @@ class BattleSimulator:
         self.battle_log.clear()
         self.damage_data.clear()
         self.skill_usage = {s.Name: 0 for s in player.skills}
-       
-
+        
+        #匿名方法 更新雙方血量魔力
+        def update_hp_mp():
+            self.gui.player_hp_bar.set_value(player.stats["HP"],player.stats["MaxHP"])
+            self.gui.player_mp_bar.set_value(player.stats["MP"],player.stats["MaxMP"])
+            self.gui.enemy_hp_bar.set_value(enemy.stats["HP"],enemy.stats["MaxHP"])
+            self.gui.enemy_mp_bar.set_value(enemy.stats["MP"],enemy.stats["MaxMP"])        
+        self.update_hp_mp = update_hp_mp
+        
+        #初始化雙方血量魔力
+        self.update_hp_mp()
+        
         #雙方同時運作攻擊計時器
         self.attack_loop(player, enemy)
         self.attack_loop(enemy, player)
@@ -230,6 +240,8 @@ class BattleSimulator:
                     self.battle_log.append(f"<color=#00ffdc>{attacker.name}</color> 施放了 <color=#ff0000>{CommonFunction.get_text(skill.Name)}</color> 需等待 {skill.CD} 秒")
                     self.gui.display_battle_log(self.get_battle_log());
                     attacker.attackTimerFunc = self.gui.root.after(int(skill.CD*1000) ,lambda: self.attack_loop(attacker, target))
+                #更新雙方血量魔力
+                self.update_hp_mp()
             else:
                 attacker.attackTimerFunc = self.gui.root.after(100, lambda: self.attack_loop(attacker, target))
         else:
