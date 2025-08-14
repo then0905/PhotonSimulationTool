@@ -6,7 +6,8 @@ from game_models import SkillData,SkillOperationData, MonsterDataModel, MonsterD
 from formula_parser import FormulaParser
 from typing import Tuple
 from commonfunction import CommonFunction
-# from skill_processor import SkillProcessor
+from skill_processor import SkillProcessor
+from status_operation import StatusValues
 
 @dataclass
 class BattleCharacter:
@@ -14,6 +15,9 @@ class BattleCharacter:
     jobBonusData: JobBonusDataModel
     level: int
     stats: Dict[str, int]
+    basal:StatusValues
+    equip:StatusValues
+    effect:StatusValues
     equipped_weapon: Optional[WeaponDataModel]
     equipped_armor: Optional[ArmorDataModel]
     skills: List[SkillData]
@@ -173,6 +177,96 @@ class BattleCharacter:
         
         return f" <color=#00ffdc>{self.name}</color> 使用 <color=#ff9300>{CommonFunction.get_text(skill.Name)}</color> 對  <color=#83ff00>{target.name}</color> 造成 <color={color_code}>{finalDamage}</color> 傷害！", finalDamage, self.attackTimer
 
+    def SkillEffectStatusOperation(self, stateType:str, isRate:bool, value:float):
+        """
+        技能效果運算
+        """
+        match(stateType):
+            case "MeleeATK":
+                self.effect.MeleeATK += round(self.basal.MeleeATK * value) if isRate else round(value)
+                print(f"basal.MeleeATK:{self.basal.MeleeATK} valur:{value} processor{self.basal.MeleeATK * value}  final to int {round(self.basal.MeleeATK * value)}")
+            case "RemoteATK":
+                self.effect.RemoteATK += round(self.basal.RemoteATK * value) if isRate else round(value)
+            case "MageATK":
+                self.effect.MageATK += round(self.basal.MageATK * value) if isRate else round(value)    
+            case "MaxHP":
+                self.effect.MaxHP += round(self.basal.MaxHP * value) if isRate else round(value)
+                print(f"basal.MaxHP:{self.basal.MaxHP} valur:{value} processor{self.basal.MaxHP * value}  final to int {round(self.basal.MaxHP * value)}")
+            case "MaxMP":
+                self.effect.MaxMP += round(self.basal.MaxMP * value) if isRate else round(value)
+            case "DEF":
+                self.effect.DEF += round(self.basal.DEF * value) if isRate else round(value)
+            case "Avoid":
+                self.effect.Avoid += round(self.basal.Avoid * value) if isRate else round(value)
+            case "MeleeHit":
+                self.effect.MeleeHit += round(self.basal.MeleeHit * value) if isRate else round(value)
+            case "RemoteHit":
+                self.effect.RemoteHit += round(self.basal.RemoteHit * value) if isRate else round(value)
+            case "MageHit":
+                self.effect.MageHit += round(self.basal.MageHit * value) if isRate else round(value)
+            case "MDEF":
+                self.effect.MDEF += round(self.basal.MDEF * value) if isRate else round(value)
+            case "BlockRate":
+                self.effect.BlockRate += round(self.basal.BlockRate * value) if isRate else round(value)
+            case "DamageReduction":
+                self.effect.DamageReduction += round(self.basal.DamageReduction * value) if isRate else round(value)
+            case "ElementDamageIncrease":
+                self.effect.ElementDamageIncrease += round(self.basal.ElementDamageIncrease * value) if isRate else round(value)
+            case "ElementDamageReduction":
+                self.effect.ElementDamageReduction += round(self.basal.ElementDamageReduction * value) if isRate else round(value)
+            case "HP_Recovery":
+                self.effect.HP_Recovery += round(self.basal.HP_Recovery * value) if isRate else round(value)
+            case "MP_Recovery":
+                self.effect.MP_Recovery += round(self.basal.MP_Recovery * value) if isRate else round(value)
+            case "Crt":
+                self.effect.Crt += round(self.basal.Crt * value) if isRate else round(value)
+            case "CrtResistance":
+                self.effect.CrtResistance += round(self.basal.CrtResistance * value) if isRate else round(value)
+            case "CrtDamage":
+                self.effect.CrtDamage += round(self.basal.CrtDamage * value) if isRate else round(value)
+            case "BlockRate":
+                self.effect.BlockRate += round(self.basal.BlockRate * value) if isRate else round(value)
+            case "Speed":
+                self.effect.Speed += round(1 * value) if isRate else round(value)
+            case "AS":
+                self.effect.AS += round(self.basal.AS * value) if isRate else round(value)
+            case "DisorderResistance":
+                self.effect.DisorderResistance += round(self.basal.DisorderResistance * value) if isRate else round(value)
+            case "ATK":
+                self.effect.MeleeATK += round(self.basal.MeleeATK * value) if isRate else round(value)
+                self.effect.RemoteATK += round(self.basal.RemoteATK * value) if isRate else round(value)
+                self.effect.MageATK += round(self.basal.MageATK * value) if isRate else round(value)
+        self.stats =  {  # 計算後的屬性值
+            "MaxHP": self.basal.MaxHP + self.equip.MaxHP + self.effect.MaxHP,
+            "HP": self.basal.MaxHP + self.equip.MaxHP + self.effect.MaxHP,
+            "MaxMP": self.basal.MaxMP + self.equip.MaxMP + self.effect.MaxMP,
+            "MP": self.basal.MaxMP + self.equip.MaxMP + self.effect.MaxMP,
+            "MeleeATK": self.basal.MeleeATK + self.equip.MeleeATK+ self.effect.MeleeATK,
+            "RemoteATK": self.basal.RemoteATK + self.equip.RemoteATK+ self.effect.RemoteATK,
+            "MageATK": self.basal.MageATK + self.equip.MageATK+ self.effect.MageATK,
+            "DEF": self.basal.DEF + self.equip.DEF+ self.effect.DEF,
+            "Avoid": self.basal.Avoid + self.equip.Avoid+ self.effect.Avoid,
+            "MeleeHit": self.basal.MeleeHit + self.equip.MeleeHit+ self.effect.MeleeHit,
+            "RemoteHit": self.basal.RemoteHit + self.equip.RemoteHit+ self.effect.RemoteHit,
+            "MageHit": self.basal.MageHit + self.equip.MageHit+ self.effect.MageHit,
+            "MDEF": self.basal.MDEF + self.equip.MDEF+ self.effect.MDEF,
+            "Speed": self.basal.Speed + self.equip.Speed+ self.effect.Speed,
+            "AS": self.basal.AS + self.equip.AS+ self.effect.AS,
+            "DamageReduction": self.basal.DamageReduction + self.equip.DamageReduction+ self.effect.DamageReduction,
+            "ElementDamageIncrease": self.basal.ElementDamageIncrease
+            + self.equip.ElementDamageIncrease+ self.effect.ElementDamageIncrease,
+            "ElementDamageReduction": self.basal.ElementDamageReduction
+            + self.equip.ElementDamageReduction+ self.effect.ElementDamageReduction,
+            "HP_Recovery": self.basal.HP_Recovery + self.equip.HP_Recovery+ self.effect.HP_Recovery,
+            "MP_Recovery": self.basal.MP_Recovery + self.equip.MP_Recovery+ self.effect.MP_Recovery,
+            "Crt": self.basal.Crt+ self.equip.Crt+ self.effect.Crt,
+            "CrtResistance": self.basal.CrtResistance+ self.equip.CrtResistance+ self.effect.CrtResistance,
+            "CrtDamage": self.basal.CrtDamage+ self.equip.CrtDamage+ self.effect.CrtDamage,
+            "BlockRate": self.basal.BlockRate+ self.equip.BlockRate+ self.effect.BlockRate,
+            "DisorderResistance": self.basal.DisorderResistance+ self.equip.DisorderResistance+ self.effect.DisorderResistance,
+            "DamageReduction": self.basal.DamageReduction+ self.equip.DamageReduction+ self.effect.DamageReduction,
+            }
+
 class BattleSimulator:
     def __init__(self, game_data,gui):
         self.game_data = game_data
@@ -189,6 +283,9 @@ class BattleSimulator:
         self.damage_data.clear()
         self.skill_usage = {s.Name: 0 for s in player.skills}
         
+        self.run_passive_skill(player, self.gui.player_status_bar)
+        self.run_passive_skill(enemy, self.gui.enemy_status_bar)
+
         #匿名方法 更新雙方血量魔力
         def update_hp_mp():
             self.gui.player_hp_bar.set_value(player.stats["HP"],player.stats["MaxHP"])
@@ -204,6 +301,18 @@ class BattleSimulator:
         self.attack_loop(player, enemy)
         self.attack_loop(enemy, player)
     
+    def run_passive_skill(self, caster:BattleCharacter, effect_bar):
+        """
+        運行被動技能
+        """
+        passive_skills =  [s for s in caster.skills if s.Characteristic == False]
+        if(passive_skills is not None):
+            for skill in passive_skills:
+                skill_operationdata_list  = skill.SkillOperationDataList
+                for op in skill_operationdata_list:
+                    SkillProcessor._execute_operation(op,caster,caster,self)
+                effect_bar.add_effect(skill)
+
     def check_battle_result(self, player: BattleCharacter, enemy: BattleCharacter):
         """
         進行戰鬥結果確認
@@ -251,7 +360,7 @@ class BattleSimulator:
         
     def _choose_skill(self, character: BattleCharacter) -> SkillData :
         # 簡單的AI選擇技能邏輯
-        available_skills = [s for s in character.skills if character.stats["MP"] >= s.CastMage]
+        available_skills = [s for s in character.skills if s.Characteristic is True & character.stats["MP"] >= s.CastMage]
         if not available_skills:
             # 沒有MP時使用普通攻擊
             return SkillData(

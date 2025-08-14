@@ -1,12 +1,12 @@
 ﻿from game_models import SkillData,SkillOperationData
 
 class SkillProcessor:
-    from battle_simulator import BattleSimulator,BattleCharacter
-    def _execute_operation(self, op: SkillOperationData, attacker: BattleCharacter, defender: BattleCharacter,battleSimulator:BattleSimulator, turn):
+    # from battle_simulator import BattleSimulator,BattleCharacter
+    def _execute_operation(op: SkillOperationData, attacker, defender,battleSimulator):
         """
         實現技能效果執行入口
         """
-        target = attacker if op.target == "Self" else defender
+        target = attacker if op.EffectRecive == 0 else defender
 
         match op.SkillComponentID:
             case "Damage":
@@ -33,7 +33,8 @@ class SkillProcessor:
             case "Debuff":
                 target.apply_debuff(op.attr, op.value, op.duration)
                 battleSimulator.battle_log.append(f"{attacker.name} 對 {target.name} 使用 Debuff：{op.attr} -{op.value}，持續 {op.duration} 回合")
-
+            case "PassiveBuff":
+                target.SkillEffectStatusOperation(op.InfluenceStatus,(op.AddType == "Rate"),op.EffectValue)
 
 
 

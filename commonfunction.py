@@ -20,6 +20,20 @@ class CommonFunction:
          控制一個數的範圍不超過最小值與最大值
         """
         return max(min_value, min(value, max_value))
+    
+    def load_skill_icon(job:str,skillId:str):
+        """
+        讀取技能Icon資源
+        """
+        return CommonFunction.load_image_resource(f'skill_icon/Icon/{job}',skillId)
+    
+    def load_image_resource(path,name):
+        """
+        依照路徑與名稱獲取圖片資源
+        """
+        import tkinter as tk
+        icon = tk.PhotoImage(file=f"{path}/{name}.png")  # PNG 圖片
+        return icon
 
 
 

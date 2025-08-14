@@ -36,6 +36,8 @@ class StatusValues:
     CrtResistance: int = 0  # 暴擊抵抗
     CrtDamage: int = 0  # 暴擊附加傷害
     BlockRate: int = 0  # 格檔率
+    DisorderResistance: int = 0  # 異常狀態抗性
+    DamageReduction: int = 0  # 傷害減免
 
 
 class CharacterStatusCalculator:
@@ -62,6 +64,7 @@ class CharacterStatusCalculator:
         # 臨時存儲計算結果的變數
         self.temp_equip_status = StatusValues()  # 裝備提供的屬性加成
         self.temp_basal_status = StatusValues()  # 基礎屬性（等級、種族、屬性點）
+        self.temp_effect_status = StatusValues()  # 技能方面影響的效果
 
     def calculate_all_status(self):
         """
@@ -94,11 +97,14 @@ class CharacterStatusCalculator:
         self.crtResistance()  # 暴擊抵抗
         self.crtDamage()  # 暴擊附加傷害
         self.block()  # 格檔率
+        self.disorderResistance()  # 異常狀態抗性
+        self.damageReduction()  # 傷害減免
 
         # 返回計算結果
         return {
             "equip": self.temp_equip_status,  # 裝備加成
             "basal": self.temp_basal_status,  # 基礎屬性
+            "effect": self.temp_effect_status,  # 效果影響
         }
 
     def melee_atk(self):
@@ -755,6 +761,46 @@ class CharacterStatusCalculator:
         )
 
         self.temp_equip_status.BlockRate = armor_blockRate
+        
+    def disorderResistance(self):
+        """
+        異常狀態計算
+        """
+
+        armor_disorderResistance = sum(
+            armor.DisorderResistance
+            + next(
+                (
+                    forge.DisorderResistance
+                    for forge in armor.ForgeConfigList
+                    if forge.ForgeLv == forgeLv
+                ),
+                0,
+            )
+            for armor , forgeLv in self.armor_list
+        )
+
+        self.temp_equip_status.DisorderResistance = armor_disorderResistance
+        
+    def damageReduction(self):
+        """
+        傷害減免計算
+        """
+
+        armor_damageReduction = sum(
+            armor.DamageReduction
+            + next(
+                (
+                    forge.DamageReduction
+                    for forge in armor.ForgeConfigList
+                    if forge.ForgeLv == forgeLv
+                ),
+                0,
+            )
+            for armor , forgeLv in self.armor_list
+        )
+
+        self.temp_equip_status.DamageReduction = armor_damageReduction
 
     def create_character(self, name: str, jobBonusData, level: int) -> Dict:
         """
@@ -775,7 +821,7 @@ class CharacterStatusCalculator:
         self.player_data = temp_player_data
 
         # 使用當前實例的裝備進行計算
-        status = self.calculate_all_status()
+        stats = self.calculate_all_status()
         
         # 返回完整角色數據
         return {
@@ -783,33 +829,38 @@ class CharacterStatusCalculator:
             "char_class": jobBonusData,  # 職業資料
             "level": level,  # 等級
             "stats": {  # 計算後的屬性值
-                "MaxHP": status["basal"].MaxHP + status["equip"].MaxHP,
-            "HP": status["basal"].MaxHP + status["equip"].MaxHP,
-            "MaxMP": status["basal"].MaxMP + status["equip"].MaxHP,
-            "MP": status["basal"].MaxMP + status["equip"].MaxHP,
-            "MeleeATK": status["basal"].MeleeATK + status["equip"].MeleeATK,
-            "RemoteATK": status["basal"].RemoteATK + status["equip"].RemoteATK,
-            "MageATK": status["basal"].MageATK + status["equip"].MageATK,
-            "DEF": status["basal"].DEF + status["equip"].DEF,
-            "Avoid": status["basal"].Avoid + status["equip"].Avoid,
-            "MeleeHit": status["basal"].MeleeHit + status["equip"].MeleeHit,
-            "RemoteHit": status["basal"].RemoteHit + status["equip"].RemoteHit,
-            "MageHit": status["basal"].MageHit + status["equip"].MageHit,
-            "MDEF": status["basal"].MDEF + status["equip"].MDEF,
-            "Speed": status["basal"].Speed + status["equip"].Speed,
-            "AS": status["basal"].AS + status["equip"].AS,
-            "DamageReduction": status["basal"].DamageReduction + status["equip"].DamageReduction,
-            "ElementDamageIncrease": status["basal"].ElementDamageIncrease
-            + status["equip"].ElementDamageIncrease,
-            "ElementDamageReduction": status["basal"].ElementDamageReduction
-            + status["equip"].ElementDamageReduction,
-            "HP_Recovery": status["basal"].HP_Recovery + status["equip"].HP_Recovery,
-            "MP_Recovery": status["basal"].MP_Recovery + status["equip"].MP_Recovery,
-            "Crt": status["basal"].Crt+ status["equip"].Crt,
-            "CrtResistance": status["basal"].CrtResistance+ status["equip"].CrtResistance,
-            "CrtDamage": status["basal"].CrtDamage+ status["equip"].CrtDamage,
-            "BlockRate": status["basal"].BlockRate+ status["equip"].BlockRate,
+            "MaxHP": stats["basal"].MaxHP + stats["equip"].MaxHP,
+            "HP": stats["basal"].MaxHP + stats["equip"].MaxHP,
+            "MaxMP": stats["basal"].MaxMP + stats["equip"].MaxHP,
+            "MP": stats["basal"].MaxMP + stats["equip"].MaxHP,
+            "MeleeATK": stats["basal"].MeleeATK + stats["equip"].MeleeATK,
+            "RemoteATK": stats["basal"].RemoteATK + stats["equip"].RemoteATK,
+            "MageATK": stats["basal"].MageATK + stats["equip"].MageATK,
+            "DEF": stats["basal"].DEF + stats["equip"].DEF,
+            "Avoid": stats["basal"].Avoid + stats["equip"].Avoid,
+            "MeleeHit": stats["basal"].MeleeHit + stats["equip"].MeleeHit,
+            "RemoteHit": stats["basal"].RemoteHit + stats["equip"].RemoteHit,
+            "MageHit": stats["basal"].MageHit + stats["equip"].MageHit,
+            "MDEF": stats["basal"].MDEF + stats["equip"].MDEF,
+            "Speed": stats["basal"].Speed + stats["equip"].Speed,
+            "AS": stats["basal"].AS + stats["equip"].AS,
+            "DamageReduction": stats["basal"].DamageReduction + stats["equip"].DamageReduction,
+            "ElementDamageIncrease": stats["basal"].ElementDamageIncrease
+            + stats["equip"].ElementDamageIncrease,
+            "ElementDamageReduction": stats["basal"].ElementDamageReduction
+            + stats["equip"].ElementDamageReduction,
+            "HP_Recovery": stats["basal"].HP_Recovery + stats["equip"].HP_Recovery,
+            "MP_Recovery": stats["basal"].MP_Recovery + stats["equip"].MP_Recovery,
+            "Crt": stats["basal"].Crt+ stats["equip"].Crt,
+            "CrtResistance": stats["basal"].CrtResistance+ stats["equip"].CrtResistance,
+            "CrtDamage": stats["basal"].CrtDamage+ stats["equip"].CrtDamage,
+            "BlockRate": stats["basal"].BlockRate+ stats["equip"].BlockRate,
+            "DisorderResistance": stats["basal"].DisorderResistance+ stats["equip"].DisorderResistance,
+            "DamageReduction": stats["basal"].DamageReduction+ stats["equip"].DamageReduction,
             },
+            "basal":stats["basal"],
+            "equip":stats["equip"],
+            "effect":stats["effect"],
             "equipped_weapon": None,  # 裝備的武器（初始為空）
             "equipped_armor": None,  # 裝備的防具（初始為空）
             "skills": self._get_skills_for_class(jobBonusData),  # 職業技能
