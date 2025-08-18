@@ -802,12 +802,13 @@ class CharacterStatusCalculator:
 
         self.temp_equip_status.DamageReduction = armor_damageReduction
 
-    def create_character(self, name: str, jobBonusData, level: int) -> Dict:
+    def create_character(self, name: str,race: str, jobBonusData, level: int) -> Dict:
         """
         創建新角色並計算初始屬性
 
         Args: 
             name: 角色名稱
+            race: 角色種族
             char_class: 職業配置資料
             level: 角色等級
 
@@ -815,7 +816,7 @@ class CharacterStatusCalculator:
             dict: 完整的角色資料
         """
         # 創建臨時玩家數據用於屬性計算
-        temp_player_data = self._create_player_data(jobBonusData, level)
+        temp_player_data = self._create_player_data(race,jobBonusData, level)
 
         # 更新當前實例的玩家數據
         self.player_data = temp_player_data
@@ -867,25 +868,26 @@ class CharacterStatusCalculator:
             "items": [],  # 物品欄（初始為空）
         }
 
-    def _create_player_data(self, jobBonusData, level: int) -> Dict:
+    def _create_player_data(self, race, jobBonusData, level: int) -> Dict:
         """
         根據職業和等級創建玩家基礎數據
 
         Args:
-            char_class: 職業配置
+            race: 角色種族
+            jobBonusData: 職業配置
             level: 角色等級
 
         Returns:
             dict: 玩家基礎數據
         """
         return {
-            "race": "Human",  # 種族（預設人類）
-            "STR": jobBonusData.STR * level,  # 力量 = 職業基礎 × 等級
-            "DEX": jobBonusData.DEX * level,  # 敏捷 = 職業基礎 × 等級
-            "INT": jobBonusData.INT * level,  # 智力 = 職業基礎 × 等級
-            "VIT": jobBonusData.VIT * level,  # 體力 = 職業基礎 × 等級
-            "WIS": jobBonusData.WIS * level,  # 體力 = 職業基礎 × 等級
-            "AGI": jobBonusData.AGI * level,  # 體力 = 職業基礎 × 等級
+            "race": race ,
+            "STR": jobBonusData.STR, 
+            "DEX": jobBonusData.DEX, 
+            "INT": jobBonusData.INT, 
+            "VIT": jobBonusData.VIT, 
+            "WIS": jobBonusData.WIS,
+            "AGI": jobBonusData.AGI, 
             "level": level,  # 角色等級
             "MaxHP": jobBonusData.HP,  # 職業基礎生命值
             "MaxMP": jobBonusData.MP,  # 職業基礎魔法值
@@ -908,85 +910,3 @@ class CharacterStatusCalculator:
             for skill in self.game_data.SkillDataDic.values()
             if skill.Job in char_class.Job
         ]
-
-    def equip_item(self, character: Dict, item: Dict):
-        """
-        為角色裝備物品並重新計算屬性
-
-        Args:
-            character: 角色數據
-            item: 要裝備的物品
-
-        Returns:
-            dict: 更新後的角色數據
-        """
-        # 根據物品類型決定裝備位置
-        if item["ClassificationID"] == "Weapon":
-            character["equipped_weapon"] = item
-        elif item["ClassificationID"] == "Armor":
-            character["equipped_armor"] = item
-
-        # 重新計算屬性
-        self._recalculate_character_stats(character)
-
-        return character
-
-    def _recalculate_character_stats(self, character: Dict):
-        """
-        重新計算角色屬性（當裝備改變時）
-
-        Args:
-            character: 角色數據（會被直接修改）
-        """
-        # 準備裝備列表
-        weapon_list = (
-            [character["equipped_weapon"]] if character["equipped_weapon"] else []
-        )
-        armor_list = (
-            [character["equipped_armor"]] if character["equipped_armor"] else []
-        )
-
-        # 創建玩家數據
-        player_data = self._create_player_data(
-            character["char_class"], character["level"]
-        )
-
-        # 重新計算
-        calculator = CharacterStatusCalculator(
-            player_data=player_data,
-            weapon_list=weapon_list,
-            armor_list=armor_list,
-            game_data=self.game_data,
-        )
-
-        status = calculator.calculate_all_status()
-
-        # 更新角色屬性
-        character["stats"] = {
-            "MaxHP": status["basal"].MaxHP + status["equip"].MaxHP,
-            # "HP": status["basal"].MaxHP + status["equip"].MaxHP,
-            "MaxMP": status["basal"].MaxMP + status["equip"].MaxHP,
-            # "MP": status["basal"].MaxMP + status["equip"].MaxHP,
-            "MeleeATK": status["basal"].MeleeATK + status["equip"].MeleeATK,
-            "RemoteATK": status["basal"].RemoteATK + status["equip"].RemoteATK,
-            "MageATK": status["basal"].MageATK + status["equip"].MageATK,
-            "DEF": status["basal"].DEF + status["equip"].DEF,
-            "Avoid": status["basal"].Avoid + status["equip"].Avoid,
-            "MeleeHit": status["basal"].MeleeHit + status["equip"].MeleeHit,
-            "RemoteHit": status["basal"].RemoteHit + status["equip"].RemoteHit,
-            "MageHit": status["basal"].MageHit + status["equip"].MageHit,
-            "MDEF": status["basal"].MDEF + status["equip"].MDEF,
-            "Speed": status["basal"].Speed + status["equip"].Speed,
-            "AS": status["basal"].AS + status["equip"].AS,
-            "DamageReduction": status["DamageReduction"].DamageReduction + status["equip"].DamageReduction,
-            "ElementDamageIncrease": status["basal"].ElementDamageIncrease
-            + status["equip"].ElementDamageIncrease,
-            "ElementDamageReduction": status["basal"].ElementDamageReduction
-            + status["equip"].ElementDamageReduction,
-            "HP_Recovery": status["basal"].HP_Recovery + status["equip"].HP_Recovery,
-            "MP_Recovery": status["basal"].MP_Recovery + status["equip"].MP_Recovery,
-            "Crt": status["basal"].Crt+ status["equip"].Crt,
-            "CrtResistance": status["basal"].CrtResistance+ status["equip"].CrtResistance,
-            "CrtDamage": status["basal"].CrtDamage+ status["equip"].CrtDamage,
-            "BlockRate": status["basal"].BlockRate+ status["equip"].BlockRate,
-        }

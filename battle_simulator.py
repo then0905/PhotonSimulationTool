@@ -1,7 +1,6 @@
 ﻿import random
-from re import S
 from typing import Dict, Optional, List
-from dataclasses import dataclass
+from dataclasses import dataclass,field
 from game_models import SkillData,SkillOperationData, MonsterDataModel, MonsterDropItemDataModel, ArmorDataModel, WeaponDataModel,ItemDataModel,JobBonusDataModel,StatusFormulaDataModel,GameText,GameSettingDataModel,AreaData,LvAndExpDataModel
 from formula_parser import FormulaParser
 from typing import Tuple
@@ -11,21 +10,32 @@ from status_operation import StatusValues
 
 @dataclass
 class BattleCharacter:
+    #基本資料
     name: str
     jobBonusData: JobBonusDataModel
     level: int
     stats: Dict[str, int]
-    basal:StatusValues
-    equip:StatusValues
-    effect:StatusValues
+    basal:StatusValues      #基本屬性數值
+    equip:StatusValues      #裝備數值
+    effect:StatusValues     #效果影響數值
     equipped_weapon: Optional[WeaponDataModel]
     equipped_armor: Optional[ArmorDataModel]
     skills: List[SkillData]
     items: List[ItemDataModel]
     characterType:bool  #當前攻擊者類型 True:人物 False:怪物
+    attackTimer:float = 0   #普通攻擊計時器
+    
+    #UI物件
+    buff_bar: Optional[object] = None     #buff效果提示欄
+    debuff_bar: Optional[object] = None  #負面狀態效果提示欄
+    passive_bar: Optional[object] = None   #被動效果提示欄
+    
+    #動態資料
+    skill_cooldowns: Dict[str, float] = field(default_factory=dict)  # skill_id -> remaining_cooldown_time
+    buff_skill:  Dict[str, Tuple[SkillData,float]] = field(default_factory=dict)   #運行中的buff效果
+    debuff_skill:  Dict[str, Tuple[float]] = field(default_factory=dict)    #運行中的負面狀態
     controlled_for_attack:float = 0 #受到控制不得使用普通攻擊類型
     controlled_for_skill:float = 0  #受到控制不得使用技能類型
-    attackTimer:float = 0   #普通攻擊計時器
     attackTimerFunc = None #儲存普攻計時任務
 
     def action_check(self,skill:SkillData)->bool:
@@ -33,6 +43,53 @@ class BattleCharacter:
             return self.stats["HP"] > 0 & self.controlled_for_attack <=0
         else:
             return self.stats["HP"] > 0 & self.controlled_for_skill <=0
+    
+    def run_passive_skill(self):
+        """
+        運行被動技能
+        """
+        passive_skills =  [s for s in self.skills if s.Characteristic == False]
+        if(passive_skills is not None):
+            for skill in passive_skills:
+                SkillProcessor._execute_operation(skill,self,self)
+                self.passive_bar.add_effect(skill)
+
+    def add_buff_effect(self,skillData:SkillData):
+        """
+        增加buff效果
+        """
+        for op in skillData.SkillOperationDataList:
+            self.SkillEffectStatusOperation(op.InfluenceStatus,(op.AddType == "Rate"),op.EffectValue)
+            
+        self.buff_bar.add_effect(skillData)
+        self.buff_skill[skillData.SkillID] = (skillData,skillData.SkillOperationDataList[0].EffectDurationTime)
+
+    def pass_time(self, dt: float):
+        """
+        獨立計時器
+        """
+        # 技能冷卻遞減
+        for skill_id in list(self.skill_cooldowns):
+            if self.skill_cooldowns[skill_id] > 0:
+                self.skill_cooldowns[skill_id] = max(0, self.skill_cooldowns[skill_id] - dt)
+                if self.skill_cooldowns[skill_id] == 0:
+                    del self.skill_cooldowns[skill_id]
+       
+        # buff狀態遞減
+        for buff in list(self.buff_skill):
+             skillData,duration =  self.buff_skill[buff]
+             duration = max(0, duration - dt)
+             if(duration == 0):
+                for op in self.skillData.SkillOperationDataList:
+                    self.SkillEffectStatusOperation(op.InfluenceStatus,(op.AddType == "Rate"),-1*op.EffectValue)
+                    del self.buff_skill[buff]
+                    self.buff_bar.remove_effect(buff)
+             
+        #負面狀態遞減
+        # if self.controlled_for_attack > 0:
+        #     self.controlled_for_attack = max(0, self.controlled_for_attack - dt)
+        # if self.controlled_for_skill > 0:
+        #     self.controlled_for_skill = max(0, self.controlled_for_skill - dt)
 
     def is_alive(self) -> bool:
         return self.stats["HP"] > 0
@@ -55,7 +112,7 @@ class BattleCharacter:
                 controlled_for_skill+=op.EffectDurationTime
                 controlled_for_attack+=op.EffectDurationTime
 
-    def HitCalculator(self, skill: SkillData, target) -> Tuple[str, int, int]:
+    def HitCalculator(self, skill: SkillData, target) -> Tuple[str, int, float]:
         """
         命中計算
         """
@@ -86,7 +143,7 @@ class BattleCharacter:
         else:
             return f" <color=#00ffdc>{self.name}</color> 使用 <color=#ff9300>{CommonFunction.get_text(skill.Name)}</color> 但攻擊並沒有命中！", 0, self.attackTimer
     
-    def BlockCalculator(self, skill: SkillData, target)-> Tuple[str, int, int]:
+    def BlockCalculator(self, skill: SkillData, target)-> Tuple[str, int, float]:
         """
         格檔計算
         """
@@ -96,7 +153,7 @@ class BattleCharacter:
         else:
             return self.CrtCalculator(skill,target)
             
-    def CrtCalculator(self, skill: SkillData, target)-> Tuple[str, int, int]:
+    def CrtCalculator(self, skill: SkillData, target)-> Tuple[str, int, float]:
         """
         暴擊計算
         """
@@ -110,7 +167,7 @@ class BattleCharacter:
         
         return self.AttackCalculator(skill,target,(is_Crt<=crt_value));
             
-    def AttackCalculator(self, skill: SkillData, target,is_Crt:bool) -> Tuple[str, int, int]:
+    def AttackCalculator(self, skill: SkillData, target,is_Crt:bool) -> Tuple[str, int, float]:
         """
         攻擊計算
         """
@@ -163,9 +220,9 @@ class BattleCharacter:
         print(f"技能傷害倍率:{skill.Damage}")
         #計算傷害
         if is_Crt:
-            damage = round(variables["attacker_attack"]*int(skill.Damage)*1.5)+self.stats["CrtDamage"]
+            damage = round(variables["attacker_attack"]*skill.Damage*1.5)+self.stats["CrtDamage"]
         else:
-            damage = round(variables["attacker_attack"]*int(skill.Damage))
+            damage = round(variables["attacker_attack"]*skill.Damage)
 
         finalDamage = CommonFunction.clamp(round(damage * (1 - defenseRatio)) - target.stats["DamageReduction"],0,round(damage * (1 - defenseRatio)) - target.stats["DamageReduction"])
         print(f"攻擊對象:{self.characterType}，攻擊者傷害:{damage}，防禦減免{defenseRatio}，最後傷害{finalDamage}")
@@ -276,6 +333,12 @@ class BattleSimulator:
         self.skill_usage: Dict[str, int] = {}
         self.update_hp_mp = None    #用來儲存更新雙方血量魔力的匿名方法
 
+    def battle_tick(self,player,enemy):
+        dt = 0.1  # 每 0.1 秒刷新一次
+        player.pass_time(dt)
+        enemy.pass_time(dt)
+        
+        self.gui.root.after(int(dt*1000), lambda:self.battle_tick(player,enemy))
 
     def simulate_battle(self, player: BattleCharacter, enemy: BattleCharacter):
         """開啟戰鬥模擬"""
@@ -283,8 +346,8 @@ class BattleSimulator:
         self.damage_data.clear()
         self.skill_usage = {s.Name: 0 for s in player.skills}
         
-        self.run_passive_skill(player, self.gui.player_status_bar)
-        self.run_passive_skill(enemy, self.gui.enemy_status_bar)
+        player.run_passive_skill()
+        enemy.run_passive_skill()
 
         #匿名方法 更新雙方血量魔力
         def update_hp_mp():
@@ -297,21 +360,11 @@ class BattleSimulator:
         #初始化雙方血量魔力
         self.update_hp_mp()
         
+        self.battle_tick(player,enemy)
+        
         #雙方同時運作攻擊計時器
         self.attack_loop(player, enemy)
         self.attack_loop(enemy, player)
-    
-    def run_passive_skill(self, caster:BattleCharacter, effect_bar):
-        """
-        運行被動技能
-        """
-        passive_skills =  [s for s in caster.skills if s.Characteristic == False]
-        if(passive_skills is not None):
-            for skill in passive_skills:
-                skill_operationdata_list  = skill.SkillOperationDataList
-                for op in skill_operationdata_list:
-                    SkillProcessor._execute_operation(op,caster,caster,self)
-                effect_bar.add_effect(skill)
 
     def check_battle_result(self, player: BattleCharacter, enemy: BattleCharacter):
         """
@@ -338,21 +391,29 @@ class BattleSimulator:
         
         if attacker.is_alive() and target.is_alive():
             skill = self._choose_skill(attacker)
+            
             if attacker.action_check(skill):
-                log_msg, damage, attack_timer = attacker.HitCalculator(skill, target)
+                log_msg, damage, attack_timer = SkillProcessor._execute_operation(skill,attacker,target)
                 self.battle_log.append(log_msg)
+                
                 if(skill.SkillID == "NORMAL_ATTACK"):
+                    
                     self.battle_log.append(f"<color=#00ffdc>{attacker.name}</color> 進入<color=#ff0000>普攻</color>計時 {attack_timer:.2f} 秒")
                     self.gui.display_battle_log(self.get_battle_log());
                     attacker.attackTimerFunc = self.gui.root.after(int(attack_timer*1000) ,lambda: self.attack_loop(attacker, target))
                 else:
-                    self.battle_log.append(f"<color=#00ffdc>{attacker.name}</color> 施放了 <color=#ff0000>{CommonFunction.get_text(skill.Name)}</color> 需等待 {skill.CD} 秒")
+                    
+                    self.battle_log.append(f"<color=#00ffdc>{attacker.name}</color> 施放了 <color=#ff0000>{CommonFunction.get_text(skill.Name)}</color> 需等待 {1 if skill.Type == "Buff" else 1.8} 秒")
                     self.gui.display_battle_log(self.get_battle_log());
-                    attacker.attackTimerFunc = self.gui.root.after(int(skill.CD*1000) ,lambda: self.attack_loop(attacker, target))
+                    attacker.skill_cooldowns[skill.SkillID] = skill.CD
+                    attacker.attackTimerFunc = self.gui.root.after(1000 if skill.Type == "Buff" else 1800 ,lambda: self.attack_loop(attacker, target))
+                    
                 #更新雙方血量魔力
                 self.update_hp_mp()
+                
             else:
                 attacker.attackTimerFunc = self.gui.root.after(100, lambda: self.attack_loop(attacker, target))
+                
         else:
             if(attacker.attackTimerFunc is not None):
                 self.gui.root.after_cancel(attacker.attackTimerFunc)
@@ -360,7 +421,10 @@ class BattleSimulator:
         
     def _choose_skill(self, character: BattleCharacter) -> SkillData :
         # 簡單的AI選擇技能邏輯
-        available_skills = [s for s in character.skills if s.Characteristic is True & character.stats["MP"] >= s.CastMage]
+        current_active_buff = [s for s in (character.buff_skill or {}) ]     #當前生效的buff效果
+        current_cooldown_buff = [s for s in (character.skill_cooldowns or {})]     #當前進入冷卻時間的技能
+        
+        available_skills = [s for s in character.skills if s.Characteristic is True and character.stats["MP"] >= s.CastMage and s.SkillID not in current_active_buff and s.SkillID not in current_cooldown_buff]
         if not available_skills:
             # 沒有MP時使用普通攻擊
             return SkillData(
