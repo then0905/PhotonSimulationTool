@@ -5,14 +5,14 @@ from typing import Tuple
 class SkillProcessor:
     # from battle_simulator import BattleSimulator,BattleCharacter
     @staticmethod
-    def _execute_operation(skillData: SkillData, attacker, defender)-> Tuple[str, int, float]:
+    def _execute_skill_operation(skillData: SkillData, attacker, defender)-> Tuple[str, int, float]:
         """
         實現技能效果執行入口
         """
         if(skillData.Name != "普通攻擊"):
             for op in skillData.SkillOperationDataList:
                 #取得施放對象
-                target = attacker if op.EffectRecive == 0 else defender
+                target = attacker if op.EffectRecive in [0,-2,-3] else defender
 
                 match op.SkillComponentID:
                     case "Damage":

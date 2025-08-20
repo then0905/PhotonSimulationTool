@@ -118,7 +118,7 @@ class BattleCharacter:
         passive_skills =  [s for s in self.skills if s.Characteristic == False]
         if(passive_skills is not None):
             for skill in passive_skills:
-                SkillProcessor._execute_operation(skill,self,self)
+                SkillProcessor._execute_skill_operation(skill,self,self)
                 self.passive_bar.add_effect(skill)
 
     def add_buff_effect(self,skillData:SkillData):
@@ -378,7 +378,7 @@ class BattleSimulator:
             skill = self._choose_skill(attacker)
             
             if attacker.action_check(skill):
-                log_msg, damage, attack_timer = SkillProcessor._execute_operation(skill,attacker,target)
+                log_msg, damage, attack_timer = SkillProcessor._execute_skill_operation(skill,attacker,target)
                 self.battle_log.append(log_msg)
                 
                 if(skill.SkillID == "NORMAL_ATTACK"):
