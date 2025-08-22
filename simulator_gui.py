@@ -91,7 +91,7 @@ class BattleSimulatorGUI:
                 super().__init__(master)
 
                 # 建立 Canvas + Scrollbar 容器
-                self.canvas = tk.Canvas(self, height=30)
+                self.canvas = tk.Canvas(self, height=60)
                 self.scrollbar = ttk.Scrollbar(
                     self, orient="horizontal", command=self.canvas.xview
                 )
@@ -130,8 +130,8 @@ class BattleSimulatorGUI:
                 """
                 skillIcon = CommonFunction.load_skill_icon(
                     skill.Job, skill.SkillID)
-                if skillIcon.height() > 40:
-                    factor = skillIcon.height() // 40
+                if skillIcon.height() > 55:
+                    factor = skillIcon.height() // 55
                     skillIcon = skillIcon.subsample(factor)
                 skillName = CommonFunction.get_text(skill.Name)
                 skillIntro = CommonFunction.get_text(skill.Intro)+'\n'
@@ -145,8 +145,8 @@ class BattleSimulatorGUI:
                         text=skillName if not skillIcon else "",
                         image=skillIcon,
                         compound="top",
-                        width=40,
-                        height=40
+                        width=55,
+                        height=55
                     )
                     btn.pack(side="left", padx=2)
                     btn.bind(
@@ -154,19 +154,47 @@ class BattleSimulatorGUI:
                             e, n, d)
                     )
                     self.effects.append(
-                        {"name": skillName, "desc": skillIntro, "widget": btn, "icon": skillIcon})
+                        {"id" : skill.SkillID ,"name": skillName, "desc": skillIntro, "widget": btn, "icon": skillIcon})
                 else:
                     print("讀取失敗")
 
-            def remove_effect(self, name):
+            def add_debuff(self,effectId:str):
+                
+                statusEffectIcon = CommonFunction.load_status_effect_icon(effectId)
+                if statusEffectIcon.height() > 55:
+                    factor = statusEffectIcon.height() // 55
+                    statusEffectIcon = statusEffectIcon.subsample(factor)
+                stautsEffectName = CommonFunction.get_text(f"TM_{effectId}_Name")
+                statusEffectIntro = CommonFunction.get_text(f"TM_{effectId}_Intro")
+
+                if statusEffectIcon:
+                    btn = tk.Button(
+                        self.inner_frame,
+                        text=stautsEffectName if not statusEffectIcon else "",
+                        image=statusEffectIcon,
+                        compound="top",
+                        width=55,
+                        height=55
+                    )
+                    btn.pack(side="left", padx=2)
+                    btn.bind(
+                        "<Button-1>", lambda e, n=stautsEffectName, d=statusEffectIntro: self._show_popup(
+                            e, n, d)
+                    )
+                    self.effects.append(
+                        {"id" : effectId, "name": stautsEffectName, "desc": statusEffectIntro, "widget": btn, "icon": statusEffectIcon})
+                else:
+                    print("讀取失敗")
+                    
+            def remove_effect(self, id):
                 """
                 移除一個技能效果圖示
                 """
                 for eff in self.effects:
-                    if eff["name"] == name:
+                    if eff["id"] == id:
                         eff["widget"].destroy()
                 self.effects = [
-                    eff for eff in self.effects if eff["name"] != name]
+                    eff for eff in self.effects if eff["id"] != id]
 
             def clear_bar(self):
                 for eff in self.effects:

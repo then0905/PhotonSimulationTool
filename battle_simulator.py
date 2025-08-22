@@ -34,7 +34,7 @@ class BattleCharacter:
     #動態資料
     skill_cooldowns: Dict[str, float] = field(default_factory=dict)  # skill_id -> remaining_cooldown_time
     buff_skill:  Dict[str, Tuple[SkillData,float]] = field(default_factory=dict)   #運行中的buff效果
-    debuff_skill:  Dict[str, Tuple[float]] = field(default_factory=dict)    #運行中的負面狀態
+    debuff_skill:  Dict[str, Tuple[SkillOperationData,float]] = field(default_factory=dict)    #運行中的負面狀態
     controlled_for_attack:float = 0 #受到控制不得使用普通攻擊類型
     controlled_for_skill:float = 0  #受到控制不得使用技能類型
     attackTimerFunc = None #儲存普攻計時任務
@@ -48,9 +48,9 @@ class BattleCharacter:
         攻擊指令許可確定
         """
         if(skill.Name == "普通攻擊"):
-            return self.stats["HP"] > 0 & self.controlled_for_attack <=0
+            return self.stats["HP"] > 0 and self.controlled_for_attack <=0
         else:
-            return self.stats["HP"] > 0 & self.controlled_for_skill <=0
+            return self.stats["HP"] > 0 and self.controlled_for_skill <=0
 
     def is_alive(self) -> bool:
         return self.stats["HP"] > 0
@@ -68,13 +68,25 @@ class BattleCharacter:
        
         # buff狀態遞減
         for buff in list(self.buff_skill):
-             skillData,duration =  self.buff_skill[buff]
-             duration = max(0, duration - dt)
-             if(duration == 0):
-                for op in self.skillData.SkillOperationDataList:
+             skillData,skillDuration =  self.buff_skill[buff]
+             skillDuration = max(0, skillDuration - dt)
+             self.buff_skill[buff] = (skillData,skillDuration)
+             if(skillDuration == 0):
+                for op in skillData.SkillOperationDataList:
                     self.SkillEffectStatusOperation(op.InfluenceStatus,(op.AddType == "Rate"),-1*op.EffectValue)
                     del self.buff_skill[buff]
                     self.buff_bar.remove_effect(buff)
+
+        #負面狀態遞減
+        for debuff in list(self.debuff_skill):
+            op,debuffDuration =  self.debuff_skill[debuff]
+            debuffDuration = max(0, debuffDuration - dt)
+            self.debuff_skill[debuff] = (op,debuffDuration)
+            if(debuffDuration == 0):
+                log,dmg,cd = SkillProcessor.status_effect_end(op , self)
+                self.battle_log.append(log)
+                del self.debuff_skill[debuff]
+                self.debuff_bar.remove_effect(debuff)
         
         # 血量自然恢復計時
         if("HP_Recovery" in self.stats):            
@@ -88,19 +100,13 @@ class BattleCharacter:
 
         # 魔力自然恢復計時
         if("MP_Recovery" in self.stats):            
-            if(self.hp_recovery_time < GameData.Instance.GameSettingDic["MpRecoverySec"].GameSettingValue):
+            if(self.mp_recovery_time < GameData.Instance.GameSettingDic["MpRecoverySec"].GameSettingValue):
                 self.hp_recovery_time+=dt
             else:
-                self.hp_recovery_time = 0
+                self.mp_recovery_time = 0
                 self.stats["MP"]+=self.stats["MP_Recovery"]
                 self.update_hp_mp()
                 self.battle_log.append(f"自然回復魔力 讓<color=#00ffdc>{self.name}</color> 恢復了<color=#ff0000>{self.stats["MP_Recovery"]}</color> 魔力")
-
-        #負面狀態遞減
-        # if self.controlled_for_attack > 0:
-        #     self.controlled_for_attack = max(0, self.controlled_for_attack - dt)
-        # if self.controlled_for_skill > 0:
-        #     self.controlled_for_skill = max(0, self.controlled_for_skill - dt)
 
     def PassTimeControll(self,passtime:float):
         """
@@ -131,14 +137,25 @@ class BattleCharacter:
         self.buff_bar.add_effect(skillData)
         self.buff_skill[skillData.SkillID] = (skillData,skillData.SkillOperationDataList[0].EffectDurationTime)
     
-    def CrowdControlCalculator(self,op: SkillOperationData):
+    def add_debuff_effect(self,op:SkillOperationData):
+        """
+        增加負面效果(含 控制狀態)
+        """
+        self.debuff_bar.add_debuff(op.InfluenceStatus)
+        self.debuff_skill[op.InfluenceStatus] = op,op.EffectDurationTime
+
+    def CrowdControlCalculator(self,op: SkillOperationData,value :int):
         """
         控制效果計算
         """
         match(op.InfluenceStatus):
-            case "Taunt" | "Stun":
-                controlled_for_skill+=op.EffectDurationTime
-                controlled_for_attack+=op.EffectDurationTime
+            case "Stun":
+                self.controlled_for_skill+=value
+                self.controlled_for_attack+=value
+            case "Taunt":
+                self.controlled_for_attack+=value
+
+    #region 戰鬥數值 計算
 
     def HitCalculator(self, skill: SkillData, target) -> Tuple[str, int, float]:
         """
@@ -262,6 +279,8 @@ class BattleCharacter:
         
         return f" <color=#00ffdc>{self.name}</color> 使用 <color=#ff9300>{CommonFunction.get_text(skill.Name)}</color> 對  <color=#83ff00>{target.name}</color> 造成 <color={color_code}>{finalDamage}</color> 傷害！", finalDamage, self.attackTimer
 
+    #endregion
+
     def SkillEffectStatusOperation(self, stateType:str, isRate:bool, value:float):
         """
         技能效果運算
@@ -351,6 +370,8 @@ class BattleCharacter:
             "DisorderResistance": self.basal.DisorderResistance+ self.equip.DisorderResistance+ self.effect.DisorderResistance,
             "DamageReduction": self.basal.DamageReduction+ self.equip.DamageReduction+ self.effect.DamageReduction,
             }
+        
+
 
 class BattleSimulator:
     def __init__(self, game_data,gui):
@@ -383,12 +404,12 @@ class BattleSimulator:
                 
                 if(skill.SkillID == "NORMAL_ATTACK"):
                     
-                    self.battle_log.append(f"<color=#00ffdc>{attacker.name}</color> 進入<color=#ff0000>普攻</color>計時 {attack_timer:.2f} 秒")
+                    self.battle_log.append(f"[ <color=#00ffdc>{attacker.name}</color> 進入<color=#ff0000>普攻</color>計時 {attack_timer:.2f} 秒 ]")
                     self.gui.display_battle_log(self.get_battle_log());
                     attacker.attackTimerFunc = self.gui.root.after(int(attack_timer*1000) ,lambda: self.attack_loop(attacker, target))
                 else:
                     
-                    self.battle_log.append(f"<color=#00ffdc>{attacker.name}</color> 施放了 <color=#ff0000>{CommonFunction.get_text(skill.Name)}</color> 需等待 {1 if skill.Type == "Buff" else 1.8} 秒")
+                    self.battle_log.append(f"[ <color=#00ffdc>{attacker.name}</color> 施放了 <color=#ff0000>{CommonFunction.get_text(skill.Name)}</color> 需等待 {1 if skill.Type == "Buff" else 1.8} 秒 ]")
                     self.gui.display_battle_log(self.get_battle_log());
                     attacker.skill_cooldowns[skill.SkillID] = skill.CD
                     attacker.attackTimerFunc = self.gui.root.after(1000 if skill.Type == "Buff" else 1800 ,lambda: self.attack_loop(attacker, target))

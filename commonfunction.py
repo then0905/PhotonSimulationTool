@@ -27,6 +27,12 @@ class CommonFunction:
         """
         return CommonFunction.load_image_resource(f'skill_icon/Icon/{job}',skillId)
     
+    def load_status_effect_icon(effectId:str):
+        """
+        讀取效果Icon資源
+        """
+        return CommonFunction.load_image_resource(f'status_effect_icon/',effectId)
+
     def load_image_resource(path,name):
         """
         依照路徑與名稱獲取圖片資源

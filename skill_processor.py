@@ -18,8 +18,7 @@ class SkillProcessor:
                     case "Damage":
                         return attacker.HitCalculator(skillData,defender)
                     case "CrowdControl":
-                        target.CrowdControlCalculator(op)
-                        return f"{attacker.name} 使 {target.name} 進入 {op.duration} 秒的控制狀態",0,0
+                        return SkillProcessor.status_effect_start(op,attacker,target)
                     case "Lunge":
                         pass
                     case "MultipleDamage":
@@ -45,6 +44,32 @@ class SkillProcessor:
                         return f"{attacker.name} 對 {target.name} 啟動 被動技能：{temp}",0,0
         else:
             return attacker.HitCalculator(skillData,defender)
-
+        
+    @staticmethod
+    def status_effect_start(op: SkillOperationData, attacker, defender)-> Tuple[str, int, float]:
+        """
+        狀態效果啟動方法
+        """
+        match op.SkillComponentID:
+            case "CrowdControl":
+                defender.CrowdControlCalculator(op,1)
+                defender.add_debuff_effect(op)
+                return f"{attacker.name} 使 {defender.name} 進入 {op.EffectDurationTime} 秒的{CommonFunction.get_text("TM_"+ op.InfluenceStatus+"_Name")}控制狀態",0,0
+            case "Debuff":
+                defender.apply_debuff(op.attr, op.value, op.duration)
+                return f"{attacker.name} 對 {defender.name} 使用 Debuff：{op.attr} -{op.value}，持續 {op.duration} 回合",0,0
+            
+    @staticmethod                    
+    def status_effect_end(op: SkillOperationData, character)-> Tuple[str, int, float]:
+        """
+        狀態效果結束方法
+        """
+        match op.SkillComponentID:
+            case "CrowdControl":
+                character.CrowdControlCalculator(op,-1)
+                return f"{character.name} 解除了 {CommonFunction.get_text("TM_"+ op.InfluenceStatus+"_Name")}的控制狀態",0,0
+            case "Debuff":
+                # defender.apply_debuff(op.attr, op.value, op.duration)
+                return f"{character.name} 對 {character.name} 使用 Debuff：{op.attr} -{op.value}，持續 {op.duration} 回合",0,0
 
 
