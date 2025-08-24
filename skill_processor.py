@@ -9,6 +9,8 @@ class SkillProcessor:
         """
         實現技能效果執行入口
         """
+        #儲存回傳的結果
+        returnResult = []
         if(skillData.Name != "普通攻擊"):
             for op in skillData.SkillOperationDataList:
                 #取得施放對象
@@ -16,9 +18,9 @@ class SkillProcessor:
 
                 match op.SkillComponentID:
                     case "Damage":
-                        return attacker.HitCalculator(skillData,defender)
+                        returnResult.append(attacker.HitCalculator(skillData,defender))
                     case "CrowdControl":
-                        return SkillProcessor.status_effect_start(op,attacker,target)
+                        returnResult.append(SkillProcessor.status_effect_start(op,attacker,target))
                     case "Lunge":
                         pass
                     case "MultipleDamage":
@@ -26,7 +28,7 @@ class SkillProcessor:
                     case "ContinuanceBuff":
                         target.add_buff_effect(skillData)
                         temp = f"{CommonFunction.get_text('TM_'+op.InfluenceStatus)}: {CommonFunction.get_text('TM_' + op.AddType).format(op.EffectValue)}"
-                        return f"{attacker.name} 對 {target.name} 使用 Buff：{temp}，持續 {op.EffectDurationTime} 秒",0,0.5
+                        returnResult.append((f"{attacker.name} 對 {target.name} 使用 Buff：{temp}，持續 {op.EffectDurationTime} 秒",0,0.5))
                     case "AdditiveBuff":
                         pass
                     case "Channeled":
@@ -37,13 +39,14 @@ class SkillProcessor:
                         pass
                     case "Debuff":
                         target.apply_debuff(op.attr, op.value, op.duration)
-                        return f"{attacker.name} 對 {target.name} 使用 Debuff：{op.attr} -{op.value}，持續 {op.duration} 回合",0,0
+                        return ((f"{attacker.name} 對 {target.name} 使用 Debuff：{op.attr} -{op.value}，持續 {op.duration} 回合",0,0))
                     case "PassiveBuff":
                         target.SkillEffectStatusOperation(op.InfluenceStatus,(op.AddType == "Rate"),op.EffectValue)
                         temp = f"{CommonFunction.get_text('TM_'+op.InfluenceStatus)}: {CommonFunction.get_text('TM_' + op.AddType).format(op.EffectValue)}"
-                        return f"{attacker.name} 對 {target.name} 啟動 被動技能：{temp}",0,0
+                        returnResult.append((f"{attacker.name} 對 {target.name} 啟動 被動技能：{temp}",0,0))
         else:
-            return attacker.HitCalculator(skillData,defender)
+            returnResult.append(attacker.HitCalculator(skillData,defender))
+        return returnResult
         
     @staticmethod
     def status_effect_start(op: SkillOperationData, attacker, defender)-> Tuple[str, int, float]:

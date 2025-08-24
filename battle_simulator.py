@@ -399,20 +399,21 @@ class BattleSimulator:
             skill = self._choose_skill(attacker)
             
             if attacker.action_check(skill):
-                log_msg, damage, attack_timer = SkillProcessor._execute_skill_operation(skill,attacker,target)
-                self.battle_log.append(log_msg)
+                for temp in SkillProcessor._execute_skill_operation(skill,attacker,target):
+                    log_msg, damage, attack_timer = temp
+                    self.battle_log.append(log_msg)
                 
-                if(skill.SkillID == "NORMAL_ATTACK"):
+                    if(skill.SkillID == "NORMAL_ATTACK"):
                     
-                    self.battle_log.append(f"[ <color=#00ffdc>{attacker.name}</color> 進入<color=#ff0000>普攻</color>計時 {attack_timer:.2f} 秒 ]")
-                    self.gui.display_battle_log(self.get_battle_log());
-                    attacker.attackTimerFunc = self.gui.root.after(int(attack_timer*1000) ,lambda: self.attack_loop(attacker, target))
-                else:
+                        self.battle_log.append(f"[ <color=#00ffdc>{attacker.name}</color> 進入<color=#ff0000>普攻</color>計時 {attack_timer:.2f} 秒 ]")
+                        self.gui.display_battle_log(self.get_battle_log());
+                        attacker.attackTimerFunc = self.gui.root.after(int(attack_timer*1000) ,lambda: self.attack_loop(attacker, target))
+                    else:
                     
-                    self.battle_log.append(f"[ <color=#00ffdc>{attacker.name}</color> 施放了 <color=#ff0000>{CommonFunction.get_text(skill.Name)}</color> 需等待 {1 if skill.Type == "Buff" else 1.8} 秒 ]")
-                    self.gui.display_battle_log(self.get_battle_log());
-                    attacker.skill_cooldowns[skill.SkillID] = skill.CD
-                    attacker.attackTimerFunc = self.gui.root.after(1000 if skill.Type == "Buff" else 1800 ,lambda: self.attack_loop(attacker, target))
+                        self.battle_log.append(f"[ <color=#00ffdc>{attacker.name}</color> 施放了 <color=#ff0000>{CommonFunction.get_text(skill.Name)}</color> 需等待 {1 if skill.Type == "Buff" else 1.8} 秒 ]")
+                        self.gui.display_battle_log(self.get_battle_log());
+                        attacker.skill_cooldowns[skill.SkillID] = skill.CD
+                        attacker.attackTimerFunc = self.gui.root.after(1000 if skill.Type == "Buff" else 1800 ,lambda: self.attack_loop(attacker, target))
                     
                 #更新雙方血量魔力
                 self.update_hp_mp()
