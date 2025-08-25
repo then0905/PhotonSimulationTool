@@ -42,7 +42,6 @@ class BattleCharacter:
     mp_recovery_time:float = 0 #魔力自然恢復間隔計時
     update_hp_mp = None    #用來儲存更新雙方血量魔力的匿名方法
 
-
     def action_check(self,skill:SkillData)->bool:
         """
         攻擊指令許可確定
@@ -101,7 +100,7 @@ class BattleCharacter:
         # 魔力自然恢復計時
         if("MP_Recovery" in self.stats):            
             if(self.mp_recovery_time < GameData.Instance.GameSettingDic["MpRecoverySec"].GameSettingValue):
-                self.hp_recovery_time+=dt
+                self.mp_recovery_time+=dt
             else:
                 self.mp_recovery_time = 0
                 self.stats["MP"]+=self.stats["MP_Recovery"]
@@ -399,21 +398,23 @@ class BattleSimulator:
             skill = self._choose_skill(attacker)
             
             if attacker.action_check(skill):
-                for temp in SkillProcessor._execute_skill_operation(skill,attacker,target):
+                total_attack_timer = 0
+                for temp in SkillProcessor._execute_skill_operation(skill,attacker,target,self.gui):
                     log_msg, damage, attack_timer = temp
                     self.battle_log.append(log_msg)
+                    total_attack_timer += attack_timer
                 
-                    if(skill.SkillID == "NORMAL_ATTACK"):
+                if(skill.SkillID == "NORMAL_ATTACK"):
                     
-                        self.battle_log.append(f"[ <color=#00ffdc>{attacker.name}</color> 進入<color=#ff0000>普攻</color>計時 {attack_timer:.2f} 秒 ]")
-                        self.gui.display_battle_log(self.get_battle_log());
-                        attacker.attackTimerFunc = self.gui.root.after(int(attack_timer*1000) ,lambda: self.attack_loop(attacker, target))
-                    else:
+                    self.battle_log.append(f"[ <color=#00ffdc>{attacker.name}</color> 進入<color=#ff0000>普攻</color>計時 {total_attack_timer:.2f} 秒 ]")
+                    self.gui.display_battle_log(self.get_battle_log());
+                    attacker.attackTimerFunc = self.gui.root.after(int(total_attack_timer*1000) ,lambda: self.attack_loop(attacker, target))
+                else:
                     
-                        self.battle_log.append(f"[ <color=#00ffdc>{attacker.name}</color> 施放了 <color=#ff0000>{CommonFunction.get_text(skill.Name)}</color> 需等待 {1 if skill.Type == "Buff" else 1.8} 秒 ]")
-                        self.gui.display_battle_log(self.get_battle_log());
-                        attacker.skill_cooldowns[skill.SkillID] = skill.CD
-                        attacker.attackTimerFunc = self.gui.root.after(1000 if skill.Type == "Buff" else 1800 ,lambda: self.attack_loop(attacker, target))
+                    self.battle_log.append(f"[ <color=#00ffdc>{attacker.name}</color> 施放了 <color=#ff0000>{CommonFunction.get_text(skill.Name)}</color> 需等待 {1 if skill.Type == "Buff" else 1.8} 秒 ]")
+                    self.gui.display_battle_log(self.get_battle_log());
+                    attacker.skill_cooldowns[skill.SkillID] = skill.CD
+                    attacker.attackTimerFunc = self.gui.root.after(1000 if skill.Type == "Buff" else 1800 ,lambda: self.attack_loop(attacker, target))
                     
                 #更新雙方血量魔力
                 self.update_hp_mp()

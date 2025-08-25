@@ -5,7 +5,7 @@ from typing import Tuple
 class SkillProcessor:
     # from battle_simulator import BattleSimulator,BattleCharacter
     @staticmethod
-    def _execute_skill_operation(skillData: SkillData, attacker, defender)-> Tuple[str, int, float]:
+    def _execute_skill_operation(skillData: SkillData, attacker, defender, gui =None)-> Tuple[str, int, float]:
         """
         實現技能效果執行入口
         """
@@ -24,7 +24,7 @@ class SkillProcessor:
                     case "Lunge":
                         pass
                     case "MultipleDamage":
-                        pass
+                        returnResult.append( attacker.HitCalculator(skillData,defender))
                     case "ContinuanceBuff":
                         target.add_buff_effect(skillData)
                         temp = f"{CommonFunction.get_text('TM_'+op.InfluenceStatus)}: {CommonFunction.get_text('TM_' + op.AddType).format(op.EffectValue)}"
