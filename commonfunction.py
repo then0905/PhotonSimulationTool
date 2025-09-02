@@ -21,6 +21,12 @@ class CommonFunction:
         """
         return max(min_value, min(value, max_value))
     
+    def load_item_icon(itemId):
+        """
+        讀取道具Icon資源
+        """
+        return CommonFunction.load_image_resource(f'item_icon/',itemId)
+
     def load_skill_icon(job:str,skillId:str):
         """
         讀取技能Icon資源

@@ -1,4 +1,4 @@
-﻿from game_models import SkillData,SkillOperationData
+﻿from game_models import ItemDataModel, SkillData,SkillOperationData,ItemEffectData
 from commonfunction import CommonFunction
 from typing import Tuple
 
@@ -20,13 +20,13 @@ class SkillProcessor:
                     case "Damage":
                         returnResult.append(attacker.HitCalculator(skillData,defender))
                     case "CrowdControl":
-                        returnResult.append(SkillProcessor.status_effect_start(op,attacker,target))
+                        returnResult.append(SkillProcessor.status_skill_effect_start(op,attacker,target))
                     case "Lunge":
                         pass
                     case "MultipleDamage":
                         returnResult.append( attacker.HitCalculator(skillData,defender))
                     case "ContinuanceBuff":
-                        target.add_buff_effect(skillData)
+                        target.add_skill_buff_effect(skillData)
                         temp = f"{CommonFunction.get_text('TM_'+op.InfluenceStatus)}: {CommonFunction.get_text('TM_' + op.AddType).format(op.EffectValue)}"
                         returnResult.append((f"{attacker.name} 對 {target.name} 使用 Buff：{temp}，持續 {op.EffectDurationTime} 秒",0,0.5))
                     case "AdditiveBuff":
@@ -47,9 +47,28 @@ class SkillProcessor:
         else:
             returnResult.append(attacker.HitCalculator(skillData,defender))
         return returnResult
-        
+
     @staticmethod
-    def status_effect_start(op: SkillOperationData, attacker, defender)-> Tuple[str, int, float]:
+    def execute_item_operation(itemData:ItemDataModel,attacker,defender,gui = None) -> Tuple[str,int,float]:
+        """
+        實現道具效果執行入口
+        """
+        #儲存回傳的結果
+        returnResult = []
+        for op in itemData.ItemEffectDataList:
+            match op.ItemComponentID:
+                case "Restoration":
+                    returnResult.append(defender.processRecovery(op,attacker,defender))
+                case "Utility":
+                    pass
+                case "Continuance":
+                    attacker.add_item_buff_effect(itemData)
+                    temp = f"{CommonFunction.get_text('TM_'+op.InfluenceStatus)}: {CommonFunction.get_text('TM_' + op.AddType).format(op.EffectValue)}"
+                    returnResult.append((f"{attacker.name} 對 {defender.name} 使用道具：{temp}，持續 {op.EffectDurationTime} 秒",0,0.5))
+        return returnResult
+
+    @staticmethod
+    def status_skill_effect_start(op: SkillOperationData, attacker, defender)-> Tuple[str, int, float]:
         """
         狀態效果啟動方法
         """
@@ -63,7 +82,7 @@ class SkillProcessor:
                 return f"{attacker.name} 對 {defender.name} 使用 Debuff：{op.attr} -{op.value}，持續 {op.duration} 回合",0,0
             
     @staticmethod                    
-    def status_effect_end(op: SkillOperationData, character)-> Tuple[str, int, float]:
+    def status_skill_effect_end(op: SkillOperationData, character)-> Tuple[str, int, float]:
         """
         狀態效果結束方法
         """

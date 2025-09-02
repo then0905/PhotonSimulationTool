@@ -21,7 +21,7 @@ class BattleCharacter:
     equipped_weapon: Optional[WeaponDataModel]
     equipped_armor: Optional[ArmorDataModel]
     skills: List[SkillData]
-    items: List[ItemDataModel]
+    items: List[Tuple[ItemDataModel,int]]
     characterType:bool  #當前攻擊者類型 True:人物 False:怪物
     attackTimer:float = 0   #普通攻擊計時器
     
@@ -34,6 +34,7 @@ class BattleCharacter:
     #動態資料
     skill_cooldowns: Dict[str, float] = field(default_factory=dict)  # skill_id -> remaining_cooldown_time
     buff_skill:  Dict[str, Tuple[SkillData,float]] = field(default_factory=dict)   #運行中的buff效果
+    buff_item:  Dict[str, Tuple[ItemDataModel,float]] = field(default_factory=dict)   #運行中的buff效果
     debuff_skill:  Dict[str, Tuple[SkillOperationData,float]] = field(default_factory=dict)    #運行中的負面狀態
     controlled_for_attack:float = 0 #受到控制不得使用普通攻擊類型
     controlled_for_skill:float = 0  #受到控制不得使用技能類型
@@ -75,6 +76,15 @@ class BattleCharacter:
                     self.SkillEffectStatusOperation(op.InfluenceStatus,(op.AddType == "Rate"),-1*op.EffectValue)
                     del self.buff_skill[buff]
                     self.buff_bar.remove_effect(buff)
+        for buff in list(self.buff_item):
+             itemData,itemDuration =  self.buff_item[buff]
+             itemDuration = max(0, itemDuration - dt)
+             self.buff_skill[buff] = (itemData,itemDuration)
+             if(itemDuration == 0):
+                for op in itemData.ItemEffectDataList:
+                    self.SkillEffectStatusOperation(op.InfluenceStatus,(op.AddType == "Rate"),-1*op.EffectValue)
+                    del self.buff_item[buff]
+                    self.buff_bar.remove_effect(buff)
 
         #負面狀態遞減
         for debuff in list(self.debuff_skill):
@@ -82,7 +92,7 @@ class BattleCharacter:
             debuffDuration = max(0, debuffDuration - dt)
             self.debuff_skill[debuff] = (op,debuffDuration)
             if(debuffDuration == 0):
-                log,dmg,cd = SkillProcessor.status_effect_end(op , self)
+                log,dmg,cd = SkillProcessor.status_skill_effect_end(op , self)
                 self.battle_log.append(log)
                 del self.debuff_skill[debuff]
                 self.debuff_bar.remove_effect(debuff)
@@ -107,15 +117,6 @@ class BattleCharacter:
                 self.update_hp_mp()
                 self.battle_log.append(f"自然回復魔力 讓<color=#00ffdc>{self.name}</color> 恢復了<color=#ff0000>{self.stats["MP_Recovery"]}</color> 魔力")
 
-    def PassTimeControll(self,passtime:float):
-        """
-        處理經過時間
-        """
-        if(controlled_for_attack!=0):
-            controlled_for_attack = CommonFunction.clamp((controlled_for_attack-passtime),0,controlled_for_attack);
-        if(controlled_for_skill!=0):
-            controlled_for_skill = CommonFunction.clamp((controlled_for_skill-passtime),0,controlled_for_skill);
-    
     def run_passive_skill(self):
         """
         運行被動技能
@@ -124,17 +125,27 @@ class BattleCharacter:
         if(passive_skills is not None):
             for skill in passive_skills:
                 SkillProcessor._execute_skill_operation(skill,self,self)
-                self.passive_bar.add_effect(skill)
+                self.passive_bar.add_skill_effect(skill)
 
-    def add_buff_effect(self,skillData:SkillData):
+    def add_skill_buff_effect(self,skillData:SkillData):
         """
-        增加buff效果
+        增加技能buff效果
         """
         for op in skillData.SkillOperationDataList:
             self.SkillEffectStatusOperation(op.InfluenceStatus,(op.AddType == "Rate"),op.EffectValue)
             
-        self.buff_bar.add_effect(skillData)
+        self.buff_bar.add_skill_effect(skillData)
         self.buff_skill[skillData.SkillID] = (skillData,skillData.SkillOperationDataList[0].EffectDurationTime)
+        
+    def add_item_buff_effect(self,itemData:ItemDataModel):
+        """
+        增加道具buff效果
+        """
+        for op in itemData.SkillOperationDataList:
+            self.SkillEffectStatusOperation(op.InfluenceStatus,(op.AddType == "Rate"),op.EffectValue)
+            
+        self.buff_bar.add_item_effect(itemData)
+        self.buff_item[itemData.SkillID] = (itemData,itemData.ItemEffectDataList[0].EffectDurationTime)
     
     def add_debuff_effect(self,op:SkillOperationData):
         """
@@ -153,6 +164,17 @@ class BattleCharacter:
                 self.controlled_for_attack+=value
             case "Taunt":
                 self.controlled_for_attack+=value
+
+    def processRecovery(self,op, caster, target):
+        """
+        處理任何恢復效果 
+        """
+        target.stats[op.InfluenceStatus]+= op.EffectValue;
+        self.update_hp_mp()
+        color_code = "#2945FF" if op.InfluenceStatus == "MP" else "#ff0000";
+        recovery_type = "魔力" if op.InfluenceStatus == "MP" else "血量";
+        return f" <color=#00ffdc>{caster.name}</color> 使用 <color=#ff9300>{CommonFunction.get_text("TM_"+op.CodeID+"_Name")}</color> 對  <color=#83ff00>{target.name}</color> 恢復 <color={color_code}>{op.EffectValue}</color> {recovery_type}！", 0, 0
+
 
     #region 戰鬥數值 計算
 

@@ -4,13 +4,12 @@ from multiprocessing import Value
 from optparse import Values
 import tkinter as tk
 from tkinter import ttk, messagebox
-from game_models import GameData, SkillData
+from game_models import GameData, ItemDataModel, ItemEffectData, SkillData
 from battle_simulator import BattleSimulator, BattleCharacter
 from stats_analyzer import StatsAnalyzer
 from status_operation import CharacterStatusCalculator
 from commonfunction import CommonFunction
 from typing import Dict
-
 
 class BattleSimulatorGUI:
     jobNameDict: Dict[str, str] = {}
@@ -124,7 +123,7 @@ class BattleSimulatorGUI:
                     widget = getattr(widget, "master", None)
                 return False
 
-            def add_effect(self, skill: SkillData):
+            def add_skill_effect(self, skill: SkillData):
                 """
                 新增一個技能效果圖示
                 """
@@ -155,6 +154,38 @@ class BattleSimulatorGUI:
                     )
                     self.effects.append(
                         {"id" : skill.SkillID ,"name": skillName, "desc": skillIntro, "widget": btn, "icon": skillIcon})
+                else:
+                    print("讀取失敗")
+            def add_item_effect(self, item: ItemDataModel):
+                """
+                新增一個技能效果圖示
+                """
+                itemIcon = CommonFunction.load_item_icon(item.CodeID)
+                if itemIcon.height() > 55:
+                    factor = itemIcon.height() // 55
+                    itemIcon = itemIcon.subsample(factor)
+                itemName = CommonFunction.get_text(item.Name)
+                itemIntro = CommonFunction.get_text(item.Intro)+'\n'
+                for op in item.ItemEffectDataList:
+                    if (op.InfluenceStatus):
+                        itemIntro += (
+                            f"{CommonFunction.get_text("TM_"+op.InfluenceStatus)} : {CommonFunction.get_text("TM_" + op.AddType).format(op.EffectValue)}")+'\n'
+                if itemIcon:
+                    btn = tk.Button(
+                        self.inner_frame,
+                        text=itemName if not itemIcon else "",
+                        image=itemIcon,
+                        compound="top",
+                        width=55,
+                        height=55
+                    )
+                    btn.pack(side="left", padx=2)
+                    btn.bind(
+                        "<Button-1>", lambda e, n=itemName, d=itemIntro: self._show_popup(
+                            e, n, d)
+                    )
+                    self.effects.append(
+                        {"id" : item.CodeID ,"name": itemName, "desc": itemIntro, "widget": btn, "icon": itemIcon})
                 else:
                     print("讀取失敗")
 
@@ -249,6 +280,106 @@ class BattleSimulatorGUI:
                 self.popup.destroy()
                 self.popup = None
 
+        class ItemManager:
+            def __init__(self, root):
+                self.root = root
+                # 攜帶的道具資料結構 {item_id: {"count": 數量, "name": 名稱}}
+                self.carried_items = {}
+                self.view_window = None  # 記錄查看道具視窗
+
+
+            def open_item_window(self):
+                """開啟道具選擇視窗，更新 self.carried_items"""
+                item_window = tk.Toplevel(self.root)
+                item_window.title("道具選擇")
+
+                item_vars = {}
+                item_counts = {}
+
+                # 過濾有作用效果的道具
+                filtered_items = [
+                    item for item in GameData.Instance.ItemsDic.values()
+                    if len(item.ItemEffectDataList) > 0
+                ]
+
+                # 動態生成道具清單
+                for i, item in enumerate(filtered_items):
+                    var = tk.BooleanVar(value=item.CodeID in self.carried_items)
+                    count_var = tk.IntVar(
+                        value=self.carried_items.get(item.CodeID, {}).get("count", 1)
+                    )
+
+                    item_vars[item.CodeID] = var
+                    item_counts[item.CodeID] = count_var
+
+                    ttk.Checkbutton(
+                        item_window, text=CommonFunction.get_text(item.Name), variable=var
+                    ).grid(row=i, column=0, sticky=tk.W)
+                    ttk.Spinbox(
+                        item_window, from_=1, to=99, textvariable=count_var, width=5
+                    ).grid(row=i, column=1)
+
+                # 點確定更新 carried_items
+                def confirm_selection():
+                    self.carried_items.clear()
+                    for item in filtered_items:
+                        if item_vars[item.CodeID].get():
+                            self.carried_items[item.CodeID] = {
+                                "count": item_counts[item.CodeID].get(),
+                                "data":item
+                            }
+                    item_window.destroy()
+                    self.show_current_items()
+
+                ttk.Button(item_window, text="確定", command=confirm_selection).grid(
+                    row=len(filtered_items), column=0, columnspan=2, pady=10
+                )
+
+            def show_current_items(self):
+                """顯示目前攜帶的道具清單"""
+                
+                # 如果已經有視窗了，就 bring to front
+                if self.view_window and tk.Toplevel.winfo_exists(self.view_window):
+                    self.view_window.lift()
+                    self.view_window.focus_force()
+                    return
+
+                view_window = tk.Toplevel(self.root)
+                view_window.title("目前攜帶道具")
+                self.view_window = view_window
+                
+                def on_close():
+                    self.view_window.destroy()
+                    self.view_window = None
+                self.view_window.protocol("WM_DELETE_WINDOW", on_close)
+
+                if not self.carried_items:
+                    ttk.Label(view_window, text="沒有攜帶道具").pack(padx=10, pady=5)
+                    return
+
+                for i, (item_id, data) in enumerate(self.carried_items.items()):
+                    ttk.Label(
+                        view_window,
+                        text=f"{CommonFunction.get_text(data['data'].Name)}: {data['count']}"
+                    ).grid(row=i, column=0, padx=10, pady=5)
+
+            def consume_item(self, item_id, amount=1):
+                """消耗道具，如果數量歸零就刪除"""
+                if item_id not in self.carried_items:
+                    print(f"沒有 {item_id} 可以消耗")
+                    return False
+
+                current_count = self.carried_items[item_id]["count"]
+                if current_count < amount:
+                    print(f"{item_id} 數量不足")
+                    return False
+
+                self.carried_items[item_id]["count"] -= amount
+                if self.carried_items[item_id]["count"] <= 0:
+                    del self.carried_items[item_id]
+                return True
+
+
         # region 左側玩家設置
 
         player_frame = ttk.LabelFrame(main_frame, text="玩家設置", padding="20")
@@ -342,10 +473,19 @@ class BattleSimulatorGUI:
         )
         self.player_equipment_data = self.common_EquipmentUI(
             player_equipment_frame)
+        
         # === 道具按鈕 ===
-        ttk.Button(
-            player_equipment_frame, text="選擇攜帶道具", command=self.open_item_window
-        ).grid(row=999, column=0, pady=10)
+        # 建立管理器
+        self.player_item_manager = ItemManager(player_equipment_frame)
+
+        # 按鈕打開道具選擇
+        ttk.Button(player_equipment_frame, text="選擇攜帶道具", command=self.player_item_manager.open_item_window).grid(row=999, column=0, pady=10)
+
+        # 顯示目前道具
+        ttk.Button(player_equipment_frame, text="查看道具", command=self.player_item_manager.show_current_items).grid(row=999, column=1, pady=10)
+        # ttk.Button(
+        #     player_equipment_frame, text="選擇攜帶道具", command=self.open_item_window
+        # ).grid(row=999, column=0, pady=10)
 
         # === 狀態效果欄（放裝備欄下方） ===
         self.player_buff_status_bar = StatusEffectBar(player_frame)
@@ -474,9 +614,20 @@ class BattleSimulatorGUI:
         self.enemy_equipment_data = self.common_EquipmentUI(
             enemy_equipment_frame)
         # === 道具按鈕 ===
-        ttk.Button(
-            enemy_equipment_frame, text="選擇攜帶道具", command=self.open_item_window
-        ).grid(row=999, column=0, pady=10)
+        # 點擊按鈕，先選道具，再開另一個視窗
+        # 建立管理器
+        self.enemy_item_manager = ItemManager(enemy_equipment_frame)
+
+        # 按鈕打開道具選擇
+        ttk.Button(enemy_equipment_frame, text="選擇攜帶道具", command=self.enemy_item_manager.open_item_window).grid(row=999, column=0, pady=10)
+
+        # 顯示目前道具
+        ttk.Button(enemy_equipment_frame, text="查看道具", command=self.enemy_item_manager.show_current_items).grid(row=999, column=1, pady=10)
+        # ttk.Button(
+        #     enemy_equipment_frame,
+        #     text="選擇攜帶道具",
+        #     command=lambda: self.open_item_window(self.show_current_items)
+        # ).grid(row=999, column=0, pady=10)
 
         # === 狀態效果欄（放裝備欄下方） ===
         self.enemy_buff_status_bar = StatusEffectBar(enemy_frame)
@@ -710,9 +861,10 @@ class BattleSimulatorGUI:
             else:
                 frame.grid()
 
-    def open_item_window(self):
+    def open_item_window(self, on_confirm=None):
         """
-        道具面板的呼叫
+        通用的道具選擇視窗
+        :param on_confirm: 確定後呼叫的函數，會收到選擇的道具資料
         """
         item_window = tk.Toplevel(self.root)
         item_window.title("道具選擇")
@@ -720,13 +872,14 @@ class BattleSimulatorGUI:
         self.item_vars = {}
         self.item_counts = {}
 
-        # 過濾出 有技能效果(可作用的部分)
+        # 過濾有作用效果的道具
         filtered_items = [
             item
             for item in GameData.Instance.ItemsDic.values()
             if len(item.ItemEffectDataList) > 0
         ]
 
+        # 動態生成道具清單
         for i, item in enumerate(filtered_items):
             var = tk.BooleanVar()
             count_var = tk.IntVar(value=1)
@@ -734,15 +887,46 @@ class BattleSimulatorGUI:
             self.item_counts[item.CodeID] = count_var
 
             ttk.Checkbutton(
-                item_window, text=CommonFunction.get_text(item.Name), variable=var
+            item_window, text=CommonFunction.get_text(item.Name), variable=var
             ).grid(row=i, column=0, sticky=tk.W)
             ttk.Spinbox(
                 item_window, from_=1, to=99, textvariable=count_var, width=5
             ).grid(row=i, column=1)
 
-        ttk.Button(item_window, text="確定", command=item_window.destroy).grid(
-            row=len(filtered_items), column=0, columnspan=2, pady=10
-        )
+        # 點確定按鈕時，把選擇資料整理後回傳
+        def confirm_selection():
+            selected_items = [
+                (item.CodeID, self.item_vars[item.CodeID].get(), self.item_counts[item.CodeID].get())
+                for item in filtered_items
+            ]
+            item_window.destroy()
+            if on_confirm:
+                on_confirm(selected_items)
+
+        ttk.Button(
+            item_window, text="確定", command=confirm_selection
+        ).grid(row=len(filtered_items), column=0, columnspan=2, pady=10)
+
+    def show_current_items(self, itemlist):
+        """顯示目前攜帶的道具清單"""
+        if not itemlist:
+            return
+
+        view_window = tk.Toplevel(self.root)
+        view_window.title("目前攜帶道具")
+
+        row_idx = 0
+        for itemid, carried, count in itemlist:
+            if carried:
+                ttk.Label(
+                    view_window,
+                    text=f"{CommonFunction.get_text('TM_' + itemid + '_Name')}: {count}"
+                ).grid(row=row_idx, column=0, padx=10, pady=5)
+                row_idx += 1
+
+        # ttk.Button(view_window, text="關閉", command=view_window.destroy).grid(
+        #     row=len(self.carried_items), column=0, pady=10
+        # )
 
     def start_battle(self):
 
@@ -774,6 +958,7 @@ class BattleSimulatorGUI:
             jobBonusData=jobBonusData,
             level=self.player_level_var.get(),
             equipment=self.player_equipment_data,
+            itemList=[(v["data"], v["count"]) for v in self.player_item_manager.carried_items.values()]
         )
 
         # 創建敵人
@@ -801,6 +986,7 @@ class BattleSimulatorGUI:
                 jobBonusData=jobBonusData,  # 使用相同的職業
                 level=self.enemy_level_var.get(),
                 equipment=self.enemy_equipment_data,
+                itemList=[(v["data"], v["count"]) for v in self.enemy_item_manager.carried_items.values()]
             )
 
         # 進行戰鬥模擬
@@ -808,7 +994,7 @@ class BattleSimulatorGUI:
         simulator.simulate_battle(self.player_character, self.enemy_character)
 
     def create_character(
-        self, name: str, race: str, jobBonusData, level: int, equipment={}
+        self, name: str, race: str, jobBonusData, level: int, equipment={} , itemList = []
     ) -> BattleCharacter:
         """
         創建人物
@@ -853,7 +1039,6 @@ class BattleSimulatorGUI:
             equip=character_data["equip"],
             effect=character_data["effect"],
             skills=skills,
-            items=[],
             equipped_weapon=self.weapon_list,
             equipped_armor=self.armor_list,
             characterType=True,
@@ -861,8 +1046,9 @@ class BattleSimulatorGUI:
             buff_bar=self.player_buff_status_bar,
             debuff_bar=self.player_debuff_status_bar,
             passive_bar=self.player_passive_status_bar,
+            items = itemList
         )
-
+    
     def create_monster_character(self, monster) -> BattleCharacter:
         # 將怪物轉換為戰鬥角色
         stats = {
@@ -896,12 +1082,12 @@ class BattleSimulatorGUI:
             equipped_weapon=None,
             equipped_armor=None,
             skills=skills,
-            items=[],
             characterType=False,
             attackTimer=1 / monster.AtkSpeed,
             buff_bar=self.enemy_buff_status_bar,
             debuff_bar=self.enemy_debuff_status_bar,
             passive_bar=self.enemy_passive_status_bar,
+            items=[(v["data"], v["count"]) for v in self.enemy_item_manager.carried_items.values()]
         )
 
     def show_damage_stats(self):
