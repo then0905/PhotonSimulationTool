@@ -13,6 +13,7 @@ from typing import Dict
 
 class BattleSimulatorGUI:
     jobNameDict: Dict[str, str] = {}
+    monsterNameDict: Dict[str, str] = {}
 
     def __init__(self, root):
         self.root = root
@@ -336,9 +337,6 @@ class BattleSimulatorGUI:
                 )
 
             def show_current_items(self):
-                """顯示目前攜帶的道具清單"""
-                
-                # 如果已經有視窗了，就 bring to front
                 if self.view_window and tk.Toplevel.winfo_exists(self.view_window):
                     self.view_window.lift()
                     self.view_window.focus_force()
@@ -347,21 +345,24 @@ class BattleSimulatorGUI:
                 view_window = tk.Toplevel(self.root)
                 view_window.title("目前攜帶道具")
                 self.view_window = view_window
-                
+
                 def on_close():
                     self.view_window.destroy()
                     self.view_window = None
+
                 self.view_window.protocol("WM_DELETE_WINDOW", on_close)
 
                 if not self.carried_items:
                     ttk.Label(view_window, text="沒有攜帶道具").pack(padx=10, pady=5)
                     return
 
+                self.item_labels = {}  # 🔑 存每個 item 的 StringVar
                 for i, (item_id, data) in enumerate(self.carried_items.items()):
-                    ttk.Label(
-                        view_window,
-                        text=f"{CommonFunction.get_text(data['data'].Name)}: {data['count']}"
-                    ).grid(row=i, column=0, padx=10, pady=5)
+                    var = tk.StringVar(
+                        value=f"{CommonFunction.get_text(data['data'].Name)}: {data['count']}"
+                    )
+                    self.item_labels[item_id] = var
+                    ttk.Label(view_window, textvariable=var).grid(row=i, column=0, padx=10, pady=5)
 
             def consume_item(self, item_id, amount=1):
                 """消耗道具，如果數量歸零就刪除"""
@@ -375,8 +376,13 @@ class BattleSimulatorGUI:
                     return False
 
                 self.carried_items[item_id]["count"] -= amount
-                if self.carried_items[item_id]["count"] <= 0:
-                    del self.carried_items[item_id]
+                if item_id in self.item_labels:
+                    if item_id in self.carried_items:
+                        self.item_labels[item_id].set(
+                            f"{CommonFunction.get_text(self.carried_items[item_id]['data'].Name)}: {self.carried_items[item_id]['count']}"
+                        )
+                    else:
+                        self.item_labels[item_id].set("已消耗完畢")
                 return True
 
 
@@ -521,15 +527,31 @@ class BattleSimulatorGUI:
         # 怪物選擇
         monster_label = ttk.Label(enemy_frame, text="選擇怪物:")
         monster_label.grid(row=1, column=0, sticky=tk.W)
+
         self.monster_var = tk.StringVar()
-        monsters = [
-            m.MonsterCodeID for m in GameData.Instance.MonstersDataDic.values()]
-        monster_combobox = ttk.Combobox(
-            enemy_frame, textvariable=self.monster_var, values=monsters, width=15
-        )
+
+        for monsterData in GameData.Instance.MonstersDataDic.values():
+            self.monsterNameDict.update(
+                {monsterData.MonsterCodeID: CommonFunction.get_text(monsterData.Name)}
+            )
+
+        tempMonsterNameList = list(self.monsterNameDict.values())
+        ttk.Combobox(
+            player_frame,
+            textvariable=self.player_class_var,
+            values=tempJobNameList,
+            width=15,
+        ).grid(row=2, column=1)
+
+        monster_combobox = (
+            ttk.Combobox(
+            enemy_frame,
+                textvariable=self.monster_var,
+                values=tempMonsterNameList,
+                width=15
+        ))
         monster_combobox.grid(row=1, column=1, columnspan=1)
-        if monsters:
-            self.monster_var.set(monsters[0])
+        self.monster_var.set(next(iter(self.monsterNameDict.values())))
 
         # 種族選擇
         enemy_race_label = ttk.Label(enemy_frame, text="種族:")
@@ -968,7 +990,7 @@ class BattleSimulatorGUI:
                 (
                     m
                     for m in GameData.Instance.MonstersDataDic.values()
-                    if m.MonsterCodeID == monster_name
+                    if CommonFunction.get_text(m.Name) == monster_name
                 ),
                 None,
             )
@@ -1043,10 +1065,11 @@ class BattleSimulatorGUI:
             equipped_armor=self.armor_list,
             characterType=True,
             attackTimer=(1 / character_data["stats"]["AS"]),
-            buff_bar=self.player_buff_status_bar,
-            debuff_bar=self.player_debuff_status_bar,
-            passive_bar=self.player_passive_status_bar,
-            items = itemList
+            buff_bar=self.enemy_buff_status_bar if(name == "敵對玩家") else self.player_buff_status_bar,
+            debuff_bar=self.enemy_debuff_status_bar if(name == "敵對玩家") else self.player_debuff_status_bar,
+            passive_bar=self.enemy_passive_status_bar if(name == "敵對玩家") else self.player_passive_status_bar,
+            items = itemList,
+            item_manager=self.enemy_item_manager if(name == "敵對玩家") else self.player_item_manager
         )
     
     def create_monster_character(self, monster) -> BattleCharacter:
@@ -1087,7 +1110,8 @@ class BattleSimulatorGUI:
             buff_bar=self.enemy_buff_status_bar,
             debuff_bar=self.enemy_debuff_status_bar,
             passive_bar=self.enemy_passive_status_bar,
-            items=[(v["data"], v["count"]) for v in self.enemy_item_manager.carried_items.values()]
+            items=[(v["data"], v["count"]) for v in self.enemy_item_manager.carried_items.values()],
+            item_manager=self.enemy_item_manager
         )
 
     def show_damage_stats(self):

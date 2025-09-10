@@ -1,12 +1,13 @@
 ﻿import random
 from typing import Dict, Optional, List
 from dataclasses import dataclass,field
-from game_models import GameData, SkillData,SkillOperationData, MonsterDataModel, MonsterDropItemDataModel, ArmorDataModel, WeaponDataModel,ItemDataModel,JobBonusDataModel,StatusFormulaDataModel,GameText,GameSettingDataModel,AreaData,LvAndExpDataModel
+from game_models import GameData, ItemsDic, SkillData,SkillOperationData, MonsterDataModel, MonsterDropItemDataModel, ArmorDataModel, WeaponDataModel,ItemDataModel,JobBonusDataModel,StatusFormulaDataModel,GameText,GameSettingDataModel,AreaData,LvAndExpDataModel
 from formula_parser import FormulaParser
 from typing import Tuple
 from commonfunction import CommonFunction
 from skill_processor import SkillProcessor
 from status_operation import StatusValues
+from AICombatAction import ai_action
 
 @dataclass
 class BattleCharacter:
@@ -30,9 +31,11 @@ class BattleCharacter:
     debuff_bar: Optional[object] = None  #負面狀態效果提示欄
     passive_bar: Optional[object] = None   #被動效果提示欄
     battle_log = None                      #戰鬥日誌
+    item_manager: Optional[object] = None   #道具管理器
     
     #動態資料
     skill_cooldowns: Dict[str, float] = field(default_factory=dict)  # skill_id -> remaining_cooldown_time
+    item_cooldowns: Dict[str, float] = field(default_factory=dict)  # item_id -> remaining_cooldown_time
     buff_skill:  Dict[str, Tuple[SkillData,float]] = field(default_factory=dict)   #運行中的buff效果
     buff_item:  Dict[str, Tuple[ItemDataModel,float]] = field(default_factory=dict)   #運行中的buff效果
     debuff_skill:  Dict[str, Tuple[SkillOperationData,float]] = field(default_factory=dict)    #運行中的負面狀態
@@ -65,7 +68,12 @@ class BattleCharacter:
                 self.skill_cooldowns[skill_id] = max(0, self.skill_cooldowns[skill_id] - dt)
                 if self.skill_cooldowns[skill_id] == 0:
                     del self.skill_cooldowns[skill_id]
-       
+        for item_id in list(self.item_cooldowns):
+            if self.item_cooldowns[item_id] > 0:
+                self.item_cooldowns[item_id] = max(0, self.skill_cooldowns[item_id] - dt)
+                if self.item_cooldowns[item_id] == 0:
+                    del self.item_cooldowns[item_id]       
+
         # buff狀態遞減
         for buff in list(self.buff_skill):
              skillData,skillDuration =  self.buff_skill[buff]
@@ -105,7 +113,7 @@ class BattleCharacter:
                 self.hp_recovery_time = 0
                 self.stats["HP"]+=self.stats["HP_Recovery"]
                 self.update_hp_mp()
-                self.battle_log.append(f"自然回復生命 讓<color=#00ffdc>{self.name}</color> 恢復了<color=#ff0000>{self.stats["HP_Recovery"]}</color> 生命")
+                self.battle_log.append(f"自然回復生命 讓<color=#00ffdc>{self.name}</color> 恢復了 [ <color=#ff0000>{self.stats["HP_Recovery"]} 生命 </color> ]")
 
         # 魔力自然恢復計時
         if("MP_Recovery" in self.stats):            
@@ -115,7 +123,26 @@ class BattleCharacter:
                 self.mp_recovery_time = 0
                 self.stats["MP"]+=self.stats["MP_Recovery"]
                 self.update_hp_mp()
-                self.battle_log.append(f"自然回復魔力 讓<color=#00ffdc>{self.name}</color> 恢復了<color=#ff0000>{self.stats["MP_Recovery"]}</color> 魔力")
+                self.battle_log.append(f"自然回復魔力 讓<color=#00ffdc>{self.name}</color> 恢復了 [ <color=#ff0000>{self.stats["MP_Recovery"]} 魔力 </color> ]")
+    
+    def use_item_id(self,itemid)-> Tuple[str, int, float]:
+        for idx, (item, count) in enumerate(self.items):
+            if count > 0 and item.CodeID not in self.item_cooldowns and itemid == item.CodeID:
+                # 執行道具效果，只傳 item
+                for temp in  SkillProcessor.execute_item_operation(item, self, self):
+                    log_msg, damage, attack_timer =temp
+            
+                    # 使用後扣除數量
+                    count -= 1
+                    self.item_manager.consume_item(itemid)
+                    if count <= 0:
+                        # 數量為0，刪除這個道具
+                        self.items.pop(idx)
+                    else:
+                        # 更新數量
+                        self.items[idx] = (item, count)
+            
+                    return log_msg, damage, attack_timer  # 回傳執行結果
 
     def run_passive_skill(self):
         """
@@ -141,11 +168,11 @@ class BattleCharacter:
         """
         增加道具buff效果
         """
-        for op in itemData.SkillOperationDataList:
+        for op in itemData.ItemEffectDataList:
             self.SkillEffectStatusOperation(op.InfluenceStatus,(op.AddType == "Rate"),op.EffectValue)
             
         self.buff_bar.add_item_effect(itemData)
-        self.buff_item[itemData.SkillID] = (itemData,itemData.ItemEffectDataList[0].EffectDurationTime)
+        self.buff_item[itemData.CodeID] = (itemData,itemData.ItemEffectDataList[0].EffectDurationTime)
     
     def add_debuff_effect(self,op:SkillOperationData):
         """
@@ -165,7 +192,7 @@ class BattleCharacter:
             case "Taunt":
                 self.controlled_for_attack+=value
 
-    def processRecovery(self,op, caster, target):
+    def processRecovery(self,op, caster, target)-> Tuple[str, int, float]:
         """
         處理任何恢復效果 
         """
@@ -173,7 +200,7 @@ class BattleCharacter:
         self.update_hp_mp()
         color_code = "#2945FF" if op.InfluenceStatus == "MP" else "#ff0000";
         recovery_type = "魔力" if op.InfluenceStatus == "MP" else "血量";
-        return f" <color=#00ffdc>{caster.name}</color> 使用 <color=#ff9300>{CommonFunction.get_text("TM_"+op.CodeID+"_Name")}</color> 對  <color=#83ff00>{target.name}</color> 恢復 <color={color_code}>{op.EffectValue}</color> {recovery_type}！", 0, 0
+        return f" <color=#00ffdc>{caster.name}</color> 使用 <color=#ff9300>{CommonFunction.get_text("TM_"+op.CodeID+"_Name")}</color> 對  <color=#83ff00>{target.name}</color> 恢復 <color={color_code}>{op.EffectValue}</color> {recovery_type}！", op.EffectValue, 0
 
 
     #region 戰鬥數值 計算
@@ -283,7 +310,7 @@ class BattleCharacter:
 
         #計算防禦減免
         defenseRatio = CommonFunction.clamp(variables["target_defense"] / (variables["target_defense"] + 9), 0.1, 0.75)
-        print(f"技能傷害倍率:{skill.Damage}")
+        # print(f"技能傷害倍率:{skill.Damage}")
         #計算傷害
         if is_Crt:
             damage = round(variables["attacker_attack"]*skill.Damage*1.5)+self.stats["CrtDamage"]
@@ -291,7 +318,7 @@ class BattleCharacter:
             damage = round(variables["attacker_attack"]*skill.Damage)
 
         finalDamage = CommonFunction.clamp(round(damage * (1 - defenseRatio)) - target.stats["DamageReduction"],0,round(damage * (1 - defenseRatio)) - target.stats["DamageReduction"])
-        print(f"攻擊對象:{self.characterType}，攻擊者傷害:{damage}，防禦減免{defenseRatio}，最後傷害{finalDamage}")
+        # print(f"攻擊對象:{self.characterType}，攻擊者傷害:{damage}，防禦減免{defenseRatio}，最後傷害{finalDamage}")
         
         target.stats["HP"] -= finalDamage
         self.stats["MP"] -= skill.CastMage
@@ -309,14 +336,14 @@ class BattleCharacter:
         match(stateType):
             case "MeleeATK":
                 self.effect.MeleeATK += round(self.basal.MeleeATK * value) if isRate else round(value)
-                print(f"basal.MeleeATK:{self.basal.MeleeATK} valur:{value} processor{self.basal.MeleeATK * value}  final to int {round(self.basal.MeleeATK * value)}")
+                # print(f"basal.MeleeATK:{self.basal.MeleeATK} valur:{value} processor{self.basal.MeleeATK * value}  final to int {round(self.basal.MeleeATK * value)}")
             case "RemoteATK":
                 self.effect.RemoteATK += round(self.basal.RemoteATK * value) if isRate else round(value)
             case "MageATK":
                 self.effect.MageATK += round(self.basal.MageATK * value) if isRate else round(value)    
             case "MaxHP":
                 self.effect.MaxHP += round(self.basal.MaxHP * value) if isRate else round(value)
-                print(f"basal.MaxHP:{self.basal.MaxHP} valur:{value} processor{self.basal.MaxHP * value}  final to int {round(self.basal.MaxHP * value)}")
+                # print(f"basal.MaxHP:{self.basal.MaxHP} valur:{value} processor{self.basal.MaxHP * value}  final to int {round(self.basal.MaxHP * value)}")
             case "MaxMP":
                 self.effect.MaxMP += round(self.basal.MaxMP * value) if isRate else round(value)
             case "DEF":
@@ -392,8 +419,6 @@ class BattleCharacter:
             "DamageReduction": self.basal.DamageReduction+ self.equip.DamageReduction+ self.effect.DamageReduction,
             }
         
-
-
 class BattleSimulator:
     def __init__(self, game_data,gui):
         self.game_data = game_data
@@ -418,37 +443,84 @@ class BattleSimulator:
         
         if attacker.is_alive() and target.is_alive():
             skill = self._choose_skill(attacker)
-            
-            if attacker.action_check(skill):
-                total_attack_timer = 0
+            ai = ai_action(attacker.skills,attacker.items)
+            action_id, state = ai.choose_action(attacker, target)
+            self.ai_choose_result(ai,state,attacker,target,action_id)
+        #     if attacker.action_check(skill):
+        #         total_attack_timer = 0
+        #         for temp in SkillProcessor._execute_skill_operation(skill,attacker,target,self.gui):
+        #             log_msg, damage, attack_timer = temp
+        #             self.battle_log.append(log_msg)
+        #             total_attack_timer += attack_timer
+                
+        #         if(skill.SkillID == "NORMAL_ATTACK"):
+                    
+        #             self.battle_log.append(f"[ <color=#00ffdc>{attacker.name}</color> 進入<color=#ff0000>普攻</color>計時 {total_attack_timer:.2f} 秒 ]")
+        #             self.gui.display_battle_log(self.get_battle_log());
+        #             attacker.attackTimerFunc = self.gui.root.after(int(total_attack_timer*1000) ,lambda: self.attack_loop(attacker, target))
+        #         else:
+                    
+        #             self.battle_log.append(f"[ <color=#00ffdc>{attacker.name}</color> 施放了 <color=#ff0000>{CommonFunction.get_text(skill.Name)}</color> 需等待 {1 if skill.Type == "Buff" else 1.8} 秒 ]")
+        #             self.gui.display_battle_log(self.get_battle_log());
+        #             attacker.skill_cooldowns[skill.SkillID] = skill.CD
+        #             attacker.attackTimerFunc = self.gui.root.after(1000 if skill.Type == "Buff" else 1800 ,lambda: self.attack_loop(attacker, target))
+                    
+        #         #更新雙方血量魔力
+        #         self.update_hp_mp()
+                
+        #     else:
+        #         attacker.attackTimerFunc = self.gui.root.after(100, lambda: self.attack_loop(attacker, target))
+                
+        # else:
+        #     if(attacker.attackTimerFunc is not None):
+        #         self.gui.root.after_cancel(attacker.attackTimerFunc)
+        #         self.check_battle_result(attacker,target)
+                
+    def ai_choose_result(self,ai,state,attacker: BattleCharacter, target:BattleCharacter,result:str):
+        """
+        AI 選擇&結果
+        """
+        reward = 0
+        total_attack_timer = 0
+        match(result):
+            case "NORMAL_ATTACK":
+                normal_attack =SkillData(
+                    SkillID="NORMAL_ATTACK",
+                    Name="普通攻擊",
+                    Damage=1,
+                    CastMage=0,
+                     # 其他必要參數...
+            )
+                for temp in SkillProcessor._execute_skill_operation(normal_attack,attacker,target,self.gui):
+                    log_msg, damage, attack_timer = temp
+                    self.battle_log.append(log_msg)
+                    reward += damage
+                    total_attack_timer += attack_timer
+                    self.battle_log.append(f"[ <color=#00ffdc>{attacker.name}</color> 進入<color=#ff0000>普攻</color>計時 {total_attack_timer:.2f} 秒 ]")
+            #道具
+            case str() if result.startswith("USE_ITEM:"):
+                log_msg, damage, attack_timer = attacker.use_item_id(result.replace("USE_ITEM:",""))
+                self.battle_log.append(log_msg)
+                reward += damage
+                total_attack_timer += attack_timer
+                self.battle_log.append(f"[ <color=#00ffdc>{attacker.name}</color> 進入<color=#ff0000>普攻</color>計時 {total_attack_timer:.2f} 秒 ]")
+            #施放技能
+            case _:
+                skill =  next(s for s in attacker.skills if s.SkillID == result)
                 for temp in SkillProcessor._execute_skill_operation(skill,attacker,target,self.gui):
                     log_msg, damage, attack_timer = temp
                     self.battle_log.append(log_msg)
-                    total_attack_timer += attack_timer
-                
-                if(skill.SkillID == "NORMAL_ATTACK"):
-                    
-                    self.battle_log.append(f"[ <color=#00ffdc>{attacker.name}</color> 進入<color=#ff0000>普攻</color>計時 {total_attack_timer:.2f} 秒 ]")
-                    self.gui.display_battle_log(self.get_battle_log());
-                    attacker.attackTimerFunc = self.gui.root.after(int(total_attack_timer*1000) ,lambda: self.attack_loop(attacker, target))
-                else:
-                    
                     self.battle_log.append(f"[ <color=#00ffdc>{attacker.name}</color> 施放了 <color=#ff0000>{CommonFunction.get_text(skill.Name)}</color> 需等待 {1 if skill.Type == "Buff" else 1.8} 秒 ]")
-                    self.gui.display_battle_log(self.get_battle_log());
                     attacker.skill_cooldowns[skill.SkillID] = skill.CD
-                    attacker.attackTimerFunc = self.gui.root.after(1000 if skill.Type == "Buff" else 1800 ,lambda: self.attack_loop(attacker, target))
+                    reward += damage
+                    total_attack_timer += attack_timer
                     
-                #更新雙方血量魔力
-                self.update_hp_mp()
-                
-            else:
-                attacker.attackTimerFunc = self.gui.root.after(100, lambda: self.attack_loop(attacker, target))
-                
-        else:
-            if(attacker.attackTimerFunc is not None):
-                self.gui.root.after_cancel(attacker.attackTimerFunc)
-                self.check_battle_result(attacker,target)
-                
+        self.gui.display_battle_log(self.get_battle_log())  
+        self.update_hp_mp()
+        next_state = ai.get_state(attacker, target)       
+        ai.update_q(state, result, reward, next_state)        
+        attacker.attackTimerFunc = self.gui.root.after(int(total_attack_timer*1000) ,lambda: self.attack_loop(attacker, target))
+        
     def simulate_battle(self, player: BattleCharacter, enemy: BattleCharacter):
         """開啟戰鬥模擬"""
         self.battle_log.clear()

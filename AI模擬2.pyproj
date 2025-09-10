@@ -19,6 +19,7 @@
     <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AICombatAction.py" />
     <Compile Include="battle_simulator.py" />
     <Compile Include="commonfunction.py" />
     <Compile Include="formula_parser.py" />
