@@ -388,37 +388,33 @@ class BattleCharacter:
                 self.effect.MeleeATK += round(self.basal.MeleeATK * value) if isRate else round(value)
                 self.effect.RemoteATK += round(self.basal.RemoteATK * value) if isRate else round(value)
                 self.effect.MageATK += round(self.basal.MageATK * value) if isRate else round(value)
-        self.stats =  {  # 計算後的屬性值
-            "MaxHP": self.basal.MaxHP + self.equip.MaxHP + self.effect.MaxHP,
-            "HP": self.basal.MaxHP + self.equip.MaxHP + self.effect.MaxHP,
-            "MaxMP": self.basal.MaxMP + self.equip.MaxMP + self.effect.MaxMP,
-            "MP": self.basal.MaxMP + self.equip.MaxMP + self.effect.MaxMP,
-            "MeleeATK": self.basal.MeleeATK + self.equip.MeleeATK+ self.effect.MeleeATK,
-            "RemoteATK": self.basal.RemoteATK + self.equip.RemoteATK+ self.effect.RemoteATK,
-            "MageATK": self.basal.MageATK + self.equip.MageATK+ self.effect.MageATK,
-            "DEF": self.basal.DEF + self.equip.DEF+ self.effect.DEF,
-            "Avoid": self.basal.Avoid + self.equip.Avoid+ self.effect.Avoid,
-            "MeleeHit": self.basal.MeleeHit + self.equip.MeleeHit+ self.effect.MeleeHit,
-            "RemoteHit": self.basal.RemoteHit + self.equip.RemoteHit+ self.effect.RemoteHit,
-            "MageHit": self.basal.MageHit + self.equip.MageHit+ self.effect.MageHit,
-            "MDEF": self.basal.MDEF + self.equip.MDEF+ self.effect.MDEF,
-            "Speed": self.basal.Speed + self.equip.Speed+ self.effect.Speed,
-            "AS": self.basal.AS + self.equip.AS+ self.effect.AS,
-            "DamageReduction": self.basal.DamageReduction + self.equip.DamageReduction+ self.effect.DamageReduction,
-            "ElementDamageIncrease": self.basal.ElementDamageIncrease
-            + self.equip.ElementDamageIncrease+ self.effect.ElementDamageIncrease,
-            "ElementDamageReduction": self.basal.ElementDamageReduction
-            + self.equip.ElementDamageReduction+ self.effect.ElementDamageReduction,
-            "HP_Recovery": self.basal.HP_Recovery + self.equip.HP_Recovery+ self.effect.HP_Recovery,
-            "MP_Recovery": self.basal.MP_Recovery + self.equip.MP_Recovery+ self.effect.MP_Recovery,
-            "Crt": self.basal.Crt+ self.equip.Crt+ self.effect.Crt,
-            "CrtResistance": self.basal.CrtResistance+ self.equip.CrtResistance+ self.effect.CrtResistance,
-            "CrtDamage": self.basal.CrtDamage+ self.equip.CrtDamage+ self.effect.CrtDamage,
-            "BlockRate": self.basal.BlockRate+ self.equip.BlockRate+ self.effect.BlockRate,
-            "DisorderResistance": self.basal.DisorderResistance+ self.equip.DisorderResistance+ self.effect.DisorderResistance,
-            "DamageReduction": self.basal.DamageReduction+ self.equip.DamageReduction+ self.effect.DamageReduction,
-            }
-        
+        self.stats["MaxHP"] =self.basal.MaxHP + self.equip.MaxHP + self.effect.MaxHP
+        self.stats["MaxMP"] =self.basal.MaxMP + self.equip.MaxMP + self.effect.MaxMP
+        self.stats["HP"] =self.basal.HP + self.equip.HP + self.effect.HP
+        self.stats["MP"] =self.basal.MP + self.equip.MP + self.effect.MP
+        self.stats["MeleeATK"] =self.basal.MeleeATK + self.equip.MeleeATK + self.effect.MeleeATK
+        self.stats["RemoteATK"] =self.basal.RemoteATK + self.equip.RemoteATK + self.effect.RemoteATK
+        self.stats["MageATK"] =self.basal.MageATK + self.equip.MageATK + self.effect.MageATK
+        self.stats["DEF"] =self.basal.DEF + self.equip.DEF + self.effect.DEF
+        self.stats["Avoid"] =self.basal.Avoid + self.equip.Avoid + self.effect.Avoid
+        self.stats["MeleeHit"] =self.basal.MeleeHit + self.equip.MeleeHit + self.effect.MeleeHit
+        self.stats["RemoteHit"] =self.basal.RemoteHit + self.equip.RemoteHit + self.effect.RemoteHit
+        self.stats["MageHit"] =self.basal.MageHit + self.equip.MageHit + self.effect.MageHit
+        self.stats["MDEF"] =self.basal.MDEF + self.equip.MDEF + self.effect.MDEF
+        self.stats["Speed"] =self.basal.Speed + self.equip.Speed + self.effect.Speed
+        self.stats["AS"] =self.basal.AS + self.equip.AS + self.effect.AS
+        self.stats["DamageReduction"] =self.basal.DamageReduction + self.equip.DamageReduction + self.effect.DamageReduction
+        self.stats["ElementDamageIncrease"] =self.basal.ElementDamageIncrease + self.equip.ElementDamageIncrease + self.effect.ElementDamageIncrease
+        self.stats["ElementDamageReduction"] =self.basal.ElementDamageReduction + self.equip.ElementDamageReduction + self.effect.ElementDamageReduction
+        self.stats["HP_Recovery"] =self.basal.HP_Recovery + self.equip.HP_Recovery + self.effect.HP_Recovery
+        self.stats["MP_Recovery"] =self.basal.MP_Recovery + self.equip.MP_Recovery + self.effect.MP_Recovery
+        self.stats["Crt"] =self.basal.Crt + self.equip.Crt + self.effect.Crt
+        self.stats["CrtResistance"] =self.basal.CrtResistance + self.equip.CrtResistance + self.effect.CrtResistance
+        self.stats["CrtDamage"] =self.basal.CrtDamage + self.equip.CrtDamage + self.effect.CrtDamage
+        self.stats["BlockRate"] =self.basal.BlockRate + self.equip.BlockRate + self.effect.BlockRate
+        self.stats["DisorderResistance"] =self.basal.DisorderResistance + self.equip.DisorderResistance + self.effect.DisorderResistance
+        self.stats["DamageReduction"] =self.basal.DamageReduction + self.equip.DamageReduction + self.effect.DamageReduction
+
 class BattleSimulator:
     def __init__(self, game_data,gui):
         self.game_data = game_data

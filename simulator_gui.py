@@ -1,7 +1,4 @@
 ﻿# -*- coding: utf-8 -*-
-from ast import Lambda
-from multiprocessing import Value
-from optparse import Values
 import tkinter as tk
 from tkinter import ttk, messagebox
 from game_models import GameData, ItemDataModel, ItemEffectData, SkillData

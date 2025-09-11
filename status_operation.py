@@ -248,7 +248,11 @@ class CharacterStatusCalculator:
             )
             + self.player_data["MaxHP"]
         )  # 加上角色初始生命值
-
+        
+        #最大HP計算完成後 設定初始HP
+        self.temp_basal_status.HP = self.temp_basal_status.MaxHP
+        self.temp_equip_status.HP = self.temp_equip_status.MaxHP
+        
     def max_mp(self):
         """
         計算最大魔法值
@@ -294,6 +298,9 @@ class CharacterStatusCalculator:
             )
             + self.player_data["MaxMP"]
         )
+        #最大MP計算完成後 設定初始MP
+        self.temp_basal_status.MP = self.temp_basal_status.MaxMP
+        self.temp_equip_status.MP = self.temp_equip_status.MaxMP
 
     def defense(self):
         """
