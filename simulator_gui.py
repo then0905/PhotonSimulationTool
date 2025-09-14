@@ -534,13 +534,7 @@ class BattleSimulatorGUI:
             )
 
         tempMonsterNameList = list(self.monsterNameDict.values())
-        ttk.Combobox(
-            self.enemy_frame,
-            textvariable=self.player_class_var,
-            values=tempJobNameList,
-            width=15,
-        ).grid(row=2, column=1)
-
+        
         monster_combobox = (
             ttk.Combobox(
             self.enemy_frame,
