@@ -940,11 +940,20 @@ class BattleSimulatorGUI:
 
             self.enemy_character = self.create_monster_character(monster)
         else:
+            # 創建玩家角色
+            enemy_class_name = self.enemy_class_var.get()
+            enemy_jobID = next(
+                (key for key, value in self.jobNameDict.items() if value == enemy_class_name),
+                None,
+            )
+            enemy_jobBonusData = next(
+                (c for c in GameData.Instance.JobBonusDic.values() if c.Job == enemy_jobID), None
+            )
             # 創建敵對玩家
             self.enemy_character = self.create_character(
                 name="敵對玩家",
                 race = self.enemy_race_var.get(),
-                jobBonusData=jobBonusData,  # 使用相同的職業
+                jobBonusData=enemy_jobBonusData,
                 level=self.enemy_level_var.get(),
                 equipment=self.enemy_equipment_data,
                 itemList=[(v["data"], v["count"]) for v in self.enemy_item_manager.carried_items.values()]
