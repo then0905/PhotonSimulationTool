@@ -7,6 +7,7 @@ from stats_analyzer import StatsAnalyzer
 from status_operation import CharacterStatusCalculator
 from commonfunction import CommonFunction
 from typing import Dict
+import os
 
 class BattleSimulatorGUI:
     jobNameDict: Dict[str, str] = {}
@@ -534,7 +535,7 @@ class BattleSimulatorGUI:
             )
 
         tempMonsterNameList = list(self.monsterNameDict.values())
-        
+
         monster_combobox = (
             ttk.Combobox(
             self.enemy_frame,
@@ -733,6 +734,10 @@ class BattleSimulatorGUI:
         )
         battle_button.grid(row=1, column=0, columnspan=2, pady=10)
 
+        #暫停
+        btn_pause = tk.Button(self.main_frame, text="暫停/繼續", command=toggle_pause)
+        btn_pause.grid(row=1, column=1, columnspan=2, pady=10)
+
         # 戰鬥日誌
         log_frame = ttk.LabelFrame(self.main_frame, text="戰鬥日誌", padding="10")
         log_frame.grid(row=2, column=0, columnspan=2, sticky=(tk.W, tk.E))
@@ -757,6 +762,7 @@ class BattleSimulatorGUI:
 
         root.update_idletasks()
         #root.after(3000, self.call_log())
+
     def common_EquipmentUI(self, frame):
         """
         通用的裝備以及道具攜帶的UI建立
@@ -1125,9 +1131,16 @@ class BattleSimulatorGUI:
         print("player req width:", self.player_frame.winfo_reqwidth())
         print("enemy  req width:", self.enemy_frame.winfo_reqwidth())
         print("main_frame width:", self.main_frame.winfo_width())
+
+def toggle_pause():
+    """
+    暫停/繼續 (按鈕觸發)
+    """
+    os.environ["PAUSED"] = "1" if os.environ.get("PAUSED","0")=="0" else "0"
+    print(f"{os.environ.get("PAUSED")}")
+
 if __name__ == "__main__":
     root = tk.Tk()
     app = BattleSimulatorGUI(root)
-
-
+    os.environ["PAUSED"] = "0"
     root.mainloop()

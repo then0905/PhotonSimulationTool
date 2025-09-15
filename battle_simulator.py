@@ -8,6 +8,7 @@ from commonfunction import CommonFunction
 from skill_processor import SkillProcessor
 from status_operation import StatusValues
 from AICombatAction import ai_action
+import os
 
 @dataclass
 class BattleCharacter:
@@ -62,6 +63,7 @@ class BattleCharacter:
         """
         獨立計時器
         """
+
         # 技能冷卻遞減
         for skill_id in list(self.skill_cooldowns):
             if self.skill_cooldowns[skill_id] > 0:
@@ -428,15 +430,28 @@ class BattleSimulator:
         """
         啟動各自計時器
         """
+
         dt = 0.1  # 每 0.1 秒刷新一次
+
+        # 暫停不執行並Delay
+        if(os.environ.get("PAUSED") != "1"):
+            self.gui.root.after(int(dt * 1000), lambda: self.battle_tick(player, enemy))
+            return
+
         player.pass_time(dt)
         enemy.pass_time(dt)
-        
         self.gui.root.after(int(dt*1000), lambda:self.battle_tick(player,enemy))
 
     def attack_loop(self, attacker: BattleCharacter, target):
         """獨立的攻擊計時器迴圈"""
-        
+
+        # 暫停不執行並Delay
+        if (os.environ.get("PAUSED") == "1"):
+            self.gui.root.after(
+                500, lambda: self.attack_loop(attacker, target)
+            )
+            return
+
         if attacker.is_alive() and target.is_alive():
             skill = self._choose_skill(attacker)
             ai = ai_action(attacker.skills,attacker.items)
