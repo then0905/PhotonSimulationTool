@@ -325,9 +325,9 @@ class BattleCharacter:
         target.stats["HP"] -= finalDamage
         self.stats["MP"] -= skill.CastMage
         
-        color_code = '#ffba01' if is_Crt else '#ff0000'
+        color_code = f'<color=#ffd600><size=13><b>{finalDamage}</size></color></b>' if is_Crt else f'<color=#ff0000><size=11>{finalDamage}</size></color>'
         
-        return f" <color=#00ffdc>{self.name}</color> 使用 <color=#ff9300>{CommonFunction.get_text(skill.Name)}</color> 對  <color=#83ff00>{target.name}</color> 造成 <color={color_code}>{finalDamage}</color> 傷害！", finalDamage, self.attackTimer
+        return f"<size=12><color=#636363>{self.name}</color></size> 使用 <color=#910000>{CommonFunction.get_text(skill.Name)}</color> 對  <color=#363636>{target.name}</color> 造成 {color_code} 傷害！", finalDamage, self.attackTimer
 
     #endregion
 

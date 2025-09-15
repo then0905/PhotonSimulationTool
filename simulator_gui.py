@@ -1,6 +1,6 @@
 ﻿# -*- coding: utf-8 -*-
 import tkinter as tk
-from tkinter import ttk, messagebox
+from tkinter import ttk, messagebox ,font
 from game_models import GameData, ItemDataModel, ItemEffectData, SkillData
 from battle_simulator import BattleSimulator, BattleCharacter
 from stats_analyzer import StatsAnalyzer
@@ -8,6 +8,7 @@ from status_operation import CharacterStatusCalculator
 from commonfunction import CommonFunction
 from typing import Dict
 import os
+import re
 
 class BattleSimulatorGUI:
     jobNameDict: Dict[str, str] = {}
@@ -1100,30 +1101,40 @@ class BattleSimulatorGUI:
 
     def _insert_colored_log(self, log_line: str):
         """
-        將含有 <color=#xxxxxx>...</color> 的字串，動態解析顏色並套用 tkinter 標籤顯示。
-        會自動為每種出現的顏色建立一個 tag。
+        將含有 <color=#xxxxxx>...</color> <b>...</b> <size=XX>...</size> 的字串，動態解析並套用 tkinter 標籤顯示。
         """
-        import re
+        parts = re.split(r"(<color=#\w+>|</color>|<b>|</b>|<size=\d+>|</size>)", log_line)
 
-        parts = re.split(r"(<color=#\w+>|</color>)", log_line)
-        current_tag = None
+        current_tag = {"color": None, "bold": False, "size": None}
 
         for part in parts:
             if part.startswith("<color="):
-                color_code = part[7:-1].lower()
-                tag_name = f"color_{color_code[1:]}"  # e.g. color_ff0000
-
-                # 如果這個 tag 沒定義過，就定義一個
-                if not self.log_text.tag_names().__contains__(tag_name):
-                    self.log_text.tag_config(tag_name, foreground=color_code)
-
-                current_tag = tag_name
-
+                current_tag["color"] = part[7:-1]
             elif part == "</color>":
-                current_tag = None
+                current_tag["color"] = None
+            elif part == "<b>":
+                current_tag["bold"] = True
+            elif part == "</b>":
+                current_tag["bold"] = False
+            elif part.startswith("<size="):
+                current_tag["size"] = int(part[6:-1])
+            elif part == "</size>":
+                current_tag["size"] = None
+            elif part:  # 實際文字
+                # 建立 tag 名稱
+                tag_name = f"color_{current_tag['color']}_b{current_tag['bold']}_s{current_tag['size']}"
 
-            else:
-                self.log_text.insert(tk.END, part, current_tag)
+                if tag_name not in self.log_text.tag_names():
+                    # 建立字型
+                    base_font = font.Font(self.log_text, self.log_text.cget("font"))
+                    if current_tag["bold"]:
+                        base_font.configure(weight="bold")
+                    if current_tag["size"]:
+                        base_font.configure(size=current_tag["size"])
+
+                    self.log_text.tag_config(tag_name, foreground=current_tag["color"], font=base_font)
+
+                self.log_text.insert(tk.END, part, tag_name)
 
         self.log_text.insert(tk.END, "\n")
 
