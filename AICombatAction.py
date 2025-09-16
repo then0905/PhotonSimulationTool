@@ -68,7 +68,7 @@ class ai_action:
         actions = ["NORMAL_ATTACK"]
         for s in self.skills:
             characteristic = s.Characteristic
-            mp_ok = self_char.stats["MP"] >= s.CastMage
+            mp_ok = (self_char.stats["MP"] - s.CastMage) > 0
             cd_ok = s.SkillID not in self_char.skill_cooldowns  # 沒在CD才能放
             skill_not_running =  s.SkillID not in self_char.buff_skill  # 若是buff且沒再運作中
             if mp_ok and cd_ok and characteristic and skill_not_running:
@@ -95,8 +95,8 @@ class ai_action:
                 q_values.append(base)
             action = actions[q_values.index(max(q_values))]
         
-        if(self_char.characterType):
-            print(f"[AI] 狀態={state} → 選擇動作={action}")
+        #if(self_char.characterType):
+            #print(f"[AI] 狀態={state} → 選擇動作={action}")
         return action, state
     
     def update_q(self, state, action, reward, next_state):
