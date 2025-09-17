@@ -26,7 +26,7 @@ class SkillProcessor:
                     case "MultipleDamage":
                         returnResult.append( attacker.HitCalculator(skillData,defender))
                     case "ContinuanceBuff":
-                        target.add_skill_buff_effect(skillData)
+                        target.add_skill_buff_effect(skillData,op)
                         temp = f"{CommonFunction.get_text('TM_'+op.InfluenceStatus)}: {CommonFunction.get_text('TM_' + op.AddType).format(op.EffectValue)}"
                         returnResult.append((f"{attacker.name} 對 {target.name} 使用 Buff：{temp}，持續 {op.EffectDurationTime} 秒",0,0.5))
                     case "AdditiveBuff":

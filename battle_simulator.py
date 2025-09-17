@@ -156,13 +156,11 @@ class BattleCharacter:
                 SkillProcessor._execute_skill_operation(skill,self,self)
                 self.passive_bar.add_skill_effect(skill)
 
-    def add_skill_buff_effect(self,skillData:SkillData):
+    def add_skill_buff_effect(self,skillData:SkillData,op):
         """
         增加技能buff效果
         """
-        for op in skillData.SkillOperationDataList:
-            self.SkillEffectStatusOperation(op.InfluenceStatus,(op.AddType == "Rate"),op.EffectValue)
-            
+        self.SkillEffectStatusOperation(op.InfluenceStatus,(op.AddType == "Rate"),op.EffectValue)
         self.buff_bar.add_skill_effect(skillData)
         self.buff_skill[skillData.SkillID] = (skillData,skillData.SkillOperationDataList[0].EffectDurationTime)
         
