@@ -335,6 +335,8 @@ class BattleCharacter:
         """
         技能效果運算
         """
+        self.tempHp = 0
+        self.tempMp = 0
         match(stateType):
             case "MeleeATK":
                 self.effect.MeleeATK += round(self.basal.MeleeATK * value) if isRate else round(value)
@@ -344,9 +346,15 @@ class BattleCharacter:
             case "MageATK":
                 self.effect.MageATK += round(self.basal.MageATK * value) if isRate else round(value)    
             case "MaxHP":
+                #暫存 此次buff影響的數值(效果提升的值 當前生命會跟著提升)
+                self.tempHp = round(self.basal.MaxHP * value) if isRate else round(value)
+
                 self.effect.MaxHP += round(self.basal.MaxHP * value) if isRate else round(value)
                 # print(f"basal.MaxHP:{self.basal.MaxHP} valur:{value} processor{self.basal.MaxHP * value}  final to int {round(self.basal.MaxHP * value)}")
             case "MaxMP":
+                #暫存 此次buff影響的數值(效果提升的值 當前魔力會跟著提升)
+                self.tempMp = round(self.basal.MaxMP * value) if isRate else round(value)
+
                 self.effect.MaxMP += round(self.basal.MaxMP * value) if isRate else round(value)
             case "DEF":
                 self.effect.DEF += round(self.basal.DEF * value) if isRate else round(value)
@@ -392,8 +400,8 @@ class BattleCharacter:
                 self.effect.MageATK += round(self.basal.MageATK * value) if isRate else round(value)
         self.stats["MaxHP"] =self.basal.MaxHP + self.equip.MaxHP + self.effect.MaxHP
         self.stats["MaxMP"] =self.basal.MaxMP + self.equip.MaxMP + self.effect.MaxMP
-        self.stats["HP"] =self.stats["HP"] + self.effect.MaxHP
-        self.stats["MP"] =self.stats["MP"] + self.effect.MaxMP
+        self.stats["HP"] =self.stats["HP"] + self.tempHp
+        self.stats["MP"] =self.stats["MP"] + self.tempMp
         self.stats["MeleeATK"] =self.basal.MeleeATK + self.equip.MeleeATK + self.effect.MeleeATK
         self.stats["RemoteATK"] =self.basal.RemoteATK + self.equip.RemoteATK + self.effect.RemoteATK
         self.stats["MageATK"] =self.basal.MageATK + self.equip.MageATK + self.effect.MageATK
