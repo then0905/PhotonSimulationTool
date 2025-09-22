@@ -62,7 +62,7 @@ class SkillProcessor:
                 case "Utility":
                     pass
                 case "Continuance":
-                    attacker.add_item_buff_effect(itemData)
+                    attacker.add_item_buff_effect(op,itemData)
                     temp = f"{CommonFunction.get_text('TM_'+op.InfluenceStatus)}: {CommonFunction.get_text('TM_' + op.AddType).format(op.EffectValue)}"
                     returnResult.append((f"{attacker.name} 對 {defender.name} 使用道具：{temp}，持續 {op.EffectDurationTime} 秒",5,0.5))
         return returnResult

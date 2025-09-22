@@ -164,12 +164,12 @@ class BattleCharacter:
         self.buff_bar.add_skill_effect(skillData)
         self.buff_skill[skillData.SkillID] = (skillData,skillData.SkillOperationDataList[0].EffectDurationTime)
         
-    def add_item_buff_effect(self,itemData:ItemDataModel):
+    def add_item_buff_effect(self,op,itemData:ItemDataModel):
         """
         增加道具buff效果
         """
-        for op in itemData.ItemEffectDataList:
-            self.SkillEffectStatusOperation(op.InfluenceStatus,(op.AddType == "Rate"),op.EffectValue)
+
+        self.SkillEffectStatusOperation(op.InfluenceStatus,(op.AddType == "Rate"),op.EffectValue)
             
         self.buff_bar.add_item_effect(itemData)
         self.buff_item[itemData.CodeID] = (itemData,itemData.ItemEffectDataList[0].EffectDurationTime)
@@ -198,7 +198,7 @@ class BattleCharacter:
         """
         maxValue = "MaxMP" if op.InfluenceStatus == "MP" else "MaxHP";
 
-        target.stats[op.InfluenceStatus] = CommonFunction.clamp(target.stats[op.InfluenceStatus]+ op.EffectValue, target.stats[op.InfluenceStatus]+ op.EffectValue,target.stats[maxValue])
+        target.stats[op.InfluenceStatus] = CommonFunction.clamp(target.stats[op.InfluenceStatus]+ op.EffectValue, target.stats[op.InfluenceStatus],target.stats[maxValue])
 
         self.update_hp_mp()
         color_code = "#2945FF" if op.InfluenceStatus == "MP" else "#ff0000";
