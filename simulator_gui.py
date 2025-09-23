@@ -1005,6 +1005,7 @@ class BattleSimulatorGUI:
             name=character_data["name"],
             level=character_data["level"],
             jobBonusData=jobBonusData,
+            ai_id = jobBonusData.Job,
             stats=character_data["stats"],
             basal=character_data["basal"],
             equip=character_data["equip"],
@@ -1046,6 +1047,7 @@ class BattleSimulatorGUI:
         return BattleCharacter(
             name=CommonFunction.get_text(f"TM_{monster.MonsterCodeID}_Name"),
             jobBonusData=None,
+            ai_id=monster.MonsterCodeID,
             level=monster.Lv,
             stats=stats,
             basal=None,

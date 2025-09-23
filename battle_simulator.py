@@ -15,6 +15,7 @@ class BattleCharacter:
     #基本資料
     name: str
     jobBonusData: JobBonusDataModel
+    ai_id: str
     level: int
     stats: Dict[str, int]
     basal:StatusValues      #基本屬性數值
@@ -33,7 +34,8 @@ class BattleCharacter:
     passive_bar: Optional[object] = None   #被動效果提示欄
     battle_log = None                      #戰鬥日誌
     item_manager: Optional[object] = None   #道具管理器
-    
+    ai: "ai_action" = field(init=False)     # Q learning AI
+
     #動態資料
     skill_cooldowns: Dict[str, float] = field(default_factory=dict)  # skill_id -> remaining_cooldown_time
     item_cooldowns: Dict[str, float] = field(default_factory=dict)  # item_id -> remaining_cooldown_time
@@ -46,6 +48,10 @@ class BattleCharacter:
     hp_recovery_time:float = 0 #血量自然恢復間隔計時
     mp_recovery_time:float = 0 #魔力自然恢復間隔計時
     update_hp_mp = None    #用來儲存更新雙方血量魔力的匿名方法
+
+    def __post_init__(self):
+        # 在物件建立後，才初始化 AI
+        self.ai = ai_action(self.ai_id, self.skills, self.items)
 
     def action_check(self,skill:SkillData)->bool:
         """
@@ -461,9 +467,8 @@ class BattleSimulator:
             return
 
         if attacker.is_alive() and target.is_alive():
-            ai = ai_action(attacker.skills,attacker.items)
-            action_id, state = ai.choose_action(attacker, target)
-            self.ai_choose_result(ai,state,attacker,target,action_id)
+            action_id, state = attacker.ai.choose_action(attacker, target)
+            self.ai_choose_result(attacker.ai,state,attacker,target,action_id)
 
     def ai_choose_result(self,ai,state,attacker: BattleCharacter, target:BattleCharacter,result:str):
         """

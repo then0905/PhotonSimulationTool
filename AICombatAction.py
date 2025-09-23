@@ -1,15 +1,52 @@
-﻿import random
+﻿import os
+import pickle
+import random
 from collections import defaultdict
 from game_models import GameData
 
 class ai_action:
-    def __init__(self, skills,item):
+    SAVE_DIR = "q_tables"  # 存放所有Q表的資料夾
+
+    def __init__(self, role_id: str,skills,item):
+        """
+                role_id: 職業/怪物的唯一識別碼 (例如 "Warrior", "Mage", "Slime001")
+                skills: 該角色的技能清單
+                items: 該角色的道具清單
+        """
+        self.role_id = role_id
         self.skills = skills
         self.item = item
         self.Q = defaultdict(float)  # Q表
         self.alpha = 0.1  # 學習率
         self.gamma = 0.9  # 折扣因子
         self.epsilon = 0.2  # 探索率
+
+        # 確保目錄存在
+        os.makedirs(self.SAVE_DIR, exist_ok=True)
+        # 嘗試讀取舊的Q表
+        self.Q = self.load_q_table()
+
+    # -----------------------------
+    # 儲存與讀取
+    # -----------------------------
+
+    def _save_path(self):
+        """回傳這個角色的Q表檔案路徑"""
+        return os.path.join(self.SAVE_DIR, f"q_table_{self.role_id}.pkl")
+
+    def load_q_table(self):
+        """讀取Q表"""
+        path = self._save_path()
+        if os.path.exists(path):
+            with open(path, "rb") as f:
+                return pickle.load(f)
+        return defaultdict(float)
+
+    def save_q_table(self):
+        """儲存Q表"""
+        path = self._save_path()
+        with open(path, "wb") as f:
+            pickle.dump(self.Q, f)
 
     def get_state(self, attacker, target):
         # 生成戰鬥狀態向量
@@ -110,3 +147,4 @@ class ai_action:
         ) if next_state else 0.0
 
         self.Q[(state, action)] = old_q + self.alpha * (reward + self.gamma * next_q - old_q)
+        self.save_q_table()
