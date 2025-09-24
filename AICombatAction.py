@@ -39,7 +39,19 @@ class ai_action:
         path = self._save_path()
         if os.path.exists(path):
             with open(path, "rb") as f:
-                return pickle.load(f)
+                q_table = pickle.load(f)
+
+            # 顯示讀取的Q表資訊
+            print("✅ 成功載入 Q 表")
+            print("目前 Q 表紀錄數量：", len(q_table))
+            if len(q_table) > 0:
+                print("範例 Q 值：", list(q_table.items())[:5])
+            else:
+                print("Q 表是空的")
+
+            return q_table
+        else:
+            print("⚠️ 找不到 Q 表檔案，將建立新的")
         return defaultdict(float)
 
     def save_q_table(self):
@@ -47,6 +59,9 @@ class ai_action:
         path = self._save_path()
         with open(path, "wb") as f:
             pickle.dump(self.Q, f)
+        print("✅ 已儲存 Q 表")
+        print("目前 Q 表紀錄數量：", len(self.Q))
+        print("範例 Q 值：", list(self.Q.items())[:5])
 
     def get_state(self, attacker, target):
         # 生成戰鬥狀態向量
@@ -147,4 +162,5 @@ class ai_action:
         ) if next_state else 0.0
 
         self.Q[(state, action)] = old_q + self.alpha * (reward + self.gamma * next_q - old_q)
+        print("目前 Q 表紀錄數量：", len(self.Q))
         self.save_q_table()
