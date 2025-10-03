@@ -948,7 +948,8 @@
         "InfluenceStatus": "IncreaseMeleeATK",
         "AddType": "Value",
         "EffectDurationTime": 5,
-        "EffectRecive": 0
+        "EffectRecive": 0,
+        "Bonus": 100
       },
       {
         "SkillID": "Berserker_6",
@@ -957,7 +958,8 @@
         "InfluenceStatus": "Damage",
         "AddType": "Value",
         "EffectDurationTime": 5,
-        "EffectRecive": 0
+        "EffectRecive": 0,
+        "Bonus": 100
       }
     ]
   },
@@ -985,10 +987,9 @@
         "InfluenceStatus": "MeleeATK",
         "AddType": "Value",
         "ConditionOR": [
-          "Equip_TwoHandedSword|Equip_Axe|Equip_GiantMallet"
-        ],
-        "ConditionAND": [
-          "Equip_TwoHandedSword|Equip_Axe|Equip_GiantMallet"
+          "Equip_TwoHandedSword",
+          "Equip_Axe",
+          "Equip_GiantMallet"
         ],
         "EffectRecive": 0
       },
@@ -999,10 +1000,9 @@
         "InfluenceStatus": "AS",
         "AddType": "Value",
         "ConditionOR": [
-          "Equip_TwoHandedSword|Equip_Axe|Equip_GiantMallet"
-        ],
-        "ConditionAND": [
-          "Equip_TwoHandedSword|Equip_Axe|Equip_GiantMallet"
+          "Equip_TwoHandedSword",
+          "Equip_Axe",
+          "Equip_GiantMallet"
         ],
         "EffectRecive": 0
       }
@@ -1050,9 +1050,6 @@
         "ConditionOR": [
           "InCombatStatus"
         ],
-        "ConditionAND": [
-          "InCombatStatus"
-        ],
         "EffectDurationTime": 5,
         "EffectRecive": 0
       },
@@ -1063,9 +1060,6 @@
         "InfluenceStatus": "MaxHP",
         "AddType": "Value",
         "ConditionOR": [
-          "InCombatStatus"
-        ],
-        "ConditionAND": [
           "InCombatStatus"
         ],
         "EffectDurationTime": 5,
@@ -1138,9 +1132,6 @@
         "ConditionOR": [
           "HpLess_0.35"
         ],
-        "ConditionAND": [
-          "HpLess_0.35"
-        ],
         "EffectDurationTime": 5,
         "EffectRecive": 0
       },
@@ -1151,9 +1142,6 @@
         "InfluenceStatus": "AS",
         "AddType": "Value",
         "ConditionOR": [
-          "HpLess_0.35"
-        ],
-        "ConditionAND": [
           "HpLess_0.35"
         ],
         "EffectDurationTime": 5,
@@ -1254,9 +1242,6 @@
         "InfluenceStatus": "Speed",
         "AddType": "Value",
         "ConditionOR": [
-          "Close_Enemy"
-        ],
-        "ConditionAND": [
           "Close_Enemy"
         ],
         "EffectDurationTime": 10,
