@@ -107,8 +107,10 @@ class ai_action:
             else:
                 remaining_time = 0.0
                 max_cd = 1.0
-            cooldown_features.append(remaining_time / max_time)
-
+            if max_time <= 0:
+                cooldown_features.append(0.0)
+            else:
+                cooldown_features.append(remaining_time / max_time)
 
         # 可以加更多資訊，如buff狀態
         return tuple(list(state)+buff_features+cooldown_features)

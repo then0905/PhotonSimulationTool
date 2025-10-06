@@ -987,8 +987,8 @@
         "InfluenceStatus": "MeleeATK",
         "AddType": "Value",
         "ConditionOR": [
-          "Equip_TwoHandedSword",
-          "Equip_Axe",
+          "EquipWeapon_TwoHandedSword",
+          "EquipWeapon_Axe",
           "Equip_GiantMallet"
         ],
         "EffectRecive": 0
@@ -1000,8 +1000,8 @@
         "InfluenceStatus": "AS",
         "AddType": "Value",
         "ConditionOR": [
-          "Equip_TwoHandedSword",
-          "Equip_Axe",
+          "EquipWeapon_TwoHandedSword",
+          "EquipWeapon_Axe",
           "Equip_GiantMallet"
         ],
         "EffectRecive": 0
@@ -1048,7 +1048,7 @@
         "InfluenceStatus": "DEF",
         "AddType": "Value",
         "ConditionOR": [
-          "InCombatStatus"
+          "InCombatStatus_True"
         ],
         "EffectDurationTime": 5,
         "EffectRecive": 0
@@ -1060,7 +1060,7 @@
         "InfluenceStatus": "MaxHP",
         "AddType": "Value",
         "ConditionOR": [
-          "InCombatStatus"
+          "InCombatStatus_True"
         ],
         "EffectDurationTime": 5,
         "EffectRecive": 0
@@ -1326,10 +1326,7 @@
         "InfluenceStatus": "MeleeATK",
         "AddType": "Value",
         "ConditionOR": [
-          "InCombatStatus"
-        ],
-        "ConditionAND": [
-          "InCombatStatus"
+          "InCombatStatus_True"
         ],
         "EffectDurationTime": 1.5,
         "EffectRecive": 0
@@ -1341,10 +1338,7 @@
         "InfluenceStatus": "AS",
         "AddType": "Value",
         "ConditionOR": [
-          "InCombatStatus"
-        ],
-        "ConditionAND": [
-          "InCombatStatus"
+          "InCombatStatus_True"
         ],
         "EffectDurationTime": 1.5,
         "EffectRecive": 0
@@ -1410,10 +1404,7 @@
         "EffectValue": 0,
         "InfluenceStatus": "Taunt",
         "ConditionOR": [
-          "Equip_Shield"
-        ],
-        "ConditionAND": [
-          "Equip_Shield"
+          "EquipWeapon_Shield"
         ],
         "EffectDurationTime": 2,
         "EffectRecive": -1,
@@ -1426,10 +1417,7 @@
         "InfluenceStatus": "ReduceTargetDmg",
         "AddType": "Rate",
         "ConditionOR": [
-          "Equip_Shield"
-        ],
-        "ConditionAND": [
-          "Equip_Shield"
+          "EquipWeapon_Shield"
         ],
         "EffectDurationTime": 2,
         "EffectRecive": -1,
@@ -1610,10 +1598,7 @@
         "SkillComponentID": "Damage",
         "EffectValue": 1.3,
         "ConditionOR": [
-          "Equip_Shield"
-        ],
-        "ConditionAND": [
-          "Equip_Shield"
+          "EquipWeapon_Shield"
         ],
         "EffectRecive": -1,
         "TargetCount": 1
@@ -1624,10 +1609,7 @@
         "EffectValue": 1.3,
         "InfluenceStatus": "HolyDamage",
         "ConditionOR": [
-          "Equip_Shield"
-        ],
-        "ConditionAND": [
-          "Equip_Shield"
+          "EquipWeapon_Shield"
         ],
         "EffectRecive": -1,
         "TargetCount": 1
@@ -1638,10 +1620,7 @@
         "EffectValue": 1.3,
         "InfluenceStatus": "Stun",
         "ConditionOR": [
-          "Equip_Shield"
-        ],
-        "ConditionAND": [
-          "Equip_Shield"
+          "EquipWeapon_Shield"
         ],
         "EffectDurationTime": 1.5,
         "EffectRecive": -1,
@@ -1674,10 +1653,7 @@
         "InfluenceStatus": "MeleeAtk",
         "AddType": "Rate",
         "ConditionOR": [
-          "Equip_Shield"
-        ],
-        "ConditionAND": [
-          "Equip_Shield"
+          "EquipWeapon_Shield"
         ],
         "EffectRecive": -2,
         "TargetCount": 1
@@ -1709,10 +1685,7 @@
         "InfluenceStatus": "HolyDamage",
         "AddType": "Value",
         "ConditionOR": [
-          "Equip_Shield"
-        ],
-        "ConditionAND": [
-          "Equip_Shield"
+          "EquipWeapon_Shield"
         ],
         "EffectDurationTime": 180,
         "EffectRecive": 0,
@@ -1742,10 +1715,7 @@
         "SkillID": "Paladin_9",
         "SkillComponentID": "Charge",
         "ConditionOR": [
-          "Equip_Shield"
-        ],
-        "ConditionAND": [
-          "Equip_Shield"
+          "EquipWeapon_Shield"
         ],
         "EffectRecive": 0,
         "TargetCount": 0
@@ -1755,10 +1725,7 @@
         "SkillComponentID": "CrowdControl",
         "InfluenceStatus": "Stun",
         "ConditionOR": [
-          "Equip_Shield"
-        ],
-        "ConditionAND": [
-          "Equip_Shield"
+          "EquipWeapon_Shield"
         ],
         "EffectDurationTime": 1,
         "EffectRecive": -1,
@@ -1769,10 +1736,7 @@
         "SkillComponentID": "Damage",
         "EffectValue": 1.15,
         "ConditionOR": [
-          "Equip_Shield"
-        ],
-        "ConditionAND": [
-          "Equip_Shield"
+          "EquipWeapon_Shield"
         ],
         "EffectRecive": -1,
         "TargetCount": -2
@@ -1803,12 +1767,8 @@
         "InfluenceStatus": "MeleeATK",
         "AddType": "Value",
         "ConditionOR": [
-          "Equip_OneHandedSword",
-          "Equip_Hammer"
-        ],
-        "ConditionAND": [
-          "Equip_OneHandedSword",
-          "Equip_Hammer"
+          "EquipWeapon_OneHandedSword",
+          "EquipWeapon_Hammer"
         ],
         "EffectRecive": 0,
         "TargetCount": 0
@@ -1820,12 +1780,8 @@
         "InfluenceStatus": "MeleeHit",
         "AddType": "Value",
         "ConditionOR": [
-          "Equip_OneHandedSword",
-          "Equip_Hammer"
-        ],
-        "ConditionAND": [
-          "Equip_OneHandedSword",
-          "Equip_Hammer"
+          "EquipWeapon_OneHandedSword",
+          "EquipWeapon_Hammer"
         ],
         "EffectRecive": 0,
         "TargetCount": 0
@@ -1856,10 +1812,7 @@
         "InfluenceStatus": "DEF",
         "AddType": "Value",
         "ConditionOR": [
-          "Equip_Shield"
-        ],
-        "ConditionAND": [
-          "Equip_Shield"
+          "EquipWeapon_Shield"
         ],
         "EffectRecive": 0,
         "TargetCount": 0
@@ -1871,10 +1824,7 @@
         "InfluenceStatus": "BlockRate",
         "AddType": "Value",
         "ConditionOR": [
-          "Equip_Shield"
-        ],
-        "ConditionAND": [
-          "Equip_Shield"
+          "EquipWeapon_Shield"
         ],
         "EffectRecive": 0,
         "TargetCount": 0
@@ -1886,10 +1836,7 @@
         "InfluenceStatus": "AS",
         "AddType": "Value",
         "ConditionOR": [
-          "Equip_Shield"
-        ],
-        "ConditionAND": [
-          "Equip_Shield"
+          "EquipWeapon_Shield"
         ],
         "EffectRecive": 0,
         "TargetCount": 0
@@ -1920,10 +1867,7 @@
         "InfluenceStatus": "DEF",
         "AddType": "Value",
         "ConditionOR": [
-          "Equip_HeavyArmor"
-        ],
-        "ConditionAND": [
-          "Equip_HeavyArmor"
+          "EquipArmor_HeavyArmor"
         ],
         "EffectRecive": 0,
         "TargetCount": 0
@@ -1935,10 +1879,7 @@
         "InfluenceStatus": "Speed",
         "AddType": "Value",
         "ConditionOR": [
-          "Equip_HeavyArmor"
-        ],
-        "ConditionAND": [
-          "Equip_HeavyArmor"
+          "EquipArmor_HeavyArmor"
         ],
         "EffectRecive": 0,
         "TargetCount": 0
@@ -1976,10 +1917,7 @@
         "InfluenceStatus": "BreakDEF",
         "AddType": "Value",
         "ConditionOR": [
-          "Equip_Shield"
-        ],
-        "ConditionAND": [
-          "Equip_Shield"
+          "EquipWeapon_Shield"
         ],
         "EffectDurationTime": 2,
         "EffectRecive": -1,
@@ -2016,10 +1954,7 @@
         "SkillComponentID": "Utility",
         "InfluenceStatus": "RemoveCC",
         "ConditionOR": [
-          "Equip_Shield"
-        ],
-        "ConditionAND": [
-          "Equip_Shield"
+          "EquipWeapon_Shield"
         ],
         "EffectRecive": -2,
         "TargetCount": 1
@@ -2052,9 +1987,6 @@
         "ConditionOR": [
           "Random_0.25"
         ],
-        "ConditionAND": [
-          "Random_0.25"
-        ],
         "EffectRecive": 0,
         "TargetCount": 0
       }
@@ -2084,10 +2016,7 @@
         "InfluenceStatus": "ReduceCCTime",
         "AddType": "Rate",
         "ConditionOR": [
-          "Equip_Shield"
-        ],
-        "ConditionAND": [
-          "Equip_Shield"
+          "EquipWeapon_Shield"
         ],
         "EffectDurationTime": 5,
         "EffectRecive": 0,
@@ -2121,10 +2050,7 @@
         "InfluenceStatus": "ReduceDmg",
         "AddType": "Rate",
         "ConditionOR": [
-          "Equip_Shield"
-        ],
-        "ConditionAND": [
-          "Equip_Shield"
+          "EquipWeapon_Shield"
         ],
         "EffectDurationTime": 3,
         "EffectRecive": 0,
@@ -2358,7 +2284,7 @@
         "InfluenceStatus": "MeleeATK",
         "AddType": "Value",
         "ConditionOR": [
-          "Equip_Shield"
+          "EquipWeapon_Shield"
         ],
         "ConditionAND": [
           "Equip_Shield"
@@ -2374,7 +2300,7 @@
         "InfluenceStatus": "DEF",
         "AddType": "Value",
         "ConditionOR": [
-          "Equip_Shield"
+          "EquipWeapon_Shield"
         ],
         "ConditionAND": [
           "Equip_Shield"
@@ -2390,7 +2316,7 @@
         "InfluenceStatus": "BlockRate",
         "AddType": "Value",
         "ConditionOR": [
-          "Equip_Shield"
+          "EquipWeapon_Shield"
         ],
         "ConditionAND": [
           "Equip_Shield"
@@ -2518,7 +2444,7 @@
         "InfluenceStatus": "MeleeATK",
         "AddType": "Value",
         "ConditionOR": [
-          "Equip_OneHandedSword"
+          "EquipWeapon_OneHandedSword"
         ],
         "ConditionAND": [
           "Equip_OneHandedSword"
@@ -2533,7 +2459,7 @@
         "InfluenceStatus": "AS",
         "AddType": "Value",
         "ConditionOR": [
-          "Equip_OneHandedSword"
+          "EquipWeaponEquipWeapon_OneHandedSword"
         ],
         "ConditionAND": [
           "Equip_OneHandedSword"
@@ -2567,7 +2493,7 @@
         "InfluenceStatus": "DEF",
         "AddType": "Value",
         "ConditionOR": [
-          "Equip_Shield"
+          "EquipWeapon_Shield"
         ],
         "ConditionAND": [
           "Equip_Shield"
@@ -2582,7 +2508,7 @@
         "InfluenceStatus": "BlockRate",
         "AddType": "Value",
         "ConditionOR": [
-          "Equip_Shield"
+          "EquipWeapon_Shield"
         ],
         "ConditionAND": [
           "Equip_Shield"
@@ -2616,8 +2542,8 @@
         "InfluenceStatus": "DEF",
         "AddType": "Value",
         "ConditionOR": [
-          "Equip_LightArmor",
-          "Equip_ClothArmor"
+          "EquipArmor_LightArmor",
+          "EquipArmor_ClothArmor"
         ],
         "ConditionAND": [
           "Equip_LightArmor",
@@ -2633,8 +2559,8 @@
         "InfluenceStatus": "Speed",
         "AddType": "Value",
         "ConditionOR": [
-          "Equip_LightArmor",
-          "Equip_ClothArmor"
+          "EquipArmor_LightArmor",
+          "EquipArmor_ClothArmor"
         ],
         "ConditionAND": [
           "Equip_LightArmor",
