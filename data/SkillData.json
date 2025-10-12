@@ -20,6 +20,7 @@
       {
         "SkillID": "Sword_1",
         "SkillComponentID": "Damage",
+        "DependCondition": "None",
         "EffectValue": 1.1,
         "EffectRecive": -1,
         "TargetCount": 1
@@ -47,6 +48,7 @@
       {
         "SkillID": "Sword_2",
         "SkillComponentID": "UpgradeSkill",
+        "DependCondition": "None",
         "EffectValue": 1.3,
         "EffectRecive": -1,
         "TargetCount": 1,
@@ -75,6 +77,7 @@
       {
         "SkillID": "Sword_3",
         "SkillComponentID": "Damage",
+        "DependCondition": "None",
         "EffectValue": 1.1,
         "EffectRecive": -1,
         "TargetCount": 3
@@ -101,6 +104,7 @@
       {
         "SkillID": "Sword_4",
         "SkillComponentID": "PassiveBuff",
+        "DependCondition": "None",
         "EffectValue": 0.1,
         "InfluenceStatus": "MeleeATK",
         "AddType": "Rate",
@@ -132,6 +136,7 @@
       {
         "SkillID": "Sword_5",
         "SkillComponentID": "PassiveBuff",
+        "DependCondition": "None",
         "EffectValue": 0.25,
         "InfluenceStatus": "MaxHP",
         "AddType": "Rate",
@@ -160,6 +165,7 @@
       {
         "SkillID": "Warrior_1",
         "SkillComponentID": "Damage",
+        "DependCondition": "None",
         "EffectValue": 1.5,
         "EffectRecive": -1,
         "TargetCount": 1
@@ -167,6 +173,7 @@
       {
         "SkillID": "Warrior_1",
         "SkillComponentID": "CrowdControl",
+        "DependCondition": "Prev",
         "InfluenceStatus": "Stun",
         "EffectDurationTime": 1,
         "EffectRecive": -1,
@@ -195,6 +202,7 @@
       {
         "SkillID": "Warrior_2",
         "SkillComponentID": "Damage",
+        "DependCondition": "None",
         "EffectValue": 1.1,
         "EffectRecive": -1,
         "TargetCount": 3
@@ -202,6 +210,7 @@
       {
         "SkillID": "Warrior_2",
         "SkillComponentID": "Lunge",
+        "DependCondition": "None",
         "EffectRecive": -1,
         "TargetCount": 3,
         "Bonus": 0.5
@@ -229,6 +238,7 @@
       {
         "SkillID": "Warrior_3",
         "SkillComponentID": "Damage",
+        "DependCondition": "None",
         "EffectValue": 1.25,
         "EffectRecive": -1,
         "TargetCount": 1
@@ -236,6 +246,7 @@
       {
         "SkillID": "Warrior_3",
         "SkillComponentID": "MultipleDamage",
+        "DependCondition": "None",
         "EffectValue": 1.25,
         "EffectRecive": -1,
         "TargetCount": 1
@@ -243,6 +254,7 @@
       {
         "SkillID": "Warrior_3",
         "SkillComponentID": "MultipleDamage",
+        "DependCondition": "None",
         "EffectValue": 1.25,
         "EffectRecive": -1,
         "TargetCount": 1
@@ -270,6 +282,7 @@
       {
         "SkillID": "Warrior_4",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 6,
         "InfluenceStatus": "MeleeATK",
         "AddType": "Value",
@@ -299,6 +312,7 @@
       {
         "SkillID": "Warrior_5",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 3,
         "InfluenceStatus": "DEF",
         "AddType": "Value",
@@ -308,6 +322,7 @@
       {
         "SkillID": "Warrior_5",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 30,
         "InfluenceStatus": "MaxHP",
         "AddType": "Value",
@@ -336,6 +351,7 @@
       {
         "SkillID": "Warrior_6",
         "SkillComponentID": "PassiveBuff",
+        "DependCondition": "None",
         "EffectValue": 0.2,
         "InfluenceStatus": "MeleeHit",
         "AddType": "Rate",
@@ -349,6 +365,7 @@
       {
         "SkillID": "Warrior_6",
         "SkillComponentID": "PassiveBuff",
+        "DependCondition": "None",
         "EffectValue": 8,
         "InfluenceStatus": "MeleeHit",
         "AddType": "Value",
@@ -381,6 +398,7 @@
       {
         "SkillID": "Warrior_7",
         "SkillComponentID": "PassiveBuff",
+        "DependCondition": "None",
         "EffectValue": 3,
         "InfluenceStatus": "DEF",
         "AddType": "Value",
@@ -389,6 +407,7 @@
       {
         "SkillID": "Warrior_7",
         "SkillComponentID": "PassiveBuff",
+        "DependCondition": "None",
         "EffectValue": 20,
         "InfluenceStatus": "MaxHP",
         "AddType": "Value",
@@ -417,6 +436,7 @@
       {
         "SkillID": "Knight_1",
         "SkillComponentID": "Damage",
+        "DependCondition": "None",
         "EffectValue": 1.2,
         "EffectRecive": -1,
         "TargetCount": 1
@@ -444,6 +464,7 @@
       {
         "SkillID": "Knight_2",
         "SkillComponentID": "CrowdControl",
+        "DependCondition": "Prev",
         "InfluenceStatus": "Taunt",
         "ConditionOR": [
           "EquipLeft_Shield"
@@ -475,6 +496,7 @@
       {
         "SkillID": "Knight_3",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 5,
         "InfluenceStatus": "ATK",
         "AddType": "Value",
@@ -488,6 +510,7 @@
       {
         "SkillID": "Knight_3",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 5,
         "InfluenceStatus": "DEF",
         "AddType": "Value",
@@ -521,6 +544,7 @@
       {
         "SkillID": "Knight_4",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 50,
         "InfluenceStatus": "MaxHP",
         "AddType": "Value",
@@ -534,6 +558,7 @@
       {
         "SkillID": "Knight_4",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 0.25,
         "InfluenceStatus": "HP_Recovery",
         "AddType": "Value",
@@ -567,6 +592,7 @@
       {
         "SkillID": "Knight_5",
         "SkillComponentID": "Damage",
+        "DependCondition": "None",
         "EffectValue": 1.13,
         "ConditionOR": [
           "EquipLeft_Shield"
@@ -577,6 +603,7 @@
       {
         "SkillID": "Knight_5",
         "SkillComponentID": "CrowdControl",
+        "DependCondition": "Prev",
         "EffectValue": 1.13,
         "InfluenceStatus": "Stun",
         "ConditionOR": [
@@ -609,6 +636,7 @@
       {
         "SkillID": "Knight_6",
         "SkillComponentID": "PassiveBuff",
+        "DependCondition": "None",
         "EffectValue": 0.1,
         "InfluenceStatus": "MeleeATK",
         "AddType": "Rate",
@@ -621,6 +649,7 @@
       {
         "SkillID": "Knight_6",
         "SkillComponentID": "PassiveBuff",
+        "DependCondition": "None",
         "EffectValue": 5,
         "InfluenceStatus": "MeleeHit",
         "AddType": "Value",
@@ -653,6 +682,7 @@
       {
         "SkillID": "Knight_7",
         "SkillComponentID": "PassiveBuff",
+        "DependCondition": "None",
         "EffectValue": 10,
         "InfluenceStatus": "DEF",
         "AddType": "Value",
@@ -664,6 +694,7 @@
       {
         "SkillID": "Knight_7",
         "SkillComponentID": "PassiveBuff",
+        "DependCondition": "None",
         "EffectValue": 0.15,
         "InfluenceStatus": "BlockRate",
         "AddType": "Value",
@@ -675,6 +706,7 @@
       {
         "SkillID": "Knight_7",
         "SkillComponentID": "PassiveBuff",
+        "DependCondition": "None",
         "EffectValue": -0.25,
         "InfluenceStatus": "AS",
         "AddType": "Value",
@@ -706,6 +738,7 @@
       {
         "SkillID": "Knight_8",
         "SkillComponentID": "PassiveBuff",
+        "DependCondition": "None",
         "EffectValue": 12,
         "InfluenceStatus": "DEF",
         "AddType": "Value",
@@ -717,6 +750,7 @@
       {
         "SkillID": "Knight_8",
         "SkillComponentID": "PassiveBuff",
+        "DependCondition": "None",
         "EffectValue": -0.25,
         "InfluenceStatus": "Speed",
         "AddType": "Value",
@@ -748,6 +782,7 @@
       {
         "SkillID": "Berserker_1",
         "SkillComponentID": "Damage",
+        "DependCondition": "None",
         "EffectValue": 1.8,
         "EffectRecive": -1,
         "TargetCount": 1
@@ -755,6 +790,7 @@
       {
         "SkillID": "Berserker_1",
         "SkillComponentID": "CrowdControl",
+        "DependCondition": "Prev",
         "InfluenceStatus": "Stun",
         "EffectDurationTime": 2,
         "EffectRecive": -1,
@@ -783,6 +819,7 @@
       {
         "SkillID": "Berserker_2",
         "SkillComponentID": "Damage",
+        "DependCondition": "None",
         "EffectValue": 1.35,
         "EffectRecive": -1,
         "TargetCount": 5
@@ -790,6 +827,7 @@
       {
         "SkillID": "Berserker_2",
         "SkillComponentID": "Debuff",
+        "DependCondition": "Prev",
         "EffectValue": 0.15,
         "InfluenceStatus": "SpeedSlow",
         "EffectDurationTime": 2.5,
@@ -819,6 +857,7 @@
       {
         "SkillID": "Berserker_3",
         "SkillComponentID": "Damage",
+        "DependCondition": "None",
         "EffectValue": 1.55,
         "EffectRecive": -1,
         "TargetCount": 1
@@ -826,6 +865,7 @@
       {
         "SkillID": "Berserker_3",
         "SkillComponentID": "MultipleDamage",
+        "DependCondition": "None",
         "EffectValue": 1.55,
         "EffectRecive": -1,
         "TargetCount": 1
@@ -833,6 +873,7 @@
       {
         "SkillID": "Berserker_3",
         "SkillComponentID": "MultipleDamage",
+        "DependCondition": "None",
         "EffectValue": 1.55,
         "EffectRecive": -1,
         "TargetCount": 1
@@ -860,6 +901,7 @@
       {
         "SkillID": "Berserker_4",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 12,
         "InfluenceStatus": "MeleeATK",
         "AddType": "Value",
@@ -869,6 +911,7 @@
       {
         "SkillID": "Berserker_4",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 8,
         "InfluenceStatus": "MeleeHit",
         "AddType": "Value",
@@ -878,6 +921,7 @@
       {
         "SkillID": "Berserker_4",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 0.2,
         "InfluenceStatus": "Crt",
         "AddType": "Value",
@@ -907,6 +951,7 @@
       {
         "SkillID": "Berserker_5",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 1.8,
         "InfluenceStatus": "IncreaseDmg",
         "AddType": "Rate",
@@ -916,6 +961,7 @@
       {
         "SkillID": "Berserker_5",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 0.2,
         "InfluenceStatus": "RecoveryDmg",
         "AddType": "Rate",
@@ -944,6 +990,7 @@
       {
         "SkillID": "Berserker_6",
         "SkillComponentID": "AdditiveBuff ",
+        "DependCondition": "None",
         "EffectValue": 0.2,
         "InfluenceStatus": "IncreaseMeleeATK",
         "AddType": "Value",
@@ -954,6 +1001,7 @@
       {
         "SkillID": "Berserker_6",
         "SkillComponentID": "AdditiveBuff ",
+        "DependCondition": "None",
         "EffectValue": 0.02,
         "InfluenceStatus": "Damage",
         "AddType": "Value",
@@ -983,6 +1031,7 @@
       {
         "SkillID": "Berserker_7",
         "SkillComponentID": "PassiveBuff",
+        "DependCondition": "None",
         "EffectValue": 15,
         "InfluenceStatus": "MeleeATK",
         "AddType": "Value",
@@ -996,6 +1045,7 @@
       {
         "SkillID": "Berserker_7",
         "SkillComponentID": "PassiveBuff",
+        "DependCondition": "None",
         "EffectValue": 0.05,
         "InfluenceStatus": "AS",
         "AddType": "Value",
@@ -1028,6 +1078,7 @@
       {
         "SkillID": "Berserker_8",
         "SkillComponentID": "PassiveBuff",
+        "DependCondition": "None",
         "EffectValue": 10,
         "InfluenceStatus": "DEF",
         "AddType": "Value",
@@ -1036,6 +1087,7 @@
       {
         "SkillID": "Berserker_8",
         "SkillComponentID": "PassiveBuff",
+        "DependCondition": "None",
         "EffectValue": 120,
         "InfluenceStatus": "MaxHP",
         "AddType": "Value",
@@ -1044,6 +1096,7 @@
       {
         "SkillID": "Berserker_8",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 10,
         "InfluenceStatus": "DEF",
         "AddType": "Value",
@@ -1056,6 +1109,7 @@
       {
         "SkillID": "Berserker_8",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 120,
         "InfluenceStatus": "MaxHP",
         "AddType": "Value",
@@ -1088,6 +1142,7 @@
       {
         "SkillID": "Berserker_9",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 0.5,
         "InfluenceStatus": "MeleeATK",
         "AddType": "Value",
@@ -1097,6 +1152,7 @@
       {
         "SkillID": "Berserker_9",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": -1,
         "InfluenceStatus": "DEF",
         "AddType": "Value",
@@ -1126,6 +1182,7 @@
       {
         "SkillID": "Berserker_10",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 25,
         "InfluenceStatus": "MeleeATK",
         "AddType": "Value",
@@ -1138,6 +1195,7 @@
       {
         "SkillID": "Berserker_10",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 1,
         "InfluenceStatus": "AS",
         "AddType": "Value",
@@ -1170,12 +1228,14 @@
       {
         "SkillID": "Berserker_11",
         "SkillComponentID": "Channeled",
+        "DependCondition": "None",
         "EffectRecive": -1,
         "TargetCount": 5
       },
       {
         "SkillID": "Berserker_11",
         "SkillComponentID": "Damage",
+        "DependCondition": "None",
         "EffectValue": 1.3,
         "EffectRecive": -1,
         "TargetCount": 5
@@ -1203,6 +1263,7 @@
       {
         "SkillID": "Berserker_12",
         "SkillComponentID": "Damage",
+        "DependCondition": "None",
         "EffectValue": 1.4,
         "EffectRecive": 1,
         "TargetCount": 1
@@ -1210,6 +1271,7 @@
       {
         "SkillID": "Berserker_12",
         "SkillComponentID": "CrowdControl",
+        "DependCondition": "Prev",
         "EffectValue": 2,
         "InfluenceStatus": "Repel ",
         "EffectRecive": 1,
@@ -1238,6 +1300,7 @@
       {
         "SkillID": "Berserker_13",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 0.5,
         "InfluenceStatus": "Speed",
         "AddType": "Value",
@@ -1270,6 +1333,7 @@
       {
         "SkillID": "Berserker_14",
         "SkillComponentID": "Utility",
+        "DependCondition": "None",
         "InfluenceStatus": "RemoveCC",
         "EffectRecive": 0
       }
@@ -1296,6 +1360,7 @@
       {
         "SkillID": "Berserker_15",
         "SkillComponentID": "Damage",
+        "DependCondition": "None",
         "EffectValue": 2.5,
         "EffectRecive": -1,
         "TargetCount": 1
@@ -1322,6 +1387,7 @@
       {
         "SkillID": "Berserker_16",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 10,
         "InfluenceStatus": "MeleeATK",
         "AddType": "Value",
@@ -1334,6 +1400,7 @@
       {
         "SkillID": "Berserker_16",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 0.8,
         "InfluenceStatus": "AS",
         "AddType": "Value",
@@ -1366,6 +1433,7 @@
       {
         "SkillID": "Paladin_1",
         "SkillComponentID": "Damage",
+        "DependCondition": "None",
         "EffectValue": 1.35,
         "EffectRecive": -1,
         "TargetCount": 1
@@ -1373,6 +1441,7 @@
       {
         "SkillID": "Paladin_1",
         "SkillComponentID": "ElementDamage",
+        "DependCondition": "Prev",
         "EffectValue": 1,
         "InfluenceStatus": "HolyDamage",
         "EffectRecive": -1,
@@ -1401,6 +1470,7 @@
       {
         "SkillID": "Paladin_2",
         "SkillComponentID": "CrowdControl",
+        "DependCondition": "Prev",
         "EffectValue": 0,
         "InfluenceStatus": "Taunt",
         "ConditionOR": [
@@ -1413,6 +1483,7 @@
       {
         "SkillID": "Paladin_2",
         "SkillComponentID": "Debuff",
+        "DependCondition": "Prev",
         "EffectValue": 0.3,
         "InfluenceStatus": "ReduceTargetDmg",
         "AddType": "Rate",
@@ -1446,6 +1517,7 @@
       {
         "SkillID": "Paladin_3",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 8,
         "InfluenceStatus": "ATK",
         "AddType": "Value",
@@ -1456,6 +1528,7 @@
       {
         "SkillID": "Paladin_3",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 0.25,
         "InfluenceStatus": "AS",
         "AddType": "Value",
@@ -1466,6 +1539,7 @@
       {
         "SkillID": "Paladin_3",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 0.5,
         "InfluenceStatus": "Speed",
         "AddType": "Value",
@@ -1496,6 +1570,7 @@
       {
         "SkillID": "Paladin_4",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 8,
         "InfluenceStatus": "DEF",
         "AddType": "Value",
@@ -1506,6 +1581,7 @@
       {
         "SkillID": "Paladin_4",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 15,
         "InfluenceStatus": "Avoid",
         "AddType": "Value",
@@ -1516,6 +1592,7 @@
       {
         "SkillID": "Paladin_4",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 80,
         "InfluenceStatus": "MaxHP",
         "AddType": "Value",
@@ -1526,6 +1603,7 @@
       {
         "SkillID": "Paladin_4",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 0.35,
         "InfluenceStatus": "Recovery_HP",
         "AddType": "Value",
@@ -1556,6 +1634,7 @@
       {
         "SkillID": "Paladin_5",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 0.25,
         "InfluenceStatus": "TransferDmg",
         "AddType": "Rate",
@@ -1566,6 +1645,7 @@
       {
         "SkillID": "Paladin_5",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 0,
         "InfluenceStatus": "BeTransferDmg",
         "AddType": "Value",
@@ -1596,6 +1676,7 @@
       {
         "SkillID": "Paladin_6",
         "SkillComponentID": "Damage",
+        "DependCondition": "None",
         "EffectValue": 1.3,
         "ConditionOR": [
           "EquipWeapon_Shield"
@@ -1606,6 +1687,7 @@
       {
         "SkillID": "Paladin_6",
         "SkillComponentID": "ElementDamage",
+        "DependCondition": "Prev",
         "EffectValue": 1.3,
         "InfluenceStatus": "HolyDamage",
         "ConditionOR": [
@@ -1617,6 +1699,7 @@
       {
         "SkillID": "Paladin_6",
         "SkillComponentID": "CrowdControl",
+        "DependCondition": "Prev",
         "EffectValue": 1.3,
         "InfluenceStatus": "Stun",
         "ConditionOR": [
@@ -1649,6 +1732,7 @@
       {
         "SkillID": "Paladin_7",
         "SkillComponentID": "Health",
+        "DependCondition": "None",
         "EffectValue": 1.25,
         "InfluenceStatus": "MeleeAtk",
         "AddType": "Rate",
@@ -1681,6 +1765,7 @@
       {
         "SkillID": "Paladin_8",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 3,
         "InfluenceStatus": "HolyDamage",
         "AddType": "Value",
@@ -1714,6 +1799,7 @@
       {
         "SkillID": "Paladin_9",
         "SkillComponentID": "Charge",
+        "DependCondition": "None",
         "ConditionOR": [
           "EquipWeapon_Shield"
         ],
@@ -1723,6 +1809,7 @@
       {
         "SkillID": "Paladin_9",
         "SkillComponentID": "CrowdControl",
+        "DependCondition": "Prev",
         "InfluenceStatus": "Stun",
         "ConditionOR": [
           "EquipWeapon_Shield"
@@ -1734,6 +1821,7 @@
       {
         "SkillID": "Paladin_9",
         "SkillComponentID": "Damage",
+        "DependCondition": "None",
         "EffectValue": 1.15,
         "ConditionOR": [
           "EquipWeapon_Shield"
@@ -1763,6 +1851,7 @@
       {
         "SkillID": "Paladin_10",
         "SkillComponentID": "PassiveBuff",
+        "DependCondition": "None",
         "EffectValue": 5,
         "InfluenceStatus": "MeleeATK",
         "AddType": "Value",
@@ -1776,6 +1865,7 @@
       {
         "SkillID": "Paladin_10",
         "SkillComponentID": "PassiveBuff",
+        "DependCondition": "None",
         "EffectValue": 5,
         "InfluenceStatus": "MeleeHit",
         "AddType": "Value",
@@ -1808,6 +1898,7 @@
       {
         "SkillID": "Paladin_11",
         "SkillComponentID": "PassiveBuff",
+        "DependCondition": "None",
         "EffectValue": 8,
         "InfluenceStatus": "DEF",
         "AddType": "Value",
@@ -1820,6 +1911,7 @@
       {
         "SkillID": "Paladin_11",
         "SkillComponentID": "PassiveBuff",
+        "DependCondition": "None",
         "EffectValue": 0.2,
         "InfluenceStatus": "BlockRate",
         "AddType": "Value",
@@ -1832,6 +1924,7 @@
       {
         "SkillID": "Paladin_11",
         "SkillComponentID": "PassiveBuff",
+        "DependCondition": "None",
         "EffectValue": -0.2,
         "InfluenceStatus": "AS",
         "AddType": "Value",
@@ -1863,6 +1956,7 @@
       {
         "SkillID": "Paladin_12",
         "SkillComponentID": "PassiveBuff",
+        "DependCondition": "None",
         "EffectValue": 15,
         "InfluenceStatus": "DEF",
         "AddType": "Value",
@@ -1875,6 +1969,7 @@
       {
         "SkillID": "Paladin_12",
         "SkillComponentID": "PassiveBuff",
+        "DependCondition": "None",
         "EffectValue": -0.8,
         "InfluenceStatus": "Speed",
         "AddType": "Value",
@@ -1906,6 +2001,7 @@
       {
         "SkillID": "Paladin_13",
         "SkillComponentID": "EnhanceSkill",
+        "DependCondition": "None",
         "EffectRecive": -1,
         "TargetCount": 1,
         "Bonus": "Paladin_2"
@@ -1913,6 +2009,7 @@
       {
         "SkillID": "Paladin_13",
         "SkillComponentID": "Debuff",
+        "DependCondition": "Prev",
         "EffectValue": 12,
         "InfluenceStatus": "BreakDEF",
         "AddType": "Value",
@@ -1945,6 +2042,7 @@
       {
         "SkillID": "Paladin_14",
         "SkillComponentID": "EnhanceSkill",
+        "DependCondition": "None",
         "EffectRecive": -2,
         "TargetCount": 1,
         "Bonus": "Paladin_7"
@@ -1952,6 +2050,7 @@
       {
         "SkillID": "Paladin_14",
         "SkillComponentID": "Utility",
+        "DependCondition": "None",
         "InfluenceStatus": "RemoveCC",
         "ConditionOR": [
           "EquipWeapon_Shield"
@@ -1981,6 +2080,7 @@
       {
         "SkillID": "Paladin_15",
         "SkillComponentID": "PassiveBuff",
+        "DependCondition": "None",
         "EffectValue": 0.3,
         "InfluenceStatus": "ReduceDmg",
         "AddType": "Rate",
@@ -2012,6 +2112,7 @@
       {
         "SkillID": "Paladin_16",
         "SkillComponentID": "PassiveBuff",
+        "DependCondition": "None",
         "EffectValue": 0.75,
         "InfluenceStatus": "ReduceCCTime",
         "AddType": "Rate",
@@ -2046,6 +2147,7 @@
       {
         "SkillID": "Paladin_17",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 0,
         "InfluenceStatus": "ReduceDmg",
         "AddType": "Rate",
@@ -2079,6 +2181,7 @@
       {
         "SkillID": "Praetorian_1",
         "SkillComponentID": "Damage",
+        "DependCondition": "None",
         "EffectValue": 1.5,
         "EffectRecive": -1,
         "TargetCount": 1
@@ -2086,6 +2189,7 @@
       {
         "SkillID": "Praetorian_1",
         "SkillComponentID": "Debuff",
+        "DependCondition": "Prev",
         "EffectValue": 8,
         "InfluenceStatus": "BreakDEF",
         "AddType": "Value",
@@ -2116,6 +2220,7 @@
       {
         "SkillID": "Praetorian_2",
         "SkillComponentID": "Damage",
+        "DependCondition": "None",
         "EffectValue": 1.4,
         "EffectRecive": -1,
         "TargetCount": 3
@@ -2123,6 +2228,7 @@
       {
         "SkillID": "Praetorian_2",
         "SkillComponentID": "Debuff",
+        "DependCondition": "Prev",
         "EffectValue": 5,
         "InfluenceStatus": "Bleed",
         "AddType": "Value",
@@ -2153,6 +2259,7 @@
       {
         "SkillID": "Praetorian_3",
         "SkillComponentID": "Damage",
+        "DependCondition": "None",
         "EffectValue": 1.25,
         "InfluenceStatus": "IncreaseDmg",
         "AddType": "Rate",
@@ -2162,6 +2269,7 @@
       {
         "SkillID": "Praetorian_3",
         "SkillComponentID": "MultipleDamage",
+        "DependCondition": "None",
         "EffectValue": 1.35,
         "InfluenceStatus": "IncreaseDmg",
         "AddType": "Rate",
@@ -2171,6 +2279,7 @@
       {
         "SkillID": "Praetorian_3",
         "SkillComponentID": "MultipleDamage",
+        "DependCondition": "None",
         "EffectValue": 1.45,
         "InfluenceStatus": "IncreaseDmg",
         "AddType": "Rate",
@@ -2200,6 +2309,7 @@
       {
         "SkillID": "Praetorian_4",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 1.25,
         "InfluenceStatus": "Speed",
         "AddType": "Value",
@@ -2210,6 +2320,7 @@
       {
         "SkillID": "Praetorian_4",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 0.23,
         "InfluenceStatus": "AS",
         "AddType": "Value",
@@ -2220,6 +2331,7 @@
       {
         "SkillID": "Praetorian_4",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 0.18,
         "InfluenceStatus": "Crt",
         "AddType": "Value",
@@ -2250,6 +2362,7 @@
       {
         "SkillID": "Praetorian_5",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 0.7,
         "InfluenceStatus": "DisorderResistance",
         "AddType": "Rate",
@@ -2280,6 +2393,7 @@
       {
         "SkillID": "Praetorian_6",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 5,
         "InfluenceStatus": "MeleeATK",
         "AddType": "Value",
@@ -2296,6 +2410,7 @@
       {
         "SkillID": "Praetorian_6",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 5,
         "InfluenceStatus": "DEF",
         "AddType": "Value",
@@ -2312,6 +2427,7 @@
       {
         "SkillID": "Praetorian_6",
         "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "None",
         "EffectValue": 0.15,
         "InfluenceStatus": "BlockRate",
         "AddType": "Value",
@@ -2348,12 +2464,14 @@
       {
         "SkillID": "Praetorian_7",
         "SkillComponentID": "Charge",
+        "DependCondition": "None",
         "EffectRecive": 0,
         "TargetCount": 0
       },
       {
         "SkillID": "Praetorian_7",
         "SkillComponentID": "InheritDamage",
+        "DependCondition": "None",
         "EffectRecive": -1,
         "TargetCount": -2,
         "Bonus": "Praetorian_1"
@@ -2361,6 +2479,7 @@
       {
         "SkillID": "Praetorian_7",
         "SkillComponentID": "Debuff",
+        "DependCondition": "Prev",
         "EffectValue": 8,
         "InfluenceStatus": "BreakDEF",
         "AddType": "Value",
@@ -2390,6 +2509,7 @@
       {
         "SkillID": "Praetorian_8",
         "SkillComponentID": "EnhanceSkill",
+        "DependCondition": "None",
         "EffectRecive": -1,
         "TargetCount": 0,
         "Bonus": "Praetorian_1"
@@ -2397,6 +2517,7 @@
       {
         "SkillID": "Praetorian_8",
         "SkillComponentID": "PassiveBuff",
+        "DependCondition": "None",
         "EffectValue": 0.1,
         "InfluenceStatus": "EffectValue",
         "AddType": "Value",
@@ -2406,6 +2527,7 @@
       {
         "SkillID": "Praetorian_8",
         "SkillComponentID": "EnhanceSkill",
+        "DependCondition": "None",
         "EffectRecive": 0,
         "TargetCount": 0,
         "Bonus": "Praetorian_7"
@@ -2413,6 +2535,7 @@
       {
         "SkillID": "Praetorian_8",
         "SkillComponentID": "PassiveBuff",
+        "DependCondition": "None",
         "EffectValue": 0.5,
         "InfluenceStatus": "HitReduceSec",
         "EffectRecive": 0,
@@ -2440,6 +2563,7 @@
       {
         "SkillID": "Praetorian_9",
         "SkillComponentID": "PassiveBuff",
+        "DependCondition": "None",
         "EffectValue": 8,
         "InfluenceStatus": "MeleeATK",
         "AddType": "Value",
@@ -2455,6 +2579,7 @@
       {
         "SkillID": "Praetorian_9",
         "SkillComponentID": "PassiveBuff",
+        "DependCondition": "None",
         "EffectValue": 0.35,
         "InfluenceStatus": "AS",
         "AddType": "Value",
@@ -2489,6 +2614,7 @@
       {
         "SkillID": "Praetorian_10",
         "SkillComponentID": "PassiveBuff",
+        "DependCondition": "None",
         "EffectValue": 5,
         "InfluenceStatus": "DEF",
         "AddType": "Value",
@@ -2504,6 +2630,7 @@
       {
         "SkillID": "Praetorian_10",
         "SkillComponentID": "PassiveBuff",
+        "DependCondition": "None",
         "EffectValue": 0.12,
         "InfluenceStatus": "BlockRate",
         "AddType": "Value",
@@ -2538,6 +2665,7 @@
       {
         "SkillID": "Praetorian_11",
         "SkillComponentID": "PassiveBuff",
+        "DependCondition": "None",
         "EffectValue": 7,
         "InfluenceStatus": "DEF",
         "AddType": "Value",
@@ -2555,6 +2683,7 @@
       {
         "SkillID": "Praetorian_11",
         "SkillComponentID": "PassiveBuff",
+        "DependCondition": "None",
         "EffectValue": 0.45,
         "InfluenceStatus": "Speed",
         "AddType": "Value",
@@ -2591,6 +2720,7 @@
       {
         "SkillID": "Praetorian_12",
         "SkillComponentID": "InheritDamage",
+        "DependCondition": "None",
         "ConditionOR": [
           "Block_0.35"
         ],
@@ -2623,6 +2753,7 @@
       {
         "SkillID": "Praetorian_13",
         "SkillComponentID": "EnhanceSkill",
+        "DependCondition": "None",
         "AddType": "Vlaue",
         "EffectRecive": 0,
         "TargetCount": 0,
@@ -2631,6 +2762,7 @@
       {
         "SkillID": "Praetorian_13",
         "SkillComponentID": "PassiveBuff",
+        "DependCondition": "None",
         "EffectValue": 1,
         "InfluenceStatus": "Distance",
         "AddType": "Vlaue",
@@ -2640,6 +2772,7 @@
       {
         "SkillID": "Praetorian_13",
         "SkillComponentID": "Charge",
+        "DependCondition": "None",
         "EffectRecive": 0,
         "TargetCount": 0
       }
@@ -2667,6 +2800,7 @@
       {
         "SkillID": "Praetorian_14",
         "SkillComponentID": "DotDamage",
+        "DependCondition": "None",
         "EffectValue": 1.85,
         "EffectDurationTime": 5,
         "EffectRecive": -1,
@@ -2695,6 +2829,7 @@
       {
         "SkillID": "Praetorian_15",
         "SkillComponentID": "Damage",
+        "DependCondition": "None",
         "EffectValue": 1.7,
         "EffectRecive": -1,
         "TargetCount": 1
@@ -2702,6 +2837,7 @@
       {
         "SkillID": "Praetorian_15",
         "SkillComponentID": "Debuff",
+        "DependCondition": "Prev",
         "EffectValue": 0.3,
         "InfluenceStatus": "SpeedSlow",
         "AddType": "Rate",
@@ -2733,6 +2869,7 @@
       {
         "SkillID": "Praetorian_16",
         "SkillComponentID": "Damage",
+        "DependCondition": "None",
         "EffectValue": 1.1,
         "EffectRecive": 1,
         "TargetCount": 1
@@ -2740,6 +2877,7 @@
       {
         "SkillID": "Praetorian_16",
         "SkillComponentID": "MultipleDamage",
+        "DependCondition": "None",
         "EffectValue": 1.1,
         "EffectRecive": 1,
         "TargetCount": 1
@@ -2747,6 +2885,7 @@
       {
         "SkillID": "Praetorian_16",
         "SkillComponentID": "MultipleDamage",
+        "DependCondition": "None",
         "EffectValue": 1.1,
         "EffectRecive": 1,
         "TargetCount": 1
@@ -2754,6 +2893,7 @@
       {
         "SkillID": "Praetorian_16",
         "SkillComponentID": "MultipleDamage",
+        "DependCondition": "None",
         "EffectValue": 1.1,
         "EffectRecive": 1,
         "TargetCount": 1
@@ -2761,6 +2901,7 @@
       {
         "SkillID": "Praetorian_16",
         "SkillComponentID": "MultipleDamage",
+        "DependCondition": "None",
         "EffectValue": 1.1,
         "EffectRecive": 1,
         "TargetCount": 1
@@ -2768,6 +2909,7 @@
       {
         "SkillID": "Praetorian_16",
         "SkillComponentID": "MultipleDamage",
+        "DependCondition": "None",
         "EffectValue": 1.1,
         "EffectRecive": 1,
         "TargetCount": 1
@@ -2775,6 +2917,7 @@
       {
         "SkillID": "Praetorian_16",
         "SkillComponentID": "MultipleDamage",
+        "DependCondition": "None",
         "EffectValue": 1.1,
         "EffectRecive": 1,
         "TargetCount": 1
@@ -2782,6 +2925,7 @@
       {
         "SkillID": "Praetorian_16",
         "SkillComponentID": "MultipleDamage",
+        "DependCondition": "None",
         "EffectValue": 1.1,
         "EffectRecive": 1,
         "TargetCount": 1
@@ -2789,6 +2933,7 @@
       {
         "SkillID": "Praetorian_16",
         "SkillComponentID": "CrowdControl",
+        "DependCondition": "Prev",
         "EffectValue": 1.1,
         "InfluenceStatus": "Inhibit",
         "EffectDurationTime": 1,
