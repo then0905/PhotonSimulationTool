@@ -41,6 +41,7 @@ class BasalAttributesDataModel:
 class SkillOperationData:
     SkillID: str = ""
     SkillComponentID: str = ""
+    DependCondition: str = ""
     EffectValue: float = 0.0
     InfluenceStatus: str = ""
     AddType: str = ""
