@@ -243,7 +243,13 @@ class BattleCharacter:
         if is_hit <= hit_value:
             return self.BlockCalculator(skill,target)
         else:
-            return f" <color=#00ffdc>{self.name}</color> 使用 <color=#ff9300>{CommonFunction.get_text(skill.Name)}</color> 但攻擊並沒有命中！", 0, self.attackTimer
+            return CommonFunction.battlelog_text_processor({
+                "caster_text":self.name,
+                "caster_color":"#636363",
+                "caster_size":12,
+                "descript_text":CommonFunction.get_text(skill.Name),
+                "descript_color":"#ff9300",
+        },"miss"), 0, self.attackTimer
     
     def BlockCalculator(self, skill: SkillData, target)-> Tuple[str, int, float]:
         """

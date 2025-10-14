@@ -47,5 +47,26 @@ class CommonFunction:
         icon = tk.PhotoImage(file=f"{path}/{name}.png")  # PNG 圖片
         return icon
 
+    def battlelog_text_processor(input_log_dic,log_type:str,other = None):
+        """
+        取得戰鬥Log 文字樣式 
+        """
+        log_dic = {
+                "caster_text":input_log_dic["caster_text"],
+                "caster_color":input_log_dic["caster_color"],
+                "caster_size":input_log_dic.get("caster_size", 10),
+                "descript_text":input_log_dic["descript_text"],
+                "descript_color":input_log_dic["descript_color"],
+                "descript_size":input_log_dic.get("descript_size", 10),
+                "target_text":input_log_dic.get("target_text", ""),
+                "target_color":input_log_dic.get("target_color", ""),
+                "target_size":input_log_dic.get("target_size", 0)
+        }
+        
+        match(log_type):
+            case "miss":
+                return (f'<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>' 
+                f' 使用 <size={log_dic["descript_size"]}><color={log_dic["descript_color"]}>{log_dic["descript_text"]}</color></size>'
+                f'但攻擊並沒有命中！')
 
 
