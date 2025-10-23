@@ -7,8 +7,10 @@ from stats_analyzer import StatsAnalyzer
 from status_operation import CharacterStatusCalculator
 from commonfunction import CommonFunction
 from typing import Dict
+from PIL import Image, ImageTk
 import os
 import re
+import traceback
 
 class BattleSimulatorGUI:
     jobNameDict: Dict[str, str] = {}
@@ -94,7 +96,7 @@ class BattleSimulatorGUI:
                 super().__init__(master)
 
                 # 建立 Canvas + Scrollbar 容器
-                self.canvas = tk.Canvas(self, height=60)
+                self.canvas = tk.Canvas(self, height=48)
                 self.scrollbar = ttk.Scrollbar(
                     self, orient="horizontal", command=self.canvas.xview
                 )
@@ -127,99 +129,99 @@ class BattleSimulatorGUI:
                     widget = getattr(widget, "master", None)
                 return False
 
-            def add_skill_effect(self, skill: SkillData):
+            def _create_effect_widget(self, icon, name, desc, effect_id, stack_count=0):
                 """
-                新增一個技能效果圖示
+                icon: Tkinter.PhotoImage
+                name: 顯示名稱
+                desc: 說明文字
+                effect_id: 效果 ID
+                stack_count: 疊層數字（0 表示不顯示）
                 """
-                skillIcon = CommonFunction.load_skill_icon(
-                    skill.Job, skill.SkillID)
-                if skillIcon.height() > 55:
-                    factor = skillIcon.height() // 55
-                    skillIcon = skillIcon.subsample(factor)
+                # 自動依比例縮小圖示到最大 55x55
+                max_size = 48
+                width = icon.width()
+                height = icon.height()
+                scale_factor = max(width / max_size, height / max_size, 1)
+                new_width = int(width / scale_factor)
+                new_height = int(height / scale_factor)
+                icon = icon.subsample(max(int(width / new_width), 1), max(int(height / new_height), 1))
+
+                # 建立 Canvas 放圖示
+                c = tk.Canvas(self.inner_frame, width=max_size, height=max_size, highlightthickness=0, bg="white")
+                c.create_image(0, 0, anchor="nw", image=icon)
+
+                # 疊加數字 (右下角) → 只有 stack_count > 0 才顯示
+                if stack_count > 0:
+                    c.create_text(
+                        max_size - 5, max_size - 5,
+                        text=str(stack_count),
+                        fill="white",
+                        font=("Arial", 10, "bold")
+                    )
+
+                # 綁定點擊事件（顯示 popup）
+                c.bind("<Button-1>", lambda e, n=name, d=desc: self._show_popup(e, n, d))
+
+                # 放入欄位
+                c.pack(side="left", padx=2)
+
+                # 保存資訊
+                self.effects.append({
+                    "id": effect_id,
+                    "name": name,
+                    "desc": desc,
+                    "widget": c,
+                    "icon": icon,
+                    "stack": stack_count
+                })
+
+            def add_skill_effect(self, skill, stack_count=0):
+                """
+                增加技能效果提示物件
+                """
+
+                #疊層類型先判斷是否已存在
+                if(stack_count >0):
+                    for eff in self.effects:
+                        if eff["id"] == skill.SkillID:
+                            eff["stack"] = CommonFunction.clamp(eff["stack"]+stack_count,0,skill.SkillOperationDataList[0].Bonus)
+                            return
+
+                skillIcon = CommonFunction.load_skill_icon(skill.Job, skill.SkillID)
+                if not skillIcon:
+                    print("讀取失敗")
+                    return
                 skillName = CommonFunction.get_text(skill.Name)
-                skillIntro = CommonFunction.get_text(skill.Intro)+'\n'
+                skillIntro = CommonFunction.get_text(skill.Intro) + '\n'
                 for op in skill.SkillOperationDataList:
-                    if (op.InfluenceStatus):
-                        skillIntro += (
-                            f"{CommonFunction.get_text("TM_"+op.InfluenceStatus)} : {CommonFunction.get_text("TM_" + op.AddType).format(op.EffectValue)}")+'\n'
-                if skillIcon:
-                    btn = tk.Button(
-                        self.inner_frame,
-                        text=skillName if not skillIcon else "",
-                        image=skillIcon,
-                        compound="top",
-                        width=55,
-                        height=55
-                    )
-                    btn.pack(side="left", padx=2)
-                    btn.bind(
-                        "<Button-1>", lambda e, n=skillName, d=skillIntro: self._show_popup(
-                            e, n, d)
-                    )
-                    self.effects.append(
-                        {"id" : skill.SkillID ,"name": skillName, "desc": skillIntro, "widget": btn, "icon": skillIcon})
-                else:
-                    print("讀取失敗")
-            def add_item_effect(self, item: ItemDataModel):
+                    if op.InfluenceStatus:
+                        skillIntro += f"{CommonFunction.get_text('TM_' + op.InfluenceStatus)} : {CommonFunction.get_text('TM_' + op.AddType).format(op.EffectValue)}\n"
+                self._create_effect_widget(skillIcon, skillName, skillIntro, skill.SkillID, stack_count)
+
+            def add_item_effect(self, item, stack_count=0):
                 """
-                新增一個技能效果圖示
+                增加道具效果提示物件
                 """
+
                 itemIcon = CommonFunction.load_item_icon(item.CodeID)
-                if itemIcon.height() > 55:
-                    factor = itemIcon.height() // 55
-                    itemIcon = itemIcon.subsample(factor)
+                if not itemIcon:
+                    print("讀取失敗")
+                    return
                 itemName = CommonFunction.get_text(item.Name)
-                itemIntro = CommonFunction.get_text(item.Intro)+'\n'
+                itemIntro = CommonFunction.get_text(item.Intro) + '\n'
                 for op in item.ItemEffectDataList:
-                    if (op.InfluenceStatus):
-                        itemIntro += (
-                            f"{CommonFunction.get_text("TM_"+op.InfluenceStatus)} : {CommonFunction.get_text("TM_" + op.AddType).format(op.EffectValue)}")+'\n'
-                if itemIcon:
-                    btn = tk.Button(
-                        self.inner_frame,
-                        text=itemName if not itemIcon else "",
-                        image=itemIcon,
-                        compound="top",
-                        width=55,
-                        height=55
-                    )
-                    btn.pack(side="left", padx=2)
-                    btn.bind(
-                        "<Button-1>", lambda e, n=itemName, d=itemIntro: self._show_popup(
-                            e, n, d)
-                    )
-                    self.effects.append(
-                        {"id" : item.CodeID ,"name": itemName, "desc": itemIntro, "widget": btn, "icon": itemIcon})
-                else:
-                    print("讀取失敗")
+                    if op.InfluenceStatus:
+                        itemIntro += f"{CommonFunction.get_text('TM_' + op.InfluenceStatus)} : {CommonFunction.get_text('TM_' + op.AddType).format(op.EffectValue)}\n"
+                self._create_effect_widget(itemIcon, itemName, itemIntro, item.CodeID, stack_count)
 
-            def add_debuff(self,effectId:str):
-                
+            def add_debuff(self, effectId, stack_count=0):
                 statusEffectIcon = CommonFunction.load_status_effect_icon(effectId)
-                if statusEffectIcon.height() > 55:
-                    factor = statusEffectIcon.height() // 55
-                    statusEffectIcon = statusEffectIcon.subsample(factor)
-                stautsEffectName = CommonFunction.get_text(f"TM_{effectId}_Name")
-                statusEffectIntro = CommonFunction.get_text(f"TM_{effectId}_Intro")
-
-                if statusEffectIcon:
-                    btn = tk.Button(
-                        self.inner_frame,
-                        text=stautsEffectName if not statusEffectIcon else "",
-                        image=statusEffectIcon,
-                        compound="top",
-                        width=55,
-                        height=55
-                    )
-                    btn.pack(side="left", padx=2)
-                    btn.bind(
-                        "<Button-1>", lambda e, n=stautsEffectName, d=statusEffectIntro: self._show_popup(
-                            e, n, d)
-                    )
-                    self.effects.append(
-                        {"id" : effectId, "name": stautsEffectName, "desc": statusEffectIntro, "widget": btn, "icon": statusEffectIcon})
-                else:
+                if not statusEffectIcon:
                     print("讀取失敗")
+                    return
+                statusEffectName = CommonFunction.get_text(f"TM_{effectId}_Name")
+                statusEffectIntro = CommonFunction.get_text(f"TM_{effectId}_Intro")
+                self._create_effect_widget(statusEffectIcon, statusEffectName, statusEffectIntro, effectId, stack_count)
                     
             def remove_effect(self, id):
                 """
@@ -230,6 +232,15 @@ class BattleSimulatorGUI:
                         eff["widget"].destroy()
                 self.effects = [
                     eff for eff in self.effects if eff["id"] != id]
+
+            def get_effect_stack(self,id) -> int:
+                """
+                取得指定技能當前的疊層
+                """
+                for eff in self.effects:
+                    if eff["id"] == id:
+                        return eff["stack"]
+                return 1;
 
             def clear_bar(self):
                 for eff in self.effects:
@@ -1105,6 +1116,11 @@ class BattleSimulatorGUI:
         """
         將含有 <color=#xxxxxx>...</color> <b>...</b> <size=XX>...</size> 的字串，動態解析並套用 tkinter 標籤顯示。
         """
+        if log_line is None:
+            print("⚠️ 偵測到 None 的 battle log！呼叫堆疊如下：")
+            traceback.print_stack()  # 會列出是誰呼叫這個函式的
+            return  # 不讓程式崩潰
+
         parts = re.split(r"(<color=#\w+>|</color>|<b>|</b>|<size=\d+>|</size>)", log_line)
 
         current_tag = {"color": None, "bold": False, "size": None}
@@ -1150,7 +1166,7 @@ def toggle_pause():
     暫停/繼續 (按鈕觸發)
     """
     os.environ["PAUSED"] = "1" if os.environ.get("PAUSED","0")=="0" else "0"
-    print(f"{os.environ.get("PAUSED")}")
+    print(f"收到暫停停{os.environ.get("PAUSED")}")
 
 if __name__ == "__main__":
     root = tk.Tk()

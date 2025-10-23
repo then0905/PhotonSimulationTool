@@ -52,14 +52,14 @@ class CommonFunction:
         取得戰鬥Log 文字樣式 
         """
         log_dic = {
-                "caster_text":input_log_dic["caster_text"],
-                "caster_color":input_log_dic["caster_color"],
+                "caster_text":input_log_dic.get("caster_text",""),
+                "caster_color":input_log_dic.get("caster_color","#ff0000"),
                 "caster_size":input_log_dic.get("caster_size", 10),
-                "descript_text":input_log_dic["descript_text"],
-                "descript_color":input_log_dic["descript_color"],
+                "descript_text":input_log_dic.get("descript_text",""),
+                "descript_color":input_log_dic.get("descript_color","#ff0000"),
                 "descript_size":input_log_dic.get("descript_size", 10),
                 "target_text":input_log_dic.get("target_text", ""),
-                "target_color":input_log_dic.get("target_color", ""),
+                "target_color":input_log_dic.get("target_color", "#ff0000"),
                 "target_size":input_log_dic.get("target_size", 0)
         }
         
@@ -68,5 +68,66 @@ class CommonFunction:
                 return (f'<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>' 
                 f' 使用 <size={log_dic["descript_size"]}><color={log_dic["descript_color"]}>{log_dic["descript_text"]}</color></size>'
                 f'但攻擊並沒有命中！')
-
-
+            case "block":
+                return (f'<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>' 
+                f' 使用 <size={log_dic["descript_size"]}><color={log_dic["descript_color"]}>{log_dic["descript_text"]}</color></size>'
+                f'但被格檔了！')
+            case "damage":
+                 return (f'<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>' 
+                f' 使用 <size={log_dic["descript_size"]}><color={log_dic["descript_color"]}>{log_dic["descript_text"]}</color></size>'
+                f' 對 <size={log_dic["target_size"]}><color={log_dic["target_color"]}>{log_dic["target_text"]}</color></size>'
+                f'造成 {other} 傷害！')
+            case "normalAttckTimer":
+                return (f'[<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>' 
+                f' 進入 <size={log_dic["descript_size"]}><color={log_dic["descript_color"]}>{log_dic["descript_text"]}</color></size> 計時'
+                f' {other} 秒 ]{'\n'}')
+            case "skillTimer":
+                 return (f'[<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>' 
+                f' 施放了 <size={log_dic["descript_size"]}><color={log_dic["descript_color"]}>{log_dic["descript_text"]}</color></size> 需等待'
+                f' {other} 秒 ]{'\n'}')
+            case "effectRecovery":
+                return (f'<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>' 
+                f' 使用 <size={log_dic["descript_size"]}><color={log_dic["descript_color"]}>{log_dic["descript_text"]}</color></size>'
+                f' 對 <size={log_dic["target_size"]}><color={log_dic["target_color"]}>{log_dic["target_text"]}</color></size>'
+                f'恢復 {other}')
+            case "naturalHpRecovery":
+                return (f'自然回復生命 讓<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>' 
+                f' 恢復了 [ <size={log_dic["descript_size"]}><color={log_dic["descript_color"]}>{log_dic["descript_text"]} 生命 ]</color></size>{'\n'}')
+            case "naturalMpRecovery":
+                return (f'自然回復魔力 讓<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>' 
+                f' 恢復了 [ <size={log_dic["descript_size"]}><color={log_dic["descript_color"]}>{log_dic["descript_text"]} 魔力 ]</color></size>{'\n'}')
+            case "continuanceBuff":
+                return (f'<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>' 
+                f' 對 <size={log_dic["target_size"]}><color={log_dic["target_color"]}>{log_dic["target_text"]}</color></size>'
+                f' 使用 Buff：<size={log_dic["descript_size"]}><color={log_dic["descript_color"]}>{log_dic["descript_text"]}</color></size>'
+                f' 持續 {other} 秒')
+            case "passiveBuff":
+                return (f'<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>' 
+                f' 對 <size={log_dic["target_size"]}><color={log_dic["target_color"]}>{log_dic["target_text"]}</color></size>'
+                f' 啟動 被動技能：<size={log_dic["descript_size"]}><color={log_dic["descript_color"]}>{log_dic["descript_text"]}</color></size>')
+            case "additiveBuff":
+                return (f'<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>' 
+                f' 對 <size={log_dic["target_size"]}><color={log_dic["target_color"]}>{log_dic["target_text"]}</color></size>'
+                f' 施加 疊加性效果：<size={log_dic["descript_size"]}><color={log_dic["descript_color"]}>{log_dic["descript_text"]}</color></size>'
+                f' 持續 {other} 秒')
+            case "continuanceItem":
+                return (f'<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>' 
+                f' 對 <size={log_dic["target_size"]}><color={log_dic["target_color"]}>{log_dic["target_text"]}</color></size>'
+                f' 使用道具：<size={log_dic["descript_size"]}><color={log_dic["descript_color"]}>{log_dic["descript_text"]}</color></size>'
+                f' 持續 {other} 秒')
+            case "crowdControlStart":
+                return (f'<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>' 
+                f' 使 <size={log_dic["target_size"]}><color={log_dic["target_color"]}>{log_dic["target_text"]}</color></size>'
+                f' 進入 {other} 秒的'
+                f'<size={log_dic["descript_size"]}><color={log_dic["descript_color"]}>{log_dic["descript_text"]}</color></size>的控制狀態')
+            case "debuffStart":
+                return (f'<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>' 
+                f' 使 <size={log_dic["target_size"]}><color={log_dic["target_color"]}>{log_dic["target_text"]}</color></size>'
+                f' 進入 {other} 秒的'
+                f'<size={log_dic["descript_size"]}><color={log_dic["descript_color"]}>{log_dic["descript_text"]}</color></size>的負面狀態')
+            case "crowdControlEnd":
+                return (f'<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>' 
+                f' 解除了 <size={log_dic["descript_size"]}><color={log_dic["descript_color"]}>{log_dic["descript_text"]}</color></size> 的控制狀態')
+            case "debuffEnd":
+                return (f'<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>' 
+                f' 解除了 <size={log_dic["descript_size"]}><color={log_dic["descript_color"]}>{log_dic["descript_text"]}</color></size> 的負面狀態')
