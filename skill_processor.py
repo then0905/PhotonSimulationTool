@@ -137,8 +137,9 @@ class SkillProcessor:
                 return SkillProcessor.status_skill_effect_start(op, attacker, target)
 
             case "PassiveBuff":
-                target.SkillEffectStatusOperation(
-                    op.InfluenceStatus, (op.AddType == "Rate"), op.EffectValue)
+                target.add_skill_passive_effect(skillData,op)
+                #target.SkillEffectStatusOperation(
+                    #op.InfluenceStatus, (op.AddType == "Rate"), op.EffectValue)
                 temp = f"{CommonFunction.get_text('TM_' + op.InfluenceStatus)}: {CommonFunction.get_text('TM_' + op.AddType).format(op.EffectValue)}"
                 return (CommonFunction.battlelog_text_processor({
                     "caster_text": attacker.name,

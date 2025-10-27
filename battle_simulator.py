@@ -195,7 +195,7 @@ class BattleCharacter:
         if(passive_skills is not None):
             for skill in passive_skills:
                 SkillProcessor._execute_skill_operation(skill,self,self)
-                self.passive_bar.add_skill_effect(skill)
+                #self.passive_bar.add_skill_effect(skill)
 
     def add_skill_buff_effect(self,skillData:SkillData,op):
         """
@@ -205,16 +205,31 @@ class BattleCharacter:
         self.buff_bar.add_skill_effect(skillData)
         self.buff_skill[skillData.SkillID] = (skillData,skillData.SkillOperationDataList[0].EffectDurationTime)
 
+    def add_skill_passive_effect(self,skillData:SkillData,op):
+        """
+        增加被動技能效果
+        """
+
+        self.SkillEffectStatusOperation(op.InfluenceStatus,(op.AddType == "Rate"),op.EffectValue)
+        # 效果欄增加資料
+        self.passive_bar.add_skill_effect(skillData)
+        self.buff_skill[skillData.SkillID] = (skillData,skillData.SkillOperationDataList[0].EffectDurationTime)
+
     def add_skill_addtive_effect(self,skillData:SkillData,op,stackCount:int):
         """
         增加疊加型效果
         """
+        #先取得疊層值(若沒有疊層值也會回傳0)
+        tempStack = self.buff_bar.get_effect_stack(skillData.SkillID)
+        #扣掉先前正在作用的值
+        self.SkillEffectStatusOperation(op.InfluenceStatus, (op.AddType == "Rate"), op.EffectValue*tempStack*-1)
+        
         #效果欄增加資料
-        self.buff_bar.add_skill_effect(skillData,stackCount)
+        self.passive_bar.add_skill_effect(skillData,stackCount)
         #重刷效果欄持續時間
         self.buff_skill[skillData.SkillID] = (skillData, skillData.SkillOperationDataList[0].EffectDurationTime)
-        if(self.buff_bar.get_effect_stack(skillData.SkillID) >= op.Bonus):
-            self.SkillEffectStatusOperation(op.InfluenceStatus, (op.AddType == "Rate"), op.EffectValue)
+        #重新把疊層值與效果計算進屬性    
+        self.SkillEffectStatusOperation(op.InfluenceStatus, (op.AddType == "Rate"), op.EffectValue*tempStack)
 
     def add_item_buff_effect(self,op,itemData:ItemDataModel):
         """

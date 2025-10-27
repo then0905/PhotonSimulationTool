@@ -155,7 +155,7 @@ class BattleSimulatorGUI:
                     c.create_text(
                         max_size - 5, max_size - 5,
                         text=str(stack_count),
-                        fill="white",
+                        fill="black",
                         font=("Arial", 10, "bold")
                     )
 
@@ -185,6 +185,19 @@ class BattleSimulatorGUI:
                     for eff in self.effects:
                         if eff["id"] == skill.SkillID:
                             eff["stack"] = CommonFunction.clamp(eff["stack"]+stack_count,0,skill.SkillOperationDataList[0].Bonus)
+                            # --- 更新 Canvas 數字 ---
+                            c = eff["widget"]
+                            c.delete("stack_text")  # 刪除舊的數字
+                            if eff["stack"] > 0:
+                                max_size = 48
+                                c.create_text(
+                                    max_size - 5,
+                                    max_size - 5,
+                                    text=str(eff["stack"]),
+                                    fill="black",
+                                    font=("Arial", 10, "bold"),
+                                    tags="stack_text",  # 給標籤方便刪除
+                                )
                             return
 
                 skillIcon = CommonFunction.load_skill_icon(skill.Job, skill.SkillID)
@@ -237,10 +250,11 @@ class BattleSimulatorGUI:
                 """
                 取得指定技能當前的疊層
                 """
-                for eff in self.effects:
-                    if eff["id"] == id:
-                        return eff["stack"]
-                return 1;
+                if(self.effects is not None):
+                    for eff in self.effects:
+                        if eff["id"] == id:
+                            return eff["stack"]
+                return 0
 
             def clear_bar(self):
                 for eff in self.effects:

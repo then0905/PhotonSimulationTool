@@ -989,7 +989,7 @@
     "SkillOperationDataList": [
       {
         "SkillID": "Berserker_6",
-        "SkillComponentID": "AdditiveBuff ",
+        "SkillComponentID": "AdditiveBuff",
         "DependCondition": "None",
         "EffectValue": 0.2,
         "InfluenceStatus": "IncreaseMeleeATK",
@@ -1000,7 +1000,7 @@
       },
       {
         "SkillID": "Berserker_6",
-        "SkillComponentID": "AdditiveBuff ",
+        "SkillComponentID": "AdditiveBuff",
         "DependCondition": "None",
         "EffectValue": 0.02,
         "InfluenceStatus": "Damage",
