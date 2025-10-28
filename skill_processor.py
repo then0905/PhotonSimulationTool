@@ -194,7 +194,7 @@ class SkillProcessor:
                     "caster_text": attacker.name,
                     "descript_text": CommonFunction.get_text("TM_" + op.InfluenceStatus + "_Name"),
                     "target_text": defender.name,
-                }, "debuffControlStart", op.EffectDurationTime), 0, 0)
+                }, "debuffStart", op.EffectDurationTime), 0, 0)
 
     @staticmethod
     def status_skill_effect_end(op: SkillOperationData, character) -> Tuple[str, int, float]:
@@ -268,7 +268,7 @@ class SkillProcessor:
                 # 模擬總是在戰鬥中 所以一律回傳true
                 return True
             case "HpLess":
-                return caster.stats["HP"] < (value*caster.stats["MaxHP"])
+                return caster.stats["HP"] < (float(value)*caster.stats["MaxHP"])
 
     @staticmethod
     def skill_additive_effect_event(skillData: SkillData, op, target):
