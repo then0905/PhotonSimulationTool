@@ -250,19 +250,19 @@ class SkillProcessor:
             case "EquipWeapon":
                 if (caster.equipped_weapon is None):
                     return False
-                return any(x.CodeID == str(value)
+                return any(x[0].CodeID == str(value)
                            for x in caster.equipped_weapon)
             case "EquipLeft":
                 if (caster.equipped_weapon is None):
                     return False
-                return any(x.TypeID == str(value)
+                return any(x[0].TypeID == str(value)
                            for x in caster.equipped_weapon)
             # 全副武裝
             case "EquipArmor":
                 if (caster.equipped_armor is None):
                     return False
                 return (len(caster.equipped_armor) == 5 and
-                        all(x.TypeID == str(caster.equipped_armor.value)
+                        all(x[0].TypeID == str(value)
                         for x in caster.equipped_armor))
             case "InCombatStatus":
                 # 模擬總是在戰鬥中 所以一律回傳true

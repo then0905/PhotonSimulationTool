@@ -1273,7 +1273,7 @@
         "SkillComponentID": "CrowdControl",
         "DependCondition": "All",
         "EffectValue": 2,
-        "InfluenceStatus": "Repel ",
+        "InfluenceStatus": "Repel",
         "EffectRecive": 1,
         "TargetCount": 1
       }
