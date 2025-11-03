@@ -10,6 +10,7 @@ from status_operation import StatusValues
 from AICombatAction import ai_action
 from commontool import Event
 import os
+import time
 
 @dataclass
 class BattleCharacter:
@@ -89,40 +90,36 @@ class BattleCharacter:
 
         # buff狀態遞減
         #技能Buff時間遞減
-        for buff in list(self.buff_skill):
-             skillData,skillDuration =  self.buff_skill[buff]
-             skillDuration = max(0, skillDuration - dt)
-             self.buff_skill[buff] = (skillData,skillDuration)
-             if(skillDuration == 0):
-                stack = self.buff_bar.get_effect_stack(buff)
+        for buff_skill_id in list(self.buff_skill):
+            skillData,skillDuration =  self.buff_skill[buff_skill_id]
+            skillDuration = max(0, skillDuration - dt)
+            self.buff_skill[buff_skill_id] = (skillData,skillDuration)
+            if(skillDuration == 0):
+                stack = self.buff_bar.get_effect_stack(buff_skill_id)
                 for op in skillData.SkillOperationDataList:
                     self.SkillEffectStatusOperation(op.InfluenceStatus,(op.AddType == "Rate"),-1*op.EffectValue*stack)
-                    self.buff_skill.pop(buff, None)
-                    self.buff_bar.remove_effect(buff)
-        for buff in list(self.buff_item):
-            try:
-             itemData,itemDuration =  self.buff_item[buff]
-             itemDuration = max(0, itemDuration - dt)
-             self.buff_skill[buff] = (itemData,itemDuration)
-             if(itemDuration == 0):
-                stack = self.buff_bar.get_effect_stack(buff)
+                    self.buff_skill.pop(buff_skill_id, None)
+                    self.buff_bar.remove_effect(buff_skill_id)
+        for buff_item_id in list(self.buff_item):
+            itemData,itemDuration =  self.buff_item[buff_item_id]
+            itemDuration = max(0, itemDuration - dt)
+            self.buff_item[buff_item_id] = (itemData,itemDuration)
+            if(itemDuration == 0):
+                stack = self.buff_bar.get_effect_stack(buff_item_id)
                 for op in itemData.ItemEffectDataList:
                     self.SkillEffectStatusOperation(op.InfluenceStatus,(op.AddType == "Rate"),-1*op.EffectValue*stack)
-                    self.buff_skill.pop(buff, None)
-                    self.buff_bar.remove_effect(buff)
-
-            except KeyError:
-                print(f"Buff錯誤{buff}")
+                    self.buff_skill.pop(buff_item_id, None)
+                    self.buff_bar.remove_effect(buff_item_id)
         #負面狀態遞減
-        for debuff in list(self.debuff_skill):
-            op,debuffDuration =  self.debuff_skill[debuff]
+        for debuff_id in list(self.debuff_skill):
+            op,debuffDuration =  self.debuff_skill[debuff_id]
             debuffDuration = max(0, debuffDuration - dt)
-            self.debuff_skill[debuff] = (op,debuffDuration)
+            self.debuff_skill[debuff_id] = (op,debuffDuration)
             if(debuffDuration == 0):
                 log,dmg,cd = SkillProcessor.status_skill_effect_end(op , self)
                 self.battle_log.append(log)
-                del self.debuff_skill[debuff]
-                self.debuff_bar.remove_effect(debuff)
+                del self.debuff_skill[debuff_id]
+                self.debuff_bar.remove_effect(debuff_id)
         
         # 血量自然恢復計時
         if("HP_Recovery" in self.stats):            
@@ -201,52 +198,73 @@ class BattleCharacter:
         """
         增加技能buff效果
         """
+        temp_id = CommonFunction.get_time_stap(skillData.SkillID)
         self.SkillEffectStatusOperation(op.InfluenceStatus,(op.AddType == "Rate"),op.EffectValue)
-        self.buff_bar.add_skill_effect(skillData)
-        self.buff_skill[skillData.SkillID] = (skillData,skillData.SkillOperationDataList[0].EffectDurationTime)
+        self.buff_bar.add_skill_effect(temp_id,skillData)
+        self.buff_skill[temp_id] = (skillData,skillData.SkillOperationDataList[0].EffectDurationTime)
 
     def add_skill_passive_effect(self,skillData:SkillData,op):
         """
         增加被動技能效果
         """
-
+        temp_id = CommonFunction.get_time_stap(skillData.SkillID)
         self.SkillEffectStatusOperation(op.InfluenceStatus,(op.AddType == "Rate"),op.EffectValue)
         # 效果欄增加資料
-        self.passive_bar.add_skill_effect(skillData)
-        self.buff_skill[skillData.SkillID] = (skillData,skillData.SkillOperationDataList[0].EffectDurationTime)
+        self.passive_bar.add_skill_effect(temp_id,skillData)
+        self.buff_skill[temp_id] = (skillData,skillData.SkillOperationDataList[0].EffectDurationTime)
 
     def add_skill_addtive_effect(self,skillData:SkillData,op,stackCount:int):
         """
         增加疊加型效果
         """
-        #先取得疊層值(若沒有疊層值也會回傳0)
-        tempStack = self.buff_bar.get_effect_stack(skillData.SkillID)
-        #扣掉先前正在作用的值
-        self.SkillEffectStatusOperation(op.InfluenceStatus, (op.AddType == "Rate"), op.EffectValue*tempStack*-1)
-        
-        #效果欄增加資料
-        self.passive_bar.add_skill_effect(skillData,stackCount)
-        #重刷效果欄持續時間
-        self.buff_skill[skillData.SkillID] = (skillData, skillData.SkillOperationDataList[0].EffectDurationTime)
-        #重新把疊層值與效果計算進屬性    
-        self.SkillEffectStatusOperation(op.InfluenceStatus, (op.AddType == "Rate"), op.EffectValue*tempStack)
+        skill_id = skillData.SkillID
+        duration = skillData.SkillOperationDataList[0].EffectDurationTime
+        effect_value = op.EffectValue
+        is_rate = (op.AddType == "Rate")
+
+        # 找出目前所有同技能 ID 的 buff
+        existing_keys = [k for k in self.buff_skill if k.startswith(skill_id)]
+
+        # 如果已存在同技能效果
+        if existing_keys:
+            # 更新 buff 時間（假設你要延長或覆蓋時間）
+            for key in existing_keys:
+                # 取得疊層(若沒有為0)
+                tempStack = self.passive_bar.get_effect_stack(key)
+                # 先移除舊疊層的效果
+                if tempStack > 0:
+                    self.SkillEffectStatusOperation(op.InfluenceStatus, is_rate, effect_value * tempStack * -1)
+
+                self.buff_skill[key] = (skillData, duration)
+                self.passive_bar.add_skill_effect(key,skillData, stackCount)
+
+        else:
+            # 新的 buff 加入 buff bar 並生成唯一 key
+            key = CommonFunction.get_time_stap(skill_id)
+            self.buff_skill[key] = (skillData, duration)
+            self.passive_bar.add_skill_effect(key,skillData, stackCount)
+
+        # 套用新的疊層效果
+        new_stack = self.passive_bar.get_effect_stack(skill_id)
+        self.SkillEffectStatusOperation(op.InfluenceStatus, is_rate, effect_value * new_stack)
 
     def add_item_buff_effect(self,op,itemData:ItemDataModel):
         """
         增加道具buff效果
         """
-
+        temp_id = CommonFunction.get_time_stap(itemData.CodeID)
         self.SkillEffectStatusOperation(op.InfluenceStatus,(op.AddType == "Rate"),op.EffectValue)
             
-        self.buff_bar.add_item_effect(itemData)
-        self.buff_item[itemData.CodeID] = (itemData,itemData.ItemEffectDataList[0].EffectDurationTime)
-    
+        self.buff_bar.add_item_effect(temp_id,itemData)
+        self.buff_item[temp_id] = (itemData,itemData.ItemEffectDataList[0].EffectDurationTime)
+
     def add_debuff_effect(self,op:SkillOperationData):
         """
         增加負面效果(含 控制狀態)
         """
-        self.debuff_bar.add_debuff(op.InfluenceStatus)
-        self.debuff_skill[op.InfluenceStatus] = op,op.EffectDurationTime
+        temp_id = CommonFunction.get_time_stap(op.InfluenceStatus)
+        self.debuff_bar.add_debuff(temp_id,op.InfluenceStatus)
+        self.debuff_skill[temp_id] = op,op.EffectDurationTime
 
     def CrowdControlCalculator(self,op: SkillOperationData,value :int):
         """
@@ -686,9 +704,9 @@ class BattleSimulator:
         """
         # 簡單的AI選擇技能邏輯
         current_active_buff = [s for s in (character.buff_skill or {}) ]     #當前生效的buff效果
-        current_cooldown_buff = [s for s in (character.skill_cooldowns or {})]     #當前進入冷卻時間的技能
+        current_cooldown_buff = [s for s in (character.skill_cooldowns or {})]     #當前進入冷卻時間的技能if k.startswith(skill_id)
         
-        available_skills = [s for s in character.skills if s.Characteristic is True and character.stats["MP"] >= s.CastMage and s.SkillID not in current_active_buff and s.SkillID not in current_cooldown_buff]
+        available_skills = [s for s in character.skills if s.Characteristic is True and character.stats["MP"] >= s.CastMage and not s.SkillID.startswith(current_active_buff) and s.SkillID not in current_cooldown_buff]
         if not available_skills:
             # 沒有MP時使用普通攻擊
             return SkillData(

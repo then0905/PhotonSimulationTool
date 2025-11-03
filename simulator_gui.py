@@ -175,7 +175,7 @@ class BattleSimulatorGUI:
                     "stack": stack_count
                 })
 
-            def add_skill_effect(self, skill, stack_count=0):
+            def add_skill_effect(self,id:str ,skill, stack_count=0):
                 """
                 增加技能效果提示物件
                 """
@@ -183,7 +183,7 @@ class BattleSimulatorGUI:
                 #疊層類型先判斷是否已存在
                 if(stack_count >0):
                     for eff in self.effects:
-                        if eff["id"] == skill.SkillID:
+                        if eff["id"] == id:
                             eff["stack"] = CommonFunction.clamp(eff["stack"]+stack_count,0,skill.SkillOperationDataList[0].Bonus)
                             # --- 更新 Canvas 數字 ---
                             c = eff["widget"]
@@ -209,9 +209,9 @@ class BattleSimulatorGUI:
                 for op in skill.SkillOperationDataList:
                     if op.InfluenceStatus:
                         skillIntro += f"{CommonFunction.get_text('TM_' + op.InfluenceStatus)} : {CommonFunction.get_text('TM_' + op.AddType).format(op.EffectValue)}\n"
-                self._create_effect_widget(skillIcon, skillName, skillIntro, skill.SkillID, stack_count)
+                self._create_effect_widget(skillIcon, skillName, skillIntro, id, stack_count)
 
-            def add_item_effect(self, item, stack_count=0):
+            def add_item_effect(self,id:str, item, stack_count=0):
                 """
                 增加道具效果提示物件
                 """
@@ -225,16 +225,16 @@ class BattleSimulatorGUI:
                 for op in item.ItemEffectDataList:
                     if op.InfluenceStatus:
                         itemIntro += f"{CommonFunction.get_text('TM_' + op.InfluenceStatus)} : {CommonFunction.get_text('TM_' + op.AddType).format(op.EffectValue)}\n"
-                self._create_effect_widget(itemIcon, itemName, itemIntro, item.CodeID, stack_count)
+                self._create_effect_widget(itemIcon, itemName, itemIntro, id, stack_count)
 
-            def add_debuff(self, effectId, stack_count=0):
+            def add_debuff(self, id:str, effectId, stack_count=0):
                 statusEffectIcon = CommonFunction.load_status_effect_icon(effectId)
                 if not statusEffectIcon:
                     print("讀取失敗")
                     return
                 statusEffectName = CommonFunction.get_text(f"TM_{effectId}_Name")
                 statusEffectIntro = CommonFunction.get_text(f"TM_{effectId}_Intro")
-                self._create_effect_widget(statusEffectIcon, statusEffectName, statusEffectIntro, effectId, stack_count)
+                self._create_effect_widget(statusEffectIcon, statusEffectName, statusEffectIntro, id, stack_count)
                     
             def remove_effect(self, id):
                 """

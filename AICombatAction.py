@@ -124,7 +124,7 @@ class ai_action:
             characteristic = s.Characteristic
             mp_ok = (self_char.stats["MP"] - s.CastMage) > 0
             cd_ok = s.SkillID not in self_char.skill_cooldowns  # 沒在CD才能放
-            skill_not_running =  s.SkillID not in self_char.buff_skill  # 若是buff且沒再運作中
+            skill_not_running =  not any(k.startswith(s.SkillID) for k in self_char.buff_skill)  # 若是buff且沒再運作中
             if mp_ok and cd_ok and characteristic and skill_not_running:
                 actions.append(s.SkillID)
                 
@@ -132,7 +132,7 @@ class ai_action:
             for item_data,count in self_char.items:
                 item_enough =  count>0
                 item_cd_ok = item_data.CodeID not in self_char.item_cooldowns  # 沒在CD才能放
-                item_buff_not_running = item_data.CodeID not in self_char.buff_item  # 若是buff且沒再運作中
+                item_buff_not_running = not any(k.startswith(item_data.CodeID)for k in self_char.buff_item)  # 若是buff且沒再運作中
                 if item_enough and item_cd_ok and item_buff_not_running:
                     actions.append(f"USE_ITEM:{item_data.CodeID}")
 

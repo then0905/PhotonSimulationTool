@@ -1,5 +1,5 @@
 ﻿from game_models import GameData
-
+import time
 
 class CommonFunction:
     @staticmethod
@@ -46,6 +46,12 @@ class CommonFunction:
         import tkinter as tk
         icon = tk.PhotoImage(file=f"{path}/{name}.png")  # PNG 圖片
         return icon
+
+    def get_time_stap(id:str):
+        """
+        帶入ID取得時間戳返回
+        """
+        return f"{id}_{str(time.time())}"
 
     def battlelog_text_processor(input_log_dic,log_type:str,other = None):
         """
