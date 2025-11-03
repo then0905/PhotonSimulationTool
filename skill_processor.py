@@ -220,7 +220,7 @@ class SkillProcessor:
         """
         技能施放條件檢查入口
         """
-        if (any(op.ConditionOR) and any(op.ConditionAND)):
+        if (not any(op.ConditionOR) and not any(op.ConditionAND)):
             return True
         or_list = []
         if (any(op.ConditionOR)):
@@ -250,7 +250,7 @@ class SkillProcessor:
             case "EquipWeapon":
                 if (caster.equipped_weapon is None):
                     return False
-                return any(x[0].CodeID == str(value)
+                return any(x[0].TypeID == str(value)
                            for x in caster.equipped_weapon)
             case "EquipLeft":
                 if (caster.equipped_weapon is None):
