@@ -1141,23 +1141,36 @@
     "SkillOperationDataList": [
       {
         "SkillID": "Berserker_9",
-        "SkillComponentID": "ContinuanceBuff",
+        "SkillComponentID": "Utility",
         "DependCondition": "None",
-        "EffectValue": 0.5,
-        "InfluenceStatus": "MeleeATK",
-        "AddType": "Value",
-        "EffectDurationTime": 3,
-        "EffectRecive": 0
+        "InfluenceStatus": "RemoveAdditive",
+        "ConditionOR": [
+          "Stack_Berserker_6"
+        ],
+        "EffectRecive": 0,
+        "Bonus": "Berserker_6"
       },
       {
         "SkillID": "Berserker_9",
         "SkillComponentID": "ContinuanceBuff",
-        "DependCondition": "None",
+        "DependCondition": "Prev",
+        "EffectValue": 0.5,
+        "InfluenceStatus": "MeleeATK",
+        "AddType": "Value",
+        "EffectDurationTime": 3,
+        "EffectRecive": 0,
+        "Bonus": "Stack_Berserker_6"
+      },
+      {
+        "SkillID": "Berserker_9",
+        "SkillComponentID": "ContinuanceBuff",
+        "DependCondition": "Prev",
         "EffectValue": -1,
         "InfluenceStatus": "DEF",
         "AddType": "Value",
         "EffectDurationTime": 3,
-        "EffectRecive": 0
+        "EffectRecive": 0,
+        "Bonus": "Stack_Berserker_6"
       }
     ]
   },
