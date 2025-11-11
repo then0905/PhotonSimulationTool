@@ -1,9 +1,4 @@
-﻿from platform import android_ver
-
-from fontTools.ufoLib import fontInfoOpenTypeNameRecordsValidator
-from fontTools.varLib.models import nonNone
-
-from game_models import ItemDataModel, SkillData, SkillOperationData, ItemEffectData
+﻿from game_models import ItemDataModel, SkillData, SkillOperationData, ItemEffectData,GameData
 from commonfunction import CommonFunction
 from typing import Tuple, Optional
 
@@ -146,7 +141,8 @@ class SkillProcessor:
                     "descript_text": temp,
                     "target_text": target.name,
                 }, "passiveBuff"), 0, 0)
-
+            case "Utility":
+                return SkillProcessor.skill_utility_processor(target,op)
             case _:
                 return None
 
@@ -226,16 +222,18 @@ class SkillProcessor:
         if (any(op.ConditionOR)):
             for or_data in op.ConditionOR:
                 temp_or_data = or_data.split('_')
+                temp_or_data_second = '_'.join(temp_or_data[1:])
                 or_list.append(SkillProcessor.skill_condition_check(
-                    caster, temp_or_data[0], temp_or_data[1]))
+                    caster, temp_or_data[0], temp_or_data_second))
         else:
             or_list.append(True)
         and_list = []
         if (any(op.ConditionAND)):
             for and_data in op.ConditionAND:
                 temp_and_data = and_data.split('_')
+                temp_and_data_second = '_'.join(temp_and_data[1:])
                 and_list.append(SkillProcessor.skill_condition_check(
-                    caster, temp_and_data[0], temp_and_data[1]))
+                    caster, temp_and_data[0], temp_and_data_second))
         else:
             and_list.append(True)
 
@@ -269,6 +267,9 @@ class SkillProcessor:
                 return True
             case "HpLess":
                 return caster.stats["HP"] < (float(value)*caster.stats["MaxHP"])
+            #尋找作用中的疊層效果
+            case "Stack":
+                return 0 < caster.passive_bar.get_effect_stack(value)
 
     @staticmethod
     def skill_additive_effect_event(skillData: SkillData, op, target):
@@ -277,3 +278,33 @@ class SkillProcessor:
         """
         if (SkillProcessor.skill_condition_process(target, op)):
             target.add_skill_addtive_effect(skillData, op, 1)
+
+    @staticmethod
+    def skill_utility_processor(caster,op):
+        """
+        功能型技能 處理
+        """
+        match op.InfluenceStatus:
+            #清除指定技能所有疊層
+            case "RemoveAdditive":
+                get_stack = caster.passive_bar.get_effect_stack(str(op.Bonus))
+                target_skill = GameData.Instance.SkillDataDic[str(op.Bonus)]
+                #暫存消耗的層數
+                caster.temp_dict[str(op.Bonus)] = get_stack
+                #重製目標技能疊層
+                caster.set_skill_addtive_effect(target_skill,op,0)
+                return (CommonFunction.battlelog_text_processor({
+                    "caster_text": caster.name,
+                    "descript_text": CommonFunction.get_text(target_skill.Name),
+                }, "removeAdditive",get_stack), 0, 0)
+
+    @staticmethod
+    def skill_continuancebuff_bonus_processor(caster,op):
+        """持續型buff技能的Bonus資料處理"""
+        temp_bonus_data = op.Bonus.split('_')
+        temp_bonus_data_value = '_'.join(temp_bonus_data[1:])
+        match temp_bonus_data[0]:
+            case "Stack":
+                stack = caster.temp_dict[temp_bonus_data_value]
+                caster.temp_dict.pop(temp_bonus_data_value, None)
+                return int(stack)

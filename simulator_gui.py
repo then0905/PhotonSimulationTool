@@ -252,9 +252,18 @@ class BattleSimulatorGUI:
                 """
                 if(self.effects is not None):
                     for eff in self.effects:
-                        if eff["id"] == id:
+                        if eff["id"] == id or eff["id"].startswith(id):
                             return eff["stack"]
                 return 0
+
+            def set_effect_stack(self,id,target_stack):
+                """
+                設定指定技能當前的疊層
+                """
+                if(self.effects is not None):
+                    for eff in self.effects:
+                        if eff["id"] == id or eff["id"].startswith(id):
+                            eff["stack"] = target_stack
 
             def clear_bar(self):
                 for eff in self.effects:
