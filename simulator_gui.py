@@ -19,6 +19,7 @@ class BattleSimulatorGUI:
     def __init__(self, root):
         self.root = root
         self.root.title("UnityAI")
+        self.root.resizable(False, False)
 
         # 加載遊戲數據
         self.game_data = GameData()
@@ -325,11 +326,11 @@ class BattleSimulatorGUI:
                 self.carried_items = {}
                 self.view_window = None  # 記錄查看道具視窗
 
-
             def open_item_window(self):
                 """開啟道具選擇視窗，更新 self.carried_items"""
                 item_window = tk.Toplevel(self.root)
                 item_window.title("道具選擇")
+                item_window.resizable(False, False)
 
                 item_vars = {}
                 item_counts = {}
@@ -381,6 +382,8 @@ class BattleSimulatorGUI:
 
                 view_window = tk.Toplevel(self.root)
                 view_window.title("目前攜帶道具")
+                view_window.resizable(False, False)
+
                 self.view_window = view_window
 
                 def on_close():
@@ -422,6 +425,115 @@ class BattleSimulatorGUI:
                         self.item_labels[item_id].set("已消耗完畢")
                 return True
 
+        class CharacterOverviewWnd(ttk.Frame):
+            """
+            角色能力值總覽視窗（可滾動）
+            """
+
+            def __init__(self, root):
+                super().__init__(root)
+
+                self.root = root
+                self.view_window = None
+                self.status = {}
+                self.status_labels = {}
+
+            def show_overview_wnd(self):
+                """開啟能力總覽視窗"""
+                if self.view_window and tk.Toplevel.winfo_exists(self.view_window):
+                    self.view_window.lift()
+                    self.view_window.focus_force()
+                    return
+
+                self.view_window = tk.Toplevel(self.root)
+                self.view_window.title("能力值總覽")
+                self.view_window.resizable(False, False)
+                self.view_window.geometry("320x480")
+
+                # 窗口關閉事件
+                def on_close():
+                    self.view_window.destroy()
+                    self.view_window = None
+
+                self.view_window.protocol("WM_DELETE_WINDOW", on_close)
+
+                # ===== Scrollable Canvas =====
+                self.canvas = tk.Canvas(self.view_window, bg="#222", highlightthickness=0)
+                self.canvas.pack(side="left", fill="both", expand=True)
+
+                self.scrollbar = ttk.Scrollbar(
+                    self.view_window, orient="vertical", command=self.canvas.yview
+                )
+                self.scrollbar.pack(side="right", fill="y")
+
+                self.canvas.configure(yscrollcommand=self.scrollbar.set)
+
+                # 建 inner_frame
+                self.inner_frame = ttk.Frame(self.canvas)
+                self.canvas_window = self.canvas.create_window((0, 0), window=self.inner_frame, anchor="nw")
+
+                # frame 大小變化時更新 scroll 區域
+                self.inner_frame.bind("<Configure>", self._on_frame_configure)
+
+                # canvas 大小變化時同步 frame 寬度
+                self.canvas.bind("<Configure>", self._on_canvas_configure)
+
+                # 滑鼠滾輪綁定
+                self.canvas.bind("<Enter>", self._bind_mousewheel)
+                self.canvas.bind("<Leave>", self._unbind_mousewheel)
+
+                # 初始狀態
+                if self.status:
+                    self.update_state(self.status)
+
+            ##########################################################
+            # Scroll control
+            ##########################################################
+
+            def _on_frame_configure(self, event):
+                """更新 scroll 區域"""
+                self.canvas.configure(scrollregion=self.canvas.bbox("all"))
+
+            def _on_canvas_configure(self, event):
+                """讓 inner_frame 寬度自動填滿 canvas"""
+                self.canvas.itemconfig(self.canvas_window, width=event.width)
+
+            def _mousewheel(self, event):
+                self.canvas.yview_scroll(int(-event.delta / 120), "units")
+
+            def _bind_mousewheel(self, event):
+                self.canvas.bind_all("<MouseWheel>", self._mousewheel)
+
+            def _unbind_mousewheel(self, event):
+                self.canvas.unbind_all("<MouseWheel>")
+
+            ##########################################################
+            # UI 更新
+            ##########################################################
+
+            def update_state(self, status: dict):
+                """更新能力值 UI"""
+                if not self.view_window:
+                    return
+
+                self.status = status
+
+                # 清舊 UI
+                for widget in self.inner_frame.winfo_children():
+                    widget.destroy()
+
+                self.status_labels.clear()
+
+                # 新增 Label
+                for i, (key, value) in enumerate(status.items()):
+                    label_text = f"{CommonFunction.get_text('TM_' + key)}: {value}"
+
+                    var = tk.StringVar(value=label_text)
+                    self.status_labels[key] = var
+
+                    ttk.Label(self.inner_frame, textvariable=var).grid(
+                        row=i, column=0, sticky="w", padx=10, pady=4
+                    )
 
         # region 左側玩家設置
 
@@ -527,16 +639,23 @@ class BattleSimulatorGUI:
         # 顯示目前道具
         ttk.Button(player_equipment_frame, text="查看道具", command=self.player_item_manager.show_current_items).grid(row=999, column=1, pady=10)
 
+        # === 能力值總覽 ===
+        self.player_overview = CharacterOverviewWnd(self.player_frame)
+        ttk.Button(self.player_frame, text="能力值總覽", command=self.player_overview.show_overview_wnd).grid(
+            row=7, column=1, pady=10)
+
         # === 狀態效果欄（放裝備欄下方） ===
         self.player_buff_status_bar = StatusEffectBar(self.player_frame)
         self.player_buff_status_bar.grid(
-            row=7, column=0, columnspan=2, sticky="ew", pady=5)
+            row=8, column=0, columnspan=2, sticky="ew", pady=5)
         self.player_debuff_status_bar = StatusEffectBar(self.player_frame)
         self.player_debuff_status_bar.grid(
-            row=8, column=0, columnspan=2, sticky="ew", pady=5)
+            row=9, column=0, columnspan=2, sticky="ew", pady=5)
         self.player_passive_status_bar = StatusEffectBar(self.player_frame)
         self.player_passive_status_bar.grid(
-            row=9, column=0, columnspan=2, sticky="ew", pady=5)
+            row=10, column=0, columnspan=2, sticky="ew", pady=5)
+
+
 
         # endregion
 
@@ -673,22 +792,22 @@ class BattleSimulatorGUI:
 
         # 顯示目前道具
         ttk.Button(enemy_equipment_frame, text="查看道具", command=self.enemy_item_manager.show_current_items).grid(row=999, column=1, pady=10)
-        # ttk.Button(
-        #     enemy_equipment_frame,
-        #     text="選擇攜帶道具",
-        #     command=lambda: self.open_item_window(self.show_current_items)
-        # ).grid(row=999, column=0, pady=10)
+
+        # === 能力值總覽 ===
+        self.enemy_overview = CharacterOverviewWnd(self.enemy_frame)
+        ttk.Button(self.enemy_frame, text="能力值總覽", command=self.enemy_overview.show_overview_wnd).grid(
+            row=9, column=1, pady=10)
 
         # === 狀態效果欄（放裝備欄下方） ===
         self.enemy_buff_status_bar = StatusEffectBar(self.enemy_frame)
         self.enemy_buff_status_bar.grid(
-            row=9, column=0, columnspan=2, sticky="ew", pady=5)
+            row=10, column=0, columnspan=2, sticky="ew", pady=5)
         self.enemy_debuff_status_bar = StatusEffectBar(self.enemy_frame)
         self.enemy_debuff_status_bar.grid(
-            row=10, column=0, columnspan=2, sticky="ew", pady=5)
+            row=11, column=0, columnspan=2, sticky="ew", pady=5)
         self.enemy_passive_status_bar = StatusEffectBar(self.enemy_frame)
         self.enemy_passive_status_bar.grid(
-            row=11, column=0, columnspan=2, sticky="ew", pady=5)
+            row=12, column=0, columnspan=2, sticky="ew", pady=5)
 
         # 敵人類型選擇
         ttk.Label(self.enemy_frame, text="敵人類型:").grid(row=0, column=0, sticky=tk.W)
@@ -954,7 +1073,7 @@ class BattleSimulatorGUI:
             jobBonusData=jobBonusData,
             level=self.player_level_var.get(),
             equipment=self.player_equipment_data,
-            itemList=[(v["data"], v["count"]) for v in self.player_item_manager.carried_items.values()]
+            itemList=[(v["data"], v["count"]) for v in self.player_item_manager.carried_items.values()],
         )
 
         # 創建敵人
@@ -991,7 +1110,7 @@ class BattleSimulatorGUI:
                 jobBonusData=enemy_jobBonusData,
                 level=self.enemy_level_var.get(),
                 equipment=self.enemy_equipment_data,
-                itemList=[(v["data"], v["count"]) for v in self.enemy_item_manager.carried_items.values()]
+                itemList=[(v["data"], v["count"]) for v in self.enemy_item_manager.carried_items.values()],
             )
 
         # 進行戰鬥模擬
@@ -1053,7 +1172,8 @@ class BattleSimulatorGUI:
             debuff_bar=self.enemy_debuff_status_bar if(name == "敵對玩家") else self.player_debuff_status_bar,
             passive_bar=self.enemy_passive_status_bar if(name == "敵對玩家") else self.player_passive_status_bar,
             items = itemList,
-            item_manager=self.enemy_item_manager if(name == "敵對玩家") else self.player_item_manager
+            item_manager=self.enemy_item_manager if(name == "敵對玩家") else self.player_item_manager,
+            character_overview=self.enemy_overview if(name == "敵對玩家") else self.player_overview
         )
     
     def create_monster_character(self, monster) -> BattleCharacter:

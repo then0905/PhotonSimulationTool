@@ -1,43 +1,21 @@
 ﻿from typing import Dict, List, Optional
 from dataclasses import dataclass
-import math
-
 from game_models import GameData
+from character_status import CharacterStatus_Core,CharacterStatus_Secret,CharacterStatus_Debuff,CharacterStatus_Element
 
 
 @dataclass
-class StatusValues:
+class StatusValues(
+CharacterStatus_Core,
+CharacterStatus_Secret,
+CharacterStatus_Debuff,
+CharacterStatus_Element
+):
     """
     角色屬性值的數據結構
     用於存儲各種屬性的數值，包括攻擊力、防禦力、血量等
     """
-
-    MeleeATK: int = 0  # 近戰攻擊力
-    RemoteATK: int = 0  # 遠程攻擊力
-    MageATK: int = 0  # 魔法攻擊力
-    MaxHP: int = 0  # 最大生命值
-    HP: int = 0  # 當前生命值
-    MaxMP: int = 0  # 最大魔法值
-    MP: int = 0  # 當前魔法值
-    DEF: int = 0  # 物理防禦力
-    Avoid: int = 0  # 迴避率
-    MeleeHit: int = 0  # 近戰命中率
-    RemoteHit: int = 0  # 遠程命中率
-    MageHit: int = 0  # 魔法命中率
-    MDEF: int = 0  # 魔法防禦力
-    Speed: int = 0  # 移動速度
-    AS: int = 0  # 攻擊速度 (Attack Speed)
-    DamageReduction: int = 0  # 傷害減免
-    ElementDamageIncrease: int = 0  # 元素傷害增加
-    ElementDamageReduction: int = 0  # 元素傷害減免
-    HP_Recovery: int = 0  # 生命值回復
-    MP_Recovery: int = 0  # 魔法值回復
-    Crt: int = 0  # 暴擊
-    CrtResistance: int = 0  # 暴擊抵抗
-    CrtDamage: int = 0  # 暴擊附加傷害
-    BlockRate: int = 0  # 格檔率
-    DisorderResistance: int = 0  # 異常狀態抗性
-    DamageReduction: int = 0  # 傷害減免
+    pass
 
 
 class CharacterStatusCalculator:

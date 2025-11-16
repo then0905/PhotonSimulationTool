@@ -39,6 +39,7 @@ class BattleCharacter:
     battle_log = None  #戰鬥日誌
     item_manager: Optional[object] = None  #道具管理器
     ai: "ai_action" = field(init=False)  # Q learning AI
+    character_overview: Optional[object] = None  # 角色能力值總覽
 
     #動態資料
     skill_cooldowns: Dict[str, float] = field(default_factory=dict)  # skill_id -> remaining_cooldown_time
@@ -206,19 +207,20 @@ class BattleCharacter:
         增加技能buff效果
         """
         #檢查Bonus資料
+
         if(op.Bonus is not None):
             temp = SkillProcessor.skill_continuancebuff_bonus_processor(self,op)
-        match(temp):
-            case int():
-                temp_id = CommonFunction.get_time_stap(skillData.SkillID)
-                self.SkillEffectStatusOperation(op.InfluenceStatus, (op.AddType == "Rate"), op.EffectValue*temp)
+            match(temp):
+                case int():
+                    temp_id = CommonFunction.get_time_stap(skillData.SkillID)
+                    self.SkillEffectStatusOperation(op.InfluenceStatus, (op.AddType == "Rate"), op.EffectValue*temp)
 
-            case _:
-                temp_id = CommonFunction.get_time_stap(skillData.SkillID)
-                self.SkillEffectStatusOperation(op.InfluenceStatus, (op.AddType == "Rate"), op.EffectValue)
+                case _:
+                    temp_id = CommonFunction.get_time_stap(skillData.SkillID)
+                    self.SkillEffectStatusOperation(op.InfluenceStatus, (op.AddType == "Rate"), op.EffectValue)
 
-        self.buff_bar.add_skill_effect(temp_id, skillData)
-        self.buff_skill[temp_id] = (skillData, op.EffectDurationTime)
+            self.buff_bar.add_skill_effect(temp_id, skillData)
+            self.buff_skill[temp_id] = (skillData, op.EffectDurationTime)
 
     def add_skill_passive_effect(self, skillData: SkillData, op):
         """
@@ -595,6 +597,7 @@ class BattleCharacter:
         self.stats[
             "DamageReduction"] = self.basal.DamageReduction + self.equip.DamageReduction + self.effect.DamageReduction
 
+        self.character_overview.update_state(self.stats)
 
 class BattleSimulator:
     def __init__(self, game_data, gui):
@@ -713,6 +716,10 @@ class BattleSimulator:
         self.damage_data.clear()
         self.skill_usage = {s.Name: 0 for s in player.skills}
 
+        #能力值總覽初始化
+        self.gui.player_overview.update_state(player.stats)
+        self.gui.enemy_overview.update_state(enemy.stats)
+
         player.run_passive_skill()
         enemy.run_passive_skill()
 
@@ -722,6 +729,8 @@ class BattleSimulator:
             self.gui.player_mp_bar.set_value(player.stats["MP"], player.stats["MaxMP"])
             self.gui.enemy_hp_bar.set_value(enemy.stats["HP"], enemy.stats["MaxHP"])
             self.gui.enemy_mp_bar.set_value(enemy.stats["MP"], enemy.stats["MaxMP"])
+            self.gui.player_overview.update_state(player.stats)
+            self.gui.enemy_overview.update_state(enemy.stats)
 
         self.update_hp_mp = update_hp_mp
 
