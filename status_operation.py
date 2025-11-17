@@ -1,15 +1,14 @@
 ﻿from typing import Dict, List, Optional
-from dataclasses import dataclass
+from dataclasses import dataclass,fields
 from game_models import GameData
 from character_status import CharacterStatus_Core,CharacterStatus_Secret,CharacterStatus_Debuff,CharacterStatus_Element
 
-
 @dataclass
 class StatusValues(
-CharacterStatus_Core,
-CharacterStatus_Secret,
+CharacterStatus_Element,
 CharacterStatus_Debuff,
-CharacterStatus_Element
+CharacterStatus_Secret,
+CharacterStatus_Core
 ):
     """
     角色屬性值的數據結構
@@ -808,42 +807,23 @@ class CharacterStatusCalculator:
 
         # 使用當前實例的裝備進行計算
         stats = self.calculate_all_status()
-        
+
+        # 設定總能力值
+        result = {}
+        basal = stats["basal"];
+        equip = stats["equip"];
+        for f in fields(StatusValues):
+            name = f.name
+            value = getattr(basal, name) + getattr(equip, name)
+            result[name] = value
+
+
         # 返回完整角色數據
         return {
             "name": name,  # 角色名稱
             "char_class": jobBonusData,  # 職業資料
             "level": level,  # 等級
-            "stats": {  # 計算後的屬性值
-            "MaxHP": stats["basal"].MaxHP + stats["equip"].MaxHP,
-            "HP": stats["basal"].MaxHP + stats["equip"].MaxHP,
-            "MaxMP": stats["basal"].MaxMP + stats["equip"].MaxHP,
-            "MP": stats["basal"].MaxMP + stats["equip"].MaxHP,
-            "MeleeATK": stats["basal"].MeleeATK + stats["equip"].MeleeATK,
-            "RemoteATK": stats["basal"].RemoteATK + stats["equip"].RemoteATK,
-            "MageATK": stats["basal"].MageATK + stats["equip"].MageATK,
-            "DEF": stats["basal"].DEF + stats["equip"].DEF,
-            "Avoid": stats["basal"].Avoid + stats["equip"].Avoid,
-            "MeleeHit": stats["basal"].MeleeHit + stats["equip"].MeleeHit,
-            "RemoteHit": stats["basal"].RemoteHit + stats["equip"].RemoteHit,
-            "MageHit": stats["basal"].MageHit + stats["equip"].MageHit,
-            "MDEF": stats["basal"].MDEF + stats["equip"].MDEF,
-            "Speed": stats["basal"].Speed + stats["equip"].Speed,
-            "AS": stats["basal"].AS + stats["equip"].AS,
-            "DamageReduction": stats["basal"].DamageReduction + stats["equip"].DamageReduction,
-            "ElementDamageIncrease": stats["basal"].ElementDamageIncrease
-            + stats["equip"].ElementDamageIncrease,
-            "ElementDamageReduction": stats["basal"].ElementDamageReduction
-            + stats["equip"].ElementDamageReduction,
-            "HP_Recovery": stats["basal"].HP_Recovery + stats["equip"].HP_Recovery,
-            "MP_Recovery": stats["basal"].MP_Recovery + stats["equip"].MP_Recovery,
-            "Crt": stats["basal"].Crt+ stats["equip"].Crt,
-            "CrtResistance": stats["basal"].CrtResistance+ stats["equip"].CrtResistance,
-            "CrtDamage": stats["basal"].CrtDamage+ stats["equip"].CrtDamage,
-            "BlockRate": stats["basal"].BlockRate+ stats["equip"].BlockRate,
-            "DisorderResistance": stats["basal"].DisorderResistance+ stats["equip"].DisorderResistance,
-            "DamageReduction": stats["basal"].DamageReduction+ stats["equip"].DamageReduction,
-            },
+            "stats": result,
             "basal":stats["basal"],
             "equip":stats["equip"],
             "effect":stats["effect"],
