@@ -38,8 +38,7 @@ class CharacterStatus_Secret:
     """
     IncreaseDmgRate:float = 0 #傷害增加(倍率)
     IncreaseDmgValue:int = 0 #傷害增加(值)
-    RecoveryDmgRate:float = 0 #減少受到傷害(倍率)
-    RecoveryDmgValue:int = 0 #減少受到傷害(值)
+    RecoveryDmg:float = 0 #吸收傷害回血  (小數點)
     Damage:float = 0 #總傷害(傷害公式計算完成後乘上)
     
 @dataclass

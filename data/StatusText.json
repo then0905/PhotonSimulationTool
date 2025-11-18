@@ -130,5 +130,37 @@
   {
     "TextID": "TM_ATK",
     "TextContent": "所有攻擊力"
+  },
+  {
+    "TextID": "TM_SpeedSlow",
+    "TextContent": "受到緩速"
+  },
+  {
+    "TextID": "TM_IncreaseDmg",
+    "TextContent": "傷害增加"
+  },
+  {
+    "TextID": "TM_RecoveryDmg",
+    "TextContent": "吸收傷害回血"
+  },
+  {
+    "TextID": "TM_IncreaseMeleeRange",
+    "TextContent": "近距離範圍增加"
+  },
+  {
+    "TextID": "TM_HolyDamage",
+    "TextContent": "神聖屬性傷害"
+  },
+  {
+    "TextID": "TM_TransferDmg",
+    "TextContent": "被轉移的傷害"
+  },
+  {
+    "TextID": "TM_BeTransferDmg",
+    "TextContent": "額外吸收到的傷害"
+  },
+  {
+    "TextID": "TM_ReduceDmg",
+    "TextContent": "減少傷害"
   }
 ]
