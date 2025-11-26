@@ -813,9 +813,9 @@ class CharacterStatusCalculator:
         basal = stats["basal"];
         equip = stats["equip"];
         for f in fields(StatusValues):
-            name = f.name
-            value = getattr(basal, name) + getattr(equip, name)
-            result[name] = value
+            tempName = f.name
+            value = getattr(basal, tempName) + getattr(equip, tempName)
+            result[tempName] = value
 
 
         # 返回完整角色數據
