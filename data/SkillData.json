@@ -52,7 +52,11 @@
         "EffectValue": 1.3,
         "EffectRecive": -1,
         "TargetCount": 1,
-        "Bonus": "Sword_1"
+        "Bonus": [
+          "Sword_1",
+          "Damage",
+          "0"
+        ]
       }
     ]
   },
@@ -213,7 +217,9 @@
         "DependCondition": "None",
         "EffectRecive": -1,
         "TargetCount": 3,
-        "Bonus": 0.5
+        "Bonus": [
+          "0.5"
+        ]
       }
     ]
   },
@@ -829,7 +835,7 @@
         "SkillComponentID": "Debuff",
         "DependCondition": "Prev",
         "EffectValue": 0.15,
-        "InfluenceStatus": "SpeedSlow",
+        "InfluenceStatus": "SpeedSlowRate",
         "EffectDurationTime": 2.5,
         "EffectRecive": -1,
         "TargetCount": 5
@@ -996,7 +1002,9 @@
         "AddType": "Value",
         "EffectDurationTime": 5,
         "EffectRecive": 0,
-        "Bonus": 100
+        "Bonus": [
+          "100"
+        ]
       }
     ]
   },
@@ -1137,7 +1145,9 @@
           "Stack_Berserker_6"
         ],
         "EffectRecive": 0,
-        "Bonus": "Berserker_6"
+        "Bonus": [
+          "Berserker_6"
+        ]
       },
       {
         "SkillID": "Berserker_9",
@@ -1148,7 +1158,10 @@
         "AddType": "Value",
         "EffectDurationTime": 3,
         "EffectRecive": 0,
-        "Bonus": "Stack_Berserker_6"
+        "Bonus": [
+          "Stack",
+          "Berserker_6"
+        ]
       },
       {
         "SkillID": "Berserker_9",
@@ -1159,7 +1172,10 @@
         "AddType": "Value",
         "EffectDurationTime": 3,
         "EffectRecive": 0,
-        "Bonus": "Stack_Berserker_6"
+        "Bonus": [
+          "Stack",
+          "Berserker_6"
+        ]
       }
     ]
   },
@@ -1336,7 +1352,7 @@
         "SkillID": "Berserker_14",
         "SkillComponentID": "Utility",
         "DependCondition": "None",
-        "InfluenceStatus": "RemoveCC",
+        "InfluenceStatus": "RemoveAllCC",
         "EffectRecive": 0
       }
     ]
@@ -2006,7 +2022,9 @@
         "DependCondition": "None",
         "EffectRecive": -1,
         "TargetCount": 1,
-        "Bonus": "Paladin_2"
+        "Bonus": [
+          "Paladin_2"
+        ]
       },
       {
         "SkillID": "Paladin_13",
@@ -2047,7 +2065,9 @@
         "DependCondition": "None",
         "EffectRecive": -2,
         "TargetCount": 1,
-        "Bonus": "Paladin_7"
+        "Bonus": [
+          "Paladin_7"
+        ]
       },
       {
         "SkillID": "Paladin_14",
@@ -2476,7 +2496,9 @@
         "DependCondition": "None",
         "EffectRecive": -1,
         "TargetCount": -2,
-        "Bonus": "Praetorian_1"
+        "Bonus": [
+          "Praetorian_1"
+        ]
       },
       {
         "SkillID": "Praetorian_7",
@@ -2514,7 +2536,9 @@
         "DependCondition": "None",
         "EffectRecive": -1,
         "TargetCount": 0,
-        "Bonus": "Praetorian_1"
+        "Bonus": [
+          "Praetorian_1"
+        ]
       },
       {
         "SkillID": "Praetorian_8",
@@ -2532,7 +2556,9 @@
         "DependCondition": "None",
         "EffectRecive": 0,
         "TargetCount": 0,
-        "Bonus": "Praetorian_7"
+        "Bonus": [
+          "Praetorian_7"
+        ]
       },
       {
         "SkillID": "Praetorian_8",
@@ -2731,7 +2757,9 @@
         ],
         "EffectRecive": 0,
         "TargetCount": 0,
-        "Bonus": "Praetorian_1"
+        "Bonus": [
+          "Praetorian_1"
+        ]
       }
     ]
   },
@@ -2759,7 +2787,9 @@
         "AddType": "Vlaue",
         "EffectRecive": 0,
         "TargetCount": 0,
-        "Bonus": "Praetorian_1"
+        "Bonus": [
+          "Praetorian_1"
+        ]
       },
       {
         "SkillID": "Praetorian_13",
