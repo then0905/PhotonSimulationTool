@@ -1,14 +1,15 @@
 ﻿from typing import Dict, List, Optional
 from dataclasses import dataclass,fields
 from game_models import GameData
-from character_status import CharacterStatus_Core,CharacterStatus_Secret,CharacterStatus_Debuff,CharacterStatus_Element
+from character_status import CharacterStatus_Core,CharacterStatus_Secret,CharacterStatus_Debuff,CharacterStatus_Element,MonsterStatus_Core
 
 @dataclass
 class StatusValues(
 CharacterStatus_Element,
 CharacterStatus_Debuff,
 CharacterStatus_Secret,
-CharacterStatus_Core
+CharacterStatus_Core,
+MonsterStatus_Core
 ):
     """
     角色屬性值的數據結構

@@ -1,6 +1,6 @@
 ﻿import random
 from typing import Dict, Optional, List
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field,fields
 from game_models import GameData, ItemsDic, SkillData, SkillOperationData, MonsterDataModel, MonsterDropItemDataModel, \
     ArmorDataModel, WeaponDataModel, ItemDataModel, JobBonusDataModel, StatusFormulaDataModel, GameText, \
     GameSettingDataModel, AreaData, LvAndExpDataModel
@@ -480,6 +480,9 @@ class BattleCharacter:
                                            round(damage * (1 - defenseRatio)) - target.stats["DamageReduction"])
         # print(f"攻擊對象:{self.characterType}，攻擊者傷害:{damage}，防禦減免{defenseRatio}，最後傷害{finalDamage}")
 
+        #處理額外傷害
+        finalDamage = self.BonusDamageCalulator(finalDamage, target)
+
         target.stats["HP"] -= finalDamage
 
         color_code = f'<color=#ffd600><size=13><b>{finalDamage}</size></color></b>' if is_Crt else f'<color=#ff0000><size=11>{finalDamage}</size></color>'
@@ -493,6 +496,75 @@ class BattleCharacter:
             "target_color": "#363636"
         }, "damage", color_code), finalDamage, self.attackTimer
 
+    def ElementAttackCalulator(self, skill:SkillData,op: SkillOperationData, target)-> Tuple[str, int, float]:
+        """
+            屬性攻擊計算
+        """
+        #   攻擊方魔法傷害值 * 屬性傷害增幅 * (1 - 被剋屬性減免)
+
+        attackerElementDamage = 0
+        targetElementDefense = 0
+        colorCode = ""
+
+        match (op.InfluenceStatus):
+            case "FireDamage":
+                attackerElementDamage = self.stats["FireDamage"]
+                targetElementDefense = self.stats["FireDefense"]
+                colorCode = "#FF4000"
+
+            case "WaterDamage":
+                attackerElementDamage = self.stats["WaterDamage"]
+                targetElementDefense = self.stats["WaterDefense"]
+                colorCode = "#0084FF"
+            case "EarthDamage":
+                attackerElementDamage = self.stats["EarthDamage"]
+                targetElementDefense = self.stats["EarthDefense"]
+                colorCode = "#A36000"
+            case "WindDamage":
+                attackerElementDamage = self.stats["WindDamage"]
+                targetElementDefense = self.stats["WindDefense"]
+                colorCode = "#26FF99"
+            case "HolyDamage":
+                attackerElementDamage = self.stats["HolyDamage"]
+                targetElementDefense = self.stats["HolyDefense"]
+                colorCode = "#FFF800"
+            case "DarkDamage":
+                attackerElementDamage = self.stats["DarkDamage"]
+                targetElementDefense = self.stats["DarkDefense"]
+                colorCode = "#242424"
+
+        calulatordmg = (attackerElementDamage*op.EffectValue*self.stats["ElementDamageIncrease"])-(targetElementDefense*target.stats["ElementDamageReduction"])
+        calulatordmg =  CommonFunction.clamp(calulatordmg, 0, calulatordmg)
+        calulatordmg = self.BonusDamageCalulator(calulatordmg, target)
+
+        return CommonFunction.battlelog_text_processor({
+            "caster_text": self.name,
+            "caster_color": "#636363",
+            "caster_size": 12,
+            "descript_text": CommonFunction.get_text(skill.Name),
+            "descript_color": "#910000",
+            "target_text": target.name,
+            "target_color": "#363636"
+        }, "elementDamage", f"<color={colorCode}>{calulatordmg}</color>"), calulatordmg, 0
+
+    def BonusDamageCalulator(self,damage,target) -> int:
+        """
+        額外傷害計算
+        """
+
+        #攻擊方取得 傷害增加參數
+        increaseDamagerate = CommonFunction.clamp(self.stats["IncreaseDmgRate"],1,self.stats["IncreaseDmgRate"])
+        increaseDamage = self.stats["IncreaseDmgValue"]
+        Damage = CommonFunction.clamp(self.stats["Damage"],1,self.stats["Damage"])
+
+        newDamage = (damage*increaseDamagerate+increaseDamage)*Damage
+
+        #防守方取得 傷害減免倍率
+        finalDamageReductionRate = CommonFunction.clamp((1-target.stats["FinalDamageReductionRate"]), 0, 1)
+
+        newDamage = newDamage*finalDamageReductionRate
+        return newDamage
+
     #endregion
 
     def SkillEffectStatusOperation(self, stateType: str, isRate: bool, value: float):
@@ -501,103 +573,44 @@ class BattleCharacter:
         """
         self.tempHp = 0
         self.tempMp = 0
-        match (stateType):
-            case "MeleeATK":
-                self.effect.MeleeATK += round(self.basal.MeleeATK * value) if isRate else round(value)
-                # print(f"basal.MeleeATK:{self.basal.MeleeATK} valur:{value} processor{self.basal.MeleeATK * value}  final to int {round(self.basal.MeleeATK * value)}")
-            case "RemoteATK":
-                self.effect.RemoteATK += round(self.basal.RemoteATK * value) if isRate else round(value)
-            case "MageATK":
-                self.effect.MageATK += round(self.basal.MageATK * value) if isRate else round(value)
-            case "MaxHP":
-                #暫存 此次buff影響的數值(效果提升的值 當前生命會跟著提升)
-                self.tempHp = round(self.basal.MaxHP * value) if isRate else round(value)
 
-                self.effect.MaxHP += round(self.basal.MaxHP * value) if isRate else round(value)
-                # print(f"basal.MaxHP:{self.basal.MaxHP} valur:{value} processor{self.basal.MaxHP * value}  final to int {round(self.basal.MaxHP * value)}")
-            case "MaxMP":
-                #暫存 此次buff影響的數值(效果提升的值 當前魔力會跟著提升)
-                self.tempMp = round(self.basal.MaxMP * value) if isRate else round(value)
+        # 特殊例外處理
+        if stateType == "MaxHP":
+            self.tempHp = self._apply_effect("MaxHP", isRate, value)
+        elif stateType == "MaxMP":
+            self.tempMp = self._apply_effect("MaxMP", isRate, value)
+        elif stateType == "ATK":  # 三屬攻擊一起加
+            for a in ("MeleeATK", "RemoteATK", "MageATK"):
+                self._apply_effect(a, isRate, value)
+        elif stateType == "ReduceTargetDmg" or  stateType == "TransferDmg":
+            self._apply_effect("FinalDamageReductionRate", isRate, value)
+        else:
+            # 一般數值
+            if hasattr(self.effect, stateType):
+                self._apply_effect(stateType, isRate, value)
+            else:
+                print("未定義的參數:", stateType)
 
-                self.effect.MaxMP += round(self.basal.MaxMP * value) if isRate else round(value)
-            case "DEF":
-                self.effect.DEF += round(self.basal.DEF * value) if isRate else round(value)
-            case "Avoid":
-                self.effect.Avoid += round(self.basal.Avoid * value) if isRate else round(value)
-            case "MeleeHit":
-                self.effect.MeleeHit += round(self.basal.MeleeHit * value) if isRate else round(value)
-            case "RemoteHit":
-                self.effect.RemoteHit += round(self.basal.RemoteHit * value) if isRate else round(value)
-            case "MageHit":
-                self.effect.MageHit += round(self.basal.MageHit * value) if isRate else round(value)
-            case "MDEF":
-                self.effect.MDEF += round(self.basal.MDEF * value) if isRate else round(value)
-            case "BlockRate":
-                self.effect.BlockRate += round(self.basal.BlockRate * value) if isRate else round(value)
-            case "DamageReduction":
-                self.effect.DamageReduction += round(self.basal.DamageReduction * value) if isRate else round(value)
-            case "ElementDamageIncrease":
-                self.effect.ElementDamageIncrease += round(
-                    self.basal.ElementDamageIncrease * value) if isRate else round(value)
-            case "ElementDamageReduction":
-                self.effect.ElementDamageReduction += round(
-                    self.basal.ElementDamageReduction * value) if isRate else round(value)
-            case "HP_Recovery":
-                self.effect.HP_Recovery += round(self.basal.HP_Recovery * value) if isRate else round(value)
-            case "MP_Recovery":
-                self.effect.MP_Recovery += round(self.basal.MP_Recovery * value) if isRate else round(value)
-            case "Crt":
-                self.effect.Crt += round(self.basal.Crt * value) if isRate else round(value)
-            case "CrtResistance":
-                self.effect.CrtResistance += round(self.basal.CrtResistance * value) if isRate else round(value)
-            case "CrtDamage":
-                self.effect.CrtDamage += round(self.basal.CrtDamage * value) if isRate else round(value)
-            case "BlockRate":
-                self.effect.BlockRate += round(self.basal.BlockRate * value) if isRate else round(value)
-            case "Speed":
-                self.effect.Speed += round(1 * value) if isRate else round(value)
-            case "AS":
-                self.effect.AS += round(self.basal.AS * value) if isRate else round(value)
-            case "DisorderResistance":
-                self.effect.DisorderResistance += round(self.basal.DisorderResistance * value) if isRate else round(
-                    value)
-            case "ATK":
-                self.effect.MeleeATK += round(self.basal.MeleeATK * value) if isRate else round(value)
-                self.effect.RemoteATK += round(self.basal.RemoteATK * value) if isRate else round(value)
-                self.effect.MageATK += round(self.basal.MageATK * value) if isRate else round(value)
-        self.stats["MaxHP"] = self.basal.MaxHP + self.equip.MaxHP + self.effect.MaxHP
-        self.stats["MaxMP"] = self.basal.MaxMP + self.equip.MaxMP + self.effect.MaxMP
-        self.stats["HP"] = self.stats["HP"] + self.tempHp
-        self.stats["MP"] = self.stats["MP"] + self.tempMp
-        self.stats["MeleeATK"] = self.basal.MeleeATK + self.equip.MeleeATK + self.effect.MeleeATK
-        self.stats["RemoteATK"] = self.basal.RemoteATK + self.equip.RemoteATK + self.effect.RemoteATK
-        self.stats["MageATK"] = self.basal.MageATK + self.equip.MageATK + self.effect.MageATK
-        self.stats["DEF"] = self.basal.DEF + self.equip.DEF + self.effect.DEF
-        self.stats["Avoid"] = self.basal.Avoid + self.equip.Avoid + self.effect.Avoid
-        self.stats["MeleeHit"] = self.basal.MeleeHit + self.equip.MeleeHit + self.effect.MeleeHit
-        self.stats["RemoteHit"] = self.basal.RemoteHit + self.equip.RemoteHit + self.effect.RemoteHit
-        self.stats["MageHit"] = self.basal.MageHit + self.equip.MageHit + self.effect.MageHit
-        self.stats["MDEF"] = self.basal.MDEF + self.equip.MDEF + self.effect.MDEF
-        self.stats["Speed"] = self.basal.Speed + self.equip.Speed + self.effect.Speed
-        self.stats["AS"] = self.basal.AS + self.equip.AS + self.effect.AS
-        self.stats[
-            "DamageReduction"] = self.basal.DamageReduction + self.equip.DamageReduction + self.effect.DamageReduction
-        self.stats[
-            "ElementDamageIncrease"] = self.basal.ElementDamageIncrease + self.equip.ElementDamageIncrease + self.effect.ElementDamageIncrease
-        self.stats[
-            "ElementDamageReduction"] = self.basal.ElementDamageReduction + self.equip.ElementDamageReduction + self.effect.ElementDamageReduction
-        self.stats["HP_Recovery"] = self.basal.HP_Recovery + self.equip.HP_Recovery + self.effect.HP_Recovery
-        self.stats["MP_Recovery"] = self.basal.MP_Recovery + self.equip.MP_Recovery + self.effect.MP_Recovery
-        self.stats["Crt"] = self.basal.Crt + self.equip.Crt + self.effect.Crt
-        self.stats["CrtResistance"] = self.basal.CrtResistance + self.equip.CrtResistance + self.effect.CrtResistance
-        self.stats["CrtDamage"] = self.basal.CrtDamage + self.equip.CrtDamage + self.effect.CrtDamage
-        self.stats["BlockRate"] = self.basal.BlockRate + self.equip.BlockRate + self.effect.BlockRate
-        self.stats[
-            "DisorderResistance"] = self.basal.DisorderResistance + self.equip.DisorderResistance + self.effect.DisorderResistance
-        self.stats[
-            "DamageReduction"] = self.basal.DamageReduction + self.equip.DamageReduction + self.effect.DamageReduction
-
+        # 套完 Effect 重算 stats
+        self._recalculate_stats()
         self.character_overview.update_state(self.stats)
+
+    def _apply_effect(self, attr: str, isRate: bool, value: float):
+        base_val = getattr(self.basal, attr)
+        add_val = round(base_val * value) if isRate else round(value)
+        current = getattr(self.effect, attr)
+        setattr(self.effect, attr, current + add_val)
+        return add_val  # 給 HP/MP 用
+
+    def _recalculate_stats(self):
+        for f in fields(StatusValues):
+            name = f.name
+            self.stats[name] = getattr(self.basal, name) + getattr(self.equip, name) + getattr(self.effect, name)
+
+        # 套 buff 增加的當前 HP/MP
+        self.stats["HP"] += self.tempHp
+        self.stats["MP"] += self.tempMp
+
 
 class BattleSimulator:
     def __init__(self, game_data, gui):

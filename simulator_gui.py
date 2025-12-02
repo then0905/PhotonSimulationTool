@@ -4,10 +4,10 @@ from tkinter import ttk, messagebox ,font
 from game_models import GameData, ItemDataModel, ItemEffectData, SkillData
 from battle_simulator import BattleSimulator, BattleCharacter
 from stats_analyzer import StatsAnalyzer
-from status_operation import CharacterStatusCalculator
+from status_operation import CharacterStatusCalculator,StatusValues
 from commonfunction import CommonFunction
 from typing import Dict
-from PIL import Image, ImageTk
+from dataclasses import asdict
 import os
 import re
 import traceback
@@ -1178,7 +1178,13 @@ class BattleSimulatorGUI:
     
     def create_monster_character(self, monster) -> BattleCharacter:
         # 將怪物轉換為戰鬥角色
-        stats = {
+        status_keys = asdict(StatusValues())
+
+        # 用來存怪物實際數值
+        stats = status_keys.copy()
+
+        # 把怪物有的欄位塞進去
+        monster_stats = {
             "MaxHP": monster.HP,
             "HP": monster.HP,
             "MaxMP": monster.MP,
@@ -1195,6 +1201,10 @@ class BattleSimulatorGUI:
             "BlockRate": 0,
             "DamageReduction": 0,
         }
+
+        for k, v in monster_stats.items():
+            if k in stats:
+                stats[k] = v
 
         skills = monster.MonsterSkillList
 

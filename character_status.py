@@ -38,6 +38,8 @@ class CharacterStatus_Secret:
     """
     IncreaseDmgRate:float = 0 #傷害增加(倍率)
     IncreaseDmgValue:int = 0 #傷害增加(值)
+    FinalDamageReductionRate:float = 0   #總傷害減免(傷害公式計算完後乘上)
+    ElementDamageIncrease:int = 0
     RecoveryDmg:float = 0 #吸收傷害回血  (小數點)
     Damage:float = 0 #總傷害(傷害公式計算完成後乘上)
     
@@ -46,11 +48,32 @@ class CharacterStatus_Debuff:
     """
     負面影響能力值
     """
-    SpeedSlow: float = 0  # 移動速度
+    SpeedSlowRate: float = 0  # 移動速度
     
 @dataclass
 class CharacterStatus_Element:
     """
     屬性方面能力值
     """
+    FireDamage: int = 0  # 火屬性傷害
+    FireDefense: int = 0  # 火屬性防禦
+    WaterDamage: int = 0  # 水屬性傷害
+    WaterDefense: int = 0  # 水屬性防禦
+    EarthDamage: int = 0  # 地屬性傷害
+    EarthDefense: int = 0  # 地屬性防禦
+    WindDamage: int = 0  # 風屬性傷害
+    WindDefense: int = 0  # 風屬性防禦
     HolyDamage: int = 0  # 神聖屬性傷害
+    HolyDefense: int = 0  # 神聖屬性防禦
+    DarkDamage: int = 0  # 黑暗屬性傷害
+    DarkDefense: int = 0  # 黑暗屬性防禦
+
+@dataclass
+class MonsterStatus_Core:
+    """
+    怪物所屬的屬性能力值
+    """
+    ATK: int = 0  # 攻擊力
+    Hit: int = 0  # 命中
+    AtkSpeed: int = 0  # 攻擊速度 (Attack Speed)
+    AttackMode: str = ""  # 攻擊模式(近距離、遠距離、魔法)
