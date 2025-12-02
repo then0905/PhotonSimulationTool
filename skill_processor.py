@@ -1,7 +1,7 @@
 ﻿from game_models import ItemDataModel, SkillData, SkillOperationData, ItemEffectData,GameData
 from commonfunction import CommonFunction
 from typing import Tuple, Optional
-
+import copy
 
 class SkillProcessor:
     @staticmethod
@@ -34,7 +34,7 @@ class SkillProcessor:
 
             # 執行效果
             result = SkillProcessor._execute_component(
-                op, skillData, attacker, target, defender)
+                op, skillData, attacker, target)
 
             # 記錄執行結果
             success = False
@@ -97,20 +97,33 @@ class SkillProcessor:
 
     @staticmethod
     def _execute_component(op: SkillOperationData, skillData: SkillData,
-                           attacker, target, defender) -> Optional[Tuple[str, int, float]]:
+                           attacker, target) -> Optional[Tuple[str, int, float]]:
         """執行單個技能組件"""
+
+        #先找出是否有升級技能資料
+        upgradeDataList = attacker.upgrade_skill_dict.get(skillData.SkillID)
+
+        if(upgradeDataList is not None):
+            lastUpgradeData = upgradeDataList[-1]
+            tempSkillData = SkillProcessor.upgrade_skill_processor(lastUpgradeData,skillData)
+        else:
+            tempSkillData = skillData
+
         match op.SkillComponentID:
             case "Damage":
-                return attacker.HitCalculator(skillData, defender)
+                return attacker.HitCalculator(tempSkillData, target)
+
+            case "ElementDamage":
+                return attacker.HitCalculator(tempSkillData, target)
 
             case "CrowdControl":
                 return SkillProcessor.status_skill_effect_start(op, attacker, target)
 
             case "MultipleDamage":
-                return attacker.HitCalculator(skillData, defender)
+                return attacker.HitCalculator(tempSkillData, target)
 
             case "ContinuanceBuff":
-                target.add_skill_buff_effect(skillData, op)
+                target.add_skill_buff_effect(tempSkillData, op)
                 temp = f"{CommonFunction.get_text('TM_' + op.InfluenceStatus)}: {CommonFunction.get_text('TM_' + op.AddType).format(op.EffectValue)}"
                 return (CommonFunction.battlelog_text_processor({
                     "caster_text": attacker.name,
@@ -120,7 +133,7 @@ class SkillProcessor:
 
             case "AdditiveBuff":
                 target.additive_buff_event += lambda: SkillProcessor.skill_additive_effect_event(
-                    skillData, op, target)
+                    tempSkillData, op, target)
                 temp = f"{CommonFunction.get_text('TM_' + op.InfluenceStatus)}: {CommonFunction.get_text('TM_' + op.AddType).format(op.EffectValue)}"
                 return (CommonFunction.battlelog_text_processor({
                     "caster_text": attacker.name,
@@ -132,7 +145,7 @@ class SkillProcessor:
                 return SkillProcessor.status_skill_effect_start(op, attacker, target)
 
             case "PassiveBuff":
-                target.add_skill_passive_effect(skillData,op)
+                target.add_skill_passive_effect(tempSkillData,op)
                 #target.SkillEffectStatusOperation(
                     #op.InfluenceStatus, (op.AddType == "Rate"), op.EffectValue)
                 temp = f"{CommonFunction.get_text('TM_' + op.InfluenceStatus)}: {CommonFunction.get_text('TM_' + op.AddType).format(op.EffectValue)}"
@@ -141,8 +154,32 @@ class SkillProcessor:
                     "descript_text": temp,
                     "target_text": target.name,
                 }, "passiveBuff"), 0, 0)
+
             case "Utility":
                 return SkillProcessor.skill_utility_processor(target,op)
+
+            case "Health":
+                return target.processRecovery(op, attacker, target)
+
+            case "EnhanceSkill":
+                #強化指定技能 在角色開一個新字典<BonusId,下個component資料>
+                attacker.passive_bar.add_skill_effect(tempSkillData.SkillID, tempSkillData)
+                key = op.Bonus[0]
+
+                if key not in attacker.enhance_skill_dict:
+                    attacker.enhance_skill_dict[key] = []
+
+                attacker.enhance_skill_dict[key].append(tempSkillData)
+                return None
+            case "UpgradeSkill":
+                # 升級指定技能 在角色開一個新字典<BonusId,下個component資料>
+                attacker.passive_bar.add_skill_effect(tempSkillData.SkillID, tempSkillData)
+                key = op.Bonus[0]
+
+                if key not in attacker.upgrade_skill_dict:
+                    attacker.upgrade_skill_dict[key] = []
+
+                attacker.upgrade_skill_dict[key].append(tempSkillData)
             case _:
                 return None
 
@@ -185,6 +222,7 @@ class SkillProcessor:
                     "target_text": defender.name,
                 }, "crowdControlStart", op.EffectDurationTime), 0, 0)
             case "Debuff":
+                defender.SkillEffectStatusOperation(op, defender)
                 defender.add_debuff_effect(op)
                 return (CommonFunction.battlelog_text_processor({
                     "caster_text": attacker.name,
@@ -287,10 +325,10 @@ class SkillProcessor:
         match op.InfluenceStatus:
             #清除指定技能所有疊層
             case "RemoveAdditive":
-                get_stack = caster.passive_bar.get_effect_stack(str(op.Bonus))
-                target_skill = GameData.Instance.SkillDataDic[str(op.Bonus)]
+                get_stack = caster.passive_bar.get_effect_stack(str(op.Bonus[0]))
+                target_skill = GameData.Instance.SkillDataDic[str(op.Bonus[0])]
                 #暫存消耗的層數
-                caster.temp_dict[str(op.Bonus)] = get_stack
+                caster.temp_dict[str(op.Bonus[0])] = get_stack
                 #重製目標技能疊層
                 caster.set_skill_addtive_effect(target_skill,op,0)
                 return (CommonFunction.battlelog_text_processor({
@@ -298,13 +336,58 @@ class SkillProcessor:
                     "descript_text": CommonFunction.get_text(target_skill.Name),
                 }, "removeAdditive",get_stack), 0, 0)
 
+            #清除控制技能
+            case "RemoveAllCC":
+                debuffskills = list(caster.debuff_skill.keys())
+                for skillid in debuffskills:
+                    caster.debuff_bar(skillid)
+                caster.debuff_skill = {}
+
     @staticmethod
     def skill_continuancebuff_bonus_processor(caster,op):
         """持續型buff技能的Bonus資料處理"""
-        temp_bonus_data = op.Bonus.split('_')
-        temp_bonus_data_value = '_'.join(temp_bonus_data[1:])
+        temp_bonus_data = op.Bonus
         match temp_bonus_data[0]:
             case "Stack":
-                stack = caster.temp_dict[temp_bonus_data_value]
-                caster.temp_dict.pop(temp_bonus_data_value, None)
+                stack = caster.temp_dict[temp_bonus_data[1]]
+                caster.temp_dict.pop(temp_bonus_data[1], None)
                 return int(stack)
+
+    @staticmethod
+    def upgrade_skill_processor(upgradeSkillData, skillData: SkillData)-> SkillData:
+        """
+        升級技能處理
+        """
+
+        #暫存 技能資料 並修改
+        tempSkillData = copy.deepcopy(skillData)
+        tempSkillData.Damage = upgradeSkillData.Damage
+        tempSkillData.CastMage = upgradeSkillData.CastMage
+        tempSkillData.CD = upgradeSkillData.CD
+        tempSkillData.Distance = upgradeSkillData.Distance
+        tempSkillData.Width = upgradeSkillData.Width
+        tempSkillData.Height = upgradeSkillData.Height
+        tempSkillData.CircleDistance = upgradeSkillData.CircleDistance
+        tempSkillData.Name = upgradeSkillData.Name
+        tempSkillData.Intro = upgradeSkillData.Intro
+
+        for tempOp in upgradeSkillData.SkillOperationDataList:
+            if(tempOp.SkillComponentID == "UpgradeSkill"):
+                upgradeSkillId = tempOp.Bonus[0]
+                upgradeComponentId = tempOp.Bonus[1]
+                upgradeComponentIndex = tempOp.Bonus[2]
+                sameComponentIds = [s for s in tempSkillData.SkillOperationDataList if s.SkillComponentID == upgradeComponentId]
+                targetSkillOpData = sameComponentIds[int(upgradeComponentIndex)]
+                #替換Op資料
+                targetSkillOpData.DependCondition = tempOp.DependCondition
+                targetSkillOpData.EffectValue = tempOp.EffectValue
+                targetSkillOpData.InfluenceStatus = tempOp.InfluenceStatus
+                targetSkillOpData.AddType = tempOp.AddType
+                targetSkillOpData.ConditionOR = tempOp.ConditionOR
+                targetSkillOpData.ConditionAND = tempOp.ConditionAND
+                targetSkillOpData.EffectDurationTime = tempOp.EffectDurationTime
+                targetSkillOpData.EffectRecive = tempOp.EffectRecive
+                targetSkillOpData.TargetCount = tempOp.TargetCount
+
+        return tempSkillData
+

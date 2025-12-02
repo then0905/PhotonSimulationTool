@@ -49,7 +49,7 @@ class SkillOperationData:
     EffectDurationTime: float = 0.0
     EffectRecive: int = 0
     TargetCount: int = 0
-    Bonus: Any = None
+    Bonus: List[str] = None
 # 技能資料結構
 @dataclass
 class SkillData:

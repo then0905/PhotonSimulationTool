@@ -185,7 +185,7 @@ class BattleSimulatorGUI:
                 if(stack_count >0):
                     for eff in self.effects:
                         if eff["id"] == id:
-                            eff["stack"] = CommonFunction.clamp(eff["stack"]+stack_count,0,skill.SkillOperationDataList[0].Bonus)
+                            eff["stack"] = CommonFunction.clamp(eff["stack"]+stack_count,0,skill.SkillOperationDataList[0].Bonus[0])
                             # --- 更新 Canvas 數字 ---
                             c = eff["widget"]
                             c.delete("stack_text")  # 刪除舊的數字

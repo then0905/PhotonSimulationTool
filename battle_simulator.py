@@ -58,6 +58,9 @@ class BattleCharacter:
     additive_debuff_event: Event = field(default_factory=Event, init=False, repr=False)  #滿足條件的DeBuff持續疊加的事件
     additive_debuff_time = 0  #滿足條件的DeBuff 作用的間隔時間
     temp_dict: Dict[str, object] = field(default_factory=dict)  #暫存動態資料 有需要再寫入 (例如:怒氣,疊層值)
+    upgrade_skill_dict:Dict[str,SkillData] = field(default_factory=dict)    #存放所選職業的技能內有升級技能的字典
+    enhance_skill_dict:Dict[str,SkillData] = field(default_factory=dict)    #存放所選職業的技能內有強化技能的字典
+    inherit_damage_skill_dict:Dict[str,SkillData] = field(default_factory=dict)    #存放所選職業的技能內有繼承技能傷害的字典
 
     def __post_init__(self):
         # 在物件建立後，才初始化 AI
@@ -332,7 +335,7 @@ class BattleCharacter:
         """
         處理任何恢復效果 
         """
-        maxValue = "MaxMP" if op.InfluenceStatus == "MP" else "MaxHP";
+        maxValue = "MaxMP" if op.InfluenceStatus == "MP" else "MaxHP"
 
         target.stats[op.InfluenceStatus] = CommonFunction.clamp(target.stats[op.InfluenceStatus] + op.EffectValue,
                                                                 target.stats[op.InfluenceStatus],
@@ -478,7 +481,8 @@ class BattleCharacter:
 
         finalDamage = CommonFunction.clamp(round(damage * (1 - defenseRatio)) - target.stats["DamageReduction"], 0,
                                            round(damage * (1 - defenseRatio)) - target.stats["DamageReduction"])
-        # print(f"攻擊對象:{self.characterType}，攻擊者傷害:{damage}，防禦減免{defenseRatio}，最後傷害{finalDamage}")
+        print(f"看看 {skill.SkillID} 技能倍率{skill.Damage}")
+        #print(f"攻擊對象:{self.characterType}，攻擊者傷害:{damage}，防禦減免{defenseRatio}，最後傷害{finalDamage}")
 
         #處理額外傷害
         finalDamage = self.BonusDamageCalulator(finalDamage, target)
