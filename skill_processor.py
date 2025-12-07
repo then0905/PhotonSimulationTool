@@ -5,48 +5,17 @@ import copy
 
 class SkillProcessor:
     @staticmethod
-    def _execute_skill_operation(skillData: SkillData, attacker, defender, gui=None) -> Tuple[str, int, float]:
+    def _execute_skill_operation(skillData: SkillData, attacker, defender) -> Tuple[str, int, float]:
         """實現技能效果執行入口"""
         returnResult = []
-        execution_history = {}  # 記錄每個效果的執行結果
 
         # 普通攻擊特殊處理
         if skillData.Name == "普通攻擊":
             returnResult.append(attacker.HitCalculator(skillData, defender))
             return returnResult
 
-        # 遍歷所有技能效果
-        for index, op in enumerate(skillData.SkillOperationDataList):
-            # 條件檢查
-            if not SkillProcessor.skill_condition_process(attacker, op):
-                execution_history[index] = {
-                    "componentID": op.SkillComponentID, "success": False}
-                continue
-
-            # 依賴判斷（核心邏輯）
-            if not SkillProcessor._check_dependency(op, execution_history):
-                execution_history[index] = {
-                    "componentID": op.SkillComponentID, "success": False}
-                continue
-
-            # 取得施放對象
-            target = attacker if op.EffectRecive in [0, -2, -3] else defender
-
-            # 執行效果
-            result = SkillProcessor._execute_component(
-                op, skillData, attacker, target)
-
-            # 記錄執行結果
-            success = False
-            if result:
-                returnResult.append(result)
-                # 判斷是否成功：damage > 0 或有效果觸發
-                success = result[1] > 0 if len(result) > 1 else True
-
-            execution_history[index] = {
-                "componentID": op.SkillComponentID,
-                "success": success
-            }
+        # 執行效果
+        returnResult.append(SkillProcessor._execute_component(skillData, attacker, defender))
 
         return returnResult
 
@@ -96,92 +65,134 @@ class SkillProcessor:
         return False  # 找不到成功的依賴
 
     @staticmethod
-    def _execute_component(op: SkillOperationData, skillData: SkillData,
-                           attacker, target) -> Optional[Tuple[str, int, float]]:
+    def _execute_component(skillData: SkillData,
+                           attacker, defender) -> Optional[Tuple[str, int, float]]:
         """執行單個技能組件"""
+        returnResult = []
+        execution_history = {}  # 記錄每個效果的執行結果
 
-        #先找出是否有升級技能資料
-        upgradeDataList = attacker.upgrade_skill_dict.get(skillData.SkillID)
+        for index, op in enumerate(skillData.SkillOperationDataList):
+            # 條件檢查
+            if not SkillProcessor.skill_condition_process(attacker, op):
+                execution_history[index] = {
+                    "componentID": op.SkillComponentID, "success": False}
+                continue
 
-        if(upgradeDataList is not None):
-            lastUpgradeData = upgradeDataList[-1]
-            tempSkillData = SkillProcessor.upgrade_skill_processor(lastUpgradeData,skillData)
-        else:
-            tempSkillData = skillData
+            # 依賴判斷（核心邏輯）
+            if not SkillProcessor._check_dependency(op, execution_history):
+                execution_history[index] = {
+                    "componentID": op.SkillComponentID, "success": False}
+                continue
 
-        match op.SkillComponentID:
-            case "Damage":
-                return attacker.HitCalculator(tempSkillData, target)
+            # 取得施放對象
+            target = attacker if op.EffectRecive in [0, -2, -3] else defender
 
-            case "ElementDamage":
-                return attacker.HitCalculator(tempSkillData, target)
+            # 先找出是否有升級技能資料
+            upgradeDataList = attacker.upgrade_skill_dict.get(skillData.SkillID)
 
-            case "CrowdControl":
-                return SkillProcessor.status_skill_effect_start(op, attacker, target)
+            if (upgradeDataList is not None):
+                lastUpgradeData = upgradeDataList[-1]
+                tempSkillData = SkillProcessor.upgrade_skill_processor(lastUpgradeData, skillData)
+            else:
+                tempSkillData = skillData
 
-            case "MultipleDamage":
-                return attacker.HitCalculator(tempSkillData, target)
+            # 先找出是否有強化技能資料
+            enhanceDataList = attacker.enhance_skill_dict.get(skillData.SkillID)
 
-            case "ContinuanceBuff":
-                target.add_skill_buff_effect(tempSkillData, op)
-                temp = f"{CommonFunction.get_text('TM_' + op.InfluenceStatus)}: {CommonFunction.get_text('TM_' + op.AddType).format(op.EffectValue)}"
-                return (CommonFunction.battlelog_text_processor({
-                    "caster_text": attacker.name,
-                    "descript_text": temp,
-                    "target_text": target.name,
-                }, "continuanceBuff", op.EffectDurationTime), 0, 0.5)
+            if (enhanceDataList is not None):
+                tempSkillData = SkillProcessor.enhance_skill_processor(enhanceDataList, tempSkillData)
 
-            case "AdditiveBuff":
-                target.additive_buff_event += lambda: SkillProcessor.skill_additive_effect_event(
-                    tempSkillData, op, target)
-                temp = f"{CommonFunction.get_text('TM_' + op.InfluenceStatus)}: {CommonFunction.get_text('TM_' + op.AddType).format(op.EffectValue)}"
-                return (CommonFunction.battlelog_text_processor({
-                    "caster_text": attacker.name,
-                    "descript_text": temp,
-                    "target_text": target.name,
-                }, "additiveBuff", op.EffectDurationTime), 0, 0.5)
+            # 記錄執行結果
+            success = True
 
-            case "Debuff":
-                return SkillProcessor.status_skill_effect_start(op, attacker, target)
+            match op.SkillComponentID:
+                case "Damage":
+                    temp = attacker.HitCalculator(tempSkillData, target)
+                    returnResult.append(temp)
+                    # 判斷是否成功：damage > 0 或有效果觸發
+                    success = temp[1] > 0 if len(temp) > 1 else True
+                case "ElementDamage":
+                    temp = attacker.HitCalculator(tempSkillData, target)
+                    returnResult.append(attacker.HitCalculator(tempSkillData, target))
+                    # 判斷是否成功：damage > 0 或有效果觸發
+                    success = temp[1] > 0 if len(temp) > 1 else True
 
-            case "PassiveBuff":
-                target.add_skill_passive_effect(tempSkillData,op)
-                #target.SkillEffectStatusOperation(
-                    #op.InfluenceStatus, (op.AddType == "Rate"), op.EffectValue)
-                temp = f"{CommonFunction.get_text('TM_' + op.InfluenceStatus)}: {CommonFunction.get_text('TM_' + op.AddType).format(op.EffectValue)}"
-                return (CommonFunction.battlelog_text_processor({
-                    "caster_text": attacker.name,
-                    "descript_text": temp,
-                    "target_text": target.name,
-                }, "passiveBuff"), 0, 0)
+                case "CrowdControl":
+                    returnResult.append(SkillProcessor.status_skill_effect_start(op, attacker, target))
 
-            case "Utility":
-                return SkillProcessor.skill_utility_processor(target,op)
+                case "MultipleDamage":
+                    temp = attacker.HitCalculator(tempSkillData, target)
+                    returnResult.append(attacker.HitCalculator(tempSkillData, target))
+                    # 判斷是否成功：damage > 0 或有效果觸發
+                    success = temp[1] > 0 if len(temp) > 1 else True
 
-            case "Health":
-                return target.processRecovery(op, attacker, target)
+                case "ContinuanceBuff":
+                    target.add_skill_buff_effect(tempSkillData, op)
+                    temp = f"{CommonFunction.get_text('TM_' + op.InfluenceStatus)}: {CommonFunction.get_text('TM_' + op.AddType).format(op.EffectValue)}"
+                    returnResult.append((CommonFunction.battlelog_text_processor({
+                        "caster_text": attacker.name,
+                        "descript_text": temp,
+                        "target_text": target.name,
+                    }, "continuanceBuff", op.EffectDurationTime), 0, 0.5))
 
-            case "EnhanceSkill":
-                #強化指定技能 在角色開一個新字典<BonusId,下個component資料>
-                attacker.passive_bar.add_skill_effect(tempSkillData.SkillID, tempSkillData)
-                key = op.Bonus[0]
+                case "AdditiveBuff":
+                    target.additive_buff_event += lambda: SkillProcessor.skill_additive_effect_event(
+                        tempSkillData, op, target)
+                    temp = f"{CommonFunction.get_text('TM_' + op.InfluenceStatus)}: {CommonFunction.get_text('TM_' + op.AddType).format(op.EffectValue)}"
+                    returnResult.append((CommonFunction.battlelog_text_processor({
+                        "caster_text": attacker.name,
+                        "descript_text": temp,
+                        "target_text": target.name,
+                    }, "additiveBuff", op.EffectDurationTime), 0, 0.5))
 
-                if key not in attacker.enhance_skill_dict:
-                    attacker.enhance_skill_dict[key] = []
+                case "Debuff":
+                    returnResult.append(SkillProcessor.status_skill_effect_start(op, attacker, target))
 
-                attacker.enhance_skill_dict[key].append(tempSkillData)
-                return None
-            case "UpgradeSkill":
-                # 升級指定技能 在角色開一個新字典<BonusId,下個component資料>
-                attacker.passive_bar.add_skill_effect(tempSkillData.SkillID, tempSkillData)
-                key = op.Bonus[0]
+                case "PassiveBuff":
+                    target.add_skill_passive_effect(tempSkillData, op)
+                    # target.SkillEffectStatusOperation(
+                    # op.InfluenceStatus, (op.AddType == "Rate"), op.EffectValue)
+                    temp = f"{CommonFunction.get_text('TM_' + op.InfluenceStatus)}: {CommonFunction.get_text('TM_' + op.AddType).format(op.EffectValue)}"
+                    returnResult.append((CommonFunction.battlelog_text_processor({
+                        "caster_text": attacker.name,
+                        "descript_text": temp,
+                        "target_text": target.name,
+                    }, "passiveBuff"), 0, 0))
 
-                if key not in attacker.upgrade_skill_dict:
-                    attacker.upgrade_skill_dict[key] = []
+                case "Utility":
+                    returnResult.append(SkillProcessor.skill_utility_processor(target, op))
 
-                attacker.upgrade_skill_dict[key].append(tempSkillData)
-            case _:
-                return None
+                case "Health":
+                    returnResult.append(target.processRecovery(op, attacker, target))
+
+                case "EnhanceSkill":
+                    # 強化指定技能 在角色開一個新字典<BonusId,下個component資料>
+                    attacker.passive_bar.add_skill_effect(tempSkillData.SkillID, tempSkillData)
+                    key = op.Bonus[0]
+
+                    if key not in attacker.enhance_skill_dict:
+                        attacker.enhance_skill_dict[key] = []
+
+                    attacker.enhance_skill_dict[key].append(tempSkillData)
+                    returnResult.append(None)
+                case "UpgradeSkill":
+                    # 升級指定技能 在角色開一個新字典<BonusId,下個component資料>
+                    attacker.passive_bar.add_skill_effect(tempSkillData.SkillID, tempSkillData)
+                    key = op.Bonus[0]
+
+                    if key not in attacker.upgrade_skill_dict:
+                        attacker.upgrade_skill_dict[key] = []
+
+                    attacker.upgrade_skill_dict[key].append(tempSkillData)
+                    returnResult.append(None)
+                case _:
+                    returnResult = None
+
+            execution_history[index] = {
+                "componentID": op.SkillComponentID,
+                "success": success
+            }
+        return returnResult
 
     @staticmethod
     def execute_item_operation(itemData: ItemDataModel, attacker, defender, gui=None) -> Tuple[str, int, float]:
@@ -388,6 +399,21 @@ class SkillProcessor:
                 targetSkillOpData.EffectDurationTime = tempOp.EffectDurationTime
                 targetSkillOpData.EffectRecive = tempOp.EffectRecive
                 targetSkillOpData.TargetCount = tempOp.TargetCount
+
+        return tempSkillData
+
+    @staticmethod
+    def enhance_skill_processor(enhanceSkillOperationList , skillData: SkillData):
+        """
+        強化技能處理
+        """
+
+        # 暫存 技能資料 並修改
+        tempSkillOpList = copy.deepcopy(skillData.SkillOperationDataList)
+        tempSkillOpList += enhanceSkillOperationList
+
+        tempSkillData = copy.deepcopy(skillData)
+        tempSkillData.SkillOperationDataList = tempSkillOpList
 
         return tempSkillData
 

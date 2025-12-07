@@ -671,7 +671,7 @@ class BattleSimulator:
                     # 其他必要參數...
                 )
                 if attacker.action_check(normal_attack):
-                    for temp in SkillProcessor._execute_skill_operation(normal_attack, attacker, target, self.gui):
+                    for temp in SkillProcessor._execute_skill_operation(normal_attack, attacker, target,):
                         log_msg, damage, attack_timer = temp
                         self.battle_log.append(log_msg)
                         reward += damage
@@ -701,19 +701,19 @@ class BattleSimulator:
                     print(
                         f"{attacker.name} 使用 ：{CommonFunction.get_text(skill.Name)} ({skill.SkillID}) 原本魔力為：{attacker.stats["MP"]} 消耗魔力為：{skill.CastMage}")
                     attacker.stats["MP"] -= skill.CastMage
-                    for temp in SkillProcessor._execute_skill_operation(skill, attacker, target, self.gui):
-                        log_msg, damage, attack_timer = temp
-                        self.battle_log.append(log_msg)
-                        self.battle_log.append(CommonFunction.battlelog_text_processor({
+                    for temp in SkillProcessor._execute_skill_operation(skill, attacker, target):
+                        for log_msg, damage, attack_timer in temp:
+                            self.battle_log.append(log_msg)
+                            self.battle_log.append(CommonFunction.battlelog_text_processor({
                             "caster_text": attacker.name,
                             "caster_color": "#636363",
                             "caster_size": 12,
                             "descript_text": CommonFunction.get_text(skill.Name),
                             "descript_color": "#ff0000",
                         }, "skillTimer", f"{1 if skill.Type == "Buff" else 1.8}"))
-                        attacker.skill_cooldowns[skill.SkillID] = skill.CD
-                        reward += damage
-                        total_attack_timer += attack_timer
+                            attacker.skill_cooldowns[skill.SkillID] = skill.CD
+                            reward += damage
+                            total_attack_timer += attack_timer
                 else:
                     self.gui.root.after(
                         100, lambda: self.attack_loop(attacker, target)
