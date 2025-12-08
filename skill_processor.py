@@ -174,7 +174,11 @@ class SkillProcessor:
                         attacker.enhance_skill_dict[key] = []
 
                     attacker.enhance_skill_dict[key].append(tempSkillData)
-                    returnResult.append(None)
+                    returnResult.append((CommonFunction.battlelog_text_processor({
+                        "caster_text": attacker.name,
+                        "target_text": CommonFunction.get_text(tempSkillData.Name),
+                        "descript_text": CommonFunction.get_text(GameData.Instance.SkillDataDic[key].Name),
+                    }, "enhanceSkill"), 0, 0))
                 case "UpgradeSkill":
                     # 升級指定技能 在角色開一個新字典<BonusId,下個component資料>
                     attacker.passive_bar.add_skill_effect(tempSkillData.SkillID, tempSkillData)
@@ -184,9 +188,13 @@ class SkillProcessor:
                         attacker.upgrade_skill_dict[key] = []
 
                     attacker.upgrade_skill_dict[key].append(tempSkillData)
-                    returnResult.append(None)
+                    returnResult.append((CommonFunction.battlelog_text_processor({
+                        "caster_text": attacker.name,
+                        "target_text": CommonFunction.get_text(tempSkillData.Name) ,
+                        "descript_text": CommonFunction.get_text(GameData.Instance.SkillDataDic[key].Name),
+                    }, "upgradeSkill"), 0, 0))
                 case _:
-                    returnResult = None
+                    returnResult.append(("",0,0))
 
             execution_history[index] = {
                 "componentID": op.SkillComponentID,
