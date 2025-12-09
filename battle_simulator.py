@@ -64,7 +64,7 @@ class BattleCharacter:
 
     def __post_init__(self):
         # 在物件建立後，才初始化 AI
-        self.ai = ai_action(self.ai_id, self.skills, self.items)
+        self.ai = ai_action(self.ai_id, self)
 
     def action_check(self, skill: SkillData) -> bool:
         """
@@ -199,10 +199,11 @@ class BattleCharacter:
         """
         運行被動技能
         """
-        passive_skills = [s for s in self.skills if s.Characteristic == False]
-        if (passive_skills is not None):
-            for skill in passive_skills:
-                SkillProcessor._execute_skill_operation(skill, self, self)
+        for s in self.skills:
+            characteristic = s.Characteristic
+            condition_ok = SkillProcessor.skill_all_condition_process(self, s)
+            if not characteristic and condition_ok:
+                SkillProcessor._execute_skill_operation(s, self, self)
                 #self.passive_bar.add_skill_effect(skill)
 
     def add_skill_buff_effect(self, skillData: SkillData, op):
@@ -224,6 +225,9 @@ class BattleCharacter:
 
             self.buff_bar.add_skill_effect(temp_id, skillData)
             self.buff_skill[temp_id] = (skillData, op.EffectDurationTime)
+        else:
+            self.buff_bar.add_skill_effect(skillData.SkillID, skillData)
+            self.buff_skill[skillData.SkillID] = (skillData, op.EffectDurationTime)
 
     def add_skill_passive_effect(self, skillData: SkillData, op):
         """

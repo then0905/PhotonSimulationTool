@@ -3,19 +3,21 @@ import pickle
 import random
 from collections import defaultdict
 from game_models import GameData
+from skill_processor import SkillProcessor
+
 
 class ai_action:
     SAVE_DIR = "q_tables"  # 存放所有Q表的資料夾
 
-    def __init__(self, role_id: str,skills,item):
+    def __init__(self, role_id: str,battle_character):
         """
                 role_id: 職業/怪物的唯一識別碼 (例如 "Warrior", "Mage", "Slime001")
-                skills: 該角色的技能清單
-                items: 該角色的道具清單
+                battle_character: 角色資料
         """
         self.role_id = role_id
-        self.skills = skills
-        self.item = item
+        self.battle_character = battle_character
+        self.skills = battle_character.skills
+        self.item = battle_character.items
         self.Q = defaultdict(float)  # Q表
         self.alpha = 0.1  # 學習率
         self.gamma = 0.9  # 折扣因子
@@ -40,18 +42,7 @@ class ai_action:
         if os.path.exists(path):
             with open(path, "rb") as f:
                 q_table = pickle.load(f)
-
-            # 顯示讀取的Q表資訊
-            # print("✅ 成功載入 Q 表")
-            # print("目前 Q 表紀錄數量：", len(q_table))
-            # if len(q_table) > 0:
-            #     print("範例 Q 值：", list(q_table.items())[:5])
-            # else:
-            #     print("Q 表是空的")
-
             return q_table
-        # else:
-        #     print("⚠️ 找不到 Q 表檔案，將建立新的")
         return defaultdict(float)
 
     def save_q_table(self):
@@ -59,9 +50,6 @@ class ai_action:
         path = self._save_path()
         with open(path, "wb") as f:
             pickle.dump(self.Q, f)
-        # print("✅ 已儲存 Q 表")
-        # print("目前 Q 表紀錄數量：", len(self.Q))
-        # print("範例 Q 值：", list(self.Q.items())[:5])
 
     def get_state(self, attacker, target):
         # 生成戰鬥狀態向量
@@ -124,8 +112,9 @@ class ai_action:
             characteristic = s.Characteristic
             mp_ok = (self_char.stats["MP"] - s.CastMage) > 0
             cd_ok = s.SkillID not in self_char.skill_cooldowns  # 沒在CD才能放
+            condition_ok = SkillProcessor.skill_all_condition_process(self.battle_character,s)
             skill_not_running =  not any(k.startswith(s.SkillID) for k in self_char.buff_skill)  # 若是buff且沒再運作中
-            if mp_ok and cd_ok and characteristic and skill_not_running:
+            if mp_ok and cd_ok and characteristic and skill_not_running and condition_ok:
                 actions.append(s.SkillID)
                 
         if self_char.items:
@@ -148,9 +137,7 @@ class ai_action:
                     base += 0.5
                 q_values.append(base)
             action = actions[q_values.index(max(q_values))]
-        
-        #if(self_char.characterType):
-            #print(f"[AI] 狀態={state} → 選擇動作={action}")
+
         return action, state
     
     def update_q(self, state, action, reward, next_state):

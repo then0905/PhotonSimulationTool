@@ -73,10 +73,10 @@ class SkillProcessor:
 
         for index, op in enumerate(skillData.SkillOperationDataList):
             # 條件檢查
-            if not SkillProcessor.skill_condition_process(attacker, op):
-                execution_history[index] = {
-                    "componentID": op.SkillComponentID, "success": False}
-                continue
+            #if not SkillProcessor.skill_condition_process(attacker, op):
+                #execution_history[index] = {
+                    #"componentID": op.SkillComponentID, "success": False}
+                #continue
 
             # 依賴判斷（核心邏輯）
             if not SkillProcessor._check_dependency(op, execution_history):
@@ -271,7 +271,7 @@ class SkillProcessor:
     @staticmethod
     def skill_condition_process(caster, op: SkillOperationData) -> bool:
         """
-        技能施放條件檢查入口
+        技能條件檢查(Operation版)
         """
         if (not any(op.ConditionOR) and not any(op.ConditionAND)):
             return True
@@ -295,6 +295,16 @@ class SkillProcessor:
             and_list.append(True)
 
         return any(or_list) and all(and_list)
+
+    @staticmethod
+    def skill_all_condition_process(caster, skillData: SkillData) -> bool:
+        """
+        技能條件檢查(Skill版)
+        """
+        result = []
+        for op in skillData.SkillOperationDataList:
+            result.append(SkillProcessor.skill_condition_process(caster, op))
+        return all(result)
 
     @staticmethod
     def skill_condition_check(caster, key: str, value) -> bool:
