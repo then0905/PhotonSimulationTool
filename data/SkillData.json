@@ -1753,7 +1753,7 @@
         "SkillComponentID": "Health",
         "DependCondition": "None",
         "EffectValue": 1.25,
-        "InfluenceStatus": "MeleeAtk",
+        "InfluenceStatus": "MeleeATK",
         "AddType": "Rate",
         "ConditionOR": [
           "EquipWeapon_Shield"
