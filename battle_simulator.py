@@ -583,21 +583,25 @@ class BattleCharacter:
         self.tempMp = 0
 
         # 特殊例外處理
-        if stateType == "MaxHP":
-            self.tempHp = self._apply_effect("MaxHP", isRate, value)
-        elif stateType == "MaxMP":
-            self.tempMp = self._apply_effect("MaxMP", isRate, value)
-        elif stateType == "ATK":  # 三屬攻擊一起加
-            for a in ("MeleeATK", "RemoteATK", "MageATK"):
-                self._apply_effect(a, isRate, value)
-        elif stateType == "ReduceTargetDmg" or  stateType == "TransferDmg":
-            self._apply_effect("FinalDamageReductionRate", isRate, value)
-        else:
+        match stateType:
+            case "MaxHP":
+                self.tempHp = self._apply_effect("MaxHP", isRate, value)
+            case "MaxMP":
+                self.tempMp = self._apply_effect("MaxMP", isRate, value)
+            # 三種攻擊一起加
+            case "ATK":
+                for a in ("MeleeATK", "RemoteATK", "MageATK"):
+                    self._apply_effect(a, isRate, value)
+            case "ReduceTargetDmg" | "TransferDmg":
+                self._apply_effect("FinalDamageReductionRate", isRate, value)
+            case "SpeedSlow":
+                self._apply_effect("SpeedSlowRate" if(isRate is True) else "SpeedSlow", isRate, value)
             # 一般數值
-            if hasattr(self.effect, stateType):
-                self._apply_effect(stateType, isRate, value)
-            else:
-                print("未定義的參數:", stateType)
+            case _:
+                if hasattr(self.effect, stateType):
+                    self._apply_effect(stateType, isRate, value)
+                else:
+                    print("未定義的參數:", stateType)
 
         # 套完 Effect 重算 stats
         self._recalculate_stats()

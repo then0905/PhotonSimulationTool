@@ -835,7 +835,8 @@
         "SkillComponentID": "Debuff",
         "DependCondition": "Prev",
         "EffectValue": 0.15,
-        "InfluenceStatus": "SpeedSlowRate",
+        "InfluenceStatus": "SpeedSlow",
+        "AddType": "Rate",
         "EffectDurationTime": 2.5,
         "EffectRecive": -1,
         "TargetCount": 5
