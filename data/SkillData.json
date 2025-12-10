@@ -2031,7 +2031,7 @@
         "SkillComponentID": "Debuff",
         "DependCondition": "Prev",
         "EffectValue": 12,
-        "InfluenceStatus": "BreakDEF",
+        "InfluenceStatus": "ArmorBreak",
         "AddType": "Value",
         "ConditionOR": [
           "EquipWeapon_Shield"
