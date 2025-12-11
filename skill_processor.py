@@ -72,12 +72,6 @@ class SkillProcessor:
         execution_history = {}  # 記錄每個效果的執行結果
 
         for index, op in enumerate(skillData.SkillOperationDataList):
-            # 條件檢查
-            #if not SkillProcessor.skill_condition_process(attacker, op):
-                #execution_history[index] = {
-                    #"componentID": op.SkillComponentID, "success": False}
-                #continue
-
             # 依賴判斷（核心邏輯）
             if not SkillProcessor._check_dependency(op, execution_history):
                 execution_history[index] = {
@@ -157,13 +151,13 @@ class SkillProcessor:
                         "caster_text": attacker.name,
                         "descript_text": temp,
                         "target_text": target.name,
-                    }, "passiveBuff"), 0, 0))
+                    }, "passiveBuff",CommonFunction.get_text(f"TM_{tempSkillData.SkillID}_Name")), 0, 0))
 
                 case "Utility":
                     returnResult.append(SkillProcessor.skill_utility_processor(target, op))
 
                 case "Health":
-                    returnResult.append(target.processRecovery(op, attacker, target))
+                    returnResult.append(target.processRecovery(op,skillData.Name, attacker, target))
 
                 case "EnhanceSkill":
                     # 強化指定技能 在角色開一個新字典<BonusId,下個component資料>
@@ -179,6 +173,7 @@ class SkillProcessor:
                         "target_text": CommonFunction.get_text(tempSkillData.Name),
                         "descript_text": CommonFunction.get_text(GameData.Instance.SkillDataDic[key].Name),
                     }, "enhanceSkill"), 0, 0))
+                    break
                 case "UpgradeSkill":
                     # 升級指定技能 在角色開一個新字典<BonusId,下個component資料>
                     attacker.passive_bar.add_skill_effect(tempSkillData.SkillID, tempSkillData)
@@ -213,7 +208,7 @@ class SkillProcessor:
             match op.ItemComponentID:
                 case "Restoration":
                     returnResult.append(
-                        defender.processRecovery(op, attacker, defender))
+                        defender.processRecovery(op,itemData.Name, attacker, defender))
                 case "Utility":
                     pass
                 case "Continuance":
@@ -241,7 +236,7 @@ class SkillProcessor:
                     "target_text": defender.name,
                 }, "crowdControlStart", op.EffectDurationTime), 0, 0)
             case "Debuff":
-                defender.SkillEffectStatusOperation(op, defender)
+                defender.SkillEffectStatusOperation(op.InfluenceStatus, (op.AddType == "Rate"), op.EffectValue)
                 defender.add_debuff_effect(op)
                 return (CommonFunction.battlelog_text_processor({
                     "caster_text": attacker.name,
@@ -371,6 +366,10 @@ class SkillProcessor:
                 for skillid in debuffskills:
                     caster.debuff_bar(skillid)
                 caster.debuff_skill = {}
+                return (CommonFunction.battlelog_text_processor({
+                    "caster_text": caster.name,
+                    "descript_text": CommonFunction.get_text(f"TM_{op.SkillID}_Name"),
+                }, "removeAllCC"), 0, 0)
 
     @staticmethod
     def skill_continuancebuff_bonus_processor(caster,op):
@@ -378,7 +377,8 @@ class SkillProcessor:
         temp_bonus_data = op.Bonus
         match temp_bonus_data[0]:
             case "Stack":
-                stack = caster.temp_dict[temp_bonus_data[1]]
+                key = temp_bonus_data[1]
+                stack = caster.temp_dict.get(key, 0)
                 caster.temp_dict.pop(temp_bonus_data[1], None)
                 return int(stack)
 
@@ -421,17 +421,26 @@ class SkillProcessor:
         return tempSkillData
 
     @staticmethod
-    def enhance_skill_processor(enhanceSkillOperationList , skillData: SkillData):
+    def enhance_skill_processor(enhanceSkillDataList , skillData: SkillData):
         """
         強化技能處理
         """
 
         # 暫存 技能資料 並修改
-        tempSkillOpList = copy.deepcopy(skillData.SkillOperationDataList)
-        tempSkillOpList += enhanceSkillOperationList
-
         tempSkillData = copy.deepcopy(skillData)
-        tempSkillData.SkillOperationDataList = tempSkillOpList
+
+        # 展開所有 enhanceSkillDataList 裡的 operation
+        enhance_ops = [
+            op
+            for skill in enhanceSkillDataList
+            for op in skill.SkillOperationDataList
+            if op.SkillComponentID == "EnhanceSkill"
+        ]
+
+        tempSkillData.SkillOperationDataList = [
+            *skillData.SkillOperationDataList,
+            *enhance_ops
+        ]
 
         return tempSkillData
 

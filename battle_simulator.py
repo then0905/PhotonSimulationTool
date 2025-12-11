@@ -203,8 +203,10 @@ class BattleCharacter:
             characteristic = s.Characteristic
             condition_ok = SkillProcessor.skill_all_condition_process(self, s)
             if not characteristic and condition_ok:
-                SkillProcessor._execute_skill_operation(s, self, self)
-                #self.passive_bar.add_skill_effect(skill)
+                for retult in SkillProcessor._execute_skill_operation(s, self, self):
+                    for temp in retult:
+                        log = temp[0]
+                        self.battle_log.append(log)
 
     def add_skill_buff_effect(self, skillData: SkillData, op):
         """
@@ -335,13 +337,13 @@ class BattleCharacter:
             case "Taunt":
                 self.controlled_for_attack += value
 
-    def processRecovery(self, op, caster, target) -> Tuple[str, int, float]:
+    def processRecovery(self, op,effectName:str, caster, target) -> Tuple[str, int, float]:
         """
         處理任何恢復效果 
         """
         maxValue = "MaxMP" if op.InfluenceStatus == "MP" else "MaxHP"
-
-        target.stats[op.InfluenceStatus] = CommonFunction.clamp(target.stats[op.InfluenceStatus] + op.EffectValue,
+        if op.InfluenceStatus not in target.stats:
+            target.stats[op.InfluenceStatus] = CommonFunction.clamp(target.stats[op.InfluenceStatus] + op.EffectValue,
                                                                 target.stats[op.InfluenceStatus],
                                                                 target.stats[maxValue])
 
@@ -351,7 +353,7 @@ class BattleCharacter:
         return CommonFunction.battlelog_text_processor({
             "caster_text": caster.name,
             "caster_color": "#00ffdc",
-            "descript_text": CommonFunction.get_text("TM_" + op.CodeID + "_Name"),
+            "descript_text": CommonFunction.get_text(effectName),
             "descript_color": "#ff9300",
             "target_text": target.name,
             "target_color": "#83ff00",
@@ -485,7 +487,7 @@ class BattleCharacter:
 
         finalDamage = CommonFunction.clamp(round(damage * (1 - defenseRatio)) - target.stats["DamageReduction"], 0,
                                            round(damage * (1 - defenseRatio)) - target.stats["DamageReduction"])
-        print(f"看看 {skill.SkillID} 技能倍率{skill.Damage}")
+        #print(f"看看 {skill.SkillID} 技能倍率{skill.Damage}")
         #print(f"攻擊對象:{self.characterType}，攻擊者傷害:{damage}，防禦減免{defenseRatio}，最後傷害{finalDamage}")
 
         #處理額外傷害
@@ -706,10 +708,14 @@ class BattleSimulator:
             case _:
                 skill = next(s for s in attacker.skills if s.SkillID == result)
                 if attacker.action_check(skill):
-                    print(
-                        f"{attacker.name} 使用 ：{CommonFunction.get_text(skill.Name)} ({skill.SkillID}) 原本魔力為：{attacker.stats["MP"]} 消耗魔力為：{skill.CastMage}")
+                    #print(
+                        #f"{attacker.name} 使用 ：{CommonFunction.get_text(skill.Name)} ({skill.SkillID}) 原本魔力為：{attacker.stats["MP"]} 消耗魔力為：{skill.CastMage}")
                     attacker.stats["MP"] -= skill.CastMage
                     for temp in SkillProcessor._execute_skill_operation(skill, attacker, target):
+                        if temp is None:
+                            print(f"資料有錯喔!: {skill.SkillID}  → temp 本身就是 None")
+                        elif isinstance(temp, list) and any(x is None for x in temp):
+                            print(f"資料有錯喔!: {skill.SkillID}  → temp 裡面有 None: {temp}")
                         for log_msg, damage, attack_timer in temp:
                             self.battle_log.append(log_msg)
                             self.battle_log.append(CommonFunction.battlelog_text_processor({
@@ -741,6 +747,9 @@ class BattleSimulator:
         self.damage_data.clear()
         self.skill_usage = {s.Name: 0 for s in player.skills}
 
+        player.battle_log = self.battle_log
+        enemy.battle_log = self.battle_log
+
         #能力值總覽初始化
         self.gui.player_overview.update_state(player.stats)
         self.gui.enemy_overview.update_state(enemy.stats)
@@ -764,8 +773,6 @@ class BattleSimulator:
 
         #初始化雙方血量魔力
         self.update_hp_mp()
-        player.battle_log = self.battle_log
-        enemy.battle_log = self.battle_log
 
         #雙方獨立計時器啟動
         self.battle_tick(player, enemy)

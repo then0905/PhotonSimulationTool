@@ -25,7 +25,7 @@ class CommonFunction:
         """
         讀取道具Icon資源
         """
-        return CommonFunction.load_image_resource(f'item_icon/',itemId)
+        return CommonFunction.load_image_resource(f'item_icon',itemId)
 
     def load_skill_icon(job:str,skillId:str):
         """
@@ -37,14 +37,15 @@ class CommonFunction:
         """
         讀取效果Icon資源
         """
-        return CommonFunction.load_image_resource(f'status_effect_icon/',effectId)
+        return CommonFunction.load_image_resource(f'status_effect_icon',effectId)
 
     def load_image_resource(path,name):
         """
         依照路徑與名稱獲取圖片資源
         """
         import tkinter as tk
-        icon = tk.PhotoImage(file=f"{path}/{name}.png")  # PNG 圖片
+        iconpath = f"{path}/{name}.png"
+        icon = tk.PhotoImage(file=iconpath)  # PNG 圖片
         return icon
 
     def get_time_stap(id:str):
@@ -116,7 +117,7 @@ class CommonFunction:
             case "passiveBuff":
                 return (f'<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>' 
                 f' 對 <size={log_dic["target_size"]}><color={log_dic["target_color"]}>{log_dic["target_text"]}</color></size>'
-                f' 啟動 被動技能：<size={log_dic["descript_size"]}><color={log_dic["descript_color"]}>{log_dic["descript_text"]}</color></size>')
+                f' 啟動 被動技能：[ <color={log_dic["descript_color"]}>{ other }</color> ] ，增強效果： <size={log_dic["descript_size"]}><color={log_dic["descript_color"]}>{log_dic["descript_text"]}</color></size>')
             case "additiveBuff":
                 return (f'<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>' 
                 f' 對 <size={log_dic["target_size"]}><color={log_dic["target_color"]}>{log_dic["target_text"]}</color></size>'
@@ -147,6 +148,10 @@ class CommonFunction:
                 return (
                 f'<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>'
                 f' 消耗了 {other} 層 的<size={log_dic["descript_size"]}><color={log_dic["descript_color"]}>{log_dic["descript_text"]}</color></size>')
+            case "removeAllCC":
+                return (
+                    f'<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>'
+                    f'使用 [ <size={log_dic["descript_size"]}><color={log_dic["descript_color"]}>{log_dic["descript_text"]}</color></size> ] 消除了所有負面狀態')
             case "upgradeSkill":
                 return (
                     f'<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>'

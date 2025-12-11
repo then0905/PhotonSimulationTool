@@ -42,6 +42,7 @@ class CharacterStatus_Secret:
     ElementDamageIncrease:int = 0
     RecoveryDmg:float = 0 #吸收傷害回血  (小數點)
     Damage:float = 0 #總傷害(傷害公式計算完成後乘上)
+    IncreaseMeleeRange:float = 0 #近距離攻擊範圍增強
     
 @dataclass
 class CharacterStatus_Debuff:
