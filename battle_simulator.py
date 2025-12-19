@@ -342,7 +342,7 @@ class BattleCharacter:
         處理任何恢復效果 
         """
         maxValue = "MaxMP" if op.InfluenceStatus == "MP" else "MaxHP"
-        if op.InfluenceStatus not in target.stats:
+        if op.InfluenceStatus in target.stats:
             target.stats[op.InfluenceStatus] = CommonFunction.clamp(target.stats[op.InfluenceStatus] + op.EffectValue,
                                                                 target.stats[op.InfluenceStatus],
                                                                 target.stats[maxValue])
@@ -492,7 +492,6 @@ class BattleCharacter:
 
         #處理額外傷害
         finalDamage = self.BonusDamageCalulator(finalDamage, target)
-
         target.stats["HP"] -= finalDamage
 
         color_code = f'<color=#ffd600><size=13><b>{finalDamage}</size></color></b>' if is_Crt else f'<color=#ff0000><size=11>{finalDamage}</size></color>'
@@ -602,8 +601,8 @@ class BattleCharacter:
             case _:
                 if hasattr(self.effect, stateType):
                     self._apply_effect(stateType, isRate, value)
-                else:
-                    print("未定義的參數:", stateType)
+                #else:
+                    #print("未定義的參數:", stateType)
 
         # 套完 Effect 重算 stats
         self._recalculate_stats()
@@ -619,7 +618,8 @@ class BattleCharacter:
     def _recalculate_stats(self):
         for f in fields(StatusValues):
             name = f.name
-            self.stats[name] = getattr(self.basal, name) + getattr(self.equip, name) + getattr(self.effect, name)
+            if(name is not 'HP' and name is not 'MP'):
+                self.stats[name] = getattr(self.basal, name) + getattr(self.equip, name) + getattr(self.effect, name)
 
         # 套 buff 增加的當前 HP/MP
         self.stats["HP"] += self.tempHp
