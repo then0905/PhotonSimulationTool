@@ -1,5 +1,9 @@
-﻿from game_models import GameData
+﻿import os
+import sys
 import time
+
+from game_models import GameData
+
 
 class CommonFunction:
     @staticmethod
@@ -44,15 +48,35 @@ class CommonFunction:
         依照路徑與名稱獲取圖片資源
         """
         import tkinter as tk
-        iconpath = f"{path}/{name}.png"
-        icon = tk.PhotoImage(file=iconpath)  # PNG 圖片
-        return icon
+        # 統一使用 get_resource_path 轉換路徑
+        full_path = CommonFunction.get_resource_path(os.path.join(path, f"{name}.png"))
+
+        try:
+            icon = tk.PhotoImage(file=full_path)
+            return icon
+        except Exception as e:
+            print(f"圖片載入失敗: {full_path}, 錯誤: {e}")
+            return None
 
     def get_time_stap(id:str):
         """
         帶入ID取得時間戳返回
         """
         return f"{id}_{str(time.time())}"
+
+    # --- JSON 讀取輔助 ---
+    def get_data_path(path, filename):
+        # 直接調用共用方法，不要在裡面定義
+        return CommonFunction.get_resource_path(os.path.join(path, filename))
+
+    # 輔助函式：減少重複代碼並確保路徑正確
+    def get_resource_path(relative_path):
+        """
+        這是你的核心共用方法，不改變邏輯。
+        """
+        if hasattr(sys, '_MEIPASS'):
+            return os.path.join(sys._MEIPASS, relative_path)
+        return os.path.join(os.path.abspath("."), relative_path)
 
     def battlelog_text_processor(input_log_dic,log_type:str,other = None):
         """

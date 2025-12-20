@@ -319,9 +319,10 @@ class GameData:
 
     def load_data(self):
         # 加載所有JSON數據
-        
+
+        from commonfunction import CommonFunction
         # 加載技能資料
-        with open(f"{self.data_dir}/SkillData.json", encoding="utf-8") as f:
+        with open(CommonFunction.get_data_path("data","SkillData.json"), encoding="utf-8") as f:
             skills_data = json.load(f)
 
             # 處理 SkillOperationDataList
@@ -336,7 +337,7 @@ class GameData:
             self.SkillDataDic = {s["SkillID"]: SkillData(**s) for s in skills_data}
 
         # 加載怪物資料
-        with open(f"{self.data_dir}/Monster.json", encoding="utf-8") as f:
+        with open(CommonFunction.get_data_path("data","Monster.json"), encoding="utf-8") as f:
             monsters_data = json.load(f)
 
             # 處理 MonsterSkillList
@@ -358,7 +359,7 @@ class GameData:
             self.MonstersDataDic = {s["MonsterCodeID"]: MonsterDataModel(**s) for s in monsters_data}
             
         # 加載掉落物資料
-        with open(f"{self.data_dir}/DropItem.json", encoding="utf-8") as f:
+        with open(CommonFunction.get_data_path("data","DropItem.json"), encoding="utf-8") as f:
             dropItems_data = json.load(f)
             
             # 處理 DropItemList
@@ -373,7 +374,7 @@ class GameData:
             self.MonsterDropItemDic = {s["MonsterCodeID"]: MonsterDropItemDataModel(**s) for s in dropItems_data}
 
         # 加載防具資料
-        with open(f"{self.data_dir}/Armor.json", encoding="utf-8") as f:
+        with open(CommonFunction.get_data_path("data","Armor.json"), encoding="utf-8") as f:
             armors_data = json.load(f)
             
             # 處理 ForgeConfigList
@@ -387,7 +388,7 @@ class GameData:
             self.ArmorsDic = {a["CodeID"]: ArmorDataModel(**a) for a in armors_data}
             
         # 加載武器資料
-        with open(f"{self.data_dir}/Weapon.json", encoding="utf-8") as f:
+        with open(CommonFunction.get_data_path("data","Weapon.json"), encoding="utf-8") as f:
             weapons_data = json.load(f)
             
             # 處理 ForgeConfigList
@@ -401,7 +402,7 @@ class GameData:
             self.WeaponsDic = {a["CodeID"]: WeaponDataModel(**a) for a in weapons_data}
             
         # 加載道具資料
-        with open(f"{self.data_dir}/Item.json", encoding="utf-8") as f:
+        with open(CommonFunction.get_data_path("data","Item.json"), encoding="utf-8") as f:
             items_data = json.load(f)
             
             # 處理 ItemEffectDataList
@@ -415,12 +416,12 @@ class GameData:
             self.ItemsDic = {a["CodeID"]: ItemDataModel(**a) for a in items_data}
             
         # 加載職業加成資料
-        with open(f"{self.data_dir}/JobBonus.json", encoding="utf-8") as f:
+        with open(CommonFunction.get_data_path("data","JobBonus.json"), encoding="utf-8") as f:
             classes_data = json.load(f)
             self.JobBonusDic = {c["Job"]: JobBonusDataModel(**c) for c in classes_data}
             
         # 加載種族能力值資料
-        with open(f"{self.data_dir}/StatusFormula.json", encoding="utf-8") as f:
+        with open(CommonFunction.get_data_path("data","StatusFormula.json"), encoding="utf-8") as f:
             statusFormulas_data = json.load(f)
             self.StatusFormulaDic = {f"{c['TargetStatus']}_{c['Race']}": StatusFormulaDataModel(**c) for c in statusFormulas_data}            
             
@@ -457,16 +458,16 @@ class GameData:
                     print(f"讀取 {file} 時發生錯誤: {e}")          
                     
         # 加載遊戲設定資料
-        with open(f"{self.data_dir}/GameSetting.json", encoding="utf-8") as f:
+        with open(CommonFunction.get_data_path("data","GameSetting.json"), encoding="utf-8") as f:
             gameSetting_data = json.load(f)
             self.GameSettingDic = {c["GameSettingID"]: GameSettingDataModel(**c) for c in gameSetting_data}        
             
         # 加載地區資料
-        with open(f"{self.data_dir}/Area.json", encoding="utf-8") as f:
+        with open(CommonFunction.get_data_path("data","Area.json"), encoding="utf-8") as f:
             areas_data = json.load(f)
             self.AreaDataDic = {c["AreaID"]: AreaData(**c) for c in areas_data}   
             
         # 加載地區資料
-        with open(f"{self.data_dir}/LvAndExp.json", encoding="utf-8") as f:
+        with open(CommonFunction.get_data_path("data","LvAndExp.json"), encoding="utf-8") as f:
             lvAndExp_data = json.load(f)
             self.ExpAndLvDic = {c["Lv"]: LvAndExpDataModel(**c) for c in lvAndExp_data}   
