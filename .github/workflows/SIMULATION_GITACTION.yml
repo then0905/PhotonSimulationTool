@@ -1,0 +1,47 @@
+name: Build EXE and Push to Unity Repo
+
+on:
+  push:
+    branches: [ "master" ] # 請確認你的主分支是 master 而不是 main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: 檢出 Python 程式碼
+      uses: actions/checkout@v4 # 建議更新到 v4
+
+    - name: 設定 Python
+      uses: actions/setup-python@v5 # 建議更新到 v5
+      with:
+        python-version: '3.13'
+
+    - name: 安裝依賴並打包
+      run: |
+        pip install pyinstaller
+        if (Test-Path requirements.txt) { pip install -r requirements.txt }
+        pyinstaller --onefile --name "SimulationTool" simulator_gui.py
+
+    - name: 將 EXE 推送到 Unity 儲存庫
+      env:
+        # 重要：這裡必須引用你在 Secrets 設定的名稱，而不是直接貼上 ghp_...
+        MY_REPO_TOKEN: ${{ secrets.UNITY_REPO_TOKEN }} 
+      run: |
+        git config --global user.email "then0905@gmail.com"
+        git config --global user.name "自動化腳本(更新模擬工具exe)"
+        
+        # 使用環境變數帶入 Token 進行 Clone
+        git clone "https://x-access-token:${env:MY_REPO_TOKEN}@github.com/then0905/HLO_new.git" unity_repo
+        
+        # 確保目標資料夾存在 (防止初次執行失敗)
+        mkdir -p unity_repo/Assets/Tools/
+        
+        # 複製檔案
+        cp dist/SimulationTool.exe unity_repo/Assets/Tools/
+        
+        cd unity_repo
+        git add Assets/Tools/SimulationTool.exe
+        
+        # 檢查是否有變動，避免沒有更新時 commit 報錯
+        git diff --quiet && git diff --staged --quiet || (git commit -m "Update Simulation Tool from Python CI" && git push)
