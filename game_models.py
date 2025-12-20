@@ -446,7 +446,7 @@ class GameData:
         self.GameTextDataDic = {}
         for file in TextJsonFile:
                 try:
-                    with open(f"data/{file}", encoding="utf-8") as f:
+                    with open(CommonFunction.get_data_path("data",file) ,encoding="utf-8") as f:
                         data = json.load(f)
                         self.GameTextDataDic.update({
                             item["TextID"]: GameText(**item)
