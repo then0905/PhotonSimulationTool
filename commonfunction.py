@@ -39,7 +39,7 @@ class CommonFunction:
     
     def load_status_effect_icon(effectId:str):
         """
-        讀取效果Icon資源 
+        讀取效果Icon資源
         """
         return CommonFunction.load_image_resource(f'status_effect_icon',effectId)
 
