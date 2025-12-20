@@ -26,7 +26,7 @@ jobs:
     - name: 將 EXE 推送到 Unity 儲存庫
       env:
         # 重要：這裡必須引用你在 Secrets 設定的名稱，而不是直接貼上 ghp_...
-        MY_REPO_TOKEN: ${{ secrets.UNITY_REPO_TOKEN }} 
+        MY_REPO_TOKEN: ${{ secrets.SIMULATION_GITACTION }} 
       run: |
         git config --global user.email "then0905@gmail.com"
         git config --global user.name "自動化腳本(更新模擬工具exe)"
