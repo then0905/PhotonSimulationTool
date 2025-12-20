@@ -21,11 +21,11 @@ jobs:
       run: |
         pip install pyinstaller
         if (Test-Path requirements.txt) { pip install -r requirements.txt }
-        pyinstaller --onefile --name "SimulationTool" simulator_gui.py `
+        pyinstaller --onefile --name "SimulationTool" `
           --add-data "data;data" `
           --add-data "item_icon;item_icon" `
           --add-data "skill_icon;skill_icon" `
-          --add-data "status_effect_icon;status_effect_icon" `
+          --add-data "status_effect_icon;status_effect_icon"
           simulator_gui.py
 
     - name: 將 EXE 推送到 Unity 儲存庫
