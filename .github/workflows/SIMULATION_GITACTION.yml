@@ -34,8 +34,10 @@ jobs:
         # 使用環境變數帶入 Token 進行 Clone
         git clone "https://x-access-token:${env:MY_REPO_TOKEN}@github.com/then0905/HLO_new.git" unity_repo
         
-        # 確保目標資料夾存在 (防止初次執行失敗)
-        mkdir -p unity_repo/Assets/Tools/
+        # 2. 確保資料夾存在（如果不存在才建立，存在則不報錯）
+        if (!(Test-Path "unity_repo/Assets/Tools")) {
+            New-Item -ItemType Directory -Force -Path "unity_repo/Assets/Tools"
+        }
         
         # 複製檔案
         cp dist/SimulationTool.exe unity_repo/Assets/Tools/
@@ -45,3 +47,5 @@ jobs:
         
         # 檢查是否有變動，避免沒有更新時 commit 報錯
         git diff --quiet && git diff --staged --quiet || (git commit -m "Update Simulation Tool from Python CI" && git push)
+
+
