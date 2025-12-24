@@ -30,8 +30,11 @@ jobs:
 
     - name: 將 EXE 推送到 Unity 儲存庫
       env:
-        # 重要：這裡必須引用你在 Secrets 設定的名稱，而不是直接貼上 ghp_...
-        MY_REPO_TOKEN: ${{ secrets.SIMULATION_GITACTION }} 
+        # 重要：這裡必須引用你在 Secrets 設定的名稱
+        MY_REPO_TOKEN: ${{ secrets.SIMULATION_GITACTION }}
+        # 取得原始 Commit 訊息與完整的 SHA
+        SRC_MSG: ${{ github.event.head_commit.message }}
+        SRC_SHA: ${{ github.sha }}
       run: |
         git config --global user.email "Im bot (CICD)"
         git config --global user.name "自動化腳本(更新模擬工具exe)"
@@ -39,16 +42,22 @@ jobs:
         # 使用環境變數帶入 Token 進行 Clone
         git clone "https://x-access-token:${env:MY_REPO_TOKEN}@github.com/then0905/HLO_new.git" unity_repo
         
-        # 2. 確保資料夾存在（如果不存在才建立，存在則不報錯）
+        # 確保資料夾存在
         if (!(Test-Path "unity_repo/Assets/Tools")) {
             New-Item -ItemType Directory -Force -Path "unity_repo/Assets/Tools"
         }
         
-        # 複製檔案
+        # 複製產出的 EXE
         cp dist/SimulationTool.exe unity_repo/Assets/Tools/
         
         cd unity_repo
+        
+        # 處理 Commit 訊息：取得前 7 碼 SHA 並組合訊息
+        $shortSha = $env:SRC_SHA.Substring(0, 7)
+        # 這裡將你原本想要的標題與新的內容串接在一起
+        $finalCommitMsg = "[Update] 更新 模擬工具exe (Update Simulation from Python CI) - $env:SRC_MSG (Commit: $shortSha)"
+        
         git add Assets/Tools/SimulationTool.exe
         
-        # 檢查是否有變動，避免沒有更新時 commit 報錯
-        git diff --quiet && git diff --staged --quiet || (git commit -m "[Update] 更新 模擬工具exe (Update Simulation ool from Python CI)" && git push)
+        # 檢查是否有變動，並使用組合後的變數 $finalCommitMsg 提交
+        git diff --quiet && git diff --staged --quiet || (git commit -m "$finalCommitMsg" && git push)

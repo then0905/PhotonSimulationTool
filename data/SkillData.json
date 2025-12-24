@@ -1759,7 +1759,10 @@
           "EquipWeapon_Shield"
         ],
         "EffectRecive": -2,
-        "TargetCount": 1
+        "TargetCount": 1,
+        "Bonus": [
+          "HP"
+        ]
       }
     ]
   },

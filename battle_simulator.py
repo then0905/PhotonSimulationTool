@@ -3,7 +3,7 @@ from typing import Dict, Optional, List
 from dataclasses import dataclass, field,fields
 from game_models import GameData, ItemsDic, SkillData, SkillOperationData, MonsterDataModel, MonsterDropItemDataModel, \
     ArmorDataModel, WeaponDataModel, ItemDataModel, JobBonusDataModel, StatusFormulaDataModel, GameText, \
-    GameSettingDataModel, AreaData, LvAndExpDataModel
+    GameSettingDataModel, AreaData, LvAndExpDataModel,ItemEffectData
 from formula_parser import FormulaParser
 from typing import Tuple
 from commonfunction import CommonFunction
@@ -341,11 +341,28 @@ class BattleCharacter:
         """
         處理任何恢復效果 
         """
-        maxValue = "MaxMP" if op.InfluenceStatus == "MP" else "MaxHP"
-        if op.InfluenceStatus in target.stats:
-            target.stats[op.InfluenceStatus] = CommonFunction.clamp(target.stats[op.InfluenceStatus] + op.EffectValue,
-                                                                target.stats[op.InfluenceStatus],
-                                                                target.stats[maxValue])
+        maxValue = ""
+        logRecoveryText = ""
+        match (op):
+            case SkillOperationData():
+                maxValue = "MaxMP" if op.Bonus[0] == "MP" else "MaxHP"
+                if op.Bonus[0] in target.stats:
+                    target.stats[op.Bonus[0]] = CommonFunction.clamp(
+                        target.stats[op.Bonus[0]] + round(op.EffectValue * target.stats[op.InfluenceStatus]),
+                        target.stats[op.Bonus[0]],
+                        target.stats[maxValue])
+                    logRecoveryText= round(op.EffectValue * target.stats[op.InfluenceStatus])
+
+            case ItemEffectData():
+                maxValue = "MaxMP" if op.InfluenceStatus == "MP" else "MaxHP"
+                if op.InfluenceStatus in target.stats:
+                    logRecoveryText =  op.EffectValue
+                    target.stats[op.InfluenceStatus] = CommonFunction.clamp(
+                        target.stats[op.InfluenceStatus] + op.EffectValue,
+                        target.stats[op.InfluenceStatus],
+                        target.stats[maxValue])
+
+
 
         self.update_hp_mp()
         color_code = "#2945FF" if op.InfluenceStatus == "MP" else "#ff0000";
@@ -357,7 +374,7 @@ class BattleCharacter:
             "descript_color": "#ff9300",
             "target_text": target.name,
             "target_color": "#83ff00",
-        }, "effectRecovery", f"<color={color_code}>{op.EffectValue} {recovery_type} </color>"), op.EffectValue, 0
+        }, "effectRecovery", f"<color={color_code}>{logRecoveryText} {recovery_type} </color>"), op.EffectValue, 0
 
     #region 戰鬥數值 計算
 
