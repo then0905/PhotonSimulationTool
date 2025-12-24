@@ -52,10 +52,10 @@ jobs:
         
         cd unity_repo
         
-        # 處理 Commit 訊息：取得前 7 碼 SHA 並組合訊息
-        $shortSha = $env:SRC_SHA.Substring(0, 7)
+        # 處理 Commit 訊息：取得 SHA 並組合訊息
+        $shortSha = $env:SRC_SHA
         # 這裡將你原本想要的標題與新的內容串接在一起
-        $finalCommitMsg = "[Update] 更新 模擬工具exe (Update Simulation from Python CI) - $env:SRC_MSG (Commit: $shortSha)"
+        $finalCommitMsg = "[Update] 更新 模擬工具exe (Update Simulation from Python CI)`n `n 更新內容 `n $env:SRC_MSG `n (Commit: $shortSha)"
         
         git add Assets/Tools/SimulationTool.exe
         
