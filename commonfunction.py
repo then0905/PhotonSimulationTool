@@ -127,6 +127,11 @@ class CommonFunction:
                 f' 使用 <size={log_dic["descript_size"]}><color={log_dic["descript_color"]}>{log_dic["descript_text"]}</color></size>'
                 f' 對 <size={log_dic["target_size"]}><color={log_dic["target_color"]}>{log_dic["target_text"]}</color></size>'
                 f'恢復 {other}')
+            case "recoveryDmg":
+                return (
+                    f'<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>'
+                    f' 因為吸血效果，'
+                    f' 回復了 <size={log_dic["descript_size"]}><color={log_dic["descript_color"]}>{log_dic["descript_text"]}</color></size> 的生命')
             case "naturalHpRecovery":
                 return (f'自然回復生命 讓<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>' 
                 f' 恢復了 [ <size={log_dic["descript_size"]}><color={log_dic["descript_color"]}>{log_dic["descript_text"]} 生命 ]</color></size>{'\n'}')

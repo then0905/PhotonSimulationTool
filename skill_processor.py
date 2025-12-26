@@ -5,17 +5,22 @@ import copy
 
 class SkillProcessor:
     @staticmethod
-    def _execute_skill_operation(skillData: SkillData, attacker, defender) -> Tuple[str, int, float]:
+    def _execute_skill_operation(skillData: SkillData, attacker, defender)-> Optional[Tuple[str, int, float]]:
         """實現技能效果執行入口"""
         returnResult = []
 
         # 普通攻擊特殊處理
         if skillData.Name == "普通攻擊":
-            returnResult.append(attacker.HitCalculator(skillData, defender))
+            #模擬技能端的資料儲存方式 參考Damage組件
+            attackerResult = attacker.HitCalculator(skillData, defender)
+            for result in attackerResult:
+                returnResult.append(result)
+
             return returnResult
 
         # 執行效果
-        returnResult.append(SkillProcessor._execute_component(skillData, attacker, defender))
+        skillResult = SkillProcessor._execute_component(skillData, attacker, defender)
+        returnResult.append(skillResult)
 
         return returnResult
 
@@ -101,13 +106,15 @@ class SkillProcessor:
 
             match op.SkillComponentID:
                 case "Damage":
-                    temp = attacker.HitCalculator(tempSkillData, target)
-                    returnResult.append(temp)
+                    attackerResult = attacker.HitCalculator(tempSkillData, target)
+                    for result in attackerResult:
+                        returnResult.append(result)
                     # 判斷是否成功：damage > 0 或有效果觸發
-                    success = temp[1] > 0 if len(temp) > 1 else True
+                    temp = attackerResult[0]
+                    success = temp[1] > 0
                 case "ElementDamage":
-                    temp = attacker.HitCalculator(tempSkillData, target)
-                    returnResult.append(attacker.HitCalculator(tempSkillData, target))
+                    temp = attacker.ElementAttackCalulator(tempSkillData,op, target)
+                    returnResult.append(temp)
                     # 判斷是否成功：damage > 0 或有效果觸發
                     success = temp[1] > 0 if len(temp) > 1 else True
 
@@ -115,8 +122,10 @@ class SkillProcessor:
                     returnResult.append(SkillProcessor.status_skill_effect_start(op, attacker, target))
 
                 case "MultipleDamage":
-                    temp = attacker.HitCalculator(tempSkillData, target)
-                    returnResult.append(attacker.HitCalculator(tempSkillData, target))
+                    attackerResult = attacker.HitCalculator(tempSkillData, target)
+                    for result in attackerResult:
+                        returnResult.append(result)
+                    temp = attackerResult[0]
                     # 判斷是否成功：damage > 0 或有效果觸發
                     success = temp[1] > 0 if len(temp) > 1 else True
 

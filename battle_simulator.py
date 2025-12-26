@@ -378,7 +378,7 @@ class BattleCharacter:
 
     #region 戰鬥數值 計算
 
-    def HitCalculator(self, skill: SkillData, target) -> Tuple[str, int, float]:
+    def HitCalculator(self, skill: SkillData, target):
         """
         命中計算
         """
@@ -407,31 +407,34 @@ class BattleCharacter:
         if is_hit <= hit_value:
             return self.BlockCalculator(skill, target)
         else:
-            return CommonFunction.battlelog_text_processor({
+            missResult = CommonFunction.battlelog_text_processor({
                 "caster_text": self.name,
                 "caster_color": "#636363",
                 "caster_size": 12,
                 "descript_text": CommonFunction.get_text(skill.Name),
                 "descript_color": "#ff9300",
             }, "miss"), 0, self.attackTimer
+            return [missResult]
 
-    def BlockCalculator(self, skill: SkillData, target) -> Tuple[str, int, float]:
+
+    def BlockCalculator(self, skill: SkillData, target):
         """
         格檔計算
         """
         is_block = random.randint(0, 100)
         if (is_block <= self.stats["BlockRate"]):
-            return CommonFunction.battlelog_text_processor({
+            blockResult = CommonFunction.battlelog_text_processor({
                 "caster_text": self.name,
                 "caster_color": "#636363",
                 "caster_size": 12,
                 "descript_text": CommonFunction.get_text(skill.Name),
                 "descript_color": "#ff9300",
             }, "block"), 0, self.attackTimer
+            return [blockResult]
         else:
             return self.CrtCalculator(skill, target)
 
-    def CrtCalculator(self, skill: SkillData, target) -> Tuple[str, int, float]:
+    def CrtCalculator(self, skill: SkillData, target):
         """
         暴擊計算
         """
@@ -445,7 +448,7 @@ class BattleCharacter:
 
         return self.AttackCalculator(skill, target, (is_Crt <= crt_value));
 
-    def AttackCalculator(self, skill: SkillData, target, is_Crt: bool) -> Tuple[str, int, float]:
+    def AttackCalculator(self, skill: SkillData, target, is_Crt: bool):
         """
         攻擊計算
         """
@@ -480,6 +483,9 @@ class BattleCharacter:
                 case _:
                     print("未知屬性")
 
+        #暫存結果
+        returnResult = []
+
         # 實現技能效果
         parser = FormulaParser()
         variables = {
@@ -512,15 +518,22 @@ class BattleCharacter:
         target.stats["HP"] -= finalDamage
 
         color_code = f'<color=#ffd600><size=13><b>{finalDamage}</size></color></b>' if is_Crt else f'<color=#ff0000><size=11>{finalDamage}</size></color>'
-        return CommonFunction.battlelog_text_processor({
+
+        returnResult.append((CommonFunction.battlelog_text_processor({
             "caster_text": self.name,
             "caster_color": "#636363",
             "caster_size": 12,
             "descript_text": CommonFunction.get_text(skill.Name),
-            "descript_color": "#910000",
+            "descript_color": "#ff0000",
             "target_text": target.name,
             "target_color": "#363636"
-        }, "damage", color_code), finalDamage, self.attackTimer
+        }, "damage", color_code), finalDamage, self.attackTimer))
+
+        #處理吸血
+        if (self.stats["RecoveryDmg"] != 0 and damage != 0):
+            returnResult.append(self.RecoveryDmgProcessor(finalDamage))
+
+        return returnResult
 
     def ElementAttackCalulator(self, skill:SkillData,op: SkillOperationData, target)-> Tuple[str, int, float]:
         """
@@ -591,6 +604,22 @@ class BattleCharacter:
         newDamage = newDamage*finalDamageReductionRate
         return newDamage
 
+
+    def RecoveryDmgProcessor(self,damage):
+        """
+        吸血效果處理
+        """
+
+        recoveryValue = round(damage*self.stats["RecoveryDmg"]/100)
+        self.stats["HP"] = CommonFunction.clamp(self.stats["HP"] + recoveryValue,self.stats["HP"],self.stats["MaxHP"])
+
+        return CommonFunction.battlelog_text_processor({
+            "caster_text": self.name,
+            "caster_color": "#00ffdc",
+            "descript_text": recoveryValue,
+            "descript_color": "#ff9300",
+        }, "recoveryDmg"), 0, 0
+
     #endregion
 
     def SkillEffectStatusOperation(self, stateType: str, isRate: bool, value: float):
@@ -635,7 +664,7 @@ class BattleCharacter:
     def _recalculate_stats(self):
         for f in fields(StatusValues):
             name = f.name
-            if(name is not 'HP' and name is not 'MP'):
+            if name != 'HP' and name != 'MP':
                 self.stats[name] = getattr(self.basal, name) + getattr(self.equip, name) + getattr(self.effect, name)
 
         # 套 buff 增加的當前 HP/MP
@@ -698,8 +727,7 @@ class BattleSimulator:
                     # 其他必要參數...
                 )
                 if attacker.action_check(normal_attack):
-                    for temp in SkillProcessor._execute_skill_operation(normal_attack, attacker, target,):
-                        log_msg, damage, attack_timer = temp
+                    for log_msg, damage, attack_timer in SkillProcessor._execute_skill_operation(normal_attack, attacker, target):
                         self.battle_log.append(log_msg)
                         reward += damage
                         total_attack_timer += attack_timer
@@ -728,12 +756,13 @@ class BattleSimulator:
                     #print(
                         #f"{attacker.name} 使用 ：{CommonFunction.get_text(skill.Name)} ({skill.SkillID}) 原本魔力為：{attacker.stats["MP"]} 消耗魔力為：{skill.CastMage}")
                     attacker.stats["MP"] -= skill.CastMage
-                    for temp in SkillProcessor._execute_skill_operation(skill, attacker, target):
-                        if temp is None:
+                    for resultList in SkillProcessor._execute_skill_operation(skill, attacker, target):
+                        if resultList is None:
                             print(f"資料有錯喔!: {skill.SkillID}  → temp 本身就是 None")
-                        elif isinstance(temp, list) and any(x is None for x in temp):
-                            print(f"資料有錯喔!: {skill.SkillID}  → temp 裡面有 None: {temp}")
-                        for log_msg, damage, attack_timer in temp:
+                        elif isinstance(resultList, list) and any(x is None for x in resultList):
+                            print(f"資料有錯喔!: {skill.SkillID}  → temp 裡面有 None: {resultList}")
+                        for temp in resultList:
+                            log_msg, damage, attack_timer = temp
                             self.battle_log.append(log_msg)
                             self.battle_log.append(CommonFunction.battlelog_text_processor({
                             "caster_text": attacker.name,
