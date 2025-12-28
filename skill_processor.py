@@ -373,7 +373,7 @@ class SkillProcessor:
             case "RemoveAllCC":
                 debuffskills = list(caster.debuff_skill.keys())
                 for skillid in debuffskills:
-                    caster.debuff_bar(skillid)
+                    caster.debuff_bar.remove_effect(skillid)
                 caster.debuff_skill = {}
                 return (CommonFunction.battlelog_text_processor({
                     "caster_text": caster.name,
