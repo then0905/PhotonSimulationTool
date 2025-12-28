@@ -884,6 +884,17 @@
         "EffectValue": 1.55,
         "EffectRecive": -1,
         "TargetCount": 1
+      },
+      {
+        "SkillID": "Berserker_3",
+        "SkillComponentID": "Debuff",
+        "DependCondition": "Prev",
+        "EffectValue": 15,
+        "InfluenceStatus": "Bleeding",
+        "AddType": "Value",
+        "EffectDurationTime": 5,
+        "EffectRecive": -1,
+        "TargetCount": 3
       }
     ]
   },
