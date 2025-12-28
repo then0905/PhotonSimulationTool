@@ -30,7 +30,7 @@ class BattleCharacter:
     skills: List[SkillData]
     items: List[Tuple[ItemDataModel, int]]
     characterType: bool  #當前攻擊者類型 True:人物 False:怪物
-    attackTimer: float = 0  #普通攻擊計時器
+    attackTimer: float = 0.0  #普通攻擊計時器
 
     #UI物件
     buff_bar: Optional[object] = None  #buff效果提示欄
@@ -47,11 +47,11 @@ class BattleCharacter:
     buff_skill: Dict[str, Tuple[SkillData, float]] = field(default_factory=dict)  #運行中的buff效果
     buff_item: Dict[str, Tuple[ItemDataModel, float]] = field(default_factory=dict)  #運行中的buff效果
     debuff_skill: Dict[str, Tuple[SkillOperationData, float]] = field(default_factory=dict)  #運行中的負面狀態
-    controlled_for_attack: float = 0  #受到控制不得使用普通攻擊類型
-    controlled_for_skill: float = 0  #受到控制不得使用技能類型
+    controlled_for_attack: float = 0.0  #受到控制不得使用普通攻擊類型
+    controlled_for_skill: float = 0.0  #受到控制不得使用技能類型
     attackTimerFunc = None  #儲存普攻計時任務
-    hp_recovery_time: float = 0  #血量自然恢復間隔計時
-    mp_recovery_time: float = 0  #魔力自然恢復間隔計時
+    hp_recovery_time: float = 0.0  #血量自然恢復間隔計時
+    mp_recovery_time: float = 0.0  #魔力自然恢復間隔計時
     update_hp_mp = None  #用來儲存更新雙方血量魔力的匿名方法
     additive_buff_event: Event = field(default_factory=Event, init=False, repr=False)  #滿足條件的Buff持續疊加的事件
     additive_buff_time = 0  #滿足條件的Buff 作用的間隔時間
@@ -230,6 +230,7 @@ class BattleCharacter:
         else:
             self.buff_bar.add_skill_effect(skillData.SkillID, skillData)
             self.buff_skill[skillData.SkillID] = (skillData, op.EffectDurationTime)
+            self.SkillEffectStatusOperation(op.InfluenceStatus, (op.AddType == "Rate"), op.EffectValue)
 
     def add_skill_passive_effect(self, skillData: SkillData, op):
         """
@@ -622,6 +623,8 @@ class BattleCharacter:
 
     #endregion
 
+    #region 效果影響能力值的計算
+
     def SkillEffectStatusOperation(self, stateType: str, isRate: bool, value: float):
         """
         技能效果運算
@@ -655,13 +658,29 @@ class BattleCharacter:
         self.character_overview.update_state(self.stats)
 
     def _apply_effect(self, attr: str, isRate: bool, value: float):
+        """
+        效果影響的參數加成處理
+        """
         base_val = getattr(self.basal, attr)
-        add_val = round(base_val * value) if isRate else round(value)
+
+        if isRate:
+            add_val = base_val * value
+        else:
+            add_val = value
+
+        # 只有在 base_val 是 int 才 round
+        if isinstance(base_val, int):
+            add_val = round(add_val)
+
         current = getattr(self.effect, attr)
         setattr(self.effect, attr, current + add_val)
-        return add_val  # 給 HP/MP 用
+        return add_val
 
     def _recalculate_stats(self):
+        """
+        能力值運算計算
+        """
+
         for f in fields(StatusValues):
             name = f.name
             if name != 'HP' and name != 'MP':
@@ -670,7 +689,7 @@ class BattleCharacter:
         # 套 buff 增加的當前 HP/MP
         self.stats["HP"] += self.tempHp
         self.stats["MP"] += self.tempMp
-
+    #endregion
 
 class BattleSimulator:
     def __init__(self, game_data, gui):

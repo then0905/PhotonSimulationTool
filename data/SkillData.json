@@ -971,7 +971,7 @@
         "DependCondition": "None",
         "EffectValue": 0.2,
         "InfluenceStatus": "RecoveryDmg",
-        "AddType": "Rate",
+        "AddType": "Value",
         "EffectDurationTime": 180,
         "EffectRecive": 0
       }

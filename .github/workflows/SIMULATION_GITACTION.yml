@@ -55,7 +55,7 @@ jobs:
         # 處理 Commit 訊息：取得 SHA 並組合訊息
         $shortSha = $env:SRC_SHA
         # 這裡將你原本想要的標題與新的內容串接在一起
-        $finalCommitMsg = "[Update] 更新 模擬工具exe (Update Simulation from Python CI)`n `n 更新內容 `n $env:SRC_MSG `n (Commit: $shortSha)"
+        $finalCommitMsg = "[Update] 更新 模擬工具exe (Update Simulation from Python CI)`n `n更新內容 `n$env:SRC_MSG `n (Commit: $shortSha)"
         
         git add Assets/Tools/SimulationTool.exe
         

@@ -18,7 +18,7 @@ class CharacterStatus_Core:
     RemoteHit: int = 0  # 遠程命中率
     MageHit: int = 0  # 魔法命中率
     MDEF: int = 0  # 魔法防禦力
-    Speed: float = 0  # 移動速度
+    Speed: float = 0.0  # 移動速度
     AS: int = 0  # 攻擊速度 (Attack Speed)
     DamageReduction: int = 0  # 傷害減免
     ElementDamageIncrease: int = 0  # 元素傷害增加
@@ -36,20 +36,20 @@ class CharacterStatus_Secret:
     """
     隱密能力值
     """
-    IncreaseDmgRate:float = 0 #傷害增加(倍率)
+    IncreaseDmgRate:float = 0.0 #傷害增加(倍率)
     IncreaseDmgValue:int = 0 #傷害增加(值)
     FinalDamageReductionRate:float = 0   #總傷害減免(傷害公式計算完後乘上)
     ElementDamageIncrease:int = 0
-    RecoveryDmg:float = 0 #吸收傷害回血  (小數點)
-    Damage:float = 0 #總傷害(傷害公式計算完成後乘上)
-    IncreaseMeleeRange:float = 0 #近距離攻擊範圍增強
+    RecoveryDmg:float = 0.0 #吸收傷害回血  (小數點)
+    Damage:float = 0.0 #總傷害(傷害公式計算完成後乘上)
+    IncreaseMeleeRange:float = 0.0 #近距離攻擊範圍增強
     
 @dataclass
 class CharacterStatus_Debuff:
     """
     負面影響能力值
     """
-    SpeedSlowRate: float = 0  # 移動速度
+    SpeedSlowRate: float = 0.0  # 移動速度
     
 @dataclass
 class CharacterStatus_Element:
