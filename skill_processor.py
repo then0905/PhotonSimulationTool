@@ -179,8 +179,8 @@ class SkillProcessor:
                     attacker.enhance_skill_dict[key].append(tempSkillData)
                     returnResult.append((CommonFunction.battlelog_text_processor({
                         "caster_text": attacker.name,
-                        "target_text": CommonFunction.get_text(tempSkillData.Name),
-                        "descript_text": CommonFunction.get_text(GameData.Instance.SkillDataDic[key].Name),
+                        "target_text": CommonFunction.get_text(GameData.Instance.SkillDataDic[key].Name),
+                        "descript_text": CommonFunction.get_text(tempSkillData.Name),
                     }, "enhanceSkill"), 0, 0))
                     break
                 case "UpgradeSkill":
@@ -194,8 +194,8 @@ class SkillProcessor:
                     attacker.upgrade_skill_dict[key].append(tempSkillData)
                     returnResult.append((CommonFunction.battlelog_text_processor({
                         "caster_text": attacker.name,
-                        "target_text": CommonFunction.get_text(tempSkillData.Name) ,
-                        "descript_text": CommonFunction.get_text(GameData.Instance.SkillDataDic[key].Name),
+                        "target_text": CommonFunction.get_text(GameData.Instance.SkillDataDic[key].Name),
+                        "descript_text": CommonFunction.get_text(tempSkillData.Name) ,
                     }, "upgradeSkill"), 0, 0))
                 case _:
                     returnResult.append(("",0,0))
