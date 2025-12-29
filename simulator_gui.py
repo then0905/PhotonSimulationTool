@@ -18,8 +18,9 @@ class BattleSimulatorGUI:
     jobNameDict: Dict[str, str] = {}
     monsterNameDict: Dict[str, str] = {}
 
-    def __init__(self, root):
+    def __init__(self, root, model):
         self.root = root
+        self.model = model
         self.root.title("UnityAI")
         self.root.resizable(False, False)
 
@@ -340,8 +341,10 @@ class BattleSimulatorGUI:
                 self.popup = None
 
         class ItemManager:
-            def __init__(self, root):
+            def __init__(self, root, prefix,view):
                 self.root = root
+                self.prefix = prefix
+                self.view = view
                 # 攜帶的道具資料結構 {item_id: {"count": 數量, "name": 名稱}}
                 self.carried_items = {}
                 self.view_window = None  # 記錄查看道具視窗
@@ -361,12 +364,20 @@ class BattleSimulatorGUI:
                     if len(item.ItemEffectDataList) > 0
                 ]
 
+                current_saved_data = self.view.model.current_config
+
                 # 動態生成道具清單
                 for i, item in enumerate(filtered_items):
-                    var = tk.BooleanVar(value=item.CodeID in self.carried_items)
-                    count_var = tk.IntVar(
-                        value=self.carried_items.get(item.CodeID, {}).get("count", 1)
-                    )
+                    check_key = f"{self.prefix}_item_check_{item.CodeID}"
+                    count_key = f"{self.prefix}_item_count_{item.CodeID}"
+
+                    # 1. 嘗試從已讀取的 JSON 資料中抓取，若無則用預設值
+                    saved_check = current_saved_data.get(check_key, item.CodeID in self.carried_items)
+                    saved_count = current_saved_data.get(count_key, self.carried_items.get(item.CodeID, {}).get("count", 1))
+
+                    # 2. 建立變數並給予「來自 JSON」的初始值
+                    var = self.view.create_var(check_key, tk.BooleanVar, saved_check)
+                    count_var = self.view.create_var(count_key, tk.IntVar, saved_count)
 
                     item_vars[item.CodeID] = var
                     item_counts[item.CodeID] = count_var
@@ -651,7 +662,7 @@ class BattleSimulatorGUI:
         
         # === 道具按鈕 ===
         # 建立管理器
-        self.player_item_manager = ItemManager(player_equipment_frame)
+        self.player_item_manager = ItemManager(player_equipment_frame,"player",self)
 
         # 按鈕打開道具選擇
         ttk.Button(player_equipment_frame, text="選擇攜帶道具", command=self.player_item_manager.open_item_window).grid(row=999, column=0, pady=10)
@@ -801,7 +812,7 @@ class BattleSimulatorGUI:
         # === 道具按鈕 ===
         # 點擊按鈕，先選道具，再開另一個視窗
         # 建立管理器
-        self.enemy_item_manager = ItemManager(self.enemy_equipment_frame)
+        self.enemy_item_manager = ItemManager(self.enemy_equipment_frame,"enemy",self)
 
         # 按鈕打開道具選擇
         ttk.Button(self.enemy_equipment_frame, text="選擇攜帶道具", command=self.enemy_item_manager.open_item_window).grid(row=999, column=0, pady=10)
@@ -1321,7 +1332,7 @@ def toggle_pause():
 if __name__ == "__main__":
     root = tk.Tk()
     model = UserConfigModel()
-    app = BattleSimulatorGUI(root)
+    app = BattleSimulatorGUI(root,model)
     controller = UserConfigController(model,app)
     os.environ["PAUSED"] = "0"
     root.mainloop()
