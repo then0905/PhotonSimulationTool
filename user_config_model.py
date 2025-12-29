@@ -2,8 +2,16 @@ import json
 import os
 
 class UserConfigModel:
-    def __init__(self, filepath="config.json"):
-        self.filepath = filepath
+    def __init__(self, app_name="MySimulator"):
+        # 取得 AppData/Roaming 路徑
+        appdata = os.getenv('APPDATA')
+        self.config_dir = os.path.join(appdata, app_name)
+        self.filepath = os.path.join(self.config_dir, "user_config.json")
+
+        # 確保資料夾存在
+        if not os.path.exists(self.config_dir):
+            os.makedirs(self.config_dir)
+
         # 這裡是預設配置 (資料結構)
         self.default_config = {
             "player_name": "玩家1",
