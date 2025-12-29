@@ -647,7 +647,7 @@ class BattleSimulatorGUI:
             row=6, column=0, columnspan=2, padx=1, pady=1, sticky=tk.W
         )
         self.player_equipment_data = self.common_EquipmentUI(
-            player_equipment_frame)
+            player_equipment_frame,"player")
         
         # === 道具按鈕 ===
         # 建立管理器
@@ -797,7 +797,7 @@ class BattleSimulatorGUI:
             row=8, column=0, columnspan=2, padx=1, pady=1, sticky=tk.W
         )
         self.enemy_equipment_data = self.common_EquipmentUI(
-            self.enemy_equipment_frame)
+            self.enemy_equipment_frame,"enemy")
         # === 道具按鈕 ===
         # 點擊按鈕，先選道具，再開另一個視窗
         # 建立管理器
@@ -885,7 +885,7 @@ class BattleSimulatorGUI:
 
         root.update_idletasks()
 
-    def common_EquipmentUI(self, frame):
+    def common_EquipmentUI(self, frame,prefix):
         """
         通用的裝備以及道具攜帶的UI建立
         """
@@ -906,7 +906,7 @@ class BattleSimulatorGUI:
             ttk.Label(frame, text=(CommonFunction.get_text(f"TM_{part}")) + " :").grid(
                 row=i, column=0, sticky=tk.W
             )
-            armor_id = tk.StringVar()
+            armor_id = self.create_var(f"{prefix}_armor_id_{i}", tk.StringVar)
             ttk.Combobox(
                 frame,
                 textvariable=armor_id,
@@ -917,7 +917,7 @@ class BattleSimulatorGUI:
                 ],
                 width=15,
             ).grid(row=i, column=1)
-            armor_forge_lv = tk.IntVar(value=0)
+            armor_forge_lv = self.create_var(f"{prefix}_armor_forge_lv_{i}", tk.IntVar,0)
             armor_forgeLv_spinbox = ttk.Spinbox(
                 frame, from_=0, to=10, textvariable=armor_forge_lv, width=5
             )
@@ -939,8 +939,8 @@ class BattleSimulatorGUI:
             for weapon in GameData.Instance.WeaponsDic.values()
             if weapon.TakeHandID in ["RightHand", "BothHand", "SingleHand"]
         )
-
-        mainhandweapon_id = tk.StringVar()
+        mainhandweapon_id = self.create_var(f"{prefix}_mainhandweapon_id", tk.StringVar)
+        #mainhandweapon_id = tk.StringVar()
         mainhandweapon_combobox = ttk.Combobox(
             frame,
             textvariable=mainhandweapon_id,
@@ -949,7 +949,7 @@ class BattleSimulatorGUI:
             width=15,
         )
         mainhandweapon_combobox.grid(row=len(parts), column=1)
-        mainhandweapon_forge_lv = tk.IntVar(value=0)
+        mainhandweapon_forge_lv = self.create_var(f"{prefix}_mainhandweapon_forge_lv", tk.IntVar,0)
         mainhandweapon_forgeLv_spinbox = ttk.Spinbox(
             frame, from_=0, to=10, textvariable=mainhandweapon_forge_lv, width=5
         )
