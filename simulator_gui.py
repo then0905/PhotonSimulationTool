@@ -42,6 +42,8 @@ class BattleSimulatorGUI:
         self.enemy_frame
         self.main_frame
 
+        self.last_battle_data ={}
+
     def create_var(self, key, var_type, default=None):
         """
         【工廠方法】
@@ -1249,7 +1251,7 @@ class BattleSimulatorGUI:
             messagebox.showinfo("提示", "請先進行一場戰鬥")
             return
 
-        StatsAnalyzer.plot_skill_usage(self.last_battle_data["skill_usage"])
+        StatsAnalyzer.plot_skill_usage(self.last_battle_data["player_skill_usage"],self.last_battle_data["enemy_skill_usage"])
 
     def show_win_rate(self):
         if not self.battle_results:

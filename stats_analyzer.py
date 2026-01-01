@@ -10,7 +10,7 @@ class StatsAnalyzer:
     
     @staticmethod
     def plot_damage_distribution(damage_data: List[Dict], title="傷害分布"):
-        damages = [d["damage"] for d in damage_data]
+        damages = [d["Damage"] for d in damage_data]
         plt.figure(figsize=(10, 5))
         plt.hist(damages, bins=20, alpha=0.7)
         plt.title(title)
@@ -18,23 +18,45 @@ class StatsAnalyzer:
         plt.ylabel("出現次數")
         plt.grid(True)
         plt.show()
-    
+
     @staticmethod
-    def plot_skill_usage(skill_usage: Dict[str, int], title="技能使用頻率"):
-        skills = list()
-        for skill in list(skill_usage.keys()):
-            skills.append(CommonFunction.get_text(skill));
-        counts = list(skill_usage.values())
-        
-        plt.figure(figsize=(10, 5))
-        plt.bar(skills, counts, alpha=0.7)
-        plt.title(title)
+    def plot_skill_usage(
+            player_skill_usage: Dict[str, int],
+            enemy_skill_usage: Dict[str, int],
+            title="技能使用頻率"
+    ):
+        # 玩家資料
+        player_skills = [CommonFunction.get_text(s) for s in player_skill_usage.keys()]
+        player_counts = list(player_skill_usage.values())
+
+        # 敵人資料
+        enemy_skills = [CommonFunction.get_text(s) for s in enemy_skill_usage.keys()]
+        enemy_counts = list(enemy_skill_usage.values())
+
+        plt.figure(figsize=(14, 5))  # 只開一次
+
+        # 左圖：玩家
+        plt.subplot(1, 2, 1)
+        plt.bar(player_skills, player_counts, alpha=0.7)
+        plt.title("玩家技能使用")
         plt.xlabel("技能名稱")
         plt.ylabel("使用次數")
         plt.xticks(rotation=45)
         plt.grid(True)
+
+        # 右圖：敵人
+        plt.subplot(1, 2, 2)
+        plt.bar(enemy_skills, enemy_counts, alpha=0.7)
+        plt.title("敵人技能使用")
+        plt.xlabel("技能名稱")
+        plt.ylabel("使用次數")
+        plt.xticks(rotation=45)
+        plt.grid(True)
+
+        plt.suptitle(title)
+        plt.tight_layout()
         plt.show()
-    
+
     @staticmethod
     def calculate_win_rate(results: List[bool]) -> float:
         if not results:

@@ -31,6 +31,7 @@ class BattleCharacter:
     items: List[Tuple[ItemDataModel, int]]
     characterType: bool  #當前攻擊者類型 True:人物 False:怪物
     attackTimer: float = 0.0  #普通攻擊計時器
+    skill_usage ={}
 
     #UI物件
     buff_bar: Optional[object] = None  #buff效果提示欄
@@ -712,9 +713,10 @@ class BattleSimulator:
             self.gui.root.after(int(dt * 100), lambda: self.battle_tick(player, enemy))
             return
 
-        player.pass_time(dt)
-        enemy.pass_time(dt)
-        self.gui.root.after(int(dt * 1000), lambda: self.battle_tick(player, enemy))
+        if player.is_alive() and enemy.is_alive():
+            player.pass_time(dt)
+            enemy.pass_time(dt)
+            self.gui.root.after(int(dt * 1000), lambda: self.battle_tick(player, enemy))
 
     def attack_loop(self, attacker: BattleCharacter, target):
         """獨立的攻擊計時器迴圈"""
@@ -729,6 +731,8 @@ class BattleSimulator:
         if attacker.is_alive() and target.is_alive():
             action_id, state = attacker.ai.choose_action(attacker, target)
             self.ai_choose_result(attacker.ai, state, attacker, target, action_id)
+        else:
+            self.check_battle_result(attacker,target)
 
     def ai_choose_result(self, ai, state, attacker: BattleCharacter, target: BattleCharacter, result: str):
         """
@@ -757,6 +761,12 @@ class BattleSimulator:
                             "descript_text": "普攻",
                             "descript_color": "#ff0000",
                         }, "normalAttckTimer", f"{total_attack_timer:.2f}"))
+                        self.damage_data.append({
+                            "attacker": attacker.name,
+                            "target": target.name,
+                            "skill": "NORMAL_ATTACK",
+                            "Damage": damage,
+                        })
                 else:
                     self.gui.root.after(
                         100, lambda: self.attack_loop(attacker, target)
@@ -771,6 +781,7 @@ class BattleSimulator:
             #施放技能
             case _:
                 skill = next(s for s in attacker.skills if s.SkillID == result)
+                attacker.skill_usage[CommonFunction.get_text(skill.Name)] += 1
                 if attacker.action_check(skill):
                     #print(
                         #f"{attacker.name} 使用 ：{CommonFunction.get_text(skill.Name)} ({skill.SkillID}) 原本魔力為：{attacker.stats["MP"]} 消耗魔力為：{skill.CastMage}")
@@ -793,6 +804,12 @@ class BattleSimulator:
                             attacker.skill_cooldowns[skill.SkillID] = skill.CD
                             reward += damage
                             total_attack_timer += attack_timer
+                            self.damage_data.append({
+                                "attacker":attacker.name,
+                                "target":target.name,
+                                "skill":CommonFunction.get_text(skill.Name),
+                                "Damage":damage,
+                            })
                 else:
                     self.gui.root.after(
                         100, lambda: self.attack_loop(attacker, target)
@@ -810,7 +827,8 @@ class BattleSimulator:
         """開啟戰鬥模擬"""
         self.battle_log.clear()
         self.damage_data.clear()
-        self.skill_usage = {s.Name: 0 for s in player.skills}
+        player.skill_usage = {CommonFunction.get_text(s.Name):0 for s in player.skills}
+        enemy.skill_usage = {CommonFunction.get_text(s.Name):0 for s in enemy.skills}
 
         player.battle_log = self.battle_log
         enemy.battle_log = self.battle_log
@@ -862,7 +880,8 @@ class BattleSimulator:
         # 保存戰鬥數據用於統計
         self.gui.last_battle_data = {
             "damage": self.get_damage_data(),
-            "skill_usage": self.get_skill_usage(),
+            "player_skill_usage": player.skill_usage,
+            "enemy_skill_usage": enemy.skill_usage,
             "result": player.is_alive()
         }
 
