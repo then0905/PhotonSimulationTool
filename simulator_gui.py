@@ -982,7 +982,7 @@ class BattleSimulatorGUI:
             if weapon.TakeHandID in ["SingleHand", "LeftHand"]
         )
 
-        offhandweapon_id = tk.StringVar()
+        offhandweapon_id = self.create_var(f"{prefix}_offhandweapon_id", tk.StringVar)
         offhandweapon_combobox = ttk.Combobox(
             frame,
             textvariable=offhandweapon_id,
@@ -991,7 +991,7 @@ class BattleSimulatorGUI:
             width=15,
         )
         offhandweapon_combobox.grid(row=len(parts) + 1, column=1)
-        offhandweapon_forge_lv = tk.IntVar(value=0)
+        offhandweapon_forge_lv = self.create_var(f"{prefix}_offhandweapon_forge_lv", tk.IntVar,0)
         offhandweapon_forgeLv_spinbox = ttk.Spinbox(
             frame, from_=0, to=10, textvariable=offhandweapon_forge_lv, width=5
         )
