@@ -92,11 +92,10 @@ class BattleCharacter:
                     del self.skill_cooldowns[skill_id]
         for item_id in list(self.item_cooldowns):
             if self.item_cooldowns[item_id] > 0:
-                self.item_cooldowns[item_id] = max(0, self.skill_cooldowns[item_id] - dt)
+                self.item_cooldowns[item_id] = max(0, self.item_cooldowns[item_id] - dt)
                 if self.item_cooldowns[item_id] == 0:
                     del self.item_cooldowns[item_id]
 
-                    # buff狀態遞減
         #技能Buff時間遞減
         for buff_skill_id in list(self.buff_skill):
             skillData, skillDuration = self.buff_skill[buff_skill_id]
@@ -182,6 +181,8 @@ class BattleCharacter:
             if count > 0 and item.CodeID not in self.item_cooldowns and itemid == item.CodeID:
                 # 執行道具效果，只傳 item
                 for temp in SkillProcessor.execute_item_operation(item, self, self):
+                    #道具進入CD
+                    self.item_cooldowns[item.CodeID] = item.CD
                     log_msg, damage, attack_timer = temp
 
                     # 使用後扣除數量

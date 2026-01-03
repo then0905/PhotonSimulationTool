@@ -68,18 +68,6 @@ class ai_action:
         self.old_mp = 0
         self.old_debuff_count = 0
 
-        # 新增：記憶緩衝區 (Buffer)
-        self.states = []
-        self.actions = []
-        self.rewards = []
-        self.log_probs = []
-        self.is_dones = []
-        self.values = []
-
-        # 暫存當前步驟的資訊 (供 ai_choose_result 使用)
-        self.tmp_log_prob = None
-        self.tmp_value = None
-
         # --- 動作空間映射 ---
         # 因為神經網路輸出是固定的 index，我們需要建立 index 對應到實際技能的 Map
         self.action_map = ["NORMAL_ATTACK"]
@@ -182,6 +170,29 @@ class ai_action:
                 state.append(remaining_time / max_time if max_time > 0 else 0)
             else:
                 state.append(0.0)  # 0 表示冷卻好或無冷卻
+
+         # 道具 Buff 效果特徵
+        for item_data, count in self.item:
+            i_id = item_data.CodeID
+            # 如果數量 > 0 且有 Buff
+            if count > 0 and i_id in attacker.buff_item:
+                remaining_time = attacker.buff_item[i_id][1]
+                max_time = attacker.buff_item[i_id][0].EffectDurationTime
+                state.append(remaining_time / max_time if max_time > 0 else 0)
+            else:
+                # 就算數量是 0，也要補 0.0，維持列表長度
+                state.append(0.0)
+
+        # 道具冷卻特徵
+        for item_data, count in self.item:
+            i_id = item_data.CodeID
+            if count > 0 and i_id in attacker.item_cooldowns:
+                remaining_time = attacker.item_cooldowns[i_id]
+                max_time = GameData.Instance.ItemsDic[i_id].CD
+                state.append(remaining_time / max_time if max_time > 0 else 0)
+            else:
+                state.append(0.0)
+
 
         return np.array(state, dtype=np.float32)
 
