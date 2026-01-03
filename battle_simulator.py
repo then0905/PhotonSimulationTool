@@ -752,7 +752,7 @@ class BattleSimulator:
                 if attacker.action_check(normal_attack):
                     for log_msg, damage, attack_timer in SkillProcessor._execute_skill_operation(normal_attack, attacker, target):
                         self.battle_log.append(log_msg)
-                        reward += damage
+                        reward += ai.calculate_reward(damage,target.is_alive(),attacker.is_alive())
                         total_attack_timer += attack_timer
                         self.battle_log.append(CommonFunction.battlelog_text_processor({
                             "caster_text": attacker.name,
@@ -768,6 +768,11 @@ class BattleSimulator:
                             "Damage": damage,
                         })
                 else:
+                    reward = -0.1  # 不可施放技能 懲罰值
+
+                    # 依然要呼叫 record_result，確保 Buffer 長度對齊
+                    # 這裡 done 通常是 False，因為戰鬥還沒結束，只是這回合浪費了
+                    ai.record_result(reward, False)
                     self.gui.root.after(
                         100, lambda: self.attack_loop(attacker, target)
                     )
@@ -776,7 +781,7 @@ class BattleSimulator:
             case str() if result.startswith("USE_ITEM:"):
                 log_msg, damage, attack_timer = attacker.use_item_id(result.replace("USE_ITEM:", ""))
                 self.battle_log.append(log_msg)
-                reward += damage
+                reward += ai.calculate_reward(damage,target.is_alive(),attacker.is_alive())
                 total_attack_timer += attack_timer
             #施放技能
             case _:
@@ -802,7 +807,7 @@ class BattleSimulator:
                             "descript_color": "#ff0000",
                         }, "skillTimer", f"{1 if skill.Type == "Buff" else 1.8}"))
                             attacker.skill_cooldowns[skill.SkillID] = skill.CD
-                            reward += damage
+                            reward += ai.calculate_reward(damage,target.is_alive(),attacker.is_alive())
                             total_attack_timer += attack_timer
                             self.damage_data.append({
                                 "attacker":attacker.name,
@@ -811,6 +816,11 @@ class BattleSimulator:
                                 "Damage":damage,
                             })
                 else:
+                    reward = -0.1  # 不可施放技能 懲罰值
+
+                    # 依然要呼叫 record_result，確保 Buffer 長度對齊
+                    # 這裡 done 通常是 False，因為戰鬥還沒結束，只是這回合浪費了
+                    ai.record_result(reward, False)
                     self.gui.root.after(
                         100, lambda: self.attack_loop(attacker, target)
                     )
@@ -819,7 +829,8 @@ class BattleSimulator:
         self.gui.display_battle_log(self.get_battle_log())
         self.update_hp_mp()
         next_state = ai.get_state(attacker, target)
-        ai.update_q(state, result, reward, next_state)
+        done =(not attacker.is_alive()) or not (target.is_alive())
+        ai.record_result(reward,done)
         attacker.attackTimerFunc = self.gui.root.after(int(total_attack_timer * 1000),
                                                        lambda: self.attack_loop(attacker, target))
 
@@ -884,6 +895,8 @@ class BattleSimulator:
             "enemy_skill_usage": enemy.skill_usage,
             "result": player.is_alive()
         }
+        #AI訓練資料更新
+        player.ai.update_ppo()
 
     def _choose_skill(self, character: BattleCharacter) -> SkillData:
         """
