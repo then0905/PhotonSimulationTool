@@ -102,7 +102,7 @@ class BattleCharacter:
             skillDuration = max(0, skillDuration - dt)
             self.buff_skill[buff_skill_id] = (skillData, skillDuration)
             if (skillDuration == 0):
-                stack = self.buff_bar.get_effect_stack(buff_skill_id)
+                stack = CommonFunction.clamp(self.buff_bar.get_effect_stack(buff_skill_id),1,self.buff_bar.get_effect_stack(buff_skill_id))
                 for op in skillData.SkillOperationDataList:
                     self.SkillEffectStatusOperation(op.InfluenceStatus, (op.AddType == "Rate"),
                                                     -1 * op.EffectValue * stack)
@@ -245,7 +245,7 @@ class BattleCharacter:
                     temp_id = CommonFunction.get_time_stap(skillData.SkillID)
                     self.SkillEffectStatusOperation(op.InfluenceStatus, (op.AddType == "Rate"), op.EffectValue)
 
-            self.buff_bar.add_skill_effect(temp_id, skillData)
+            self.buff_bar.add_skill_effect(temp_id, skillData,temp)
             self.buff_skill[temp_id] = (skillData, op.EffectDurationTime)
         else:
             self.buff_bar.add_skill_effect(skillData.SkillID, skillData)
