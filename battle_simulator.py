@@ -331,7 +331,8 @@ class BattleCharacter:
                     self.SkillEffectStatusOperation(op.InfluenceStatus, is_rate, effect_value * phase_difference * -1)
 
                 self.buff_skill[key] = (targetSkillData, duration)
-                self.passive_bar.add_skill_effect(key, targetSkillData, stackCount)
+        else:
+            print(f"沒有存在相同的效果{skill_id}")
 
     def add_item_buff_effect(self, op, itemData: ItemDataModel):
         """
