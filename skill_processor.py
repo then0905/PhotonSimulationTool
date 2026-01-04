@@ -163,7 +163,9 @@ class SkillProcessor:
                     }, "passiveBuff",CommonFunction.get_text(f"TM_{tempSkillData.SkillID}_Name")), 0, 0))
 
                 case "Utility":
-                    returnResult.append(SkillProcessor.skill_utility_processor(target, op))
+                    utilityResult = SkillProcessor.skill_utility_processor(target, op)
+                    for result in utilityResult:
+                        returnResult.append(result)
 
                 case "Health":
                     returnResult.append(target.processRecovery(op,skillData.Name, attacker, target))
@@ -183,6 +185,7 @@ class SkillProcessor:
                         "descript_text": CommonFunction.get_text(tempSkillData.Name),
                     }, "enhanceSkill"), 0, 0))
                     break
+
                 case "UpgradeSkill":
                     # 升級指定技能 在角色開一個新字典<BonusId,下個component資料>
                     attacker.passive_bar.add_skill_effect(tempSkillData.SkillID, tempSkillData)
@@ -197,6 +200,7 @@ class SkillProcessor:
                         "target_text": CommonFunction.get_text(GameData.Instance.SkillDataDic[key].Name),
                         "descript_text": CommonFunction.get_text(tempSkillData.Name) ,
                     }, "upgradeSkill"), 0, 0))
+
                 case _:
                     returnResult.append(("",0,0))
 
@@ -355,6 +359,9 @@ class SkillProcessor:
         """
         功能型技能 處理
         """
+
+        result = []
+
         match op.InfluenceStatus:
             #清除指定技能所有疊層
             case "RemoveAdditive":
@@ -364,21 +371,26 @@ class SkillProcessor:
                 caster.temp_dict[str(op.Bonus[0])] = get_stack
                 #重製目標技能疊層
                 caster.set_skill_addtive_effect(target_skill,op,0)
-                return (CommonFunction.battlelog_text_processor({
+                result.append((CommonFunction.battlelog_text_processor({
                     "caster_text": caster.name,
                     "descript_text": CommonFunction.get_text(target_skill.Name),
-                }, "removeAdditive",get_stack), 0, 0)
+                }, "removeAdditive",get_stack), 0, 0))
 
             #清除控制技能
             case "RemoveAllCC":
                 debuffskills = list(caster.debuff_skill.keys())
-                for skillid in debuffskills:
-                    caster.debuff_bar.remove_effect(skillid)
+                for debuff_id in debuffskills:
+                    op, debuffDuration = caster.debuff_skill[debuff_id]
+                    result.append(SkillProcessor.status_skill_effect_end(op, caster))
+                    caster.debuff_bar.remove_effect(debuff_id)
+                    del caster.debuff_skill[debuff_id]
                 caster.debuff_skill = {}
-                return (CommonFunction.battlelog_text_processor({
+
+                result.append((CommonFunction.battlelog_text_processor({
                     "caster_text": caster.name,
                     "descript_text": CommonFunction.get_text(f"TM_{op.SkillID}_Name"),
-                }, "removeAllCC"), 0, 0)
+                }, "removeAllCC"), 0, 0))
+        return result
 
     @staticmethod
     def skill_continuancebuff_bonus_processor(caster,op):

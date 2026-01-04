@@ -254,7 +254,6 @@ class BattleCharacter:
             #一般常駐buff 獎勵為5
             if(skillData.CD == 1):
                 reward = 5
-        print(f"獎勵 {reward}")
         return reward
 
     def add_skill_passive_effect(self, skillData: SkillData, op):
