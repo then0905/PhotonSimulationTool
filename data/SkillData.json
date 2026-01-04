@@ -980,7 +980,7 @@
         "SkillID": "Berserker_5",
         "SkillComponentID": "ContinuanceBuff",
         "DependCondition": "None",
-        "EffectValue": 0.2,
+        "EffectValue": 20,
         "InfluenceStatus": "RecoveryDmg",
         "AddType": "Value",
         "EffectDurationTime": 180,
@@ -1113,7 +1113,10 @@
           "InCombatStatus_True"
         ],
         "EffectDurationTime": 5,
-        "EffectRecive": 0
+        "EffectRecive": 0,
+        "Bonus": [
+          "Subscription"
+        ]
       },
       {
         "SkillID": "Berserker_8",
@@ -1126,7 +1129,10 @@
           "InCombatStatus_True"
         ],
         "EffectDurationTime": 5,
-        "EffectRecive": 0
+        "EffectRecive": 0,
+        "Bonus": [
+          "Subscription"
+        ]
       }
     ]
   },
@@ -1425,7 +1431,10 @@
           "InCombatStatus_True"
         ],
         "EffectDurationTime": 1.5,
-        "EffectRecive": 0
+        "EffectRecive": 0,
+        "Bonus": [
+          "Subscription"
+        ]
       },
       {
         "SkillID": "Berserker_16",
@@ -1438,7 +1447,10 @@
           "InCombatStatus_True"
         ],
         "EffectDurationTime": 1.5,
-        "EffectRecive": 0
+        "EffectRecive": 0,
+        "Bonus": [
+          "Subscription"
+        ]
       }
     ]
   },
