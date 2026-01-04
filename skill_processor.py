@@ -130,13 +130,13 @@ class SkillProcessor:
                     success = temp[1] > 0 if len(temp) > 1 else True
 
                 case "ContinuanceBuff":
-                    target.add_skill_buff_effect(tempSkillData, op)
+                    reward = target.add_skill_buff_effect(tempSkillData, op)
                     temp = f"{CommonFunction.get_text('TM_' + op.InfluenceStatus)}: {CommonFunction.get_text('TM_' + op.AddType).format(op.EffectValue)}"
                     returnResult.append((CommonFunction.battlelog_text_processor({
                         "caster_text": attacker.name,
                         "descript_text": temp,
                         "target_text": target.name,
-                    }, "continuanceBuff", op.EffectDurationTime), 0, 0.5))
+                    }, "continuanceBuff", op.EffectDurationTime), reward , 0.5))
 
                 case "AdditiveBuff":
                     target.additive_buff_event += lambda: SkillProcessor.skill_additive_effect_event(

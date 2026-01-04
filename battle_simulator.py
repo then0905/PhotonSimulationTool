@@ -210,10 +210,14 @@ class BattleCharacter:
                         log = temp[0]
                         self.battle_log.append(log)
 
-    def add_skill_buff_effect(self, skillData: SkillData, op):
+    def add_skill_buff_effect(self, skillData: SkillData, op) -> int:
         """
         增加技能buff效果
         """
+
+        #PPO獎勵
+        reward = 0
+
         #檢查Bonus資料
 
         if(op.Bonus is not None):
@@ -222,6 +226,20 @@ class BattleCharacter:
                 case int():
                     temp_id = CommonFunction.get_time_stap(skillData.SkillID)
                     self.SkillEffectStatusOperation(op.InfluenceStatus, (op.AddType == "Rate"), op.EffectValue*temp)
+                    #疊層最大值
+                    max = int(next(
+                            (x for x in GameData.Instance.SkillDataDic[op.Bonus[1]].SkillOperationDataList
+                                if x.SkillComponentID == "AdditiveBuff"), None
+                            ).Bonus[0])
+                    #疊層獎勵處理
+                    if (temp/max) >= 0.85:
+                        reward = 20.0  # 接近滿層釋放，大獎勵
+                    if (temp/max) >= 0.6:
+                        reward = 10.0  # 高層釋放，大獎勵
+                    elif (temp/max) >= 0.3:
+                        reward = 5.0  # 普通層數，小獎勵
+                    else:
+                        reward  = -10.0  # 低層數浪費，懲罰
 
                 case _:
                     temp_id = CommonFunction.get_time_stap(skillData.SkillID)
@@ -233,6 +251,11 @@ class BattleCharacter:
             self.buff_bar.add_skill_effect(skillData.SkillID, skillData)
             self.buff_skill[skillData.SkillID] = (skillData, op.EffectDurationTime)
             self.SkillEffectStatusOperation(op.InfluenceStatus, (op.AddType == "Rate"), op.EffectValue)
+            #一般常駐buff 獎勵為5
+            if(skillData.CD == 1):
+                reward = 5
+        print(f"獎勵 {reward}")
+        return reward
 
     def add_skill_passive_effect(self, skillData: SkillData, op):
         """
@@ -419,7 +442,6 @@ class BattleCharacter:
             }, "miss"), 0, self.attackTimer
             return [missResult]
 
-
     def BlockCalculator(self, skill: SkillData, target):
         """
         格檔計算
@@ -577,7 +599,7 @@ class BattleCharacter:
 
         calulatordmg = (attackerElementDamage*op.EffectValue*self.stats["ElementDamageIncrease"])-(targetElementDefense*target.stats["ElementDamageReduction"])
         calulatordmg =  CommonFunction.clamp(calulatordmg, 0, calulatordmg)
-        calulatordmg = self.BonusDamageCalulator(calulatordmg, target)
+        calulatordmg = round(self.BonusDamageCalulator(calulatordmg, target))
 
         return CommonFunction.battlelog_text_processor({
             "caster_text": self.name,
@@ -606,7 +628,6 @@ class BattleCharacter:
 
         newDamage = newDamage*finalDamageReductionRate
         return newDamage
-
 
     def RecoveryDmgProcessor(self,damage):
         """
