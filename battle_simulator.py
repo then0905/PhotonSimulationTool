@@ -58,6 +58,8 @@ class BattleCharacter:
     additive_buff_time = 0  #滿足條件的Buff 作用的間隔時間
     additive_debuff_event: Event = field(default_factory=Event, init=False, repr=False)  #滿足條件的DeBuff持續疊加的事件
     additive_debuff_time = 0  #滿足條件的DeBuff 作用的間隔時間
+    subscription_skill_event:Event = field(default_factory=Event, init=False, repr=False)     #需要訂閱的技能 訂閱後將每固定時間檢查是否達成條件而執行
+    subscription_skill_time = 0  #紀錄訂閱技能的呼叫間隔時間(區間一到就呼叫一次技能)
     temp_dict: Dict[str, object] = field(default_factory=dict)  #暫存動態資料 有需要再寫入 (例如:怒氣,疊層值)
     upgrade_skill_dict:Dict[str,SkillData] = field(default_factory=dict)    #存放所選職業的技能內有升級技能的字典
     enhance_skill_dict:Dict[str,SkillData] = field(default_factory=dict)    #存放所選職業的技能內有強化技能的字典
@@ -169,12 +171,21 @@ class BattleCharacter:
             self.additive_buff_time = 0
             self.additive_buff_event()
 
+
         #持續疊加的Debuff
         if (self.additive_debuff_time < 0.25):
             self.additive_debuff_time += dt
         else:
             self.additive_debuff_time = 0
             self.additive_debuff_event()
+
+
+        #技能訂閱的呼叫計時器
+        if(self.subscription_skill_time < 1):
+            self.subscription_skill_time += dt
+        else:
+            self.subscription_skill_time = 0
+            self.subscription_skill_event()
 
     def use_item_id(self, itemid) -> Tuple[str, int, float]:
         for idx, (item, count) in enumerate(self.items):
@@ -240,6 +251,29 @@ class BattleCharacter:
                         reward = 5.0  # 普通層數，小獎勵
                     else:
                         reward  = -10.0  # 低層數浪費，懲罰
+
+                #訂閱技能
+                case "Subscription":
+
+                    def SubscriptionSkillEffect(subscriptionSkillOp,temp_id):
+
+                        #先做條件檢查
+                        if(SkillProcessor.skill_condition_process(self,subscriptionSkillOp)):
+                            #檢查buff技能是否再做用中
+                            subscriptionSkillId = next((x for x in self.buff_skill.keys() if x == temp_id), None)
+                            #若正再做用 刷新時間
+                            if subscriptionSkillId is not None:
+                                self.buff_skill[subscriptionSkillId] = (skillData, subscriptionSkillOp.EffectDurationTime)
+                            #若未再做用 開始作用
+                            else:
+                                self.SkillEffectStatusOperation(subscriptionSkillOp.InfluenceStatus, (subscriptionSkillOp.AddType == "Rate"), subscriptionSkillOp.EffectValue)
+                                self.buff_bar.add_skill_effect(temp_id, skillData)
+                                self.buff_skill[temp_id] = (skillData, subscriptionSkillOp.EffectDurationTime)
+
+                    temp_id = CommonFunction.get_time_stap(skillData.SkillID)
+                    self.subscription_skill_event += lambda: SubscriptionSkillEffect(op,temp_id)
+
+                    return 0
 
                 case _:
                     temp_id = CommonFunction.get_time_stap(skillData.SkillID)

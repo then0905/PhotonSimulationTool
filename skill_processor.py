@@ -402,6 +402,8 @@ class SkillProcessor:
                 stack = caster.temp_dict.get(key, 0)
                 caster.temp_dict.pop(temp_bonus_data[1], None)
                 return int(stack)
+            case _:
+                return temp_bonus_data[0]
 
     @staticmethod
     def upgrade_skill_processor(upgradeSkillData, skillData: SkillData)-> SkillData:
