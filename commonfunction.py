@@ -191,3 +191,12 @@ class CommonFunction:
                     f'<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>'
                     f' 的技能：[ <size={log_dic["target_size"]}><color={log_dic["target_color"]}>{log_dic["target_text"]}</color></size> ]'
                     f' 受到了 [ <size={log_dic["descript_size"]}><color={log_dic["descript_color"]}>{log_dic["descript_text"]}</color></size> ] 強化！')
+
+            # region 負面狀態效果執行
+
+            case "Bleeding":
+                 return (
+                    f'<size={log_dic["caster_size"]}><color={log_dic["caster_color"]}>{log_dic["caster_text"]}</color></size>'
+                    f' 因為出血效果，'
+                    f' 受到了 <size={log_dic["descript_size"]}><color={log_dic["descript_color"]}>{log_dic["descript_text"]}</color></size> 的傷害')
+            # endregion

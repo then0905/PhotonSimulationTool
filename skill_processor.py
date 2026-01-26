@@ -249,7 +249,8 @@ class SkillProcessor:
                     "target_text": defender.name,
                 }, "crowdControlStart", op.EffectDurationTime), 0, 0)
             case "Debuff":
-                defender.SkillEffectStatusOperation(op.InfluenceStatus, (op.AddType == "Rate"), op.EffectValue)
+                SkillProcessor.debuff_effect_processor(op,attacker,defender)
+                #defender.SkillEffectStatusOperation(op.InfluenceStatus, (op.AddType == "Rate"), op.EffectValue)
                 defender.add_debuff_effect(op)
                 return (CommonFunction.battlelog_text_processor({
                     "caster_text": attacker.name,
@@ -271,10 +272,44 @@ class SkillProcessor:
                 }, "crowdControlEnd", op.EffectDurationTime), 0, 0)
             case "Debuff":
                 # defender.apply_debuff(op.attr, op.value, op.duration)
+                SkillProcessor.debuff_effect_processor(op,character,character,True)
                 return (CommonFunction.battlelog_text_processor({
                     "caster_text": character.name,
                     "descript_text": CommonFunction.get_text("TM_" + op.InfluenceStatus + "_Name"),
                 }, "debuffEnd", op.EffectDurationTime), 0, 0)
+
+    @staticmethod
+    def debuff_effect_processor(op: SkillOperationData, attacker, defender,description = False):
+        """
+        負面效果處理
+        """
+        match op.InfluenceStatus:
+            case "SpeedSlow":
+               defender.SkillEffectStatusOperation(op.InfluenceStatus, (op.AddType == "Rate"), op.EffectValue)
+            case "Bleeding":
+                if(description is False):
+                    def SubscriptionBleeding(subscriptionSkillOp,temp_id):
+                            # (每秒扣除EffectValue血量持續EffectDurationTime秒)
+                            defender.stats["HP"] -= op.EffectValue
+                            skillData = GameData.Instance.SkillDataDic[op.SkillID]
+                            defender.buff_bar.add_skill_effect(temp_id, skillData)
+                            defender.debuff_skill[temp_id] = (op, subscriptionSkillOp.EffectDurationTime)
+                            defender.battle_log.append(CommonFunction.battlelog_text_processor({
+                        "caster_text": defender.name,
+                        "descript_text": op.EffectValue,
+                    }, op.InfluenceStatus))
+
+                    temp_id = CommonFunction.get_time_stap(op.SkillID)
+                    defender.subscription_skill_event += lambda: SubscriptionBleeding(op,temp_id)
+                else:
+                    defender.subscription_skill_event -= lambda: SubscriptionBleeding(op,temp_id)
+            case "ReduceTargetDmg":
+                pass
+            case "ArmorBreak":
+                pass
+            case "BreakDEF":
+                pass
+                
 
     @staticmethod
     def skill_condition_process(caster, op: SkillOperationData) -> bool:
