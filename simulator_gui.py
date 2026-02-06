@@ -1,10 +1,10 @@
 ﻿# -*- coding: utf-8 -*-
 import tkinter as tk
-from tkinter import ttk, messagebox ,font
+from tkinter import ttk, messagebox, font
 from game_models import GameData, ItemDataModel, ItemEffectData, SkillData
 from battle_simulator import BattleSimulator, BattleCharacter
 from stats_analyzer import StatsAnalyzer
-from status_operation import CharacterStatusCalculator,StatusValues
+from status_operation import CharacterStatusCalculator, StatusValues
 from commonfunction import CommonFunction
 from user_config_controller import UserConfigController
 from user_config_model import UserConfigModel
@@ -14,6 +14,7 @@ import os
 import re
 import traceback
 
+
 class BattleSimulatorGUI:
     jobNameDict: Dict[str, str] = {}
     monsterNameDict: Dict[str, str] = {}
@@ -22,7 +23,28 @@ class BattleSimulatorGUI:
         self.root = root
         self.model = model
         self.root.title("UnityAI")
-        self.root.resizable(False, False)
+
+        # 根據螢幕解析度設定視窗大小
+        screen_w = self.root.winfo_screenwidth()
+        screen_h = self.root.winfo_screenheight()
+        win_w = int(screen_w * 0.43)
+        win_h = int(screen_h * 0.9)
+
+        # 計算縮放比例（以 1440x810 為基準）
+        self.scale_x = win_w / 1440
+        self.scale_y = win_h / 810
+        self.scale = min(self.scale_x, self.scale_y)
+
+        # 設定視窗大小和位置（置中）
+        pos_x = (screen_w - win_w) // 2
+        pos_y = (screen_h - win_h) // 2
+        self.root.geometry(f"{win_w}x{win_h}+{pos_x}+{pos_y}")
+        self.root.resizable(True, True)
+
+        # 設定最小視窗大小
+        min_w = int(screen_w * 0.43)
+        min_h = int(screen_h * 0.9)
+        self.root.minsize(min_w, min_h)
 
         # 加載遊戲數據
         self.game_data = GameData()
@@ -42,7 +64,7 @@ class BattleSimulatorGUI:
         self.enemy_frame
         self.main_frame
 
-        self.last_battle_data ={}
+        self.last_battle_data = {}
 
     def create_var(self, key, var_type, default=None):
         """
@@ -59,6 +81,14 @@ class BattleSimulatorGUI:
         self.vars_registry[key] = var
         return var
 
+    def scaled(self, value):
+        """根據縮放比例調整數值"""
+        return int(value * self.scale)
+
+    def scaled_font(self, size):
+        """根據縮放比例調整字體大小"""
+        return max(8, int(size * self.scale))
+
     def create_widgets(self):
         # 主框架
         self.main_frame = ttk.Frame(self.root, padding="0")
@@ -69,7 +99,12 @@ class BattleSimulatorGUI:
             彩色條
             """
 
-            def __init__(self, master, width=200, height=20, fg_color="red", **kwargs):
+            def __init__(self, master, width=200, height=20, fg_color="red", gui_ref=None, **kwargs):
+                # 使用縮放後的尺寸
+                if gui_ref:
+                    width = gui_ref.scaled(width)*1.5
+                    height = gui_ref.scaled(height)*1.5
+
                 super().__init__(
                     master,
                     width=width,
@@ -83,6 +118,7 @@ class BattleSimulatorGUI:
                 self.fg_color = fg_color
                 self.current_value = 0
                 self.max_value = 100
+                self.gui_ref = gui_ref
                 self.draw_bar()
 
             def set_value(self, current, max_value):
@@ -112,15 +148,16 @@ class BattleSimulatorGUI:
                     self.height // 2,
                     text=f"{self.current_value}/{self.max_value}",
                     fill="white",
-                    font=("Arial", 10, "bold"),
+                    font=("Arial", self.gui_ref.scaled_font(10*1.5) if self.gui_ref else 10, "bold"),
                 )
 
         class StatusEffectBar(ttk.Frame):
-            def __init__(self, master):
+            def __init__(self, master, gui_ref=None):
                 super().__init__(master)
+                self.gui_ref = gui_ref
 
                 # 建立 Canvas + Scrollbar 容器
-                self.canvas = tk.Canvas(self, height=48)
+                self.canvas = tk.Canvas(self, height=gui_ref.scaled(48*1.65) if gui_ref else 48)
                 self.scrollbar = ttk.Scrollbar(
                     self, orient="horizontal", command=self.canvas.xview
                 )
@@ -162,7 +199,7 @@ class BattleSimulatorGUI:
                 stack_count: 疊層數字（0 表示不顯示）
                 """
                 # 自動依比例縮小圖示到最大 55x55
-                max_size = 48
+                max_size = self.gui_ref.scaled(48*1.65) if self.gui_ref else 48
                 width = icon.width()
                 height = icon.height()
                 scale_factor = max(width / max_size, height / max_size, 1)
@@ -180,14 +217,14 @@ class BattleSimulatorGUI:
                         max_size - 5, max_size - 5,
                         text=str(stack_count),
                         fill="black",
-                        font=("Arial", 10, "bold")
+                        font=("Arial", self.gui_ref.scaled_font(10*1.65) if self.gui_ref else 10, "bold")
                     )
 
                 # 綁定點擊事件（顯示 popup）
                 c.bind("<Button-1>", lambda e, n=name, d=desc: self._show_popup(e, n, d))
 
                 # 放入欄位
-                c.pack(side="left", padx=2)
+                c.pack(side="left", padx=self.gui_ref.scaled(2*1.65) if self.gui_ref else 2)
 
                 # 保存資訊
                 self.effects.append({
@@ -199,27 +236,28 @@ class BattleSimulatorGUI:
                     "stack": stack_count
                 })
 
-            def add_skill_effect(self,id:str ,skill, stack_count=0):
+            def add_skill_effect(self, id: str, skill, stack_count=0):
                 """
                 增加技能效果提示物件
                 """
 
-                #疊層類型先判斷是否已存在
-                if(stack_count >0):
+                # 疊層類型先判斷是否已存在
+                if (stack_count > 0):
                     for eff in self.effects:
                         if eff["id"] == id:
-                            eff["stack"] = CommonFunction.clamp(eff["stack"]+stack_count,0,int(skill.SkillOperationDataList[0].Bonus[0]))
+                            eff["stack"] = CommonFunction.clamp(eff["stack"] + stack_count, 0,
+                                                                int(skill.SkillOperationDataList[0].Bonus[0]))
                             # --- 更新 Canvas 數字 ---
                             c = eff["widget"]
                             c.delete("stack_text")  # 刪除舊的數字
                             if eff["stack"] > 0:
-                                max_size = 48
+                                max_size = self.gui_ref.scaled(48*1.65) if self.gui_ref else 48
                                 c.create_text(
                                     max_size - 5,
                                     max_size - 5,
                                     text=str(eff["stack"]),
                                     fill="black",
-                                    font=("Arial", 10, "bold"),
+                                    font=("Arial", self.gui_ref.scaled_font(10*1.65) if self.gui_ref else 10, "bold"),
                                     tags="stack_text",  # 給標籤方便刪除
                                 )
                             return
@@ -235,7 +273,7 @@ class BattleSimulatorGUI:
                         skillIntro += f"{CommonFunction.get_text('TM_' + op.InfluenceStatus)} : {CommonFunction.get_text('TM_' + op.AddType).format(op.EffectValue)}\n"
                 self._create_effect_widget(skillIcon, skillName, skillIntro, id, stack_count)
 
-            def add_item_effect(self,id:str, item, stack_count=0):
+            def add_item_effect(self, id: str, item, stack_count=0):
                 """
                 增加道具效果提示物件
                 """
@@ -251,7 +289,7 @@ class BattleSimulatorGUI:
                         itemIntro += f"{CommonFunction.get_text('TM_' + op.InfluenceStatus)} : {CommonFunction.get_text('TM_' + op.AddType).format(op.EffectValue)}\n"
                 self._create_effect_widget(itemIcon, itemName, itemIntro, id, stack_count)
 
-            def add_debuff(self, id:str, effectId, stack_count=0):
+            def add_debuff(self, id: str, effectId, stack_count=0):
                 statusEffectIcon = CommonFunction.load_status_effect_icon(effectId)
                 if not statusEffectIcon:
                     print("讀取失敗")
@@ -259,7 +297,7 @@ class BattleSimulatorGUI:
                 statusEffectName = CommonFunction.get_text(f"TM_{effectId}_Name")
                 statusEffectIntro = CommonFunction.get_text(f"TM_{effectId}_Intro")
                 self._create_effect_widget(statusEffectIcon, statusEffectName, statusEffectIntro, id, stack_count)
-                    
+
             def remove_effect(self, id):
                 """
                 移除一個技能效果圖示
@@ -270,21 +308,21 @@ class BattleSimulatorGUI:
                 self.effects = [
                     eff for eff in self.effects if eff["id"] != id]
 
-            def get_effect_stack(self,id) -> int:
+            def get_effect_stack(self, id) -> int:
                 """
                 取得指定技能當前的疊層
                 """
-                if(self.effects is not None):
+                if (self.effects is not None):
                     for eff in self.effects:
                         if eff["id"] == id or eff["id"].startswith(id):
                             return eff["stack"]
                 return 0
 
-            def set_effect_stack(self,id,target_stack):
+            def set_effect_stack(self, id, target_stack):
                 """
                 設定指定技能當前的疊層
                 """
-                if(self.effects is not None):
+                if (self.effects is not None):
                     for eff in self.effects:
                         if eff["id"] == id or eff["id"].startswith(id):
                             eff["stack"] = target_stack
@@ -316,7 +354,7 @@ class BattleSimulatorGUI:
                     text=f"{name}\n\n{description}",
                     background="white",
                     relief="solid",
-                    padding=5,
+                    padding=self.gui_ref.scaled(5) if self.gui_ref else 5,
                 )
                 label.pack()
 
@@ -343,7 +381,7 @@ class BattleSimulatorGUI:
                 self.popup = None
 
         class ItemManager:
-            def __init__(self, root, prefix,view):
+            def __init__(self, root, prefix, view):
                 self.root = root
                 self.prefix = prefix
                 self.view = view
@@ -375,7 +413,8 @@ class BattleSimulatorGUI:
 
                     # 1. 嘗試從已讀取的 JSON 資料中抓取，若無則用預設值
                     saved_check = current_saved_data.get(check_key, item.CodeID in self.carried_items)
-                    saved_count = current_saved_data.get(count_key, self.carried_items.get(item.CodeID, {}).get("count", 1))
+                    saved_count = current_saved_data.get(count_key,
+                                                         self.carried_items.get(item.CodeID, {}).get("count", 1))
 
                     # 2. 建立變數並給予「來自 JSON」的初始值
                     var = self.view.create_var(check_key, tk.BooleanVar, saved_check)
@@ -398,7 +437,7 @@ class BattleSimulatorGUI:
                         if item_vars[item.CodeID].get():
                             self.carried_items[item.CodeID] = {
                                 "count": item_counts[item.CodeID].get(),
-                                "data":item
+                                "data": item
                             }
                     item_window.destroy()
                     self.show_current_items()
@@ -576,14 +615,14 @@ class BattleSimulatorGUI:
         # 角色名稱
         ttk.Label(self.player_frame, text="角色名稱:").grid(
             row=0, column=0, sticky=tk.W)
-        self.player_name = self.create_var("player_name", tk.StringVar,"玩家1")
+        self.player_name = self.create_var("player_name", tk.StringVar, "玩家1")
         ttk.Entry(self.player_frame, textvariable=self.player_name, width=15).grid(
             row=0, column=1
         )
 
         # 種族選擇
         ttk.Label(self.player_frame, text="種族:").grid(row=1, column=0, sticky=tk.W)
-        self.player_race_var = self.create_var("player_race_var", tk.StringVar,"Human")
+        self.player_race_var = self.create_var("player_race_var", tk.StringVar, "Human")
         player_race_row = ttk.Frame(self.player_frame)
         player_race_row.grid(row=1, column=1, columnspan=3, sticky=tk.W)
 
@@ -632,21 +671,21 @@ class BattleSimulatorGUI:
 
         # 角色血量
         self.player_hp_bar = ColoredBar(
-            self.player_frame, width=150, height=20, fg_color="red"
+            self.player_frame, width=150, height=20, fg_color="red", gui_ref=self
         )
         self.player_hp_bar.grid(row=3, column=1, columnspan=2, pady=2)
         self.player_hp_bar.set_value(100, 100)  # 預設滿血，可根據角色資料初始化
 
         # 角色魔力
         self.player_mp_bar = ColoredBar(
-            self.player_frame, width=150, height=20, fg_color="blue"
+            self.player_frame, width=150, height=20, fg_color="blue", gui_ref=self
         )
         self.player_mp_bar.grid(row=4, column=1, columnspan=2, pady=2)
         self.player_mp_bar.set_value(50, 50)  # 預設滿魔力，可根據角色資料初始化
 
         # 等級
         ttk.Label(self.player_frame, text="等級:").grid(row=5, column=0, sticky=tk.W)
-        self.player_level_var = self.create_var("player_level_var", tk.IntVar,1)
+        self.player_level_var = self.create_var("player_level_var", tk.IntVar, 1)
         ttk.Spinbox(
             self.player_frame, from_=1, to=100, textvariable=self.player_level_var, width=15
         ).grid(row=5, column=1)
@@ -660,17 +699,19 @@ class BattleSimulatorGUI:
             row=6, column=0, columnspan=2, padx=1, pady=1, sticky=tk.W
         )
         self.player_equipment_data = self.common_EquipmentUI(
-            player_equipment_frame,"player")
-        
+            player_equipment_frame, "player")
+
         # === 道具按鈕 ===
         # 建立管理器
-        self.player_item_manager = ItemManager(player_equipment_frame,"player",self)
+        self.player_item_manager = ItemManager(player_equipment_frame, "player", self)
 
         # 按鈕打開道具選擇
-        ttk.Button(player_equipment_frame, text="選擇攜帶道具", command=self.player_item_manager.open_item_window).grid(row=999, column=0, pady=10)
+        ttk.Button(player_equipment_frame, text="選擇攜帶道具", command=self.player_item_manager.open_item_window).grid(
+            row=999, column=0, pady=10)
 
         # 顯示目前道具
-        ttk.Button(player_equipment_frame, text="查看道具", command=self.player_item_manager.show_current_items).grid(row=999, column=1, pady=10)
+        ttk.Button(player_equipment_frame, text="查看道具", command=self.player_item_manager.show_current_items).grid(
+            row=999, column=1, pady=10)
 
         # === 能力值總覽 ===
         self.player_overview = CharacterOverviewWnd(self.player_frame)
@@ -678,17 +719,15 @@ class BattleSimulatorGUI:
             row=7, column=1, pady=10)
 
         # === 狀態效果欄（放裝備欄下方） ===
-        self.player_buff_status_bar = StatusEffectBar(self.player_frame)
+        self.player_buff_status_bar = StatusEffectBar(self.player_frame, gui_ref=self)
         self.player_buff_status_bar.grid(
             row=8, column=0, columnspan=2, sticky="ew", pady=5)
-        self.player_debuff_status_bar = StatusEffectBar(self.player_frame)
+        self.player_debuff_status_bar = StatusEffectBar(self.player_frame, gui_ref=self)
         self.player_debuff_status_bar.grid(
             row=9, column=0, columnspan=2, sticky="ew", pady=5)
-        self.player_passive_status_bar = StatusEffectBar(self.player_frame)
+        self.player_passive_status_bar = StatusEffectBar(self.player_frame, gui_ref=self)
         self.player_passive_status_bar.grid(
             row=10, column=0, columnspan=2, sticky="ew", pady=5)
-
-
 
         # endregion
 
@@ -721,18 +760,18 @@ class BattleSimulatorGUI:
 
         self.monster_combobox = (
             ttk.Combobox(
-            self.enemy_frame,
+                self.enemy_frame,
                 textvariable=self.monster_var,
                 values=tempMonsterNameList,
                 width=15
-        ))
+            ))
         self.monster_combobox.grid(row=1, column=1, columnspan=1)
         self.monster_var.set(next(iter(self.monsterNameDict.values())))
 
         # 種族選擇
         self.enemy_race_label = ttk.Label(self.enemy_frame, text="種族:")
         self.enemy_race_label.grid(row=2, column=0, sticky=tk.W)
-        self.enemy_race_var = self.create_var("enemy_race_var", tk.StringVar,"Human")
+        self.enemy_race_var = self.create_var("enemy_race_var", tk.StringVar, "Human")
         self.enemy_race_row = ttk.Frame(self.enemy_frame)
         self.enemy_race_row.grid(row=2, column=1, columnspan=3, sticky=tk.W)
 
@@ -784,7 +823,7 @@ class BattleSimulatorGUI:
         # 敵對玩家等級
         self.enemy_lv_label = ttk.Label(self.enemy_frame, text="等級:")
         self.enemy_lv_label.grid(row=5, column=0, sticky=tk.W)
-        self.enemy_level_var = self.create_var("enemy_level_var", tk.IntVar,1)
+        self.enemy_level_var = self.create_var("enemy_level_var", tk.IntVar, 1)
         self.enemy_lv_spinbox = ttk.Spinbox(
             self.enemy_frame, from_=1, to=100, textvariable=self.enemy_level_var, width=15
         )
@@ -792,13 +831,13 @@ class BattleSimulatorGUI:
 
         # 角色血量
         self.enemy_hp_bar = ColoredBar(
-            self.enemy_frame, width=150, height=20, fg_color="red"
+            self.enemy_frame, width=150, height=20, fg_color="red", gui_ref=self
         )
         self.enemy_hp_bar.grid(row=6, column=1, columnspan=2, pady=2)
         self.enemy_hp_bar.set_value(100, 100)  # 預設滿血，可根據角色資料初始化
         # 角色魔力
         self.enemy_mp_bar = ColoredBar(
-            self.enemy_frame, width=150, height=20, fg_color="blue"
+            self.enemy_frame, width=150, height=20, fg_color="blue", gui_ref=self
         )
         self.enemy_mp_bar.grid(row=7, column=1, columnspan=2, pady=2)
         self.enemy_mp_bar.set_value(50, 50)  # 預設滿魔力，可根據角色資料初始化
@@ -810,17 +849,19 @@ class BattleSimulatorGUI:
             row=8, column=0, columnspan=2, padx=1, pady=1, sticky=tk.W
         )
         self.enemy_equipment_data = self.common_EquipmentUI(
-            self.enemy_equipment_frame,"enemy")
+            self.enemy_equipment_frame, "enemy")
         # === 道具按鈕 ===
         # 點擊按鈕，先選道具，再開另一個視窗
         # 建立管理器
-        self.enemy_item_manager = ItemManager(self.enemy_equipment_frame,"enemy",self)
+        self.enemy_item_manager = ItemManager(self.enemy_equipment_frame, "enemy", self)
 
         # 按鈕打開道具選擇
-        ttk.Button(self.enemy_equipment_frame, text="選擇攜帶道具", command=self.enemy_item_manager.open_item_window).grid(row=999, column=0, pady=10)
+        ttk.Button(self.enemy_equipment_frame, text="選擇攜帶道具",
+                   command=self.enemy_item_manager.open_item_window).grid(row=999, column=0, pady=10)
 
         # 顯示目前道具
-        ttk.Button(self.enemy_equipment_frame, text="查看道具", command=self.enemy_item_manager.show_current_items).grid(row=999, column=1, pady=10)
+        ttk.Button(self.enemy_equipment_frame, text="查看道具",
+                   command=self.enemy_item_manager.show_current_items).grid(row=999, column=1, pady=10)
 
         # === 能力值總覽 ===
         self.enemy_overview = CharacterOverviewWnd(self.enemy_frame)
@@ -828,13 +869,13 @@ class BattleSimulatorGUI:
             row=9, column=1, pady=10)
 
         # === 狀態效果欄（放裝備欄下方） ===
-        self.enemy_buff_status_bar = StatusEffectBar(self.enemy_frame)
+        self.enemy_buff_status_bar = StatusEffectBar(self.enemy_frame, gui_ref=self)
         self.enemy_buff_status_bar.grid(
             row=10, column=0, columnspan=2, sticky="ew", pady=5)
-        self.enemy_debuff_status_bar = StatusEffectBar(self.enemy_frame)
+        self.enemy_debuff_status_bar = StatusEffectBar(self.enemy_frame, gui_ref=self)
         self.enemy_debuff_status_bar.grid(
             row=11, column=0, columnspan=2, sticky="ew", pady=5)
-        self.enemy_passive_status_bar = StatusEffectBar(self.enemy_frame)
+        self.enemy_passive_status_bar = StatusEffectBar(self.enemy_frame, gui_ref=self)
         self.enemy_passive_status_bar.grid(
             row=12, column=0, columnspan=2, sticky="ew", pady=5)
 
@@ -843,7 +884,7 @@ class BattleSimulatorGUI:
         self.enemy_type_row = ttk.Frame(self.enemy_frame)
         self.enemy_type_row.grid(row=0, column=1, columnspan=3, sticky=tk.W)
 
-        self.enemy_type_var = self.create_var("enemy_type_var", tk.StringVar,"monster")
+        self.enemy_type_var = self.create_var("enemy_type_var", tk.StringVar, "monster")
         ttk.Radiobutton(
             self.enemy_type_row,
             text="怪物",
@@ -870,7 +911,7 @@ class BattleSimulatorGUI:
         )
         battle_button.grid(row=1, column=0, columnspan=2, pady=10)
 
-        #暫停
+        # 暫停
         btn_pause = tk.Button(self.main_frame, text="暫停/繼續", command=toggle_pause)
         btn_pause.grid(row=1, column=1, columnspan=2, pady=10)
 
@@ -898,7 +939,7 @@ class BattleSimulatorGUI:
 
         root.update_idletasks()
 
-    def common_EquipmentUI(self, frame,prefix):
+    def common_EquipmentUI(self, frame, prefix):
         """
         通用的裝備以及道具攜帶的UI建立
         """
@@ -930,7 +971,7 @@ class BattleSimulatorGUI:
                 ],
                 width=15,
             ).grid(row=i, column=1)
-            armor_forge_lv = self.create_var(f"{prefix}_armor_forge_lv_{i}", tk.IntVar,0)
+            armor_forge_lv = self.create_var(f"{prefix}_armor_forge_lv_{i}", tk.IntVar, 0)
             armor_forgeLv_spinbox = ttk.Spinbox(
                 frame, from_=0, to=10, textvariable=armor_forge_lv, width=5
             )
@@ -953,7 +994,7 @@ class BattleSimulatorGUI:
             if weapon.TakeHandID in ["RightHand", "BothHand", "SingleHand"]
         )
         mainhandweapon_id = self.create_var(f"{prefix}_mainhandweapon_id", tk.StringVar)
-        #mainhandweapon_id = tk.StringVar()
+        # mainhandweapon_id = tk.StringVar()
         mainhandweapon_combobox = ttk.Combobox(
             frame,
             textvariable=mainhandweapon_id,
@@ -962,7 +1003,7 @@ class BattleSimulatorGUI:
             width=15,
         )
         mainhandweapon_combobox.grid(row=len(parts), column=1)
-        mainhandweapon_forge_lv = self.create_var(f"{prefix}_mainhandweapon_forge_lv", tk.IntVar,0)
+        mainhandweapon_forge_lv = self.create_var(f"{prefix}_mainhandweapon_forge_lv", tk.IntVar, 0)
         mainhandweapon_forgeLv_spinbox = ttk.Spinbox(
             frame, from_=0, to=10, textvariable=mainhandweapon_forge_lv, width=5
         )
@@ -993,7 +1034,7 @@ class BattleSimulatorGUI:
             width=15,
         )
         offhandweapon_combobox.grid(row=len(parts) + 1, column=1)
-        offhandweapon_forge_lv = self.create_var(f"{prefix}_offhandweapon_forge_lv", tk.IntVar,0)
+        offhandweapon_forge_lv = self.create_var(f"{prefix}_offhandweapon_forge_lv", tk.IntVar, 0)
         offhandweapon_forgeLv_spinbox = ttk.Spinbox(
             frame, from_=0, to=10, textvariable=offhandweapon_forge_lv, width=5
         )
@@ -1076,7 +1117,7 @@ class BattleSimulatorGUI:
 
         self.player_character = self.create_character(
             name=self.player_name.get(),
-            race = self.player_race_var.get(),
+            race=self.player_race_var.get(),
             jobBonusData=jobBonusData,
             level=self.player_level_var.get(),
             equipment=self.player_equipment_data,
@@ -1113,7 +1154,7 @@ class BattleSimulatorGUI:
             # 創建敵對玩家
             self.enemy_character = self.create_character(
                 name="敵對玩家",
-                race = self.enemy_race_var.get(),
+                race=self.enemy_race_var.get(),
                 jobBonusData=enemy_jobBonusData,
                 level=self.enemy_level_var.get(),
                 equipment=self.enemy_equipment_data,
@@ -1124,11 +1165,11 @@ class BattleSimulatorGUI:
         simulator = BattleSimulator(GameData.Instance, self)
         simulator.simulate_battle(self.player_character, self.enemy_character)
 
-        #儲存使用者配置
+        # 儲存使用者配置
         controller.save_view_to_config()
 
     def create_character(
-        self, name: str, race: str, jobBonusData, level: int, equipment={} , itemList = []
+            self, name: str, race: str, jobBonusData, level: int, equipment={}, itemList=[]
     ) -> BattleCharacter:
         """
         創建人物
@@ -1155,7 +1196,7 @@ class BattleSimulatorGUI:
             armor_list=self.armor_list,
             game_data=GameData.Instance,
         )
-        character_data = calculator.create_character(name,race, jobBonusData, level)
+        character_data = calculator.create_character(name, race, jobBonusData, level)
 
         # 獲取技能
         skills = [
@@ -1168,7 +1209,7 @@ class BattleSimulatorGUI:
             name=character_data["name"],
             level=character_data["level"],
             jobBonusData=jobBonusData,
-            ai_id = jobBonusData.Job,
+            ai_id=jobBonusData.Job,
             stats=character_data["stats"],
             basal=character_data["basal"],
             equip=character_data["equip"],
@@ -1178,14 +1219,14 @@ class BattleSimulatorGUI:
             equipped_armor=self.armor_list,
             characterType=True,
             attackTimer=(1 / character_data["stats"]["AS"]),
-            buff_bar=self.enemy_buff_status_bar if(name == "敵對玩家") else self.player_buff_status_bar,
-            debuff_bar=self.enemy_debuff_status_bar if(name == "敵對玩家") else self.player_debuff_status_bar,
-            passive_bar=self.enemy_passive_status_bar if(name == "敵對玩家") else self.player_passive_status_bar,
-            items = itemList,
-            item_manager=self.enemy_item_manager if(name == "敵對玩家") else self.player_item_manager,
-            character_overview=self.enemy_overview if(name == "敵對玩家") else self.player_overview
+            buff_bar=self.enemy_buff_status_bar if (name == "敵對玩家") else self.player_buff_status_bar,
+            debuff_bar=self.enemy_debuff_status_bar if (name == "敵對玩家") else self.player_debuff_status_bar,
+            passive_bar=self.enemy_passive_status_bar if (name == "敵對玩家") else self.player_passive_status_bar,
+            items=itemList,
+            item_manager=self.enemy_item_manager if (name == "敵對玩家") else self.player_item_manager,
+            character_overview=self.enemy_overview if (name == "敵對玩家") else self.player_overview
         )
-    
+
     def create_monster_character(self, monster) -> BattleCharacter:
         # 將怪物轉換為戰鬥角色
         status_keys = asdict(StatusValues())
@@ -1251,7 +1292,8 @@ class BattleSimulatorGUI:
             messagebox.showinfo("提示", "請先進行一場戰鬥")
             return
 
-        StatsAnalyzer.plot_skill_usage(self.last_battle_data["player_skill_usage"],self.last_battle_data["enemy_skill_usage"])
+        StatsAnalyzer.plot_skill_usage(self.last_battle_data["player_skill_usage"],
+                                       self.last_battle_data["enemy_skill_usage"])
 
     def show_win_rate(self):
         if not self.battle_results:
@@ -1261,7 +1303,7 @@ class BattleSimulatorGUI:
         win_rate = StatsAnalyzer.calculate_win_rate(self.battle_results)
         messagebox.showinfo(
             "勝率統計",
-            f"當前勝率: {win_rate*100:.1f}% ({sum(self.battle_results)}勝/{len(self.battle_results)}場)",
+            f"當前勝率: {win_rate * 100:.1f}% ({sum(self.battle_results)}勝/{len(self.battle_results)}場)",
         )
 
     def display_battle_log(self, log_lines):
@@ -1324,17 +1366,19 @@ class BattleSimulatorGUI:
         print("enemy  req width:", self.enemy_frame.winfo_reqwidth())
         print("main_frame width:", self.main_frame.winfo_width())
 
+
 def toggle_pause():
     """
     暫停/繼續 (按鈕觸發)
     """
-    os.environ["PAUSED"] = "1" if os.environ.get("PAUSED","0")=="0" else "0"
+    os.environ["PAUSED"] = "1" if os.environ.get("PAUSED", "0") == "0" else "0"
     print(f"收到暫停停{os.environ.get("PAUSED")}")
+
 
 if __name__ == "__main__":
     root = tk.Tk()
     model = UserConfigModel()
-    app = BattleSimulatorGUI(root,model)
-    controller = UserConfigController(model,app)
+    app = BattleSimulatorGUI(root, model)
+    controller = UserConfigController(model, app)
     os.environ["PAUSED"] = "0"
     root.mainloop()
