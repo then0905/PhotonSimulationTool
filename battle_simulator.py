@@ -481,7 +481,7 @@ class BattleCharacter:
         格檔計算
         """
         is_block = random.randint(0, 100)
-        if (is_block <= self.stats["BlockRate"]):
+        if (is_block <= target.stats["BlockRate"]):
             blockResult = CommonFunction.battlelog_text_processor({
                 "caster_text": self.name,
                 "caster_color": "#636363",
