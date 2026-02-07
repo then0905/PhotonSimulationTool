@@ -296,11 +296,11 @@ class SkillProcessor:
                     }, op.InfluenceStatus))
                 if(unsubscription is False):
                     tempfunction = lambda: SubscriptionBleeding(op, defender)
-                    defender.temp_dict['{op.SkillID}'] = tempfunction
-                    defender.subscription_skill_event += defender.temp_dict['{op.SkillID}']
+                    defender.temp_dict[op.SkillID] = tempfunction
+                    defender.subscription_skill_event += defender.temp_dict[op.SkillID]
                     SubscriptionBleeding(op,defender)
                 else:
-                    defender.subscription_skill_event -=  defender.temp_dict['{op.SkillID}']
+                    defender.subscription_skill_event -=  defender.temp_dict[op.SkillID]
             case "ReduceTargetDmg":
                 pass
             case "ArmorBreak":
