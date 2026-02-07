@@ -1169,11 +1169,15 @@ class BattleSimulatorGUI:
         controller.save_view_to_config()
 
     def create_character(
-            self, name: str, race: str, jobBonusData, level: int, equipment={}, itemList=[]
+            self, name: str, race: str, jobBonusData, level: int, equipment=None, itemList=None
     ) -> BattleCharacter:
         """
         創建人物
         """
+        if equipment is None:
+            equipment = {}
+        if itemList is None:
+            itemList = []
 
         self.weapon_list = [
             (weapon, equipment["equipment_forge_vars"][part_id].get())
