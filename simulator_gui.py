@@ -1286,14 +1286,14 @@ class BattleSimulatorGUI:
         )
 
     def show_damage_stats(self):
-        if not hasattr(self, "last_battle_data"):
+        if not self.last_battle_data:
             messagebox.showinfo("提示", "請先進行一場戰鬥")
             return
 
         StatsAnalyzer.plot_damage_distribution(self.last_battle_data["damage"])
 
     def show_skill_stats(self):
-        if not hasattr(self, "last_battle_data"):
+        if not self.last_battle_data:
             messagebox.showinfo("提示", "請先進行一場戰鬥")
             return
 
