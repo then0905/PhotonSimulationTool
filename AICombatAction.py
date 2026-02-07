@@ -296,7 +296,10 @@ class ai_action:
         reward += damage * 0.1
 
         hp_ratio = self.battle_character.stats["HP"] / self.battle_character.stats["MaxHP"]
-        mp_ratio = self.battle_character.stats["MP"] / self.battle_character.stats["MaxMP"]
+        if self.battle_character.stats["MaxMP"]  <= 0:
+            mp_ratio = 0
+        else:
+            mp_ratio = self.battle_character.stats["MP"] / self.battle_character.stats["MaxMP"]
 
         hp_change = self.battle_character.stats["HP"] - self.old_hp
         mp_change = self.battle_character.stats["MP"] - self.old_mp
