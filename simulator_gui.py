@@ -1277,7 +1277,8 @@ class BattleSimulatorGUI:
             debuff_bar=self.enemy_debuff_status_bar,
             passive_bar=self.enemy_passive_status_bar,
             items=[(v["data"], v["count"]) for v in self.enemy_item_manager.carried_items.values()],
-            item_manager=self.enemy_item_manager
+            item_manager=self.enemy_item_manager,
+            character_overview=self.enemy_overview
         )
 
     def show_damage_stats(self):
