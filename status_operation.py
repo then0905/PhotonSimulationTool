@@ -9,6 +9,7 @@ CharacterStatus_Element,
 CharacterStatus_Debuff,
 CharacterStatus_Secret,
 CharacterStatus_Core,
+MonsterStatus_Core,
 MonsterStatus_Core
 ):
     """
@@ -76,7 +77,6 @@ class CharacterStatusCalculator:
         self.crtDamage()  # 暴擊附加傷害
         self.block()  # 格檔率
         self.disorderResistance()  # 異常狀態抗性
-        self.damageReduction()  # 傷害減免
 
         # 返回計算結果
         return {
@@ -766,26 +766,6 @@ class CharacterStatusCalculator:
         )
 
         self.temp_equip_status.DisorderResistance = armor_disorderResistance
-        
-    def damageReduction(self):
-        """
-        傷害減免計算
-        """
-
-        armor_damageReduction = sum(
-            armor.DamageReduction
-            + next(
-                (
-                    forge.DamageReduction
-                    for forge in armor.ForgeConfigList
-                    if forge.ForgeLv == forgeLv
-                ),
-                0,
-            )
-            for armor , forgeLv in self.armor_list
-        )
-
-        self.temp_equip_status.DamageReduction = armor_damageReduction
 
     def create_character(self, name: str,race: str, jobBonusData, level: int) -> Dict:
         """
