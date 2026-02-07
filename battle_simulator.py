@@ -938,12 +938,13 @@ class BattleSimulator:
         if player.is_alive():
             print(f"{enemy.name} 被擊敗了！{player.name} 獲勝！")
             self.battle_log.append(f"{enemy.name} 被擊敗了！{player.name} 獲勝！")
-            self.gui.battle_results.append(True);
+            self.gui.battle_results.append(True)
         else:
             print(f"{player.name} 被擊敗了！{enemy.name} 獲勝！")
             self.battle_log.append(f"{player.name} 被擊敗了！{enemy.name} 獲勝！")
+            self.gui.battle_results.append(False)
 
-        self.gui.display_battle_log(self.get_battle_log());
+        self.gui.display_battle_log(self.get_battle_log())
         # 保存戰鬥數據用於統計
         self.gui.last_battle_data = {
             "damage": self.get_damage_data(),
