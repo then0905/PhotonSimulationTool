@@ -108,8 +108,8 @@ class BattleCharacter:
                 for op in skillData.SkillOperationDataList:
                     self.SkillEffectStatusOperation(op.InfluenceStatus, (op.AddType == "Rate"),
                                                     -1 * op.EffectValue * stack)
-                    self.buff_skill.pop(buff_skill_id, None)
-                    self.buff_bar.remove_effect(buff_skill_id)
+                self.buff_skill.pop(buff_skill_id, None)
+                self.buff_bar.remove_effect(buff_skill_id)
         for buff_item_id in list(self.buff_item):
             itemData, itemDuration = self.buff_item[buff_item_id]
             itemDuration = max(0, itemDuration - dt)
