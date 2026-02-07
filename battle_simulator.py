@@ -952,32 +952,6 @@ class BattleSimulator:
         #AI訓練資料更新
         player.ai.update_ppo()
 
-    def _choose_skill(self, character: BattleCharacter) -> SkillData:
-        """
-        選擇技能
-        """
-        # 簡單的AI選擇技能邏輯
-        current_active_buff = [s for s in (character.buff_skill or {})]  #當前生效的buff效果
-        current_cooldown_buff = [s for s in (character.skill_cooldowns or {})]  #當前進入冷卻時間的技能if k.startswith(skill_id)
-
-        available_skills = [s for s in character.skills if s.Characteristic is True and character.stats[
-            "MP"] >= s.CastMage and not s.SkillID.startswith(
-            current_active_buff) and s.SkillID not in current_cooldown_buff]
-        if not available_skills:
-            # 沒有MP時使用普通攻擊
-            return SkillData(
-                SkillID="NORMAL_ATTACK",
-                Name="普通攻擊",
-                Damage=1,
-                CastMage=0,
-                # 其他必要參數...
-            )
-        # 使用 sorted() 進行排序，Type == "Buff" 的技能優先
-        # key 函數返回 (priority, skill)，其中 priority 為 0 表示 Buff 技能（最高優先級），1 表示其他技能
-        sorted_skills = sorted(available_skills, key=lambda skill: (0 if skill.Type == "Buff" else 1, skill.SkillID))
-
-        return random.choice(sorted_skills[:3] if len(sorted_skills) > 3 else sorted_skills)  # 從前3個技能中隨機選擇
-
     def get_battle_log(self) -> List[str]:
         return self.battle_log
 
