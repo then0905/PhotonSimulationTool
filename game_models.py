@@ -243,15 +243,15 @@ class ItemDataModel(BasalAttributesDataModel):
 # 職業能力值加成
 @dataclass
 class JobBonusDataModel:
-    Job: str = ""
-    STR: str = ""
-    DEX: str = ""
-    INT: str = ""
-    AGI: str = ""
-    WIS: str = ""
-    VIT: str = ""
-    HP: str = ""
-    MP: str = ""
+    Job: int = 0
+    STR: int = 0
+    DEX: int = 0
+    INT: int = 0
+    AGI: int = 0
+    WIS: int = 0
+    VIT: int = 0
+    HP: float = 0.0
+    MP: float = 0.0
 # 種族能力值加成
 @dataclass
 class StatusFormulaDataModel:
