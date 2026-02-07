@@ -597,7 +597,7 @@ class CharacterStatusCalculator:
             armor.ElementDamageReduction
             + next(
                 (
-                    forge.MDEF
+                    forge.armorElementDamageReduction
                     for forge in armor.ForgeConfigList
                     if forge.ForgeLv == forgeLv
                 ),
