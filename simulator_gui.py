@@ -60,10 +60,6 @@ class BattleSimulatorGUI:
         self.enemy_character = None
         self.battle_results = []
 
-        self.player_frame
-        self.enemy_frame
-        self.main_frame
-
         self.last_battle_data = {}
 
     def create_var(self, key, var_type, default=None):
