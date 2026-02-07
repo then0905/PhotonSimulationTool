@@ -78,3 +78,10 @@ class MonsterStatus_Core:
     Hit: int = 0  # 命中
     AtkSpeed: int = 0  # 攻擊速度 (Attack Speed)
     AttackMode: str = ""  # 攻擊模式(近距離、遠距離、魔法)
+
+@dataclass
+class MonsterStatus_Debuff:
+    """
+    怪物所屬的負面影響能力值
+    """
+    SpeedSlowRate: float = 0.0  # 移動速度
