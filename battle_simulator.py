@@ -498,10 +498,7 @@ class BattleCharacter:
         暴擊計算
         """
         #暴擊率 
-        crt_resistance = self.stats["Crt"] + target.stats["CrtResistance"]
-        crt_value = 0
-        if crt_resistance != 0:
-            crt_value = round(self.stats["Crt"] * 100 / (self.stats["Crt"] + crt_resistance))
+        crt_value = round(self.stats["Crt"] * 100 / max(1, self.stats["Crt"] + target.stats["CrtResistance"]))
         #暴擊判定
         is_Crt = random.randint(0, 100)
 
