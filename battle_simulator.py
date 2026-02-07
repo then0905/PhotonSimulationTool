@@ -498,10 +498,13 @@ class BattleCharacter:
         暴擊計算
         """
         #暴擊率 
-        crt_value = round(self.stats["Crt"] * 100 / max(1, self.stats["Crt"] + target.stats["CrtResistance"]))
-        #暴擊判定
-        is_Crt = random.randint(0, 100)
+        crt_value = round(self.stats["Crt"] / max(1, self.stats["Crt"] + target.stats["CrtResistance"]))
+        #print(f'>>暴擊率:{self.stats["Crt"] } 暴擊抵抗:{target.stats["CrtResistance"]}')
 
+        is_Crt = random.randint(0, 100)
+        #print(f'暴擊率:{crt_value} 暴擊隨機值:{is_Crt}')
+
+        #暴擊判定
         return self.AttackCalculator(skill, target, (is_Crt <= crt_value));
 
     def AttackCalculator(self, skill: SkillData, target, is_Crt: bool):
