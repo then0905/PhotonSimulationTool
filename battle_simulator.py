@@ -31,7 +31,7 @@ class BattleCharacter:
     items: List[Tuple[ItemDataModel, int]]
     characterType: bool  #當前攻擊者類型 True:人物 False:怪物
     attackTimer: float = 0.0  #普通攻擊計時器
-    skill_usage ={}
+    skill_usage: Dict = field(default_factory=dict)  # ✅ 修正
 
     #UI物件
     buff_bar: Optional[object] = None  #buff效果提示欄
