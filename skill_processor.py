@@ -227,11 +227,11 @@ class SkillProcessor:
                 case "Continuance":
                     attacker.add_item_buff_effect(op, itemData)
                     temp = f"{CommonFunction.get_text('TM_'+op.InfluenceStatus)}: {CommonFunction.get_text('TM_' + op.AddType).format(op.EffectValue)}"
-                    returnResult.append(CommonFunction.battlelog_text_processor({
+                    returnResult.append((CommonFunction.battlelog_text_processor({
                         "caster_text": attacker.name,
                         "descript_text": temp,
                         "target_text": defender.name,
-                    }, "continuanceBuff", op.EffectDurationTime), 5, 0.5)
+                    }, "continuanceBuff", op.EffectDurationTime), 5, 0.5))
         return returnResult
 
     @staticmethod
