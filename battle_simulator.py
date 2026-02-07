@@ -119,7 +119,7 @@ class BattleCharacter:
                 for op in itemData.ItemEffectDataList:
                     self.SkillEffectStatusOperation(op.InfluenceStatus, (op.AddType == "Rate"),
                                                     -1 * op.EffectValue * stack)
-                self.buff_skill.pop(buff_item_id, None)
+                self.buff_item.pop(buff_item_id, None)
                 self.buff_bar.remove_effect(buff_item_id)
         #負面狀態遞減
         for debuff_id in list(self.debuff_skill):
