@@ -26,7 +26,7 @@ class StatsAnalyzer:
             title="技能使用頻率"
     ):
         # 玩家資料
-        player_skills = [CommonFunction.get_text(s) for s in player_skill_usage.keys()]
+        player_skills = list(player_skill_usage.keys())
         player_counts = list(player_skill_usage.values())
 
         # 敵人資料
