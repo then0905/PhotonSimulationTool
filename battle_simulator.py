@@ -6,8 +6,10 @@ from game_models import GameData, ItemsDic, SkillData, SkillOperationData, Monst
     GameSettingDataModel, AreaData, LvAndExpDataModel,ItemEffectData
 from formula_parser import FormulaParser
 from typing import Tuple
-from commonfunction import CommonFunction
-from skill_processor import SkillProcessor
+from commonfunction import clamp, battlelog_text_processor, get_text, get_time_stap
+from skill_processor import (_execute_skill_operation, execute_item_operation,
+    status_skill_effect_end, skill_all_condition_process, skill_condition_process,
+    skill_continuancebuff_bonus_processor)
 from status_operation import StatusValues
 from AICombatAction import ai_action
 from commontool import Event
@@ -104,7 +106,7 @@ class BattleCharacter:
             skillDuration = max(0, skillDuration - dt)
             self.buff_skill[buff_skill_id] = (skillData, skillDuration)
             if (skillDuration == 0):
-                stack = CommonFunction.clamp(self.buff_bar.get_effect_stack(buff_skill_id),1,self.buff_bar.get_effect_stack(buff_skill_id))
+                stack = clamp(self.buff_bar.get_effect_stack(buff_skill_id),1,self.buff_bar.get_effect_stack(buff_skill_id))
                 for op in skillData.SkillOperationDataList:
                     self.SkillEffectStatusOperation(op.InfluenceStatus, (op.AddType == "Rate"),
                                                     -1 * op.EffectValue * stack)
@@ -127,7 +129,7 @@ class BattleCharacter:
             debuffDuration = max(0, debuffDuration - dt)
             self.debuff_skill[debuff_id] = (op, debuffDuration)
             if (debuffDuration == 0):
-                log, dmg, cd = SkillProcessor.status_skill_effect_end(op, self)
+                log, dmg, cd = status_skill_effect_end(op, self)
                 self.battle_log.append(log)
                 del self.debuff_skill[debuff_id]
                 self.debuff_bar.remove_effect(debuff_id)
@@ -138,10 +140,10 @@ class BattleCharacter:
                 self.hp_recovery_time += dt
             else:
                 self.hp_recovery_time = 0
-                self.stats["HP"] = CommonFunction.clamp(self.stats["HP"] + self.stats["HP_Recovery"], 0,
+                self.stats["HP"] = clamp(self.stats["HP"] + self.stats["HP_Recovery"], 0,
                                                         self.stats["MaxHP"])
                 self.update_hp_mp()
-                self.battle_log.append(CommonFunction.battlelog_text_processor({
+                self.battle_log.append(battlelog_text_processor({
                     "caster_text": self.name,
                     "caster_color": "#00ffdc",
                     "descript_text": self.stats["HP_Recovery"],
@@ -154,10 +156,10 @@ class BattleCharacter:
                 self.mp_recovery_time += dt
             else:
                 self.mp_recovery_time = 0
-                self.stats["MP"] = CommonFunction.clamp(self.stats["MP"] + self.stats["MP_Recovery"], 0,
+                self.stats["MP"] = clamp(self.stats["MP"] + self.stats["MP_Recovery"], 0,
                                                         self.stats["MaxMP"])
                 self.update_hp_mp()
-                self.battle_log.append(CommonFunction.battlelog_text_processor({
+                self.battle_log.append(battlelog_text_processor({
                     "caster_text": self.name,
                     "caster_color": "#00ffdc",
                     "descript_text": self.stats["MP_Recovery"],
@@ -191,7 +193,7 @@ class BattleCharacter:
         for idx, (item, count) in enumerate(self.items):
             if count > 0 and item.CodeID not in self.item_cooldowns and itemid == item.CodeID:
                 # 執行道具效果，只傳 item
-                for temp in SkillProcessor.execute_item_operation(item, self, self):
+                for temp in execute_item_operation(item, self, self):
                     #道具進入CD
                     self.item_cooldowns[item.CodeID] = item.CD
                     log_msg, damage, attack_timer = temp
@@ -214,9 +216,9 @@ class BattleCharacter:
         """
         for s in self.skills:
             characteristic = s.Characteristic
-            condition_ok = SkillProcessor.skill_all_condition_process(self, s)
+            condition_ok = skill_all_condition_process(self, s)
             if not characteristic and condition_ok:
-                for retult in SkillProcessor._execute_skill_operation(s, self, self):
+                for retult in _execute_skill_operation(s, self, self):
                     for temp in retult:
                         log = temp[0]
                         self.battle_log.append(log)
@@ -232,10 +234,10 @@ class BattleCharacter:
         #檢查Bonus資料
 
         if(op.Bonus is not None):
-            temp = SkillProcessor.skill_continuancebuff_bonus_processor(self,op)
+            temp = skill_continuancebuff_bonus_processor(self,op)
             match(temp):
                 case int():
-                    temp_id = CommonFunction.get_time_stap(skillData.SkillID)
+                    temp_id = get_time_stap(skillData.SkillID)
                     self.SkillEffectStatusOperation(op.InfluenceStatus, (op.AddType == "Rate"), op.EffectValue*temp)
                     #疊層最大值
                     max = int(next(
@@ -258,7 +260,7 @@ class BattleCharacter:
                     def SubscriptionSkillEffect(subscriptionSkillOp,temp_id):
 
                         #先做條件檢查
-                        if(SkillProcessor.skill_condition_process(self,subscriptionSkillOp)):
+                        if(skill_condition_process(self,subscriptionSkillOp)):
                             #檢查buff技能是否再做用中
                             subscriptionSkillId = next((x for x in self.buff_skill.keys() if x == temp_id), None)
                             #若正再做用 刷新時間
@@ -270,13 +272,13 @@ class BattleCharacter:
                                 self.buff_bar.add_skill_effect(temp_id, skillData)
                                 self.buff_skill[temp_id] = (skillData, subscriptionSkillOp.EffectDurationTime)
 
-                    temp_id = CommonFunction.get_time_stap(skillData.SkillID)
+                    temp_id = get_time_stap(skillData.SkillID)
                     self.subscription_skill_event += lambda: SubscriptionSkillEffect(op,temp_id)
 
                     return 0
 
                 case _:
-                    temp_id = CommonFunction.get_time_stap(skillData.SkillID)
+                    temp_id = get_time_stap(skillData.SkillID)
                     self.SkillEffectStatusOperation(op.InfluenceStatus, (op.AddType == "Rate"), op.EffectValue)
 
             self.buff_bar.add_skill_effect(temp_id, skillData,temp)
@@ -294,7 +296,7 @@ class BattleCharacter:
         """
         增加被動技能效果
         """
-        temp_id = CommonFunction.get_time_stap(skillData.SkillID)
+        temp_id = get_time_stap(skillData.SkillID)
         self.SkillEffectStatusOperation(op.InfluenceStatus, (op.AddType == "Rate"), op.EffectValue)
         # 效果欄增加資料
         self.passive_bar.add_skill_effect(temp_id, skillData)
@@ -327,7 +329,7 @@ class BattleCharacter:
 
         else:
             # 新的 buff 加入 buff bar 並生成唯一 key
-            key = CommonFunction.get_time_stap(skill_id)
+            key = get_time_stap(skill_id)
             self.buff_skill[key] = (skillData, duration)
             self.passive_bar.add_skill_effect(key, skillData, stackCount)
 
@@ -372,7 +374,7 @@ class BattleCharacter:
         """
         增加道具buff效果
         """
-        temp_id = CommonFunction.get_time_stap(itemData.CodeID)
+        temp_id = get_time_stap(itemData.CodeID)
         self.SkillEffectStatusOperation(op.InfluenceStatus, (op.AddType == "Rate"), op.EffectValue)
 
         self.buff_bar.add_item_effect(temp_id, itemData)
@@ -382,7 +384,7 @@ class BattleCharacter:
         """
         增加負面效果(含 控制狀態)
         """
-        temp_id = CommonFunction.get_time_stap(op.InfluenceStatus)
+        temp_id = get_time_stap(op.InfluenceStatus)
         self.debuff_bar.add_debuff(temp_id, op.InfluenceStatus)
         self.debuff_skill[temp_id] = op, op.EffectDurationTime
 
@@ -407,7 +409,7 @@ class BattleCharacter:
             case SkillOperationData():
                 maxValue = "MaxMP" if op.Bonus[0] == "MP" else "MaxHP"
                 if op.Bonus[0] in target.stats:
-                    target.stats[op.Bonus[0]] = CommonFunction.clamp(
+                    target.stats[op.Bonus[0]] = clamp(
                         target.stats[op.Bonus[0]] + round(op.EffectValue * target.stats[op.InfluenceStatus]),
                         target.stats[op.Bonus[0]],
                         target.stats[maxValue])
@@ -417,7 +419,7 @@ class BattleCharacter:
                 maxValue = "MaxMP" if op.InfluenceStatus == "MP" else "MaxHP"
                 if op.InfluenceStatus in target.stats:
                     logRecoveryText =  op.EffectValue
-                    target.stats[op.InfluenceStatus] = CommonFunction.clamp(
+                    target.stats[op.InfluenceStatus] = clamp(
                         target.stats[op.InfluenceStatus] + op.EffectValue,
                         target.stats[op.InfluenceStatus],
                         target.stats[maxValue])
@@ -427,10 +429,10 @@ class BattleCharacter:
         self.update_hp_mp()
         color_code = "#2945FF" if op.InfluenceStatus == "MP" else "#ff0000";
         recovery_type = "魔力" if op.InfluenceStatus == "MP" else "血量";
-        return CommonFunction.battlelog_text_processor({
+        return battlelog_text_processor({
             "caster_text": caster.name,
             "caster_color": "#00ffdc",
-            "descript_text": CommonFunction.get_text(effectName),
+            "descript_text": get_text(effectName),
             "descript_color": "#ff9300",
             "target_text": target.name,
             "target_color": "#83ff00",
@@ -467,11 +469,11 @@ class BattleCharacter:
         if is_hit <= hit_value:
             return self.BlockCalculator(skill, target)
         else:
-            missResult = CommonFunction.battlelog_text_processor({
+            missResult = battlelog_text_processor({
                 "caster_text": self.name,
                 "caster_color": "#636363",
                 "caster_size": 12,
-                "descript_text": CommonFunction.get_text(skill.Name),
+                "descript_text": get_text(skill.Name),
                 "descript_color": "#ff9300",
             }, "miss"), 0, self.attackTimer
             return [missResult]
@@ -482,11 +484,11 @@ class BattleCharacter:
         """
         is_block = random.randint(0, 100)
         if (is_block <= target.stats["BlockRate"]):
-            blockResult = CommonFunction.battlelog_text_processor({
+            blockResult = battlelog_text_processor({
                 "caster_text": self.name,
                 "caster_color": "#636363",
                 "caster_size": 12,
-                "descript_text": CommonFunction.get_text(skill.Name),
+                "descript_text": get_text(skill.Name),
                 "descript_color": "#ff9300",
             }, "block"), 0, self.attackTimer
             return [blockResult]
@@ -559,7 +561,7 @@ class BattleCharacter:
         parser.set_variables(variables)
 
         #計算防禦減免
-        defenseRatio = CommonFunction.clamp(variables["target_defense"] / (variables["target_defense"] + 9), 0.1, 0.75)
+        defenseRatio = clamp(variables["target_defense"] / (variables["target_defense"] + 9), 0.1, 0.75)
         # print(f"技能傷害倍率:{skill.Damage}")
         #計算傷害
         if is_Crt:
@@ -567,7 +569,7 @@ class BattleCharacter:
         else:
             damage = round(variables["attacker_attack"] * skill.Damage)
 
-        finalDamage = CommonFunction.clamp(round(damage * (1 - defenseRatio)) - target.stats["DamageReduction"], 0,
+        finalDamage = clamp(round(damage * (1 - defenseRatio)) - target.stats["DamageReduction"], 0,
                                            round(damage * (1 - defenseRatio)) - target.stats["DamageReduction"])
         #print(f"看看 {skill.SkillID} 技能倍率{skill.Damage}")
         #print(f"攻擊對象:{self.characterType}，攻擊者傷害:{damage}，防禦減免{defenseRatio}，最後傷害{finalDamage}")
@@ -578,11 +580,11 @@ class BattleCharacter:
 
         color_code = f'<color=#ffd600><size=13><b>{finalDamage}</size></color></b>' if is_Crt else f'<color=#ff0000><size=11>{finalDamage}</size></color>'
 
-        returnResult.append((CommonFunction.battlelog_text_processor({
+        returnResult.append((battlelog_text_processor({
             "caster_text": self.name,
             "caster_color": "#636363",
             "caster_size": 12,
-            "descript_text": CommonFunction.get_text(skill.Name),
+            "descript_text": get_text(skill.Name),
             "descript_color": "#ff0000",
             "target_text": target.name,
             "target_color": "#363636"
@@ -632,14 +634,14 @@ class BattleCharacter:
                 colorCode = "#242424"
 
         calulatordmg = (attackerElementDamage*op.EffectValue*self.stats["ElementDamageIncrease"])-(targetElementDefense*target.stats["ElementDamageReduction"])
-        calulatordmg =  CommonFunction.clamp(calulatordmg, 0, calulatordmg)
+        calulatordmg =  clamp(calulatordmg, 0, calulatordmg)
         calulatordmg = round(self.BonusDamageCalulator(calulatordmg, target))
 
-        return CommonFunction.battlelog_text_processor({
+        return battlelog_text_processor({
             "caster_text": self.name,
             "caster_color": "#636363",
             "caster_size": 12,
-            "descript_text": CommonFunction.get_text(skill.Name),
+            "descript_text": get_text(skill.Name),
             "descript_color": "#910000",
             "target_text": target.name,
             "target_color": "#363636"
@@ -651,14 +653,14 @@ class BattleCharacter:
         """
 
         #攻擊方取得 傷害增加參數
-        increaseDamagerate = CommonFunction.clamp(self.stats["IncreaseDmgRate"],1,self.stats["IncreaseDmgRate"])
+        increaseDamagerate = clamp(self.stats["IncreaseDmgRate"],1,self.stats["IncreaseDmgRate"])
         increaseDamage = self.stats["IncreaseDmgValue"]
-        Damage = CommonFunction.clamp(self.stats["Damage"],1,self.stats["Damage"])
+        Damage = clamp(self.stats["Damage"],1,self.stats["Damage"])
 
         newDamage = (damage*increaseDamagerate+increaseDamage)*Damage
 
         #防守方取得 傷害減免倍率
-        finalDamageReductionRate = CommonFunction.clamp((1-target.stats["FinalDamageReductionRate"]), 0, 1)
+        finalDamageReductionRate = clamp((1-target.stats["FinalDamageReductionRate"]), 0, 1)
 
         newDamage = newDamage*finalDamageReductionRate
         return newDamage
@@ -669,9 +671,9 @@ class BattleCharacter:
         """
 
         recoveryValue = round(damage*self.stats["RecoveryDmg"]/100)
-        self.stats["HP"] = CommonFunction.clamp(self.stats["HP"] + recoveryValue,self.stats["HP"],self.stats["MaxHP"])
+        self.stats["HP"] = clamp(self.stats["HP"] + recoveryValue,self.stats["HP"],self.stats["MaxHP"])
 
-        return CommonFunction.battlelog_text_processor({
+        return battlelog_text_processor({
             "caster_text": self.name,
             "caster_color": "#00ffdc",
             "descript_text": recoveryValue,
@@ -806,11 +808,11 @@ class BattleSimulator:
                     # 其他必要參數...
                 )
                 if attacker.action_check(normal_attack):
-                    for log_msg, damage, attack_timer in SkillProcessor._execute_skill_operation(normal_attack, attacker, target):
+                    for log_msg, damage, attack_timer in _execute_skill_operation(normal_attack, attacker, target):
                         self.battle_log.append(log_msg)
                         reward += ai.calculate_reward(damage,target.is_alive(),attacker.is_alive())
                         total_attack_timer += attack_timer
-                        self.battle_log.append(CommonFunction.battlelog_text_processor({
+                        self.battle_log.append(battlelog_text_processor({
                             "caster_text": attacker.name,
                             "caster_color": "#636363",
                             "caster_size": 12,
@@ -842,12 +844,12 @@ class BattleSimulator:
             #施放技能
             case _:
                 skill = next(s for s in attacker.skills if s.SkillID == result)
-                attacker.skill_usage[CommonFunction.get_text(skill.Name)] += 1
+                attacker.skill_usage[get_text(skill.Name)] += 1
                 if attacker.action_check(skill):
                     #print(
-                        #f"{attacker.name} 使用 ：{CommonFunction.get_text(skill.Name)} ({skill.SkillID}) 原本魔力為：{attacker.stats["MP"]} 消耗魔力為：{skill.CastMage}")
+                        #f"{attacker.name} 使用 ：{get_text(skill.Name)} ({skill.SkillID}) 原本魔力為：{attacker.stats["MP"]} 消耗魔力為：{skill.CastMage}")
                     attacker.stats["MP"] -= skill.CastMage
-                    for resultList in SkillProcessor._execute_skill_operation(skill, attacker, target):
+                    for resultList in _execute_skill_operation(skill, attacker, target):
                         if resultList is None:
                             print(f"資料有錯喔!: {skill.SkillID}  → temp 本身就是 None")
                         elif isinstance(resultList, list) and any(x is None for x in resultList):
@@ -855,11 +857,11 @@ class BattleSimulator:
                         for temp in resultList:
                             log_msg, damage, attack_timer = temp
                             self.battle_log.append(log_msg)
-                            self.battle_log.append(CommonFunction.battlelog_text_processor({
+                            self.battle_log.append(battlelog_text_processor({
                             "caster_text": attacker.name,
                             "caster_color": "#636363",
                             "caster_size": 12,
-                            "descript_text": CommonFunction.get_text(skill.Name),
+                            "descript_text": get_text(skill.Name),
                             "descript_color": "#ff0000",
                         }, "skillTimer", f"{1 if skill.Type == "Buff" else 1.8}"))
                             attacker.skill_cooldowns[skill.SkillID] = skill.CD
@@ -868,7 +870,7 @@ class BattleSimulator:
                             self.damage_data.append({
                                 "attacker":attacker.name,
                                 "target":target.name,
-                                "skill":CommonFunction.get_text(skill.Name),
+                                "skill":get_text(skill.Name),
                                 "Damage":damage,
                             })
                 else:
@@ -894,8 +896,8 @@ class BattleSimulator:
         """開啟戰鬥模擬"""
         self.battle_log.clear()
         self.damage_data.clear()
-        player.skill_usage = {CommonFunction.get_text(s.Name):0 for s in player.skills}
-        enemy.skill_usage = {CommonFunction.get_text(s.Name):0 for s in enemy.skills}
+        player.skill_usage = {get_text(s.Name):0 for s in player.skills}
+        enemy.skill_usage = {get_text(s.Name):0 for s in enemy.skills}
 
         player.battle_log = self.battle_log
         enemy.battle_log = self.battle_log

@@ -7,7 +7,7 @@ from torch.distributions import Categorical
 import numpy as np
 from collections import defaultdict
 from game_models import GameData
-from skill_processor import SkillProcessor
+from skill_processor import skill_all_condition_process
 
 
 # ----------------------------------------
@@ -220,7 +220,7 @@ class ai_action:
                     # 檢查 CD
                     cd_ok = s.SkillID not in self_char.skill_cooldowns
                     # 檢查條件 (SkillProcessor)
-                    condition_ok = SkillProcessor.skill_all_condition_process(self.battle_character, s)
+                    condition_ok = skill_all_condition_process(self.battle_character, s)
                     # 檢查 Buff 是否正在運行 (避免重複施放同Buff)
                     skill_not_running = not any(k.startswith(s.SkillID) for k in self_char.buff_skill)
 

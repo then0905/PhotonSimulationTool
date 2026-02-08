@@ -1,7 +1,7 @@
 ﻿import matplotlib.pyplot as plt
 import seaborn as sns
 from typing import List, Dict
-from commonfunction import CommonFunction
+from commonfunction import get_text
 
 class StatsAnalyzer:
     # seaborn通常對中文支援較好
@@ -30,7 +30,7 @@ class StatsAnalyzer:
         player_counts = list(player_skill_usage.values())
 
         # 敵人資料
-        enemy_skills = [CommonFunction.get_text(s) for s in enemy_skill_usage.keys()]
+        enemy_skills = [get_text(s) for s in enemy_skill_usage.keys()]
         enemy_counts = list(enemy_skill_usage.values())
 
         plt.figure(figsize=(14, 5))  # 只開一次

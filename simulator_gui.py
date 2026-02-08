@@ -5,7 +5,7 @@ from game_models import GameData, ItemDataModel, ItemEffectData, SkillData
 from battle_simulator import BattleSimulator, BattleCharacter
 from stats_analyzer import StatsAnalyzer
 from status_operation import CharacterStatusCalculator, StatusValues
-from commonfunction import CommonFunction
+from commonfunction import get_text, clamp, load_skill_icon, load_item_icon, load_status_effect_icon
 from user_config_controller import UserConfigController
 from user_config_model import UserConfigModel
 from typing import Dict
@@ -241,7 +241,7 @@ class BattleSimulatorGUI:
                 if (stack_count > 0):
                     for eff in self.effects:
                         if eff["id"] == id:
-                            eff["stack"] = CommonFunction.clamp(eff["stack"] + stack_count, 0,
+                            eff["stack"] = clamp(eff["stack"] + stack_count, 0,
                                                                 int(skill.SkillOperationDataList[0].Bonus[0]))
                             # --- 更新 Canvas 數字 ---
                             c = eff["widget"]
@@ -258,15 +258,15 @@ class BattleSimulatorGUI:
                                 )
                             return
 
-                skillIcon = CommonFunction.load_skill_icon(skill.Job, skill.SkillID)
+                skillIcon = load_skill_icon(skill.Job, skill.SkillID)
                 if not skillIcon:
                     print("讀取失敗")
                     return
-                skillName = CommonFunction.get_text(skill.Name)
-                skillIntro = CommonFunction.get_text(skill.Intro) + '\n'
+                skillName = get_text(skill.Name)
+                skillIntro = get_text(skill.Intro) + '\n'
                 for op in skill.SkillOperationDataList:
                     if op.InfluenceStatus:
-                        skillIntro += f"{CommonFunction.get_text('TM_' + op.InfluenceStatus)} : {CommonFunction.get_text('TM_' + op.AddType).format(op.EffectValue)}\n"
+                        skillIntro += f"{get_text('TM_' + op.InfluenceStatus)} : {get_text('TM_' + op.AddType).format(op.EffectValue)}\n"
                 self._create_effect_widget(skillIcon, skillName, skillIntro, id, stack_count)
 
             def add_item_effect(self, id: str, item, stack_count=0):
@@ -274,24 +274,24 @@ class BattleSimulatorGUI:
                 增加道具效果提示物件
                 """
 
-                itemIcon = CommonFunction.load_item_icon(item.CodeID)
+                itemIcon = load_item_icon(item.CodeID)
                 if not itemIcon:
                     print("讀取失敗")
                     return
-                itemName = CommonFunction.get_text(item.Name)
-                itemIntro = CommonFunction.get_text(item.Intro) + '\n'
+                itemName = get_text(item.Name)
+                itemIntro = get_text(item.Intro) + '\n'
                 for op in item.ItemEffectDataList:
                     if op.InfluenceStatus:
-                        itemIntro += f"{CommonFunction.get_text('TM_' + op.InfluenceStatus)} : {CommonFunction.get_text('TM_' + op.AddType).format(op.EffectValue)}\n"
+                        itemIntro += f"{get_text('TM_' + op.InfluenceStatus)} : {get_text('TM_' + op.AddType).format(op.EffectValue)}\n"
                 self._create_effect_widget(itemIcon, itemName, itemIntro, id, stack_count)
 
             def add_debuff(self, id: str, effectId, stack_count=0):
-                statusEffectIcon = CommonFunction.load_status_effect_icon(effectId)
+                statusEffectIcon = load_status_effect_icon(effectId)
                 if not statusEffectIcon:
                     print("讀取失敗")
                     return
-                statusEffectName = CommonFunction.get_text(f"TM_{effectId}_Name")
-                statusEffectIntro = CommonFunction.get_text(f"TM_{effectId}_Intro")
+                statusEffectName = get_text(f"TM_{effectId}_Name")
+                statusEffectIntro = get_text(f"TM_{effectId}_Intro")
                 self._create_effect_widget(statusEffectIcon, statusEffectName, statusEffectIntro, id, stack_count)
 
             def remove_effect(self, id):
@@ -420,7 +420,7 @@ class BattleSimulatorGUI:
                     item_counts[item.CodeID] = count_var
 
                     ttk.Checkbutton(
-                        item_window, text=CommonFunction.get_text(item.Name), variable=var
+                        item_window, text=get_text(item.Name), variable=var
                     ).grid(row=i, column=0, sticky=tk.W)
                     ttk.Spinbox(
                         item_window, from_=1, to=99, textvariable=count_var, width=5
@@ -467,7 +467,7 @@ class BattleSimulatorGUI:
                 self.item_labels = {}  # 🔑 存每個 item 的 StringVar
                 for i, (item_id, data) in enumerate(self.carried_items.items()):
                     var = tk.StringVar(
-                        value=f"{CommonFunction.get_text(data['data'].Name)}: {data['count']}"
+                        value=f"{get_text(data['data'].Name)}: {data['count']}"
                     )
                     self.item_labels[item_id] = var
                     ttk.Label(view_window, textvariable=var).grid(row=i, column=0, padx=10, pady=5)
@@ -487,7 +487,7 @@ class BattleSimulatorGUI:
                 if item_id in self.item_labels:
                     if item_id in self.carried_items:
                         self.item_labels[item_id].set(
-                            f"{CommonFunction.get_text(self.carried_items[item_id]['data'].Name)}: {self.carried_items[item_id]['count']}"
+                            f"{get_text(self.carried_items[item_id]['data'].Name)}: {self.carried_items[item_id]['count']}"
                         )
                     else:
                         self.item_labels[item_id].set("已消耗完畢")
@@ -594,7 +594,7 @@ class BattleSimulatorGUI:
 
                 # 新增 Label
                 for i, (key, value) in enumerate(status.items()):
-                    label_text = f"{CommonFunction.get_text('TM_' + key)}: {value}"
+                    label_text = f"{get_text('TM_' + key)}: {value}"
 
                     var = tk.StringVar(value=label_text)
                     self.status_labels[key] = var
@@ -653,7 +653,7 @@ class BattleSimulatorGUI:
 
         for jobData in GameData.Instance.JobBonusDic.values():
             self.jobNameDict.update(
-                {jobData.Job: CommonFunction.get_text("TM_" + jobData.Job)}
+                {jobData.Job: get_text("TM_" + jobData.Job)}
             )
         tempJobNameList = list(self.jobNameDict.values())
 
@@ -749,7 +749,7 @@ class BattleSimulatorGUI:
 
         for monsterData in GameData.Instance.MonstersDataDic.values():
             self.monsterNameDict.update(
-                {monsterData.MonsterCodeID: CommonFunction.get_text(monsterData.Name)}
+                {monsterData.MonsterCodeID: get_text(monsterData.Name)}
             )
 
         tempMonsterNameList = list(self.monsterNameDict.values())
@@ -802,7 +802,7 @@ class BattleSimulatorGUI:
         self.enemy_class_var = self.create_var("enemy_class_var", tk.StringVar)
         for jobData in GameData.Instance.JobBonusDic.values():
             self.jobNameDict.update(
-                {jobData.Job: CommonFunction.get_text("TM_" + jobData.Job)}
+                {jobData.Job: get_text("TM_" + jobData.Job)}
             )
 
         tempJobNameList = list(self.jobNameDict.values())
@@ -953,7 +953,7 @@ class BattleSimulatorGUI:
             }.values()
         )
         for i, part in enumerate(parts):
-            ttk.Label(frame, text=(CommonFunction.get_text(f"TM_{part}")) + " :").grid(
+            ttk.Label(frame, text=(get_text(f"TM_{part}")) + " :").grid(
                 row=i, column=0, sticky=tk.W
             )
             armor_id = self.create_var(f"{prefix}_armor_id_{i}", tk.StringVar)
@@ -961,7 +961,7 @@ class BattleSimulatorGUI:
                 frame,
                 textvariable=armor_id,
                 values=[
-                    CommonFunction.get_text(item.Name)
+                    get_text(item.Name)
                     for item in GameData.Instance.ArmorsDic.values()
                     if item.WearPartID == part
                 ],
@@ -994,7 +994,7 @@ class BattleSimulatorGUI:
         mainhandweapon_combobox = ttk.Combobox(
             frame,
             textvariable=mainhandweapon_id,
-            values=[CommonFunction.get_text(weapon.Name)
+            values=[get_text(weapon.Name)
                     for weapon in mainhandweapon],
             width=15,
         )
@@ -1025,7 +1025,7 @@ class BattleSimulatorGUI:
         offhandweapon_combobox = ttk.Combobox(
             frame,
             textvariable=offhandweapon_id,
-            values=[CommonFunction.get_text(weapon.Name)
+            values=[get_text(weapon.Name)
                     for weapon in offhandweapon],
             width=15,
         )
@@ -1127,7 +1127,7 @@ class BattleSimulatorGUI:
                 (
                     m
                     for m in GameData.Instance.MonstersDataDic.values()
-                    if CommonFunction.get_text(m.Name) == monster_name
+                    if get_text(m.Name) == monster_name
                 ),
                 None,
             )
@@ -1179,14 +1179,14 @@ class BattleSimulatorGUI:
             (weapon, equipment["equipment_forge_vars"][part_id].get())
             for part_id, var in equipment["equipment_vars"].items()
             for weapon in GameData.Instance.WeaponsDic.values()
-            if CommonFunction.get_text(weapon.Name) == var.get()
+            if get_text(weapon.Name) == var.get()
         ]
 
         self.armor_list = [
             (armor, equipment["equipment_forge_vars"][part_id].get())
             for part_id, var in equipment["equipment_vars"].items()
             for armor in GameData.Instance.ArmorsDic.values()
-            if CommonFunction.get_text(armor.Name) == var.get()
+            if get_text(armor.Name) == var.get()
         ]
 
         # 根據職業和等級計算屬性
@@ -1260,7 +1260,7 @@ class BattleSimulatorGUI:
         skills = monster.MonsterSkillList
 
         return BattleCharacter(
-            name=CommonFunction.get_text(f"TM_{monster.MonsterCodeID}_Name"),
+            name=get_text(f"TM_{monster.MonsterCodeID}_Name"),
             jobBonusData=None,
             ai_id=monster.MonsterCodeID,
             level=monster.Lv,
