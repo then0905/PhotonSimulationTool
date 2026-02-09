@@ -8,6 +8,7 @@ from status_operation import CharacterStatusCalculator, StatusValues
 from commonfunction import get_text, clamp, load_skill_icon, load_item_icon, load_status_effect_icon
 from user_config_controller import UserConfigController
 from user_config_model import UserConfigModel
+from dummy_gui import DummyStatusEffectBar, DummyCharacterOverview, DummyItemManager
 from typing import Dict
 from dataclasses import asdict
 import os
@@ -901,15 +902,23 @@ class BattleSimulatorGUI:
 
         # endregion
 
-        # 戰鬥按鈕
-        battle_button = ttk.Button(
-            self.main_frame, text="開始戰鬥模擬", command=self.start_battle
-        )
-        battle_button.grid(row=1, column=0, columnspan=2, pady=10)
+        # 戰鬥控制列
+        battle_control_frame = ttk.Frame(self.main_frame)
+        battle_control_frame.grid(row=1, column=0, columnspan=2, pady=10)
+
+        ttk.Button(
+            battle_control_frame, text="開始戰鬥模擬", command=self.start_battle
+        ).pack(side=tk.LEFT, padx=5)
+
+        # 快速略過戰鬥
+        self.fast_skip_var = self.create_var("fast_skip_var", tk.BooleanVar, False)
+        ttk.Checkbutton(
+            battle_control_frame, text="快速略過戰鬥", variable=self.fast_skip_var
+        ).pack(side=tk.LEFT, padx=5)
 
         # 暫停
-        btn_pause = tk.Button(self.main_frame, text="暫停/繼續", command=toggle_pause)
-        btn_pause.grid(row=1, column=1, columnspan=2, pady=10)
+        tk.Button(battle_control_frame, text="暫停/繼續", command=toggle_pause
+        ).pack(side=tk.LEFT, padx=5)
 
         # 戰鬥日誌
         log_frame = ttk.LabelFrame(self.main_frame, text="戰鬥日誌", padding="10")
@@ -1089,13 +1098,37 @@ class BattleSimulatorGUI:
 
     def start_battle(self):
 
-        # 清空雙方效果欄
+        fast_mode = self.fast_skip_var.get()
+
+        # 清空雙方效果欄（真實 GUI 的效果欄在兩種模式都需要清）
         self.player_buff_status_bar.clear_bar()
         self.player_debuff_status_bar.clear_bar()
         self.player_passive_status_bar.clear_bar()
         self.enemy_buff_status_bar.clear_bar()
         self.enemy_debuff_status_bar.clear_bar()
         self.enemy_passive_status_bar.clear_bar()
+
+        # 快速模式時建立 Dummy GUI 元件
+        if fast_mode:
+            p_buff = DummyStatusEffectBar()
+            p_debuff = DummyStatusEffectBar()
+            p_passive = DummyStatusEffectBar()
+            p_overview = DummyCharacterOverview()
+            p_item_mgr = DummyItemManager(
+                {k: {"count": v["count"], "data": v["data"]}
+                 for k, v in self.player_item_manager.carried_items.items()}
+            )
+            e_buff = DummyStatusEffectBar()
+            e_debuff = DummyStatusEffectBar()
+            e_passive = DummyStatusEffectBar()
+            e_overview = DummyCharacterOverview()
+            e_item_mgr = DummyItemManager(
+                {k: {"count": v["count"], "data": v["data"]}
+                 for k, v in self.enemy_item_manager.carried_items.items()}
+            )
+        else:
+            p_buff = p_debuff = p_passive = p_overview = p_item_mgr = None
+            e_buff = e_debuff = e_passive = e_overview = e_item_mgr = None
 
         # 創建玩家角色
         class_name = self.player_class_var.get()
@@ -1118,6 +1151,11 @@ class BattleSimulatorGUI:
             level=self.player_level_var.get(),
             equipment=self.player_equipment_data,
             itemList=[(v["data"], v["count"]) for v in self.player_item_manager.carried_items.values()],
+            buff_bar=p_buff,
+            debuff_bar=p_debuff,
+            passive_bar=p_passive,
+            item_manager=p_item_mgr,
+            character_overview=p_overview,
         )
 
         # 創建敵人
@@ -1136,7 +1174,14 @@ class BattleSimulatorGUI:
                 messagebox.showerror("錯誤", "請選擇有效的怪物")
                 return
 
-            self.enemy_character = self.create_monster_character(monster)
+            self.enemy_character = self.create_monster_character(
+                monster,
+                buff_bar=e_buff,
+                debuff_bar=e_debuff,
+                passive_bar=e_passive,
+                item_manager=e_item_mgr,
+                character_overview=e_overview,
+            )
         else:
             # 創建玩家角色
             enemy_class_name = self.enemy_class_var.get()
@@ -1155,17 +1200,26 @@ class BattleSimulatorGUI:
                 level=self.enemy_level_var.get(),
                 equipment=self.enemy_equipment_data,
                 itemList=[(v["data"], v["count"]) for v in self.enemy_item_manager.carried_items.values()],
+                buff_bar=e_buff,
+                debuff_bar=e_debuff,
+                passive_bar=e_passive,
+                item_manager=e_item_mgr,
+                character_overview=e_overview,
             )
 
         # 進行戰鬥模擬
         simulator = BattleSimulator(GameData.Instance, self)
-        simulator.simulate_battle(self.player_character, self.enemy_character)
+        if fast_mode:
+            simulator.simulate_battle_fast(self.player_character, self.enemy_character)
+        else:
+            simulator.simulate_battle(self.player_character, self.enemy_character)
 
         # 儲存使用者配置
         controller.save_view_to_config()
 
     def create_character(
-            self, name: str, race: str, jobBonusData, level: int, equipment=None, itemList=None
+            self, name: str, race: str, jobBonusData, level: int, equipment=None, itemList=None,
+            buff_bar=None, debuff_bar=None, passive_bar=None, item_manager=None, character_overview=None
     ) -> BattleCharacter:
         """
         創建人物
@@ -1205,6 +1259,18 @@ class BattleSimulatorGUI:
             if skill.Job == jobBonusData.Job
         ]
 
+        # 若未傳入 GUI 元件，使用預設的真實元件
+        if buff_bar is None:
+            buff_bar = self.enemy_buff_status_bar if (name == "敵對玩家") else self.player_buff_status_bar
+        if debuff_bar is None:
+            debuff_bar = self.enemy_debuff_status_bar if (name == "敵對玩家") else self.player_debuff_status_bar
+        if passive_bar is None:
+            passive_bar = self.enemy_passive_status_bar if (name == "敵對玩家") else self.player_passive_status_bar
+        if item_manager is None:
+            item_manager = self.enemy_item_manager if (name == "敵對玩家") else self.player_item_manager
+        if character_overview is None:
+            character_overview = self.enemy_overview if (name == "敵對玩家") else self.player_overview
+
         return BattleCharacter(
             name=character_data["name"],
             level=character_data["level"],
@@ -1219,15 +1285,17 @@ class BattleSimulatorGUI:
             equipped_armor=self.armor_list,
             characterType=True,
             attackTimer=(1 / character_data["stats"]["AS"]),
-            buff_bar=self.enemy_buff_status_bar if (name == "敵對玩家") else self.player_buff_status_bar,
-            debuff_bar=self.enemy_debuff_status_bar if (name == "敵對玩家") else self.player_debuff_status_bar,
-            passive_bar=self.enemy_passive_status_bar if (name == "敵對玩家") else self.player_passive_status_bar,
+            buff_bar=buff_bar,
+            debuff_bar=debuff_bar,
+            passive_bar=passive_bar,
             items=itemList,
-            item_manager=self.enemy_item_manager if (name == "敵對玩家") else self.player_item_manager,
-            character_overview=self.enemy_overview if (name == "敵對玩家") else self.player_overview
+            item_manager=item_manager,
+            character_overview=character_overview
         )
 
-    def create_monster_character(self, monster) -> BattleCharacter:
+    def create_monster_character(self, monster,
+                                buff_bar=None, debuff_bar=None, passive_bar=None,
+                                item_manager=None, character_overview=None) -> BattleCharacter:
         # 將怪物轉換為戰鬥角色
         status_keys = asdict(StatusValues())
 
@@ -1259,6 +1327,18 @@ class BattleSimulatorGUI:
 
         skills = monster.MonsterSkillList
 
+        # 若未傳入 GUI 元件，使用預設的真實元件
+        if buff_bar is None:
+            buff_bar = self.enemy_buff_status_bar
+        if debuff_bar is None:
+            debuff_bar = self.enemy_debuff_status_bar
+        if passive_bar is None:
+            passive_bar = self.enemy_passive_status_bar
+        if item_manager is None:
+            item_manager = self.enemy_item_manager
+        if character_overview is None:
+            character_overview = self.enemy_overview
+
         return BattleCharacter(
             name=get_text(f"TM_{monster.MonsterCodeID}_Name"),
             jobBonusData=None,
@@ -1273,12 +1353,12 @@ class BattleSimulatorGUI:
             skills=skills,
             characterType=False,
             attackTimer=1 / monster.AtkSpeed,
-            buff_bar=self.enemy_buff_status_bar,
-            debuff_bar=self.enemy_debuff_status_bar,
-            passive_bar=self.enemy_passive_status_bar,
+            buff_bar=buff_bar,
+            debuff_bar=debuff_bar,
+            passive_bar=passive_bar,
             items=[(v["data"], v["count"]) for v in self.enemy_item_manager.carried_items.values()],
-            item_manager=self.enemy_item_manager,
-            character_overview=self.enemy_overview
+            item_manager=item_manager,
+            character_overview=character_overview
         )
 
     def show_damage_stats(self):

@@ -1,4 +1,5 @@
 ﻿import random
+import heapq
 from typing import Dict, Optional, List
 from dataclasses import dataclass, field,fields
 from game_models import GameData, ItemsDic, SkillData, SkillOperationData, MonsterDataModel, MonsterDropItemDataModel, \
@@ -955,6 +956,206 @@ class BattleSimulator:
             "result": player.is_alive()
         }
         #AI訓練資料更新
+        player.ai.update_ppo()
+
+    # ──────────────────────────────────────────
+    # 快速略過戰鬥 (Discrete Event Simulation)
+    # ──────────────────────────────────────────
+
+    def simulate_battle_fast(self, player: BattleCharacter, enemy: BattleCharacter):
+        """以離散事件模擬 (DES) 方式瞬間完成整場戰鬥"""
+        self.battle_log.clear()
+        self.damage_data.clear()
+        player.skill_usage = {get_text(s.Name): 0 for s in player.skills}
+        enemy.skill_usage = {get_text(s.Name): 0 for s in enemy.skills}
+
+        player.battle_log = self.battle_log
+        enemy.battle_log = self.battle_log
+
+        # 使用 no-op 的 update_hp_mp（快速模式中不即時更新 GUI）
+        noop = lambda: None
+        self.update_hp_mp = noop
+        player.update_hp_mp = noop
+        enemy.update_hp_mp = noop
+
+        # 能力值總覽初始化（使用角色自身的 overview，可能是 Dummy）
+        player.character_overview.update_state(player.stats)
+        enemy.character_overview.update_state(enemy.stats)
+
+        # 執行被動技能
+        player.run_passive_skill()
+        enemy.run_passive_skill()
+
+        # ── 建立優先佇列 ──
+        # 事件格式: (time, priority, event_type, data)
+        #   priority: 0=TICK, 1=PLAYER_ATTACK, 2=ENEMY_ATTACK （同時間時依此順序）
+        TICK = 0
+        PLAYER_ATTACK = 1
+        ENEMY_ATTACK = 2
+
+        event_queue = []
+        counter = 0  # 用來打破同 (time, priority) 的 tie
+
+        def push_event(t, priority, etype):
+            nonlocal counter
+            heapq.heappush(event_queue, (t, priority, counter, etype))
+            counter += 1
+
+        dt = 0.1
+        push_event(dt, TICK, "TICK")
+        push_event(0.0, PLAYER_ATTACK, "PLAYER_ATTACK")
+        push_event(0.0, ENEMY_ATTACK, "ENEMY_ATTACK")
+
+        MAX_TIME = 300.0  # 5 分鐘上限，防止無限戰鬥
+
+        while event_queue:
+            current_time, priority, _cnt, etype = heapq.heappop(event_queue)
+
+            if current_time > MAX_TIME:
+                self.battle_log.append("戰鬥超時！（300秒）")
+                break
+
+            if not player.is_alive() or not enemy.is_alive():
+                break
+
+            if etype == "TICK":
+                player.pass_time(dt)
+                enemy.pass_time(dt)
+                push_event(current_time + dt, TICK, "TICK")
+
+            elif etype == "PLAYER_ATTACK":
+                next_delay = self._process_action_fast(player, enemy)
+                if next_delay is not None:
+                    push_event(current_time + next_delay, PLAYER_ATTACK, "PLAYER_ATTACK")
+
+            elif etype == "ENEMY_ATTACK":
+                next_delay = self._process_action_fast(enemy, player)
+                if next_delay is not None:
+                    push_event(current_time + next_delay, ENEMY_ATTACK, "ENEMY_ATTACK")
+
+        # 戰鬥結束，處理結果
+        self._finalize_battle_fast(player, enemy)
+
+    def _process_action_fast(self, attacker: BattleCharacter, target: BattleCharacter) -> Optional[float]:
+        """
+        處理一次攻擊動作（快速模式），回傳下次攻擊的延遲秒數。
+        若戰鬥已結束則回傳 None。
+        """
+        if not attacker.is_alive() or not target.is_alive():
+            return None
+
+        ai = attacker.ai
+        action_id, state = ai.choose_action(attacker, target)
+
+        reward = 0
+        total_attack_timer = 0
+
+        match (action_id):
+            case "NORMAL_ATTACK":
+                normal_attack = SkillData(
+                    SkillID="NORMAL_ATTACK",
+                    Name="普通攻擊",
+                    Damage=1,
+                    CastMage=0,
+                )
+                if attacker.action_check(normal_attack):
+                    for log_msg, damage, attack_timer in _execute_skill_operation(normal_attack, attacker, target):
+                        self.battle_log.append(log_msg)
+                        reward += ai.calculate_reward(damage, target.is_alive(), attacker.is_alive())
+                        total_attack_timer += attack_timer
+                        self.battle_log.append(battlelog_text_processor({
+                            "caster_text": attacker.name,
+                            "caster_color": "#636363",
+                            "caster_size": 12,
+                            "descript_text": "普攻",
+                            "descript_color": "#ff0000",
+                        }, "normalAttckTimer", f"{total_attack_timer:.2f}"))
+                        self.damage_data.append({
+                            "attacker": attacker.name,
+                            "target": target.name,
+                            "skill": "NORMAL_ATTACK",
+                            "Damage": damage,
+                        })
+                else:
+                    reward = -0.1
+                    ai.record_result(reward, False)
+                    return 0.1  # 被控制，稍後重試
+
+            case str() if action_id.startswith("USE_ITEM:"):
+                log_msg, damage, attack_timer = attacker.use_item_id(action_id.replace("USE_ITEM:", ""))
+                self.battle_log.append(log_msg)
+                reward += ai.calculate_reward(damage, target.is_alive(), attacker.is_alive())
+                total_attack_timer += attack_timer
+
+            case _:
+                skill = next(s for s in attacker.skills if s.SkillID == action_id)
+                attacker.skill_usage[get_text(skill.Name)] += 1
+                if attacker.action_check(skill):
+                    attacker.stats["MP"] -= skill.CastMage
+                    for resultList in _execute_skill_operation(skill, attacker, target):
+                        if resultList is None:
+                            continue
+                        elif isinstance(resultList, list) and any(x is None for x in resultList):
+                            continue
+                        for temp in resultList:
+                            log_msg, damage, attack_timer = temp
+                            self.battle_log.append(log_msg)
+                            self.battle_log.append(battlelog_text_processor({
+                                "caster_text": attacker.name,
+                                "caster_color": "#636363",
+                                "caster_size": 12,
+                                "descript_text": get_text(skill.Name),
+                                "descript_color": "#ff0000",
+                            }, "skillTimer", f"{1 if skill.Type == 'Buff' else 1.8}"))
+                            attacker.skill_cooldowns[skill.SkillID] = skill.CD
+                            reward += ai.calculate_reward(damage, target.is_alive(), attacker.is_alive())
+                            total_attack_timer += attack_timer
+                            self.damage_data.append({
+                                "attacker": attacker.name,
+                                "target": target.name,
+                                "skill": get_text(skill.Name),
+                                "Damage": damage,
+                            })
+                else:
+                    reward = -0.1
+                    ai.record_result(reward, False)
+                    return 0.1  # 被控制，稍後重試
+
+        # 記錄 AI 結果
+        done = (not attacker.is_alive()) or (not target.is_alive())
+        ai.record_result(reward, done)
+
+        return total_attack_timer if total_attack_timer > 0 else attacker.attackTimer
+
+    def _finalize_battle_fast(self, player: BattleCharacter, enemy: BattleCharacter):
+        """快速戰鬥結束後：記錄結果、更新真實 GUI、觸發 AI 訓練"""
+        if player.is_alive():
+            self.battle_log.append(f"{enemy.name} 被擊敗了！{player.name} 獲勝！")
+            self.gui.battle_results.append(True)
+        else:
+            self.battle_log.append(f"{player.name} 被擊敗了！{enemy.name} 獲勝！")
+            self.gui.battle_results.append(False)
+
+        # 顯示完整戰鬥日誌
+        self.gui.display_battle_log(self.get_battle_log())
+
+        # 更新真實 GUI 的 HP/MP bar 為最終狀態
+        self.gui.player_hp_bar.set_value(player.stats["HP"], player.stats["MaxHP"])
+        self.gui.player_mp_bar.set_value(player.stats["MP"], player.stats["MaxMP"])
+        self.gui.enemy_hp_bar.set_value(enemy.stats["HP"], enemy.stats["MaxHP"])
+        self.gui.enemy_mp_bar.set_value(enemy.stats["MP"], enemy.stats["MaxMP"])
+        self.gui.player_overview.update_state(player.stats)
+        self.gui.enemy_overview.update_state(enemy.stats)
+
+        # 保存戰鬥數據
+        self.gui.last_battle_data = {
+            "damage": self.get_damage_data(),
+            "player_skill_usage": player.skill_usage,
+            "enemy_skill_usage": enemy.skill_usage,
+            "result": player.is_alive()
+        }
+
+        # AI 訓練資料更新
         player.ai.update_ppo()
 
     def get_battle_log(self) -> List[str]:

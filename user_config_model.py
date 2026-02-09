@@ -52,6 +52,8 @@ class UserConfigModel:
             "enemy_armor_forge_lv_3": 0,
             "enemy_armor_id_4": "",
             "enemy_armor_forge_lv_4": 0,
+
+            "fast_skip_var": False,
         }
         self.current_config = self.default_config.copy()
 
