@@ -759,30 +759,52 @@ class BattleSimulator:
         self.damage_data: List[Dict] = []
         self.skill_usage: Dict[str, int] = {}
         self.update_hp_mp = None  #用來儲存更新雙方血量魔力的匿名方法
+        self._after_ids: List = []  # 追蹤所有 tkinter.after 的 ID
+        self.is_battling = False  # 戰鬥是否進行中
+
+    def _schedule(self, ms, callback):
+        """統一排程 tkinter.after 並追蹤 ID，方便中止時一次取消"""
+        after_id = self.gui.root.after(ms, callback)
+        self._after_ids.append(after_id)
+        return after_id
+
+    def stop_battle(self):
+        """中止目前正在進行的即時戰鬥"""
+        self.is_battling = False
+        for after_id in self._after_ids:
+            try:
+                self.gui.root.after_cancel(after_id)
+            except ValueError:
+                pass
+        self._after_ids.clear()
 
     def battle_tick(self, player, enemy):
         """
         啟動各自計時器
         """
+        if not self.is_battling:
+            return
 
         dt = 0.1  # 每 0.1 秒刷新一次
 
         # 暫停不執行並Delay
         if (os.environ.get("PAUSED") == "1"):
-            self.gui.root.after(int(dt * 100), lambda: self.battle_tick(player, enemy))
+            self._schedule(int(dt * 100), lambda: self.battle_tick(player, enemy))
             return
 
         if player.is_alive() and enemy.is_alive():
             player.pass_time(dt)
             enemy.pass_time(dt)
-            self.gui.root.after(int(dt * 1000), lambda: self.battle_tick(player, enemy))
+            self._schedule(int(dt * 1000), lambda: self.battle_tick(player, enemy))
 
     def attack_loop(self, attacker: BattleCharacter, target):
         """獨立的攻擊計時器迴圈"""
+        if not self.is_battling:
+            return
 
         # 暫停不執行並Delay
         if (os.environ.get("PAUSED") == "1"):
-            self.gui.root.after(
+            self._schedule(
                 100, lambda: self.attack_loop(attacker, target)
             )
             return
@@ -832,7 +854,7 @@ class BattleSimulator:
                     # 依然要呼叫 record_result，確保 Buffer 長度對齊
                     # 這裡 done 通常是 False，因為戰鬥還沒結束，只是這回合浪費了
                     ai.record_result(reward, False)
-                    self.gui.root.after(
+                    self._schedule(
                         100, lambda: self.attack_loop(attacker, target)
                     )
                     return
@@ -880,7 +902,7 @@ class BattleSimulator:
                     # 依然要呼叫 record_result，確保 Buffer 長度對齊
                     # 這裡 done 通常是 False，因為戰鬥還沒結束，只是這回合浪費了
                     ai.record_result(reward, False)
-                    self.gui.root.after(
+                    self._schedule(
                         100, lambda: self.attack_loop(attacker, target)
                     )
                     return
@@ -890,11 +912,12 @@ class BattleSimulator:
         next_state = ai.get_state(attacker, target)
         done =(not attacker.is_alive()) or not (target.is_alive())
         ai.record_result(reward,done)
-        attacker.attackTimerFunc = self.gui.root.after(int(total_attack_timer * 1000),
-                                                       lambda: self.attack_loop(attacker, target))
+        attacker.attackTimerFunc = self._schedule(int(total_attack_timer * 1000),
+                                                    lambda: self.attack_loop(attacker, target))
 
     def simulate_battle(self, player: BattleCharacter, enemy: BattleCharacter):
         """開啟戰鬥模擬"""
+        self.is_battling = True
         self.battle_log.clear()
         self.damage_data.clear()
         player.skill_usage = {get_text(s.Name):0 for s in player.skills}
@@ -938,6 +961,7 @@ class BattleSimulator:
         """
         進行戰鬥結果確認
         """
+        self.is_battling = False
         if player.is_alive():
             print(f"{enemy.name} 被擊敗了！{player.name} 獲勝！")
             self.battle_log.append(f"{enemy.name} 被擊敗了！{player.name} 獲勝！")
@@ -957,6 +981,10 @@ class BattleSimulator:
         }
         #AI訓練資料更新
         player.ai.update_ppo()
+
+        # 通知 GUI 戰鬥結束（恢復按鈕狀態）
+        if hasattr(self.gui, '_on_battle_end'):
+            self.gui._on_battle_end()
 
     # ──────────────────────────────────────────
     # 快速略過戰鬥 (Discrete Event Simulation)

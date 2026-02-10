@@ -60,6 +60,7 @@ class BattleSimulatorGUI:
         self.player_character = None
         self.enemy_character = None
         self.battle_results = []
+        self.current_simulator = None  # 追蹤當前戰鬥模擬器
 
         self.last_battle_data = {}
 
@@ -906,9 +907,15 @@ class BattleSimulatorGUI:
         battle_control_frame = ttk.Frame(self.main_frame)
         battle_control_frame.grid(row=1, column=0, columnspan=2, pady=10)
 
-        ttk.Button(
+        self.battle_button = ttk.Button(
             battle_control_frame, text="開始戰鬥模擬", command=self.start_battle
-        ).pack(side=tk.LEFT, padx=5)
+        )
+        self.battle_button.pack(side=tk.LEFT, padx=5)
+
+        self.stop_battle_button = ttk.Button(
+            battle_control_frame, text="中止戰鬥", command=self.stop_battle, state=tk.DISABLED
+        )
+        self.stop_battle_button.pack(side=tk.LEFT, padx=5)
 
         # 快速略過戰鬥
         self.fast_skip_var = self.create_var("fast_skip_var", tk.BooleanVar, False)
@@ -1208,14 +1215,28 @@ class BattleSimulatorGUI:
             )
 
         # 進行戰鬥模擬
-        simulator = BattleSimulator(GameData.Instance, self)
+        self.current_simulator = BattleSimulator(GameData.Instance, self)
         if fast_mode:
-            simulator.simulate_battle_fast(self.player_character, self.enemy_character)
+            self.current_simulator.simulate_battle_fast(self.player_character, self.enemy_character)
+            self._on_battle_end()
         else:
-            simulator.simulate_battle(self.player_character, self.enemy_character)
+            self.battle_button.config(state=tk.DISABLED)
+            self.stop_battle_button.config(state=tk.NORMAL)
+            self.current_simulator.simulate_battle(self.player_character, self.enemy_character)
 
         # 儲存使用者配置
         controller.save_view_to_config()
+
+    def stop_battle(self):
+        """中止當前即時戰鬥"""
+        if self.current_simulator and self.current_simulator.is_battling:
+            self.current_simulator.stop_battle()
+            self._on_battle_end()
+
+    def _on_battle_end(self):
+        """戰鬥結束時恢復按鈕狀態"""
+        self.battle_button.config(state=tk.NORMAL)
+        self.stop_battle_button.config(state=tk.DISABLED)
 
     def create_character(
             self, name: str, race: str, jobBonusData, level: int, equipment=None, itemList=None,
