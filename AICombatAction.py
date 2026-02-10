@@ -68,17 +68,20 @@ class ai_action:
         self.old_mp = 0
         self.old_debuff_count = 0
 
+        # --- 固定的道具清單（所有有效果的道具，不隨每場攜帶而變）---
+        self.all_game_items = [
+            item for item in GameData.Instance.ItemsDic.values()
+            if len(item.ItemEffectDataList) > 0
+        ]
+
         # --- 動作空間映射 ---
-        # 因為神經網路輸出是固定的 index，我們需要建立 index 對應到實際技能的 Map
+        # 維度固定：普攻 + 所有主動技 + 所有可用道具
         self.action_map = ["NORMAL_ATTACK"]
         for s in self.skills:
             if s.Characteristic:  # 只加入主動技
                 self.action_map.append(s.SkillID)
-        # 假設道具也是固定的，這裡簡化處理，將目前有的道具加入 Map
-        # 注意：如果道具耗盡，之後需要透過 Mask 處理
-        if self.item:
-            for item_data, count in self.item:
-                self.action_map.append(f"USE_ITEM:{item_data.CodeID}")
+        for item in self.all_game_items:
+            self.action_map.append(f"USE_ITEM:{item.CodeID}")
 
         self.n_actions = len(self.action_map)
 
@@ -124,8 +127,6 @@ class ai_action:
         if os.path.exists(path):
             self.policy.load_state_dict(torch.load(path))
             self.policy.eval()  # 設定為評估模式 (雖然訓練時會切回來)
-        else:
-            pass  # 使用隨機初始化
 
     # -----------------------------
     # 狀態獲取 (維持原邏輯，但確保轉為 list/np array)
@@ -171,22 +172,20 @@ class ai_action:
             else:
                 state.append(0.0)  # 0 表示冷卻好或無冷卻
 
-         # 道具 Buff 效果特徵
-        for item_data, count in self.item:
-            i_id = item_data.CodeID
-            # 如果數量 > 0 且有 Buff
-            if count > 0 and i_id in attacker.buff_item:
+        # 道具 Buff 效果特徵（遍歷所有遊戲道具，維度固定）
+        for item in self.all_game_items:
+            i_id = item.CodeID
+            if i_id in attacker.buff_item:
                 remaining_time = attacker.buff_item[i_id][1]
                 max_time = attacker.buff_item[i_id][0].EffectDurationTime
                 state.append(remaining_time / max_time if max_time > 0 else 0)
             else:
-                # 就算數量是 0，也要補 0.0，維持列表長度
                 state.append(0.0)
 
-        # 道具冷卻特徵
-        for item_data, count in self.item:
-            i_id = item_data.CodeID
-            if count > 0 and i_id in attacker.item_cooldowns:
+        # 道具冷卻特徵（遍歷所有遊戲道具，維度固定）
+        for item in self.all_game_items:
+            i_id = item.CodeID
+            if i_id in attacker.item_cooldowns:
                 remaining_time = attacker.item_cooldowns[i_id]
                 max_time = GameData.Instance.ItemsDic[i_id].CD
                 state.append(remaining_time / max_time if max_time > 0 else 0)
